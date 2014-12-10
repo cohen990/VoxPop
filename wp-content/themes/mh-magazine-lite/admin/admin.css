@@ -1,0 +1,7 @@
+/***** Dashboard Info Widget *****/
+
+.admin-theme-thumb { background: #fff; text-align: center; border: 1px solid #ebebeb; }
+
+/***** Add Color to MH Widgets *****/
+
+#widget-list [id*='_mh_'] .widget-top { background: #0074a2; color: #fff; }
