@@ -8,7 +8,7 @@
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
 
-    public class TableStore<TEntity> : IStore<TEntity> where TEntity : class, ITableEntity
+    public class TableStore<TEntity> : IStore<TEntity> where TEntity : class, ITableEntity, new()
     {
         private readonly CloudTable _table;
 
@@ -22,9 +22,9 @@
 
         public IEnumerable<TEntity> GetAll()
         {
-            var query = new TableQuery();
+            var query = new TableQuery<TEntity>();
 
-            IEnumerable<TEntity> entities = _table.ExecuteQuery(query).Select(x => x as TEntity);
+            IEnumerable<TEntity> entities = _table.ExecuteQuery(query).Select(x => x);
 
             return entities;
         }

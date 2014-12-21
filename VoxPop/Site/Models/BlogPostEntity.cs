@@ -9,6 +9,10 @@ namespace Site.Models
 
     public class BlogPostEntity : ITableEntity
     {
+        public BlogPostEntity()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogPostEntity"/> class.
         /// </summary>
@@ -54,7 +58,7 @@ namespace Site.Models
 
             var pollString = properties["Poll"].StringValue;
 
-            string[] keyValuePairs = pollString.Split(',');
+            var keyValuePairs = pollString.Split(',').Where(x => x != string.Empty);
             var pollDict = keyValuePairs
                 .Select(pair => pair.Split(':')).ToDictionary(split => split[0], split => int.Parse(split[1]));
 

@@ -15,7 +15,7 @@
 
         public async Task CreateAsync(BlogViewModel blog)
         {
-            blog.PollOptions = new List<string> {"option1", "option2", "nick fury"};
+            blog.PollOptions = new List<string> {"Toby Maguire", "That other cunt"};
 
             var blogEntity = blog.AsEntity();
 
