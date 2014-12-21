@@ -190,12 +190,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogPostEntity.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\IBlogService.cs" />
+    <Compile Include="Services\IStore.cs" />
     <Compile Include="Services\TableStore.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

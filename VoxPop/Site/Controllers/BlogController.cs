@@ -15,9 +15,9 @@
         }
 
         // GET: Blog
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var blogs = await _blogService.GetAllAsync();
+            var blogs = _blogService.GetAll();
 
             return View(blogs);
         }

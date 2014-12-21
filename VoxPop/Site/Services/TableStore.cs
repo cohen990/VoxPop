@@ -10,19 +10,17 @@
 
     public class TableStore<TEntity> : IStore<TEntity> where TEntity : class, ITableEntity
     {
-        private readonly CloudTableClient _client;
-
         private readonly CloudTable _table;
 
         public TableStore()
         {
-            _client = GetStorageAccount().CreateCloudTableClient();
+            CloudTableClient client = GetStorageAccount().CreateCloudTableClient();
 
-            _table = _client.GetTableReference("voxpopblogs");
+            _table = client.GetTableReference("voxpopblogs");
             _table.CreateIfNotExists();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public IEnumerable<TEntity> GetAll()
         {
             var query = new TableQuery();
 
@@ -31,9 +29,10 @@
             return entities;
         }
 
-        public void CreateAsync(TEntity entity)
+        public async Task CreateAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            var operation = TableOperation.Insert(entity);
+            await _table.ExecuteAsync(operation);
         }
 
         private CloudStorageAccount GetStorageAccount()
@@ -47,12 +46,5 @@
             string message = string.Format("The connection string '{0}' is invalid.", connectionString);
             throw new InvalidOperationException(message);
         }
-    }
-
-    public interface IStore<TEntity>
-    {
-        Task<IEnumerable<TEntity>> GetAllAsync();
-
-        void CreateAsync(TEntity entity);
     }
 }
