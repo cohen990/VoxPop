@@ -7,5 +7,17 @@
 
 @Html.ActionLink("Create New", "Create")
 
-@Html.DisplayForModel()
+@if (@Model != null)
+{
+    foreach (var blogPost in Model)
+    {
+        <h2>@blogPost.BlogTitle</h2>
+        <p>@blogPost.BlogContent</p>
+        foreach (var pollItem in blogPost.Poll)
+        {
+            <h4>@pollItem.Key :</h4>
+            <span>@pollItem.Value</span>
+        }
+    }
 
+}

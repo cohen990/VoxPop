@@ -3,6 +3,7 @@ namespace Site.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.UI;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
 
@@ -50,10 +51,14 @@ namespace Site.Models
         {
             BlogContent = properties["BlogContent"].StringValue;
             BlogTitle = properties["BlogTitle"].StringValue;
-            Poll = properties["Poll"].PropertyAsObject as Dictionary<string, int>;
 
-            RowKey = properties["RowKey"].StringValue;
-            PartitionKey = properties["PartitionKey"].StringValue;
+            var pollString = properties["Poll"].StringValue;
+
+            string[] keyValuePairs = pollString.Split(',');
+            var pollDict = keyValuePairs
+                .Select(pair => pair.Split(':')).ToDictionary(split => split[0], split => int.Parse(split[1]));
+
+            Poll = pollDict;
         }
 
         /// <summary>
@@ -71,7 +76,16 @@ namespace Site.Models
         /// </returns>
         public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
         {
-            throw new NotImplementedException();
+            IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
+            result.Add("BlogContent", new EntityProperty(BlogContent));
+            result.Add("BlogTitle", new EntityProperty(BlogTitle));
+
+            string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
+                .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
+
+            result.Add("Poll", new EntityProperty(pollAsString));
+
+            return result;
         }
 
         /// <summary>
