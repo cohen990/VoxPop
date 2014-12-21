@@ -1,0 +1,15 @@
+﻿@model Site.Models.BlogViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Create"))
+{
+    @Html.EditorForModel()
+
+    <input type="submit"/>
+}
+
