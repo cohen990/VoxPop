@@ -13,9 +13,11 @@
 
         public List<string> PollOptions { get; set; }
 
-        public BlogEntity AsEntity()
+        public BlogPostEntity AsEntity()
         {
-            throw new System.NotImplementedException();
+            var entity = new BlogPostEntity(Title, Content, PollOptions);
+
+            return entity;
         }
     }
 }
