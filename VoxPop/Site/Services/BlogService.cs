@@ -1,6 +1,7 @@
 ﻿namespace Site.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Models;
 
@@ -13,8 +14,14 @@
             _blogStore = new TableStore<BlogPostEntity>();
         }
 
+        /// <summary>
+        /// Creates a new <see cref="BlogViewModel"/> entity in the table storage.
+        /// </summary>
+        /// <param name="blog">This is the blog entity which will be inserted into the database.</param>
+        /// <returns>Returns <see cref="Task"/> </returns>
         public async Task CreateAsync(BlogViewModel blog)
         {
+            // TODO: Add a thing here
             blog.PollOptions = new List<string> {"Toby Maguire", "That other cunt"};
 
             var blogEntity = blog.AsEntity();
@@ -24,7 +31,11 @@
 
         public IEnumerable<BlogPostEntity> GetAll()
         {
-            return _blogStore.GetAll();
+            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAll();
+
+            List<BlogPostEntity> sortedBlogs = blogs.OrderByDescending(b => b.Timestamp).ToList();
+
+            return sortedBlogs;
         }
     }
 }
