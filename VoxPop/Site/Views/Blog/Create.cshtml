@@ -6,10 +6,25 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm("Create"))
+@using (Html.BeginForm("Create", "Blog", FormMethod.Post, new{@name="blogForm"}))
 {
     @Html.EditorForModel()
+    <fieldset id="pollOptions">
+        <label for="pollOptions">Poll Options</label>
+        <input name="pollOptions" type="text" />
+        <input name="pollOptions" type="text" />
+    </fieldset>
+    <span onclick="AddOption()">Add more options...</span>
 
     <input type="submit"/>
 }
+
+<script>
+    var AddOption = function () {
+        var newOption = document.createElement("input");
+        newOption.setAttribute("name", "pollOptions");
+        newOption.setAttribute("type", "text");
+        document.getElementById("pollOptions").insertAdjacentElement("beforeend", newOption);
+    }
+</script>
 

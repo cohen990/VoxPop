@@ -1,5 +1,6 @@
 ﻿namespace Site.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Models;
@@ -29,8 +30,10 @@
         }
 
         [HttpPost]
-        public ActionResult Create(BlogViewModel blog)
+        public ActionResult Create(BlogViewModel blog, params string[] pollOptions)
         {
+            blog.PollOptions = pollOptions.ToList();
+
             _blogService.CreateAsync(blog);
 
             return RedirectToAction("Index");
