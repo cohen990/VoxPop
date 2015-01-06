@@ -21,9 +21,6 @@
         /// <returns>Returns <see cref="Task"/> </returns>
         public async Task CreateAsync(BlogViewModel blog)
         {
-            // TODO: Add a thing here
-            blog.PollOptions = new List<string> {"Toby Maguire", "That other cunt"};
-
             var blogEntity = blog.AsEntity();
 
             await _blogStore.CreateAsync(blogEntity);
