@@ -6,7 +6,7 @@
 
     public interface IBlogService
     {
-        void CreateAsync(BlogViewModel blog);
-        Task<IEnumerable<BlogEntity>> GetAllAsync();
+        Task CreateAsync(BlogViewModel blog);
+        IEnumerable<BlogPostEntity> GetAll();
     }
 }
