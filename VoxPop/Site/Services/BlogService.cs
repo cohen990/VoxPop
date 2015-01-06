@@ -2,15 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
-    using System.Drawing.Drawing2D;
-    using System.Linq;
-    using System.Net;
-    using System.Security.Principal;
     using System.Threading.Tasks;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Table;
     using Models;
 
@@ -25,7 +18,7 @@
 
         public void CreateAsync(BlogViewModel blog)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<BlogEntity>> GetAllAsync()

@@ -33,7 +33,7 @@
 
         public void CreateAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private CloudStorageAccount GetStorageAccount()
