@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Site.Controllers
+﻿namespace Site.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Models;
+    using Services;
+
     public class HomeController : Controller
     {
+        private readonly IBlogService _blogService;
+
+        public HomeController()
+        {
+            _blogService = new BlogService();
+        }
+
+        // GET: Blog
         public ActionResult Index()
         {
+            var blogs = _blogService.GetAll();
+
+            return View(blogs);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Create(BlogViewModel blog, params string[] pollOptions)
         {
-            ViewBag.Message = "Your application description page.";
+            blog.PollOptions = pollOptions.ToList();
 
-            return View();
-        }
+            _blogService.CreateAsync(blog);
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
