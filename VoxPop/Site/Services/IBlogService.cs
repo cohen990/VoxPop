@@ -8,5 +8,7 @@
     {
         Task CreateAsync(BlogViewModel blog);
         IEnumerable<BlogPostEntity> GetAll();
+
+        Task VoteAsync(BlogViewModel blog, string pollOption);
     }
 }
