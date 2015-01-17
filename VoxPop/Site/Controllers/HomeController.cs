@@ -29,6 +29,11 @@
             return View();
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Create(BlogViewModel blog, params string[] pollOptions)
         {
