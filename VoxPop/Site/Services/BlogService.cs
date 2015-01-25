@@ -47,5 +47,10 @@
 
             _blogStore.Merge(blogPost);
         }
+
+        public BlogPostEntity Get(string rowKey, string partitionKey)
+        {
+            return _blogStore.Get(rowKey, partitionKey);
+        }
     }
 }

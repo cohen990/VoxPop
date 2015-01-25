@@ -186,6 +186,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Vote.cshtml" />
+    <Content Include="Views\Home\GenericStory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

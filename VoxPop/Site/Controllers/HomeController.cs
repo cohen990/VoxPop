@@ -34,6 +34,13 @@
             return View();
         }
 
+        public ActionResult GenericStory(string rowKey, string partitionKey)
+        {
+            var blogs = _blogService.Get(rowKey, partitionKey);
+
+            return View(blogs);
+        }
+
         [HttpPost]
         public ActionResult Create(BlogViewModel blog, params string[] pollOptions)
         {

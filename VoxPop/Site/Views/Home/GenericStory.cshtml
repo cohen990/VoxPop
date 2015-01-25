@@ -1,0 +1,12 @@
+﻿@model Site.Models.BlogPostEntity
+@{
+    ViewBag.Title = "GenericStory";
+}
+
+<h2>@Model.BlogTitle</h2>
+<p>@Model.BlogContent</p>
+@foreach (var pollItem in Model.Poll)
+{
+    <h4>@pollItem.Key :</h4>
+    <span>@pollItem.Value</span>
+}
