@@ -13,7 +13,7 @@
 {
     foreach (var blogPost in Model)
     {
-        <h2>@blogPost.BlogTitle</h2>
+        <h2>@Html.ActionLink(blogPost.BlogTitle, "GenericStory", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)</h2>
         <p>@blogPost.BlogContent</p>
         foreach (var pollItem in blogPost.Poll)
         {
