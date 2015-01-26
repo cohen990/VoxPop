@@ -36,9 +36,16 @@
             return sortedBlogs;
         }
 
-        public Task VoteAsync(BlogViewModel blog, string pollOption)
+        public void Vote(VoteModel model)
         {
-            throw new NotImplementedException();
+            BlogPostEntity blogPost = _blogStore.Get(model.BlogPostRowKey, model.BlogPostPartitionKey);
+
+            var key =
+                blogPost.Poll.Keys.Single(x => x.Trim().Equals(model.PollItemKey, StringComparison.OrdinalIgnoreCase));
+
+            blogPost.Poll[key] += 1;
+
+            _blogStore.Merge(blogPost);
         }
     }
 }
