@@ -8,5 +8,9 @@
         IEnumerable<TEntity> GetAll();
 
         Task CreateAsync(TEntity entity);
+
+        void Merge(TEntity entity);
+
+        TEntity Get(string entityRowKey, string entityPartitionKey);
     }
 }

@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web.UI.WebControls;
+    using Microsoft.Data.Edm.Csdl;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
@@ -33,6 +35,24 @@
         {
             var operation = TableOperation.Insert(entity);
             await _table.ExecuteAsync(operation);
+        }
+
+        public void Merge(TEntity entity)
+        {
+            TableOperation operation = TableOperation.Merge(entity);
+
+            _table.Execute(operation);
+        }
+
+        public TEntity Get(string entityRowKey, string entityPartitionKey)
+        {
+            TableOperation operation = TableOperation.Retrieve<TEntity>(entityPartitionKey, entityRowKey);
+
+            TableResult result = _table.Execute(operation);
+
+            var entity = result.Result as TEntity;
+
+            return entity;
         }
 
         private CloudStorageAccount GetStorageAccount()
