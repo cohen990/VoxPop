@@ -9,7 +9,7 @@
 
         Task CreateAsync(TEntity entity);
 
-        void Vote(TEntity entity, string optionKey);
+        void Merge(TEntity entity);
 
         TEntity Get(string entityRowKey, string entityPartitionKey);
     }

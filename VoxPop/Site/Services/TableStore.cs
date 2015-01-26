@@ -37,7 +37,7 @@
             await _table.ExecuteAsync(operation);
         }
 
-        public void Vote(TEntity entity, string optionKey)
+        public void Merge(TEntity entity)
         {
             TableOperation operation = TableOperation.Merge(entity);
 

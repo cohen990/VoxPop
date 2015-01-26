@@ -45,7 +45,7 @@
 
             blogPost.Poll[key] += 1;
 
-            _blogStore.Vote(blogPost, model.PollItemKey);
+            _blogStore.Merge(blogPost);
         }
     }
 }
