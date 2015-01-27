@@ -64,5 +64,22 @@
 
             return RedirectToAction("Index");
         }
+    
+        public ActionResult Vote2(string pollItemKey, string blogPostPartitionKey, string blogPostRowKey)
+        {
+            var model = new VoteModel
+            {
+                PollItemKey = pollItemKey,
+                BlogPostPartitionKey = blogPostPartitionKey,
+                BlogPostRowKey = blogPostRowKey
+            };
+
+            _blogService.Vote(model);
+
+            return RedirectToAction("Index");
+
+        }
+    
     }
+
 }
