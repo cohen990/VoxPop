@@ -18,9 +18,9 @@
             <span>@pollItem.Value</span>
             using(Html.BeginForm("Vote", "Home"))
             {
-                <input type="hidden" name="pollItemKey" value=@pollItem.Key >
-                <input type="hidden" name="blogPostPartitionKey" value=@blogPost.PartitionKey >
-                <input type="hidden" name="blogPostRowKey" value=@blogPost.RowKey >
+                <input type="hidden" name="pollItemKey" value="@pollItem.Key" >
+                <input type="hidden" name="blogPostPartitionKey" value="@blogPost.PartitionKey" >
+                <input type="hidden" name="blogPostRowKey" value="@blogPost.RowKey" >
                 <input type="submit" value="+1" >
             }
         }
