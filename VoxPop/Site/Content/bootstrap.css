@@ -3,18 +3,30 @@
 
 }*/
 
+html{
+    position:static;
+    left:0;
+    right:0;
+}
+
+body{
+    margin:0;
+    width:100%;
+    display:block;
+}
+
 * {
     font-family: 'Segoe WP SemiLight';
 
 }
 
 .Logo {
-    background: url('../Images/VPlogo_Big Os_WPtest.jpg') no-repeat;
+    background: url('../Images/VPlogo_Big Os.jpg') no-repeat;
     display: block;
     width: 750px;
     height: 136px;
     text-indent: -9999px; /* hides the link text */
-    margin-bottom: 15px;
+    margin-bottom: -25px;
     margin-top: -35px;
     
 }
@@ -27,14 +39,32 @@
     border-right: none;
     border-left:none;
     margin-left: -10px;
-    margin-right: 20px;   
+    margin-right: 20px;  
+    display: inline-block; 
 
 }
 
 #CreateButton {
-    display:inline-block;
-    font-size:inherit;
+    display: inline-block;
+    margin: 0px 0px 0px 20px;
+    border: 5px solid #060606;
+    border-radius: 7px;
+    
 }
 
+#SearchButton {
+    display: inline-block;
+    float: right;
+    margin: 0px 20px 0px 0px;
+}
+
+div div p {
+    text-decoration:none;
+    text-align: center;
+    font-size: 1em;
+    font: #ffffff;
+    font-weight:900;
+    
+}
 
 
