@@ -8,10 +8,13 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/charts")
 
+    
 </head>
 <body>
-    <h1>VoxPop</h1>
     
+    <h1>@Html.ActionLink("VoxPop", "Index")</h1>
+    @Html.ActionLink("Create Story", "Create")
+    @Html.ActionLink("Search VP", "Search")
           
     <div class="container body-content">
         @RenderBody()
