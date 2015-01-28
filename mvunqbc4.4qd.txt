@@ -1,7 +1,0 @@
-﻿[user]
-    name = AJizzleBizzle
-    email = aaron_jerez@hotmail.com
-
-
-
-
