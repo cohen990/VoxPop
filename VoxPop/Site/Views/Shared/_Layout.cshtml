@@ -19,8 +19,8 @@
     @Html.ActionLink("VoxPop", "Index", null, new { @class="Logo" })
    
     <div id="navbar">
-        <div id="CreateButton">@Html.ActionLink("Create Story", "Create")</div>
-        <div>@Html.ActionLink("Search VP", "Search")</div>
+        <div id="CreateButton"><p>@Html.ActionLink("Create Story", "Create", null, new { @class="navbar-link" })</p></div>
+        <div id="SearchButton"><p>@Html.ActionLink("Search VP", "Search", null, new { @class = "navbar-link" })</p></div>
     </div>
 
     
