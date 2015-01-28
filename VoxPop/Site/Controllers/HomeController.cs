@@ -1,5 +1,6 @@
 ﻿namespace Site.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -51,7 +52,11 @@
             return RedirectToAction("Index");
         }
 
-        public ActionResult Vote(string pollItemKey, string blogPostPartitionKey, string blogPostRowKey)
+        public ActionResult Vote(
+            string pollItemKey,
+            string blogPostPartitionKey,
+            string blogPostRowKey,
+            string returnUrl  = null)
         {
             var model = new VoteModel
             {
@@ -62,10 +67,12 @@
 
             _blogService.Vote(model);
 
-            return RedirectToAction("Index");
-        }
-    
-    
-    }
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
 
+            return RedirectToAction("Index", "Home");
+        }
+    }
 }
