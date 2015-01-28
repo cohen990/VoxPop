@@ -7,8 +7,11 @@
     public interface IBlogService
     {
         Task CreateAsync(BlogViewModel blog);
+
         IEnumerable<BlogPostEntity> GetAll();
 
         void Vote(VoteModel model);
+
+        BlogPostEntity Get(string rowKey, string partitionKey);
     }
 }
