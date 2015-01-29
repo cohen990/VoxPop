@@ -16,12 +16,12 @@
 
 <body>
     
-    @Html.ActionLink("VoxPop", "Index", null, new { @class="Logo" })
+    <div><a href="@Url.Action("Index", "Home")" class="Logo"></a></div>
    
-    <div id="navbar">
-        <div id="CreateButton"><p>@Html.ActionLink("Create Story", "Create", null, new { @class="navbar-link" })</p></div>
-        <div id="SearchButton"><p>@Html.ActionLink("Search VP", "Search", null, new { @class = "navbar-link" })</p></div>
-    </div>
+    <div class="navbar">
+        <div id="CreateButton"><a href="@Url.Action("Create","Home")" class="navbar-link"><p class="navbar-link-text">Create New Story</p></a></div>
+        <div id="SearchButton"><a href="@Url.Action("Search","Home")" class="navbar-link"><p class="navbar-link-text">Search VP</p></a></div>
+   </div>
 
     
     
