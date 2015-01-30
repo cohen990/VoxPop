@@ -35,7 +35,7 @@
             return View();
         }
 
-        public ActionResult GenericStory(string rowKey, string partitionKey)
+        public ActionResult Story(string rowKey, string partitionKey)
         {
             var blogs = _blogService.Get(rowKey, partitionKey);
 
