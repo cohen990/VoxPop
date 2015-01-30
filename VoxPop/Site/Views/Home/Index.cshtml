@@ -3,26 +3,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Home</h2>
+<h1 class="PageHeadings">Top Stories</h1>
 
 
 @if (@Model != null)
 {
     foreach (var blogPost in Model)
     {
-        <h2>@Html.ActionLink(blogPost.BlogTitle, "GenericStory", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)</h2>
-        <p>@blogPost.BlogContent</p>
-        foreach (var pollItem in blogPost.Poll)
-        {
-            <h4>@pollItem.Key :</h4>
-            <span>@pollItem.Value</span>
-            using(Html.BeginForm("Vote", "Home"))
-            {
-                <input type="hidden" name="pollItemKey" value="@pollItem.Key" >
-                <input type="hidden" name="blogPostPartitionKey" value="@blogPost.PartitionKey" >
-                <input type="hidden" name="blogPostRowKey" value="@blogPost.RowKey" >
-                <input type="submit" value="+1" >
-            }
-        }
+        <div class="IndexStoryLinks">
+            <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)">
+                <div><a class="IndexStoryPics"></a></div>
+                <div><a class="IndexStoryCharts"></a></div>
+                <h2 class="IndexStoryTitles">@Html.ActionLink(blogPost.BlogTitle, "Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)</h2>
+            </a>
+        </div>
     }
 }
+        

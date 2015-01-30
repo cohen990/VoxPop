@@ -1,7 +1,10 @@
-﻿/* {
+﻿/* { 
     border:dashed 2px black;
 
 }*/
+
+/* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
+
 body
 {
 margin:0px;
@@ -30,13 +33,11 @@ margin:0px;
     
 }
 
-
-
 .navbar {
     height: 45px;
     width: 100%;
     background: #FFd1d1;
-    border: .32em solid #060606;
+    border: .25em solid #060606;
     border-right: none;
     border-left:none; 
     display: inline-block; 
@@ -59,7 +60,8 @@ margin:0px;
     background-color: #ff6e7f;
 }
 
-/*.navbar-link:active {
+/*  (Push in effect) not sure about atm so leaving out
+    .navbar-link:active {
     background-color: #f51212;
     height:45px;
     border: 3px solid #060606;
@@ -68,7 +70,7 @@ margin:0px;
 }*/
 
 #CreateButton {
-    float:left;
+    float: left;
     margin-left: 20px;
     
 }
@@ -96,6 +98,35 @@ margin:0px;
          1px  1px 0px #060606;
 }
 
+/* Index Page Stuff*/
+
+.IndexStoryLinks {
+    height: 350px;
+    z-index: -1;
+}
+
+
+.IndexStoryPics {
+    display:inline-block;
+    float: left;
+    background: url('../Images/Legalize.jpg') no-repeat;
+    height: 300px;
+    width: 420px;
+    margin-left: 60px;
+    
+}
+
+.IndexStoryCharts {
+    display: inline-block;
+    float: right;
+    background: url('../Images/JsChartMock1.jpg') no-repeat;
+    height: 300px;
+    width: 300px;
+    
+}
+
+.IndexStoryTitles {
+}
 
 
     
