@@ -103,11 +103,12 @@ margin:0px;
 .IndexStoryLinks {
     height: 350px;
     z-index: -1;
+    
 }
 
 
 .IndexStoryPics {
-    display:inline-block;
+    display: inline-block;
     float: left;
     background: url('../Images/Legalize.jpg') no-repeat;
     height: 300px;
@@ -126,6 +127,7 @@ margin:0px;
 }
 
 .IndexStoryTitles {
+    
 }
 
 
