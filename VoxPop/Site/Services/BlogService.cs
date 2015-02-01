@@ -40,10 +40,10 @@
         {
             BlogPostEntity blogPost = _blogStore.Get(model.BlogPostRowKey, model.BlogPostPartitionKey);
 
-             var key =
+            var key =
                 blogPost.Poll.Keys.Single(x => x.Trim().Equals(model.PollItemKey, StringComparison.OrdinalIgnoreCase));
 
-             blogPost.Poll[key] += 1;
+            blogPost.Poll[key] += 1;
 
             _blogStore.Merge(blogPost);
         }
