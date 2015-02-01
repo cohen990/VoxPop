@@ -7,20 +7,14 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/charts")
-
-  
-    
+    @Scripts.Render("~/bundles/jqueryval")
 </head>
 
-
-
 <body>
-    
     <div>
         <a href="@Url.Action("Index", "Home")" class="Logo">
         </a>
     </div>
-   
     <div class="navbar">
         <div id="CreateButton">
             <a href="@Url.Action("Create","Home")" class="navbar-link">
