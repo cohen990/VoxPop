@@ -16,11 +16,22 @@
 
 <body>
     
-    <div><a href="@Url.Action("Index", "Home")" class="Logo"></a></div>
+    <div>
+        <a href="@Url.Action("Index", "Home")" class="Logo">
+        </a>
+    </div>
    
     <div class="navbar">
-        <div id="CreateButton"><a href="@Url.Action("Create","Home")" class="navbar-link"><p class="navbar-link-text">Create New Story</p></a></div>
-        <div id="SearchButton"><a href="@Url.Action("Search","Home")" class="navbar-link"><p class="navbar-link-text">Search VP</p></a></div>
+        <div id="CreateButton">
+            <a href="@Url.Action("Create","Home")" class="navbar-link">
+                <p class="navbar-link-text">Create New Story</p>
+            </a>
+        </div>
+        <div id="SearchButton">
+            <a href="@Url.Action("Search","Home")" class="navbar-link">
+                <p class="navbar-link-text">Search VP</p>
+            </a>
+        </div>
    </div>
 
    <div class="container body-content">
