@@ -1,24 +1,159 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/* { 
+    border:dashed 2px black;
+
+}*/
+
+/* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
+
+body
+{
+    margin:0px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+* {
+    font-family: 'Segoe WP SemiLight';
+   
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.Logo {
+    background: url('../Images/VPlogo link.jpg') no-repeat;
+    display: block;
+    width: 505px;
+    height: 96px;
+    margin: 7px;
+    
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.Logo:hover {
+    background: url('../Images/VPlogo link-hover.jpg') no-repeat;
+    display: block;
+    width: 505px;
+    height: 96px;
+    margin: 7px;
+    
 }
+
+.navbar {
+    height: 45px;
+    width: 100%;
+    background: #FFd1d1;
+    border: .25em solid #060606;
+    border-right: none;
+    border-left:none; 
+    display: inline-block; 
+
+}
+
+.navbar-link {
+    text-decoration: none;
+    height: 45px;
+    display: inline-block;
+    margin: -3px 0px 0px 0px;
+    border: 3px solid #060606;
+    border-radius: 11px; 
+    border-left: none;
+    border-right: none;
+
+}
+
+.navbar-link:hover {
+    background-color: #ff6e7f;
+}
+
+/*  (Push in effect) Not sure about atm so leaving out
+    .navbar-link:active {
+    background-color: #f51212;
+    height:45px;
+    border: 3px solid #060606;
+    margin: -3px 0px 0px 0px;
+    padding: 0 -2px 0 -2px;
+}*/
+
+#CreateButton {
+    float: left;
+    margin-left: 20px;
+    
+}
+
+#SearchButton {
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar-link-text {
+    margin: 10px 4px 13px; 
+    text-align:center;
+    font-family:Verdana;
+    font-size: 20px;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 
+        -1px -1px 0px #060606,
+         0px -1px 0px #060606,
+         1px -1px 0px #060606,
+        -1px  0px 0px #060606,
+         1px  0px 0px #060606,
+        -1px  1px 0px #060606,
+         0px  1px 0px #060606,
+         1px  1px 0px #060606;
+}
+
+/* Index Page Stuff*/
+
+.IndexStoryLinks {
+    height: 20em;
+    border: 3px dashed black;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    margin: 30px;
+    margin-bottom: 40px;
+    display:block;
+    text-decoration: none;
+}
+
+.IndexStoryTitles {
+    clear: left;
+    margin-left: 1.55em;
+    padding-top: .6em;
+    font-size:30px;
+    font-weight:900;
+    color: black;
+}
+
+.IndexStoryPics {
+    display: inline-block;
+    float: left;
+    margin-top: 1.25em;
+    margin-left: 3em;
+    height: 215px;
+    width: 425px;
+    background: url('../Images/Legalize.jpg') no-repeat;
+}
+
+.IndexStoryCharts {
+    display: inline-block;
+    float: right;
+    margin-top: 1em;
+    margin-right: 13em;
+    background: url('../Images/JsChartMock1.jpg') no-repeat;
+    height: 289px;
+    width: 300px;
+
+}
+
+.IndexStoryCharts:hover {
+    display: inline-block;
+    float: right;
+    margin-top: 1em;
+    margin-right: 13em;
+    background: url('../Images/JsChartMock1Hover.jpg') no-repeat;
+    background-size: initial;
+    height: 289px;
+    width: 300px;
+
+}
+
+
+
+
