@@ -1,6 +1,6 @@
 ﻿@model Site.Models.BlogPostEntity
 @{
-    ViewBag.Title = "GenericStory";
+    ViewBag.Title = "Story";
 }
 
 <h2>@Model.BlogTitle</h2>
@@ -14,7 +14,8 @@
         <input type="hidden" name="pollItemKey" value="@pollItem.Key">
         <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
         <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-        <input type="hidden" name="returnUrl" value="/Home/GenericStory?rowKey=@Model.RowKey&partitionKey=@Model.PartitionKey">
+        <input type="hidden" name="returnUrl" value="/Home/Story?rowKey=@Model.RowKey&partitionKey=@Model.PartitionKey">
         <input type="submit" value="+1">
     }
 }
+

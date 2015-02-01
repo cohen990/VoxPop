@@ -25,9 +25,7 @@ namespace Site
 
             bundles.Add(new ScriptBundle("~/bundles/charts").Include("~/Scripts/chart.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
         }
     }
 }
