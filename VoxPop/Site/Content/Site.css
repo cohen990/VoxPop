@@ -7,7 +7,7 @@
 
 body
 {
-margin:0px;
+    margin:0px;
 }
 
 * {
@@ -44,23 +44,23 @@ margin:0px;
 
 }
 
-.navbar-link{
-    text-decoration:none;
-    height:45px;
+.navbar-link {
+    text-decoration: none;
+    height: 45px;
     display: inline-block;
     margin: -3px 0px 0px 0px;
     border: 3px solid #060606;
     border-radius: 11px; 
     border-left: none;
     border-right: none;
-    
+
 }
 
 .navbar-link:hover {
     background-color: #ff6e7f;
 }
 
-/*  (Push in effect) not sure about atm so leaving out
+/*  (Push in effect) Not sure about atm so leaving out
     .navbar-link:active {
     background-color: #f51212;
     height:45px;
@@ -101,34 +101,59 @@ margin:0px;
 /* Index Page Stuff*/
 
 .IndexStoryLinks {
-    height: 350px;
-    z-index: -1;
-    
+    height: 20em;
+    border: 3px dashed black;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    margin: 30px;
+    margin-bottom: 40px;
+    display:block;
+    text-decoration: none;
 }
 
+.IndexStoryTitles {
+    clear: left;
+    margin-left: 1.55em;
+    padding-top: .6em;
+    font-size:30px;
+    font-weight:900;
+    color: black;
+}
 
 .IndexStoryPics {
     display: inline-block;
     float: left;
+    margin-top: 1.25em;
+    margin-left: 3em;
+    height: 215px;
+    width: 425px;
     background: url('../Images/Legalize.jpg') no-repeat;
-    height: 300px;
-    width: 420px;
-    margin-left: 60px;
-    
 }
 
 .IndexStoryCharts {
     display: inline-block;
     float: right;
+    margin-top: 1em;
+    margin-right: 13em;
     background: url('../Images/JsChartMock1.jpg') no-repeat;
-    height: 300px;
+    height: 289px;
     width: 300px;
-    
+
 }
 
-.IndexStoryTitles {
-    
+.IndexStoryCharts:hover {
+    display: inline-block;
+    float: right;
+    margin-top: 1em;
+    margin-right: 13em;
+    background: url('../Images/JsChartMock1Hover.jpg') no-repeat;
+    background-size: initial;
+    height: 289px;
+    width: 300px;
+
 }
 
 
-    
+
+

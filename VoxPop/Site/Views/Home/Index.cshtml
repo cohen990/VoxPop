@@ -10,13 +10,18 @@
 {
     foreach (var blogPost in Model)
     {
-        <div class="IndexStoryLinks">
-            <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)">
-                <div><a class="IndexStoryPics"></a></div>
-                <div><a class="IndexStoryCharts"></a></div>
-                <h2 class="IndexStoryTitles">@Html.ActionLink(blogPost.BlogTitle, "Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)</h2>
+        <div>
+            <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)" class="IndexStoryLinks">
+            <div>
+                <img class="IndexStoryPics">
+            </div>
+            <div>
+                <img class="IndexStoryCharts">
+            </div>
+            <p class="IndexStoryTitles">@blogPost.BlogTitle</p>
+            
             </a>
         </div>
     }
 }
-        
+
