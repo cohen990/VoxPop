@@ -1,9 +1,11 @@
 ﻿using Microsoft.Owin;
-using Owin;
+using Site;
 
-[assembly: OwinStartupAttribute(typeof(VoxPop.Startup))]
-namespace VoxPop
+[assembly: OwinStartup(typeof(Startup))]
+namespace Site
 {
+    using Owin;
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
