@@ -17,12 +17,15 @@ namespace Site.Models
         /// Initializes a new instance of the <see cref="BlogPostEntity"/> class.
         /// </summary>
         /// <param name="blogTitle">The title of the blog post.</param>
+        /// <param name="blogImage"> The story's image.</param>
         /// <param name="blogContent">The content of the blog post.</param>
         /// <param name="pollOptions">The poll attached to the blog post.</param>
-        public BlogPostEntity(string blogTitle, string blogContent, IEnumerable<string> pollOptions)
+        public BlogPostEntity(string blogTitle, string blogImage, string blogContent, IEnumerable<string> pollOptions)
         {
             if (string.IsNullOrEmpty(blogTitle))
                 throw new ArgumentNullException("blogTitle");
+            if (string.IsNullOrEmpty(blogImage))
+                throw new ArgumentException("blogImage");
             if (string.IsNullOrEmpty(blogContent))
                 throw new ArgumentNullException("blogContent");
             if (pollOptions == null || !pollOptions.Any())
@@ -32,7 +35,9 @@ namespace Site.Models
             RowKey = Guid.NewGuid().ToString();
 
             BlogTitle = blogTitle;
+            BlogImage = blogImage;
             BlogContent = blogContent;
+
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -83,6 +88,7 @@ namespace Site.Models
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
             result.Add("BlogContent", new EntityProperty(BlogContent));
             result.Add("BlogTitle", new EntityProperty(BlogTitle));
+            result.Add("BlogImage", new EntityProperty(BlogImage));
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -132,6 +138,11 @@ namespace Site.Models
         public string BlogTitle { get; set; }
 
         /// <summary>
+        /// Gets or sets the Image of the blog.
+        /// </summary>
+        public string BlogImage { get; set; }
+
+        ///<summary>
         /// Gets or sets the content of the blog.
         /// </summary>
         public string BlogContent { get; set; }

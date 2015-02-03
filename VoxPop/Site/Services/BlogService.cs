@@ -20,9 +20,9 @@
         /// </summary>
         /// <param name="blog">This is the blog entity which will be inserted into the database.</param>
         /// <returns>Returns <see cref="Task"/> </returns>
-        public async Task CreateAsync(BlogViewModel blog)
+        public async Task CreateAsync(BlogViewModel blog, string encodedImage)
         {
-            var blogEntity = blog.AsEntity();
+            var blogEntity = blog.AsEntity(encodedImage);
 
             await _blogStore.CreateAsync(blogEntity);
         }
