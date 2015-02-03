@@ -3,6 +3,7 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using ElCamino.AspNet.Identity.AzureTable;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
@@ -89,6 +90,15 @@
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
+        }
+
+        /// <summary>
+        /// Creates the Azure Table Storage Tables
+        /// </summary>
+        public static async void StartupAsync()
+        {
+            var azureStore = new UserStore<Politico>(new AuthenticationContext());
+            await azureStore.CreateTablesIfNotExists();
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(Politico user)

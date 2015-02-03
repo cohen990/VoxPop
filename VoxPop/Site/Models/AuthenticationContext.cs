@@ -32,6 +32,7 @@ namespace Site.Models
             return new IdentityConfiguration
             {
                 StorageConnectionString = ConfigurationManager.AppSettings["voxpop.authconnectionstring"],
+                TablePrefix = "VoxPop",
             };
         }
     }
