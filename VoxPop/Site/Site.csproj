@@ -203,7 +203,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\JsChartMock1.jpg" />
+    <Content Include="Images\JsChartMock1Hover.jpg" />
     <Content Include="Images\Legalize.jpg" />
+    <Content Include="Images\VPlogoVec.svg" />
+    <Content Include="Images\VPlogoVecHov.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
