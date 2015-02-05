@@ -59,6 +59,11 @@
             return RedirectToAction("Index");
         }
 
+        public string Create(string encodedImage)
+        {
+            return encodedImage;
+        }
+
         public ActionResult Vote(
             string pollItemKey,
             string blogPostPartitionKey,
