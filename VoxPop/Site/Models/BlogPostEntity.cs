@@ -17,15 +17,15 @@ namespace Site.Models
         /// Initializes a new instance of the <see cref="BlogPostEntity"/> class.
         /// </summary>
         /// <param name="blogTitle">The title of the blog post.</param>
-        /// <param name="blogImage"> The story's image.</param>
+        /// <param name="encodedImage"> The story's image.</param>
         /// <param name="blogContent">The content of the blog post.</param>
         /// <param name="pollOptions">The poll attached to the blog post.</param>
-        public BlogPostEntity(string blogTitle, string blogImage, string blogContent, IEnumerable<string> pollOptions)
+        public BlogPostEntity(string blogTitle, string encodedImage, string blogContent, IEnumerable<string> pollOptions)
         {
             if (string.IsNullOrEmpty(blogTitle))
                 throw new ArgumentNullException("blogTitle");
-            if (string.IsNullOrEmpty(blogImage))
-                throw new ArgumentException("blogImage");
+            if (string.IsNullOrEmpty(encodedImage))
+                throw new ArgumentException("encodedImage");
             if (string.IsNullOrEmpty(blogContent))
                 throw new ArgumentNullException("blogContent");
             if (pollOptions == null || !pollOptions.Any())
@@ -35,7 +35,7 @@ namespace Site.Models
             RowKey = Guid.NewGuid().ToString();
 
             BlogTitle = blogTitle;
-            BlogImage = blogImage;
+            BlogImage = encodedImage;
             BlogContent = blogContent;
 
 
@@ -60,6 +60,7 @@ namespace Site.Models
         {
             BlogContent = properties["BlogContent"].StringValue;
             BlogTitle = properties["BlogTitle"].StringValue;
+            BlogImage = properties["BlogImage"].StringValue;
 
             var pollString = properties["Poll"].StringValue;
 
