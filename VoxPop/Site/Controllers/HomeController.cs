@@ -52,7 +52,7 @@
             BinaryReader reader = new BinaryReader(image.InputStream);
             byte[] imageBytes = reader.ReadBytes((int)image.InputStream.Length);
 
-            string base64String = Convert.ToBase64String(imageBytes);
+            string encodedImage = Convert.ToBase64String(imageBytes);
 
             _blogService.CreateAsync(blog, image.ToString());
 
