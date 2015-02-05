@@ -52,5 +52,6 @@
         {
             return _blogStore.Get(rowKey, partitionKey);
         }
+
     }
 }
