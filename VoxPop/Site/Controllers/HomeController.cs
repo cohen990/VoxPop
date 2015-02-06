@@ -54,7 +54,7 @@
 
             string encodedImage = Convert.ToBase64String(imageBytes);
 
-            _blogService.CreateAsync(blog, image.ToString());
+            await _blogService.CreateAsync(blog, encodedImage);
 
             return RedirectToAction("Index");
         }

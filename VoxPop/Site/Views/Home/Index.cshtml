@@ -13,7 +13,7 @@
         <div>
             <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)" class="IndexStoryLinks">
             <div>
-                <img src="~/Images/Legalize.jpg" class="IndexStoryPics">
+                <img src="data:image/gif;base64,@blogPost.BlogImage" class="IndexStoryPics">
             </div>
             <div>
                 <img src="~/Images/JsChartMock1.jpg" class="IndexStoryCharts">
