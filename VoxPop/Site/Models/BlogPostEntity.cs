@@ -148,8 +148,6 @@ namespace Site.Models
         /// </summary>
         public string BlogContent { get; set; }
 
-        public string encodedImage { get; set; }
-
         /// <summary>
         /// Gets or sets the poll of the blog.
         /// </summary>
