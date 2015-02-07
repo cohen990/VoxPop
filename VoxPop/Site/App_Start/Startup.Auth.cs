@@ -7,8 +7,6 @@
     using Microsoft.Owin.Security.Cookies;
     using Models;
     using Owin;
-    using VoxPop;
-    using VoxPop.Models;
 
     public partial class Startup
     {

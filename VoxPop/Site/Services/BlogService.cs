@@ -5,8 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Models;
+    using ViewModels;
 
-    class BlogService : IBlogService
+    public class BlogService : IBlogService
     {
         private readonly IStore<BlogPostEntity> _blogStore;
 
