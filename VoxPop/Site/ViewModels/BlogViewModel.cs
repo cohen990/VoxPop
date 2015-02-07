@@ -1,8 +1,8 @@
-﻿namespace Site.Models
+﻿namespace Site.ViewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Services;
+    using Models;
 
 
     public class BlogViewModel
@@ -19,6 +19,11 @@
             var entity = new BlogPostEntity(Title, image, Content, PollOptions);
 
             return entity;
+        }
+
+        public BlogViewModel()
+        {
+            PollOptions = new List<string>();
         }
     }
 }
