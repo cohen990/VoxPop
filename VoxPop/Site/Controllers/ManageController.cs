@@ -10,6 +10,8 @@ using VoxPop.Models;
 
 namespace VoxPop.Controllers
 {
+    using Site;
+
     [Authorize]
     public class ManageController : Controller
     {

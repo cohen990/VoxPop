@@ -42,6 +42,10 @@
     <Reference Include="AccidentalFish.AspNet.Identity.Azure">
       <HintPath>..\packages\accidentalfish.aspnet.identity.azure.0.3.0.5\lib\net45\AccidentalFish.AspNet.Identity.Azure.dll</HintPath>
     </Reference>
+    <Reference Include="ElCamino.AspNet.Identity.AzureTable, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8a83e5a7822753ac, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ElCamino.AspNet.Identity.AzureTable.1.5.2.0\lib\net45\ElCamino.AspNet.Identity.AzureTable.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -186,10 +190,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AuthenticationContext.cs" />
     <Compile Include="Models\BlogPostEntity.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Politico.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
