@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Services;
 
+
     public class BlogViewModel
     {
         public string Title { get; set; }
@@ -13,11 +14,12 @@
 
         public List<string> PollOptions { get; set; }
 
-        public BlogPostEntity AsEntity()
+        public BlogPostEntity AsEntity(string image)
         {
-            var entity = new BlogPostEntity(Title, Content, PollOptions);
+            var entity = new BlogPostEntity(Title, image, Content, PollOptions);
 
             return entity;
         }
     }
 }
+

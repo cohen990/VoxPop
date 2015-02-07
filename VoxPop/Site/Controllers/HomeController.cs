@@ -1,8 +1,10 @@
 ﻿namespace Site.Controllers
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Mvc;
     using Models;
     using Services;
@@ -43,11 +45,16 @@
         }
 
         [HttpPost]
-        public ActionResult Create(BlogViewModel blog, params string[] pollOptions)
+        public async Task<ActionResult> Create(BlogViewModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
             blog.PollOptions = pollOptions.ToList();
 
-            _blogService.CreateAsync(blog);
+            BinaryReader reader = new BinaryReader(image.InputStream);
+            byte[] imageBytes = reader.ReadBytes((int)image.InputStream.Length);
+
+            string encodedImage = Convert.ToBase64String(imageBytes);
+
+            await _blogService.CreateAsync(blog, encodedImage);
 
             return RedirectToAction("Index");
         }

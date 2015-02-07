@@ -6,7 +6,7 @@
 
 
 
-@using (Html.BeginForm("Create", "Home", FormMethod.Post, new{@name="blogForm"}))
+@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
 {
     @Html.EditorForModel()
     <fieldset id="pollOptions">
@@ -15,7 +15,7 @@
         <input name="pollOptions" type="text" />
     </fieldset>
     <span onclick="AddOption()">Add more options...</span>
-
+    <input name="image" type="file" />
     <input type="submit"/>
 }
 
