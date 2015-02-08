@@ -3,6 +3,10 @@
     ViewBag.Title = "Story";
 }
 
+<script>
+    var chartData = [];
+</script>
+
 <h1 class="story-headings">@Model.BlogTitle</h1>
 <p class="story-date">@Model.Timestamp</p>
 <div class="story-width">
@@ -13,24 +17,26 @@
         <div>
             <a class="story-chart-box">
                 <div>
-                    <img src="~/Images/JsChartMock1.jpg" class="story-chart">
+                    <canvas class="story-chart" id="storyChart" height="350" width="350"></canvas>
                 </div>
-                <a class ="story-votebuttons">
-                        <h2 class="story-votebuttons-title">Vote</h2>
-                        @foreach (var pollItem in Model.Poll)
+                <a class="story-votebuttons">
+                    <h2 class="story-votebuttons-title">Vote</h2>
+                    @foreach (var pollItem in Model.Poll)
+                    {
+                        <h4>@pollItem.Key :</h4>
+                        <span>@pollItem.Value</span>
+                        using (Html.BeginForm("Vote", "Home"))
                         {
-                            <h4>@pollItem.Key :</h4>
-                            <span>@pollItem.Value</span>
-                            using (Html.BeginForm("Vote", "Home"))
-                            {
-                                <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                                <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                                <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                                <input type="hidden" name="returnUrl" value="/Home/Story?rowKey=@Model.RowKey&partitionKey=@Model.PartitionKey">
-                                <input type="submit" value="+1">
-                            }
+                            <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                            <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
+                            <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
+                            <input type="hidden" name="returnUrl" value="/Home/Story?rowKey=@Model.RowKey&partitionKey=@Model.PartitionKey">
+                            <input type="submit" value="+1">
                         }
-
+                        <script>
+                            chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                        </script>
+                    }
                 </a>
             </a>
         </div>
@@ -40,3 +46,6 @@
 
 <p class="story-content">@Model.BlogContent</p>
 
+<script>
+    GenerateChart("storyChart", chartData)
+</script>
