@@ -197,6 +197,7 @@
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\IBlogService.cs" />
     <Compile Include="Services\IStore.cs" />
+    <Compile Include="Services\BlobStore.cs" />
     <Compile Include="Services\TableStore.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />

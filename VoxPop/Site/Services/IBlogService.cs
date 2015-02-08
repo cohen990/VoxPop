@@ -1,13 +1,15 @@
 ﻿namespace Site.Services
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Threading.Tasks;
     using ViewModels;
 
     public interface IBlogService
     {
-        Task CreateAsync(BlogViewModel blog, string Image);
+        Task CreateAsync(BlogViewModel blog, Stream imageStream);
 
         IEnumerable<BlogPostEntity> GetAll();
 

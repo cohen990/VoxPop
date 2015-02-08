@@ -6,14 +6,19 @@
     using System.Threading.Tasks;
     using Models;
     using ViewModels;
+    using System.IO;
 
     public class BlogService : IBlogService
     {
         private readonly IStore<BlogPostEntity> _blogStore;
 
+        private readonly BlobStore _blobStore;
+
         public BlogService()
         {
             _blogStore = new TableStore<BlogPostEntity>();
+
+            _blobStore = new BlobStore();
         }
 
         /// <summary>
@@ -21,9 +26,11 @@
         /// </summary>
         /// <param name="blog">This is the blog entity which will be inserted into the database.</param>
         /// <returns>Returns <see cref="Task"/> </returns>
-        public async Task CreateAsync(BlogViewModel blog, string encodedImage)
+        public async Task CreateAsync(BlogViewModel blog, Stream imageStream)
         {
-            var blogEntity = blog.AsEntity(encodedImage);
+            Uri imageUri = _blobStore.StoreAsync(imageStream);
+
+            var blogEntity = blog.AsEntity(imageUri);
 
             await _blogStore.CreateAsync(blogEntity);
         }
