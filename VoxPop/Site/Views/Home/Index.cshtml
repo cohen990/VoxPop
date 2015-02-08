@@ -10,16 +10,29 @@
 {
     foreach (var blogPost in Model)
     {
+        <script>
+            chartData = []
+        </script>
         <div>
             <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)" class="IndexStoryLinks">
-            <div>
-                <img src="data:image/gif;base64,@blogPost.BlogImage" class="IndexStoryPics">
-            </div>
-            <div>
-                <img src="~/Images/JsChartMock1.jpg" class="IndexStoryCharts">
-            </div>
-            <p class="IndexStoryTitles">@blogPost.BlogTitle</p>
+                <div>
+                    <img src="data:image/gif;base64,@blogPost.BlogImage" class="IndexStoryPics">
+                </div>
+                <div>
+                    <canvas class="story-chart" id="@blogPost.RowKey@blogPost.PartitionKey" height="300" width="300"></canvas>
+                </div>
+                <p class="IndexStoryTitles">@blogPost.BlogTitle</p>
             </a>
         </div>
+        foreach (var pollItem in blogPost.Poll)
+        {
+            <script>
+                chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+            </script>
+        }
+
+        <script>
+            GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData)
+        </script>
     }
 }
