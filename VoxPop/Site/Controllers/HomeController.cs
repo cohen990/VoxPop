@@ -8,6 +8,7 @@
     using System.Web.Mvc;
     using Models;
     using Services;
+    using ViewModels;
 
     public class HomeController : Controller
     {
