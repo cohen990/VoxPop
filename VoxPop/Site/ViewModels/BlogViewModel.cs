@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Models;
+    using System;
 
 
     public class BlogViewModel
@@ -14,9 +15,9 @@
 
         public List<string> PollOptions { get; set; }
 
-        public BlogPostEntity AsEntity(string image)
+        public BlogPostEntity AsEntity(Uri imageUri)
         {
-            var entity = new BlogPostEntity(Title, image, Content, PollOptions);
+            var entity = new BlogPostEntity(Title, imageUri, Content, PollOptions);
 
             return entity;
         }

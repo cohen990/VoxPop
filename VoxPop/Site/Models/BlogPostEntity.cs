@@ -16,25 +16,26 @@ namespace Site.Models
         /// Initializes a new instance of the <see cref="BlogPostEntity"/> class.
         /// </summary>
         /// <param name="blogTitle">The title of the blog post.</param>
-        /// <param name="encodedImage"> The story's image.</param>
+        /// <param name="imageUri"> The link to the story's image in the cloud.</param>
         /// <param name="blogContent">The content of the blog post.</param>
         /// <param name="pollOptions">The poll attached to the blog post.</param>
-        public BlogPostEntity(string blogTitle, string encodedImage, string blogContent, IEnumerable<string> pollOptions)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions)
         {
             if (string.IsNullOrEmpty(blogTitle))
                 throw new ArgumentNullException("blogTitle");
-            if (string.IsNullOrEmpty(encodedImage))
-                throw new ArgumentException("encodedImage");
             if (string.IsNullOrEmpty(blogContent))
                 throw new ArgumentNullException("blogContent");
             if (pollOptions == null || !pollOptions.Any())
                 throw new ArgumentNullException("pollOptions");
+            if (imageUri == null)
+                throw new ArgumentNullException("imageUri");
+
 
             PartitionKey = blogTitle.Split(' ').First().ToLowerInvariant();
             RowKey = Guid.NewGuid().ToString();
 
             BlogTitle = blogTitle;
-            BlogImage = encodedImage;
+            BlogImageUri = imageUri;
             BlogContent = blogContent;
 
 
@@ -59,7 +60,7 @@ namespace Site.Models
         {
             BlogContent = properties["BlogContent"].StringValue;
             BlogTitle = properties["BlogTitle"].StringValue;
-            BlogImage = properties["BlogImage"].StringValue;
+            BlogImageUri = new Uri(properties["BlogImage"].StringValue);
 
             var pollString = properties["Poll"].StringValue;
 
@@ -88,7 +89,7 @@ namespace Site.Models
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
             result.Add("BlogContent", new EntityProperty(BlogContent));
             result.Add("BlogTitle", new EntityProperty(BlogTitle));
-            result.Add("BlogImage", new EntityProperty(BlogImage));
+            result.Add("BlogImage", new EntityProperty(BlogImageUri.ToString()));
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -140,7 +141,7 @@ namespace Site.Models
         /// <summary>
         /// Gets or sets the Image of the blog.
         /// </summary>
-        public string BlogImage { get; set; }
+        public Uri BlogImageUri { get; set; }
 
         ///<summary>
         /// Gets or sets the content of the blog.

@@ -50,12 +50,7 @@
         {
             blog.PollOptions = pollOptions.ToList();
 
-            BinaryReader reader = new BinaryReader(image.InputStream);
-            byte[] imageBytes = reader.ReadBytes((int)image.InputStream.Length);
-
-            string encodedImage = Convert.ToBase64String(imageBytes);
-
-            await _blogService.CreateAsync(blog, encodedImage);
+            await _blogService.CreateAsync(blog, image.InputStream);
 
             return RedirectToAction("Index");
         }
