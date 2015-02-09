@@ -17,7 +17,7 @@
 
         public BlogPostEntity AsEntity(Uri imageUri)
         {
-            var entity = new BlogPostEntity(Title, imageUri, Content, PollOptions);
+            var entity = new BlogPostEntity(Title, imageUri, Content, PollOptions, ImageCaption);
 
             return entity;
         }
@@ -26,6 +26,8 @@
         {
             PollOptions = new List<string>();
         }
+
+        public string ImageCaption { get; set; }
     }
 }
 
