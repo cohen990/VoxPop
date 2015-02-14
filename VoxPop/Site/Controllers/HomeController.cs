@@ -20,7 +20,7 @@
         // GET: Blog
         public ActionResult Index()
         {
-            var blogs = _blogService.GetAll();
+            var blogs = _blogService.GetAllBlogs();
 
             return View(blogs);
         }
@@ -38,7 +38,7 @@
 
         public ActionResult Story(string rowKey, string partitionKey)
         {
-            var blogs = _blogService.Get(rowKey, partitionKey);
+            var blogs = _blogService.GetBlog(rowKey, partitionKey);
 
             return View(blogs);
         }
@@ -48,7 +48,7 @@
         {
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateAsync(blog, image.InputStream);
+            await _blogService.CreateBlogAsync(blog, image);
 
             return RedirectToAction("Index");
         }

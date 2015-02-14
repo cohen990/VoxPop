@@ -1,10 +1,10 @@
 ﻿namespace Site.Storage
 {
     using System;
-    using System.IO;
+    using System.Web;
 
     public interface IImageStore
     {
-        Uri StoreImageAsync(Stream stream);
+        Uri StoreImageAsync(HttpPostedFileBase imageFile);
     }
 }

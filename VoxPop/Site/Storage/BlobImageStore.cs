@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Web;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
@@ -38,9 +39,11 @@
             _container.SetPermissions(permissions);
         }
 
-        public Uri StoreImageAsync(Stream stream)
+        public Uri StoreImageAsync(HttpPostedFileBase imageFile)
         {
-            var reference = Guid.NewGuid().ToString("N") + ".png";
+            var reference = Guid.NewGuid().ToString("N");
+
+            var stream = imageFile.InputStream;
 
             CloudBlockBlob blockBlob = _container.GetBlockBlobReference(reference);
             stream.Seek(0, SeekOrigin.Begin);

@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Web;
     using Storage;
     using Storage.Models;
     using ViewModels;
-    using System.IO;
 
     public class BlogService : IBlogService
     {
@@ -21,21 +21,16 @@
             _imageStore = imageStore;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="BlogViewModel"/> entity in the table storage.
-        /// </summary>
-        /// <param name="blog">This is the blog entity which will be inserted into the database.</param>
-        /// <returns>Returns <see cref="Task"/> </returns>
-        public async Task CreateAsync(BlogViewModel blog, Stream imageStream)
+        public async Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase imageFile)
         {
-            Uri imageUri = _imageStore.StoreImageAsync(imageStream);
+            Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             var blogEntity = blog.AsEntity(imageUri);
 
             await _blogBlogStore.CreateBlogAsync(blogEntity);
         }
 
-        public IEnumerable<BlogPostEntity> GetAll()
+        public IEnumerable<BlogPostEntity> GetAllBlogs()
         {
             IEnumerable<BlogPostEntity> blogs = _blogBlogStore.GetAllBlogs();
 
@@ -56,7 +51,7 @@
             _blogBlogStore.MergeBlog(blogPost);
         }
 
-        public BlogPostEntity Get(string rowKey, string partitionKey)
+        public BlogPostEntity GetBlog(string rowKey, string partitionKey)
         {
             return _blogBlogStore.GetBlog(rowKey, partitionKey);
         }
