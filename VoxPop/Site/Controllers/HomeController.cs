@@ -1,13 +1,10 @@
 ﻿namespace Site.Controllers
 {
-    using System;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using Services;
-    using Storage;
     using Storage.Models;
     using ViewModels;
 
@@ -15,9 +12,9 @@
     {
         private readonly IBlogService _blogService;
 
-        public HomeController()
+        public HomeController(IBlogService blogService)
         {
-            _blogService = new BlogService();
+            _blogService = blogService;
         }
 
         // GET: Blog

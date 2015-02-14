@@ -13,13 +13,12 @@
     {
         private readonly IBlogStore _blogBlogStore;
 
-        private readonly IImageStore _blobImageStore;
+        private readonly IImageStore _imageStore;
 
-        public BlogService()
+        public BlogService(IBlogStore blogStore, IImageStore imageStore)
         {
-            _blogBlogStore = new TableBlogStore();
-
-            _blobImageStore = new BlobImageStore();
+            _blogBlogStore = blogStore;
+            _imageStore = imageStore;
         }
 
         /// <summary>
@@ -29,7 +28,7 @@
         /// <returns>Returns <see cref="Task"/> </returns>
         public async Task CreateAsync(BlogViewModel blog, Stream imageStream)
         {
-            Uri imageUri = _blobImageStore.StoreImageAsync(imageStream);
+            Uri imageUri = _imageStore.StoreImageAsync(imageStream);
 
             var blogEntity = blog.AsEntity(imageUri);
 
