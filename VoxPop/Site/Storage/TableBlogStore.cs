@@ -1,20 +1,19 @@
-﻿namespace Site.Services
+namespace Site.Storage
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Web.UI.WebControls;
-    using Microsoft.Data.Edm.Csdl;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
+    using Models;
 
-    public class TableStore<TEntity> : IStore<TEntity> where TEntity : class, ITableEntity, new()
+    public class TableBlogStore : IBlogStore
     {
         private readonly CloudTable _table;
 
-        public TableStore()
+        public TableBlogStore()
         {
             CloudTableClient client = GetStorageAccount().CreateCloudTableClient();
 
@@ -22,35 +21,35 @@
             _table.CreateIfNotExists();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<BlogPostEntity> GetAllBlogs()
         {
-            var query = new TableQuery<TEntity>();
+            var query = new TableQuery<BlogPostEntity>();
 
-            IEnumerable<TEntity> entities = _table.ExecuteQuery(query).Select(x => x);
+            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query).Select(x => x);
 
             return entities;
         }
 
-        public async Task CreateAsync(TEntity entity)
+        public async Task CreateBlogAsync(BlogPostEntity entity)
         {
             var operation = TableOperation.Insert(entity);
             await _table.ExecuteAsync(operation);
         }
 
-        public void Merge(TEntity entity)
+        public void MergeBlog(BlogPostEntity entity)
         {
             TableOperation operation = TableOperation.Merge(entity);
 
             _table.Execute(operation);
         }
 
-        public TEntity Get(string entityRowKey, string entityPartitionKey)
+        public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)
         {
-            TableOperation operation = TableOperation.Retrieve<TEntity>(entityPartitionKey, entityRowKey);
+            TableOperation operation = TableOperation.Retrieve<BlogPostEntity>(entityPartitionKey, entityRowKey);
 
             TableResult result = _table.Execute(operation);
 
-            var entity = result.Result as TEntity;
+            var entity = result.Result as BlogPostEntity;
 
             return entity;
         }

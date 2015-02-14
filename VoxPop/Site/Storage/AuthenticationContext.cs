@@ -4,11 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Site.Models
+namespace Site.Storage
 {
     using System.Configuration;
     using ElCamino.AspNet.Identity.AzureTable;
     using ElCamino.AspNet.Identity.AzureTable.Model;
+    using Models;
 
     /// <summary>
     /// The authentication context.

@@ -1,10 +1,11 @@
 ﻿namespace Site.Services
 {
-    using Models;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
+    using Storage;
+    using Storage.Models;
     using ViewModels;
 
     public interface IBlogService

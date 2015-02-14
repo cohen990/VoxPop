@@ -5,8 +5,9 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
-    using Models;
     using Owin;
+    using Storage;
+    using Storage.Models;
 
     public partial class Startup
     {

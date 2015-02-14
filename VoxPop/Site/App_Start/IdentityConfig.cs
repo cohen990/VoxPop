@@ -8,7 +8,8 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security;
-    using Models;
+    using Storage;
+    using Storage.Models;
 
     public class EmailService : IIdentityMessageService
     {
