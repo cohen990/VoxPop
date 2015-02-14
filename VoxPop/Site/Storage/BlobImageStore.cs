@@ -8,9 +8,14 @@
 
     public class BlobImageStore : IImageStore
     {
-        private readonly CloudBlobContainer _container;
+        private CloudBlobContainer _container;
 
         public BlobImageStore()
+        {
+            InitializeBlobImageStore();
+        }
+
+        private void InitializeBlobImageStore()
         {
             // Retrieve storage account from connection string.
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
@@ -20,15 +25,17 @@
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             // Retrieve a reference to a container.
-            _container = blobClient.GetContainerReference("VoxPop.UserImages");
-
-            _container.SetPermissions(new BlobContainerPermissions
-            {
-                PublicAccess = BlobContainerPublicAccessType.Container
-            });
+            _container = blobClient.GetContainerReference("voxpopuserimages");
 
             // Create the container if it doesn't already exist.
             _container.CreateIfNotExists();
+
+            var permissions = new BlobContainerPermissions
+            {
+                PublicAccess = BlobContainerPublicAccessType.Container
+            };
+
+            _container.SetPermissions(permissions);
         }
 
         public Uri StoreImageAsync(Stream stream)
