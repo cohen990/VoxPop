@@ -1,15 +1,8 @@
 ﻿namespace Site.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.UI.WebControls;
-    using Microsoft.Data.Edm.Csdl;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Table;
-    using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
     using System.IO;
 
@@ -33,13 +26,18 @@
             // Retrieve a reference to a container.
             _container = _blobClient.GetContainerReference("userimagescontainer");
 
+            _container.SetPermissions(new BlobContainerPermissions
+            {
+                PublicAccess = BlobContainerPublicAccessType.Container
+            });
+
             // Create the container if it doesn't already exist.
             _container.CreateIfNotExists();
         }
 
-        public Uri StoreAsync(Stream stream)
+        public Uri StoreImageAsync(Stream stream)
         {
-            var reference = Guid.NewGuid().ToString("N");
+            var reference = Guid.NewGuid().ToString("N") + ".png";
 
             CloudBlockBlob blockBlob = _container.GetBlockBlobReference(reference);
             stream.Seek(0, SeekOrigin.Begin);

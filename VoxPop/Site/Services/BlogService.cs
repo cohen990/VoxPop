@@ -28,7 +28,7 @@
         /// <returns>Returns <see cref="Task"/> </returns>
         public async Task CreateAsync(BlogViewModel blog, Stream imageStream)
         {
-            Uri imageUri = _blobStore.StoreAsync(imageStream);
+            Uri imageUri = _blobStore.StoreImageAsync(imageStream);
 
             var blogEntity = blog.AsEntity(imageUri);
 
