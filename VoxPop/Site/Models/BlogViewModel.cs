@@ -1,11 +1,9 @@
-﻿namespace Site.ViewModels
+﻿namespace Site.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System;
-    using Storage;
     using Storage.Models;
-
 
     public class BlogViewModel
     {

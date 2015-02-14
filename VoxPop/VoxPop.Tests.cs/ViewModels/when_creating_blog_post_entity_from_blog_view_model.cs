@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Machine.Specifications;
+    using Models;
     using Storage.Models;
 
     class when_creating_blog_post_entity_from_blog_view_model

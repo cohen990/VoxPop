@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
+    using Models;
     using Storage;
     using Storage.Models;
-    using ViewModels;
 
     public class BlogService : IBlogService
     {

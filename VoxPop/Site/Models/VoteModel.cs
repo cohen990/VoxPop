@@ -1,4 +1,4 @@
-﻿namespace Site.Storage.Models
+﻿namespace Site.Models
 {
     public class VoteModel
     {
