@@ -4,21 +4,22 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Models;
+    using Storage;
+    using Storage.Models;
     using ViewModels;
     using System.IO;
 
     public class BlogService : IBlogService
     {
-        private readonly IStore<BlogPostEntity> _blogStore;
+        private readonly IBlogStore _blogBlogStore;
 
-        private readonly BlobStore _blobStore;
+        private readonly IImageStore _blobImageStore;
 
         public BlogService()
         {
-            _blogStore = new TableStore<BlogPostEntity>();
+            _blogBlogStore = new TableBlogStore();
 
-            _blobStore = new BlobStore();
+            _blobImageStore = new BlobImageStore();
         }
 
         /// <summary>
@@ -28,16 +29,16 @@
         /// <returns>Returns <see cref="Task"/> </returns>
         public async Task CreateAsync(BlogViewModel blog, Stream imageStream)
         {
-            Uri imageUri = _blobStore.StoreImageAsync(imageStream);
+            Uri imageUri = _blobImageStore.StoreImageAsync(imageStream);
 
             var blogEntity = blog.AsEntity(imageUri);
 
-            await _blogStore.CreateAsync(blogEntity);
+            await _blogBlogStore.CreateBlogAsync(blogEntity);
         }
 
         public IEnumerable<BlogPostEntity> GetAll()
         {
-            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAll();
+            IEnumerable<BlogPostEntity> blogs = _blogBlogStore.GetAllBlogs();
 
             List<BlogPostEntity> sortedBlogs = blogs.OrderByDescending(b => b.Timestamp).ToList();
 
@@ -46,19 +47,19 @@
 
         public void Vote(VoteModel model)
         {
-            BlogPostEntity blogPost = _blogStore.Get(model.BlogPostRowKey, model.BlogPostPartitionKey);
+            BlogPostEntity blogPost = _blogBlogStore.GetBlog(model.BlogPostRowKey, model.BlogPostPartitionKey);
 
             var key =
                 blogPost.Poll.Keys.Single(x => x.Trim().Equals(model.PollItemKey, StringComparison.OrdinalIgnoreCase));
 
             blogPost.Poll[key] += 1;
 
-            _blogStore.Merge(blogPost);
+            _blogBlogStore.MergeBlog(blogPost);
         }
 
         public BlogPostEntity Get(string rowKey, string partitionKey)
         {
-            return _blogStore.Get(rowKey, partitionKey);
+            return _blogBlogStore.GetBlog(rowKey, partitionKey);
         }
     }
 }

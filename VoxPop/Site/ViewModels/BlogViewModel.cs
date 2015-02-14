@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Models;
     using System;
+    using Storage;
+    using Storage.Models;
 
 
     public class BlogViewModel
@@ -14,6 +15,8 @@
         public string Content { get; set; }
 
         public List<string> PollOptions { get; set; }
+
+        public string ImageCaption { get; set; }
 
         public BlogPostEntity AsEntity(Uri imageUri)
         {
@@ -26,8 +29,6 @@
         {
             PollOptions = new List<string>();
         }
-
-        public string ImageCaption { get; set; }
     }
 }
 

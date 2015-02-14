@@ -1,4 +1,4 @@
-﻿namespace Site.Models
+﻿namespace Site.Storage.Models
 {
     using System;
     using System.Security.Claims;

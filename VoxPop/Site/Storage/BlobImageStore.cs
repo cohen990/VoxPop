@@ -1,30 +1,26 @@
-﻿namespace Site.Services
+﻿namespace Site.Storage
 {
     using System;
+    using System.IO;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
-    using System.IO;
 
-    public class BlobStore
+    public class BlobImageStore : IImageStore
     {
-        private readonly CloudStorageAccount _storageAccount;
-
-        private readonly CloudBlobClient _blobClient;
-
         private readonly CloudBlobContainer _container;
 
-        public BlobStore()
+        public BlobImageStore()
         {
             // Retrieve storage account from connection string.
-            _storageAccount = CloudStorageAccount.Parse(
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                 CloudConfigurationManager.GetSetting("voxpop.blobstorageaccount"));
 
             // Create the blob client.
-            _blobClient = _storageAccount.CreateCloudBlobClient();
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             // Retrieve a reference to a container.
-            _container = _blobClient.GetContainerReference("userimagescontainer");
+            _container = blobClient.GetContainerReference("VoxPop.UserImages");
 
             _container.SetPermissions(new BlobContainerPermissions
             {
