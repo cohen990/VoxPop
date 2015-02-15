@@ -16,13 +16,13 @@
         <div>
             <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)" class="index-links">
                 <div>
-                    <img src="@blogPost.BlogImageUri" class="index-pic">
+                    <img src="@blogPost.ImageUri" class="index-pic">
                 </div>
                 <div class="index-chart">
                     <canvas class="index-chart" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
                 </div>
                 <div class="index-titles line-clamp">
-                    <p>@blogPost.BlogTitle</p>
+                    <p>@blogPost.Title</p>
                 </div>
             </a>
         </div>

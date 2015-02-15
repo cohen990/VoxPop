@@ -12,15 +12,16 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName)
         {
             PartitionKey = blogTitle.Split(' ').First().ToLowerInvariant();
             RowKey = Guid.NewGuid().ToString();
 
-            BlogTitle = blogTitle;
-            BlogImageUri = imageUri;
-            BlogContent = blogContent;
-            BlogImageCaption = blogImageCaption;
+            Title = blogTitle;
+            ImageUri = imageUri;
+            Content = blogContent;
+            ImageCaption = blogImageCaption;
+            Author = userName;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -41,10 +42,11 @@ namespace Site.Storage.Models
         /// </param>
         public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
         {
-            BlogContent = properties["BlogContent"].StringValue;
-            BlogTitle = properties["BlogTitle"].StringValue;
-            BlogImageUri = new Uri(properties["BlogImageUri"].StringValue);
-            BlogImageCaption = properties["BlogImageCaption"].StringValue;
+            Content = properties["Content"].StringValue;
+            Title = properties["Title"].StringValue;
+            ImageUri = new Uri(properties["ImageUri"].StringValue);
+            ImageCaption = properties["ImageCaption"].StringValue;
+            Author = properties["Author"].StringValue;
 
             var pollString = properties["Poll"].StringValue;
 
@@ -71,10 +73,11 @@ namespace Site.Storage.Models
         public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
         {
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
-            result.Add("BlogContent", new EntityProperty(BlogContent));
-            result.Add("BlogTitle", new EntityProperty(BlogTitle));
-            result.Add("BlogImageUri", new EntityProperty(BlogImageUri.ToString()));
-            result.Add("BlogImageCaption", new EntityProperty(BlogImageCaption));
+            result.Add("Content", new EntityProperty(Content));
+            result.Add("Title", new EntityProperty(Title));
+            result.Add("ImageUri", new EntityProperty(ImageUri.ToString()));
+            result.Add("ImageCaption", new EntityProperty(ImageCaption));
+            result.Add("Author", new EntityProperty(Author));
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -116,31 +119,33 @@ namespace Site.Storage.Models
         /// <value>
         /// The entity's timestamp.
         /// </value>
-        public string ETag { get; set; }
+        public string ETag { get; set;}
 
         /// <summary>
         /// Gets or sets the title of the blog.
         /// </summary>
-        public string BlogTitle { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the blog's Image.
         /// </summary>
-        public Uri BlogImageUri { get; set; }
+        public Uri ImageUri { get; set; }
 
         /// <summary>
         /// Gets or sets the blog's Image Capation.
         /// </summary>
-        public string BlogImageCaption { get; set; }
+        public string ImageCaption { get; set; }
 
         ///<summary>
         /// Gets or sets the content of the blog.
         /// </summary>
-        public string BlogContent { get; set; }
+        public string Content { get; set; }
 
         /// <summary>
         /// Gets or sets the poll of the blog.
         /// </summary>
         public Dictionary<string, int> Poll { get; set; }
+
+        public string Author { get; set; }
     }
 }
