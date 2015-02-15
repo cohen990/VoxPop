@@ -8,12 +8,12 @@
 
     public interface IBlogService
     {
-        Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase imageFile);
-
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
         void Vote(VoteModel model);
 
         BlogPostEntity GetBlog(string rowKey, string partitionKey);
+
+        Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase image, string userName);
     }
 }
