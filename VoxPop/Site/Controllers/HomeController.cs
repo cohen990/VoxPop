@@ -25,6 +25,7 @@
             return View(blogs);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Create()
         {
@@ -43,6 +44,7 @@
             return View(blogs);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create(BlogViewModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
@@ -53,6 +55,7 @@
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult Vote(
             string pollItemKey,
             string blogPostPartitionKey,
