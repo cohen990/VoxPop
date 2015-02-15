@@ -56,7 +56,7 @@ namespace Site.Storage
 
         private CloudStorageAccount GetStorageAccount()
         {
-            string connectionString = CloudConfigurationManager.GetSetting("voxpop.storageaccount");
+            string connectionString = CloudConfigurationManager.GetSetting("voxpop.articlestorage");
 
             CloudStorageAccount storageAccount;
             if (CloudStorageAccount.TryParse(connectionString, out storageAccount))

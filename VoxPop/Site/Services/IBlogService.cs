@@ -10,10 +10,10 @@
     {
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
-        void Vote(VoteModel model);
+        Task Vote(VoteModel model);
 
-        BlogPostEntity GetBlog(string rowKey, string partitionKey);
+        Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey);
 
-        Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase image, string userName);
+        Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string userName);
     }
 }

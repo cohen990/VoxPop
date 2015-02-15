@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
     using Models;
     using Services;
     using Storage.Models;
@@ -37,18 +38,18 @@
             return View();
         }
 
-        public ActionResult Story(string rowKey, string partitionKey)
+        public async Task<ActionResult> Story(string rowKey, string partitionKey)
         {
-            var blogs = _blogService.GetBlog(rowKey, partitionKey);
+            var blog = await _blogService.GetBlog(rowKey, partitionKey);
 
-            return View(blogs);
+            return View(blog);
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Create(BlogViewModel blog, HttpPostedFileBase image, params string[] pollOptions)
+        public async Task<ActionResult> Create(BlogModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
-            var userName = this.User.Identity.Name;
+            var userName = User.Identity.GetUserId();
 
             blog.PollOptions = pollOptions.ToList();
 
@@ -68,7 +69,8 @@
             {
                 PollItemKey = pollItemKey,
                 BlogPostPartitionKey = blogPostPartitionKey,
-                BlogPostRowKey = blogPostRowKey
+                BlogPostRowKey = blogPostRowKey,
+                UserId = User.Identity.GetUserId()
             };
 
             _blogService.Vote(model);
