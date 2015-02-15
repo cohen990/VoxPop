@@ -4,19 +4,46 @@
     ViewBag.Title = "Create";
 }
 
-
-
 @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
 {
-    @Html.EditorForModel()
-    <fieldset id="pollOptions">
-        <label for="pollOptions">Poll Options</label>
-        <input name="pollOptions" type="text" />
-        <input name="pollOptions" type="text" />
+    <div>
+        @Html.LabelFor(x => x.Title)
+    </div>
+    <div>
+        @Html.EditorFor(x => x.Title)
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Content)
+    </div>
+    <div>
+        @Html.EditorFor(x => x.Content)
+        @Html.ValidationMessageFor(x => x.Content)
+    </div>
+
+    <fieldset>
+        <div id="pollOptions">
+            <label for="pollOptions">Poll Options</label>
+            <input name="pollOptions" type="text" />
+            <input name="pollOptions" type="text" />
+        </div>
+        <span onclick="AddOption()" class="btn">Add more options...</span>
     </fieldset>
-    <span onclick="AddOption()">Add more options...</span>
-    <input name="image" type="file" accept="image/*"/>
-    <input type="submit"/>
+
+    <div>
+        <input name="image" type="file" accept="image/*" />
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.ImageCaption)
+    </div>
+    <div>
+        @Html.EditorFor(x => x.ImageCaption, new { htmlAttributes = new { @class = "image-caption" } })
+        @Html.ValidationMessageFor(x => x.ImageCaption)
+    </div>
+
+    <input type="submit" />
 }
 
 <script>
