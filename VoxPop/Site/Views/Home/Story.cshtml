@@ -7,12 +7,12 @@
     var chartData = [];
 </script>
 
-<h1 class="story-headings">@Model.BlogTitle</h1>
+<h1 class="story-headings">@Model.Title</h1>
 <p class="story-date">@Model.Timestamp</p>
 <div class="story-width">
     <a>
         <div>
-            <img src="@Model.BlogImageUri" class="story-pic">
+            <img src="@Model.ImageUri" class="story-pic">
         </div>
         <div>
             <a class="story-chart-box">
@@ -40,11 +40,11 @@
                 </a>
             </a>
         </div>
-        <p class="story-pic-caption">@Model.BlogImageCaption</p>
+        <p class="story-pic-caption">@Model.ImageCaption</p>
     </a>
 </div>
 
-<p class="story-content">@Model.BlogContent</p>
+<p class="story-content">@Model.Content</p>
 
 <script>
     GenerateChart("storyChart", chartData)

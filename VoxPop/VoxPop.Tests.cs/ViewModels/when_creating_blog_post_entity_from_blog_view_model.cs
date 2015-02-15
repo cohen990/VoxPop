@@ -21,12 +21,15 @@
 
         internal static Uri imageUrl;
 
+        internal static string userName;
+
         private Establish context = () =>
         {
             content = "placeholder content";
             title = "Placeholder Title";
             pollOptions = new List<string> {"poll option 1", "poll option 2", "poll option 3"};
             imageUrl = new Uri("http://www.blobstorage.com/image.png");
+            userName = "user@name.com";
 
             model =
                     new BlogViewModel
@@ -37,11 +40,11 @@
                     };
         };
 
-        private Because of = () => result = model.AsEntity(imageUrl);
+        private Because of = () => result = model.AsEntity(imageUrl, userName);
 
-        private It should_have_the_same_content = () => result.BlogContent.ShouldEqual(content);
+        private It should_have_the_same_content = () => result.Content.ShouldEqual(content);
 
-        private It should_have_the_same_title = () => result.BlogTitle.ShouldEqual(title);
+        private It should_have_the_same_title = () => result.Title.ShouldEqual(title);
 
         private It should_contain_the_first_poll_option = () => result.Poll.Keys.ShouldContain(pollOptions.First());
 
@@ -50,6 +53,6 @@
         private It should_initialize_all_poll_options_to_zero_votes =
             () => result.Poll.All(x => x.Value == 0).ShouldBeTrue();
 
-        private It should_have_the_same_encoded_image = () => result.BlogImageUri.ShouldEqual(imageUrl);
+        private It should_have_the_same_encoded_image = () => result.ImageUri.ShouldEqual(imageUrl);
     }
 }

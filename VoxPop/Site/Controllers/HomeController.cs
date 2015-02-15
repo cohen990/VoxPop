@@ -48,9 +48,11 @@
         [HttpPost]
         public async Task<ActionResult> Create(BlogViewModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
+            var userName = this.User.Identity.Name;
+
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateBlogAsync(blog, image);
+            await _blogService.CreateBlogAsync(blog, image, userName);
 
             return RedirectToAction("Index");
         }
