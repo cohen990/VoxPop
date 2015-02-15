@@ -16,9 +16,9 @@
 
         public string ImageCaption { get; set; }
 
-        public BlogPostEntity AsEntity(Uri imageUri)
+        public BlogPostEntity AsEntity(Uri imageUri, string userName)
         {
-            var entity = new BlogPostEntity(Title, imageUri, Content, PollOptions, ImageCaption);
+            var entity = new BlogPostEntity(Title, imageUri, Content, PollOptions, ImageCaption, userName);
 
             return entity;
         }

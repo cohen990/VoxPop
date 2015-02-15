@@ -21,11 +21,11 @@
             _imageStore = imageStore;
         }
 
-        public async Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase imageFile)
+        public async Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase imageFile, string userName)
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
-            var blogEntity = blog.AsEntity(imageUri);
+            var blogEntity = blog.AsEntity(imageUri, userName);
 
             await _blogBlogStore.CreateBlogAsync(blogEntity);
         }
