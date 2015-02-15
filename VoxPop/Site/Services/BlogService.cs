@@ -11,49 +11,58 @@
 
     public class BlogService : IBlogService
     {
-        private readonly IBlogStore _blogBlogStore;
+        private readonly IBlogStore _blogStore;
 
         private readonly IImageStore _imageStore;
 
-        public BlogService(IBlogStore blogStore, IImageStore imageStore)
+        private readonly IVoteService _voteService;
+
+        public BlogService(IBlogStore blogStore, IImageStore imageStore, IVoteService voteService)
         {
-            _blogBlogStore = blogStore;
+            _blogStore = blogStore;
             _imageStore = imageStore;
+            _voteService = voteService;
         }
 
-        public async Task CreateBlogAsync(BlogViewModel blog, HttpPostedFileBase imageFile, string userName)
+        public async Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase imageFile, string userName)
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             var blogEntity = blog.AsEntity(imageUri, userName);
 
-            await _blogBlogStore.CreateBlogAsync(blogEntity);
+            await _blogStore.CreateBlogAsync(blogEntity);
         }
 
         public IEnumerable<BlogPostEntity> GetAllBlogs()
         {
-            IEnumerable<BlogPostEntity> blogs = _blogBlogStore.GetAllBlogs();
+            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAllBlogs();
 
-            List<BlogPostEntity> sortedBlogs = blogs.OrderByDescending(b => b.Timestamp).ToList();
+            IEnumerable<BlogPostEntity> blogsWithVotes = blogs
+                .Select(x => _voteService.RetrieveVotes(x)
+                    .GetAwaiter()
+                    .GetResult());
+
+            List<BlogPostEntity> sortedBlogs = blogsWithVotes.OrderByDescending(b => b.Timestamp).ToList();
 
             return sortedBlogs;
         }
 
-        public void Vote(VoteModel model)
+        public async Task Vote(VoteModel model)
         {
-            BlogPostEntity blogPost = _blogBlogStore.GetBlog(model.BlogPostRowKey, model.BlogPostPartitionKey);
+            var voteStore = new TableVoteStore();
 
-            var key =
-                blogPost.Poll.Keys.Single(x => x.Trim().Equals(model.PollItemKey, StringComparison.OrdinalIgnoreCase));
+            var voteEntity = VoteEntity.For(model);
 
-            blogPost.Poll[key] += 1;
-
-            _blogBlogStore.MergeBlog(blogPost);
+            await voteStore.VoteAsync(voteEntity);
         }
 
-        public BlogPostEntity GetBlog(string rowKey, string partitionKey)
+        public async Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey)
         {
-            return _blogBlogStore.GetBlog(rowKey, partitionKey);
+            BlogPostEntity entity = _blogStore.GetBlog(blogRowKey, blogPartitionKey);
+
+            entity = await _voteService.RetrieveVotes(entity);
+
+            return BlogModel.For(entity);
         }
     }
 }

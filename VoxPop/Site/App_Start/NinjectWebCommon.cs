@@ -66,6 +66,7 @@ namespace Site.App_Start
             kernel.Bind<IBlogService>().To<BlogService>();
             kernel.Bind<IBlogStore>().To<TableBlogStore>();
             kernel.Bind<IImageStore>().To<BlobImageStore>();
+            kernel.Bind<IVoteService>().To<VoteService>();
         }
     }
 }

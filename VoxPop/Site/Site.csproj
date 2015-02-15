@@ -203,20 +203,25 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BlogViewModel.cs" />
+    <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\IBlogService.cs" />
+    <Compile Include="Services\IVoteService.cs" />
+    <Compile Include="Services\VoteService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Storage\AuthenticationContext.cs" />
     <Compile Include="Storage\IImageStore.cs" />
     <Compile Include="Storage\BlobImageStore.cs" />
     <Compile Include="Storage\IBlogStore.cs" />
+    <Compile Include="Storage\IVoteStore.cs" />
     <Compile Include="Storage\Models\BlogPostEntity.cs" />
     <Compile Include="Storage\Models\Politico.cs" />
+    <Compile Include="Storage\Models\VoteEntity.cs" />
     <Compile Include="Storage\TableBlogStore.cs" />
+    <Compile Include="Storage\TableVoteStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\VoxPopCharts.js" />

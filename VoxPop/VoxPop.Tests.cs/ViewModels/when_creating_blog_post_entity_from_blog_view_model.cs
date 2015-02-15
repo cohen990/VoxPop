@@ -9,7 +9,7 @@
 
     class when_creating_blog_post_entity_from_blog_view_model
     {
-        internal static BlogViewModel model;
+        internal static BlogModel model;
 
         internal static BlogPostEntity result;
 
@@ -32,7 +32,7 @@
             userName = "user@name.com";
 
             model =
-                    new BlogViewModel
+                    new BlogModel
                     {
                         Content = content,
                         Title = title,
