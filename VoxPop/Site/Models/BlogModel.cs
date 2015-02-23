@@ -14,6 +14,7 @@
 
         public List<string> PollOptions { get; set; }
 
+        [Display(Name="Image Caption")]
         public string ImageCaption { get; set; }
 
         public Uri ImageUri { get; set; }
