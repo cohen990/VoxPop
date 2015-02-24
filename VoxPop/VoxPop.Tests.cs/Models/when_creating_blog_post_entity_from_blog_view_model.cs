@@ -40,7 +40,7 @@
                         Title = title,
                         PollOptions = pollOptions,
                         ImageUri = imageUrl,
-                        AuthorId = authorId,
+                        Author = authorId,
                         ImageCaption = imageCaption
                     };
         };
