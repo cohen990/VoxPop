@@ -29,7 +29,7 @@
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             blog.ImageUri = imageUri;
-            blog.AuthorId = userName;
+            blog.Author = userName;
 
             var blogEntity = BlogPostEntity.For(blog);
 
