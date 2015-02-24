@@ -76,8 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\when_creating_blog_model_from_blog_post_entity.cs" />
+    <Compile Include="Models\when_decoding_poll_dictionary.cs" />
+    <Compile Include="Models\when_encoding_poll_options_list.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\when_creating_blog_post_entity_from_blog_view_model.cs" />
+    <Compile Include="Models\when_creating_blog_post_entity_from_blog_view_model.cs" />
+    <Compile Include="Storage\Models\when_creating_vote_entity_from_vote_model.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
