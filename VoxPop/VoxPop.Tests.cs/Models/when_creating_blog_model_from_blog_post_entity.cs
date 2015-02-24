@@ -29,7 +29,7 @@
 
         private Because of = () => model = entity.ToModel();
 
-        private It should_set_author_to_author = () => model.AuthorId.ShouldEqual("author");
+        private It should_set_author_to_author = () => model.Author.ShouldEqual("author");
         private It should_set_content_to_content = () => model.Content.ShouldEqual("content");
         private It should_set_image_caption_to_image_caption = () => model.ImageCaption.ShouldEqual("image caption");
         private It should_set_image_uri_to_www_image_com =

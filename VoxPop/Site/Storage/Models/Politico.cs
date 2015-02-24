@@ -9,9 +9,9 @@
     public class Politico : IdentityUser
     {
         /// <summary>
-        /// Generated the <see cref="ClaimsIdentity"/> of this <see cref="Retailer"/>.
+        /// Generated the <see cref="ClaimsIdentity"/> of this <see cref="Politico"/>.
         /// </summary>
-        /// <param name="manager">The <see cref="UserManager{T}"/> or <see cref="Retailer"/> entities.</param>
+        /// <param name="manager">The <see cref="UserManager{T}"/> or <see cref="Politico"/> entities.</param>
         /// <returns>The <see cref="ClaimsIdentity"/>.</returns>
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Politico> manager)
         {
