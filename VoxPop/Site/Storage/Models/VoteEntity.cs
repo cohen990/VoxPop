@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
+    using Services;
     using Site.Models;
 
     public class VoteEntity : ITableEntity
@@ -91,7 +92,7 @@
         {
             return new VoteEntity
             {
-                PollOptionKey = model.PollItemKey,
+                PollOptionKey = model.PollItemKey.EncodePollOption(),
                 PartitionKey = model.BlogPostRowKey,
                 RowKey = model.UserId
             };
