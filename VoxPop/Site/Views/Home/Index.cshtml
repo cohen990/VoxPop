@@ -14,7 +14,7 @@
             chartData = []
         </script>
         <div>
-            <a href="@Url.Action("Story", "Home", new { rowKey = blogPost.RowKey, partitionKey = blogPost.PartitionKey }, null)" class="index-links">
+            <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey" class="index-links">
                 <div>
                     <img src="@blogPost.ImageUri" class="index-pic">
                 </div>

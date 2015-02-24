@@ -38,6 +38,7 @@
             return View();
         }
 
+        [Route("Story/{partitionKey}/{rowKey}")]
         public async Task<ActionResult> Story(string rowKey, string partitionKey)
         {
             var blog = await _blogService.GetBlog(rowKey, partitionKey);
@@ -49,7 +50,7 @@
         [HttpPost]
         public async Task<ActionResult> Create(BlogModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
-            var userName = User.Identity.GetUserId();
+            var userName = User.Identity.GetUserName();
 
             blog.PollOptions = pollOptions.ToList();
 

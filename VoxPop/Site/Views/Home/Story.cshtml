@@ -29,7 +29,7 @@
                             <input type="hidden" name="pollItemKey" value="@pollItem.Key">
                             <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
                             <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                            <input type="hidden" name="returnUrl" value="/Home/Story?rowKey=@Model.RowKey&partitionKey=@Model.PartitionKey">
+                            <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
                             <input type="submit" value="+1">
                         }
                         <script>

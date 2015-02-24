@@ -14,16 +14,16 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string authorId)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName)
         {
-            PartitionKey = authorId;
-            RowKey = Guid.NewGuid().ToString();
+            PartitionKey = userName;
+            RowKey = Guid.NewGuid().ToString("N");
 
             Title = blogTitle;
             ImageUri = imageUri;
             Content = blogContent;
             ImageCaption = blogImageCaption;
-            Author = authorId;
+            Author = userName;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -158,7 +158,7 @@ namespace Site.Storage.Models
                 model.Content,
                 model.PollOptions.EncodePollOptions(),
                 model.ImageCaption,
-                model.AuthorId);
+                model.Author);
 
             return entity;
         }
@@ -169,7 +169,7 @@ namespace Site.Storage.Models
             return new BlogModel
             {
                 ImageCaption = ImageCaption,
-                AuthorId = Author,
+                Author = Author,
                 Content = Content,
                 ImageUri = ImageUri,
                 PartitionKey = PartitionKey,
