@@ -32,7 +32,7 @@ namespace Site.Storage
         {
             return new IdentityConfiguration
             {
-                StorageConnectionString = ConfigurationManager.AppSettings["voxpop.authcoasdadannectionstring"],
+                StorageConnectionString = ConfigurationManager.AppSettings["voxpop.authconnectionstring"],
                 TablePrefix = "VoxPop",
             };
         }

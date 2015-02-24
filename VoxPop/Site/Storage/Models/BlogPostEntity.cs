@@ -5,6 +5,7 @@ namespace Site.Storage.Models
     using System.Linq;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
+    using Services;
     using Site.Models;
 
     public class BlogPostEntity : ITableEntity
@@ -13,16 +14,16 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string authorId)
         {
-            PartitionKey = userName;
+            PartitionKey = authorId;
             RowKey = Guid.NewGuid().ToString();
 
             Title = blogTitle;
             ImageUri = imageUri;
             Content = blogContent;
             ImageCaption = blogImageCaption;
-            Author = userName;
+            Author = authorId;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -149,6 +150,33 @@ namespace Site.Storage.Models
 
         public string Author { get; set; }
 
+        public static BlogPostEntity For(BlogModel model)
+        {
+            var entity = new BlogPostEntity(
+                model.Title,
+                model.ImageUri,
+                model.Content,
+                model.PollOptions.EncodePollOptions(),
+                model.ImageCaption,
+                model.AuthorId);
 
+            return entity;
+        }
+
+        public BlogModel ToModel()
+        {
+
+            return new BlogModel
+            {
+                ImageCaption = ImageCaption,
+                AuthorId = Author,
+                Content = Content,
+                ImageUri = ImageUri,
+                PartitionKey = PartitionKey,
+                Poll = Poll.DecodePoll(),
+                RowKey = RowKey,
+                Title = Title
+            };
+        }
     }
 }
