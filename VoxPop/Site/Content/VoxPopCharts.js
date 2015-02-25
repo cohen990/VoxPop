@@ -3,7 +3,7 @@
         value: 1,
         color: "#d6d6c2",
         highlight: "#ddd",
-        label: "There are no votes on this poll."
+        label: "There are no votes on this poll"
     }];
 
 function GetPollData(optionName, votes) {

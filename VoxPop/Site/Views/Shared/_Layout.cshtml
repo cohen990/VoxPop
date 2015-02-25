@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Vox Pop Biatch</title>
+    <title>@ViewBag.Title - VoxPop</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/charts")
@@ -20,7 +20,7 @@
     <div class="navbar">
         <div id="CreateButton">
             <a href="@Url.Action("Create","Home")" class="navbar-link">
-                <p class="navbar-link-text">Create New Story</p>
+                <p class="navbar-link-text">Create</p>
             </a>
         </div>
         <div id="SearchButton">
@@ -34,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Vox Pop Biatch</p>
+            <p>&copy; @DateTime.Now.Year - VoxPop</p>
         </footer>
     </div>
 </body>
