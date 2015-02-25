@@ -272,6 +272,87 @@ body
     padding:  10px 0px 0px 0px;
 }
 
+/* CREATE Page */
+.create-intro {
+    margin: 0px 150px 0px 80px;
+}
 
+.create-form-box {
+    margin: 0px 0px 0px 90px;
+    padding: 35px;
+    height:362px;
+    max-width:490px;
+    border: .25em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+}
+
+.create-form-headings {
+    font-weight:bolder;
+    float:left;
+    margin-right: 10px;
+}
+
+.create-form-Title {
+    float:right;
+    text-wrap:normal;
+    display:inline-block;
+
+}
+
+#Title {
+    width: 300px;
+    height: 21px;
+    margin-top: -5px;
+    padding: 3px 0 0px 0px;
+}
+
+#ImageCaption{
+    width: 300px;
+    height: 21px;
+    margin-top: -5px;
+    padding: 3px 0 0px 0px;
+}
+.create-form-descriptions {
+    margin-top: 10px;
+}
+
+.create-form-voting-box{
+    margin: 30px 0px 0px 0px;
+}
+
+.create-form-pollOptions-boxes{
+    width: 150px;
+    height: 21px;
+    margin: 5px;
+    padding: 3px 0 0px 0px;
+}
+
+.create-form-new-pollOptions-boxes{
+    width: 150px;
+    height: 21px;
+    margin: 5px;
+    padding: 3px 0 0px 0px;
+}
+
+::-webkit-input-placeholder {
+   font-size: 16px;
+   line-height: 13px;
+   height: 20px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-size: 16px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 16px;
+
+}
+
+:-ms-input-placeholder {
+   font-size: 16px;
+}
 
 
