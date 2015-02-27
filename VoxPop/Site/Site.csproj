@@ -230,6 +230,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1352236885442170385Add Symbol.svg.hi.png" />
+    <Content Include="Images\nicEditorIcons.gif" />
     <Content Include="Images\VPlogoVec.svg" />
     <Content Include="Images\VPlogoVecHov.svg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -239,7 +240,6 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.min.js" />
-    <Content Include="Scripts\nicEdit-latest.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js.map">
@@ -251,6 +251,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\nicEdit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
