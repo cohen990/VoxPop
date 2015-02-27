@@ -5,14 +5,17 @@
 
 /* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
 
-body
-{
+body {
     margin:0px;
 }
 
 * {
     font-family: 'Segoe WP SemiLight';
     color: #060606;
+}
+
+a {
+    color: #422dff;
 }
 
 .Logo {
@@ -294,6 +297,15 @@ body
     margin-right: 10px;
 }
 
+.create-form-pollOptions-boxes {
+    width:156px;
+}
+
+.create-form-addMoreOptions {
+    display: block;
+    margin-bottom: 5px;
+}
+
 .create-form-uploadImage-box {
     height: 266px;
     margin: 40px 0px 0px 0px;
@@ -303,7 +315,7 @@ body
     max-width:379px;
     min-height: 239px;
     cursor: pointer;
-    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat 239px ;
+    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat 239px;
     background-size:50%;
     background-position:center;
 }
@@ -315,13 +327,6 @@ body
 }
 
 .create-form-ImageCaption-box {
-}
-
-.create-form-Title {
-    float:right;
-    text-wrap:normal;
-    display:inline-block;
-
 }
 
 /*Styles Title textBox*/
@@ -348,38 +353,48 @@ body
 
 ::-webkit-input-placeholder {
    font-size: 16px;
-   line-height: 13px;
+   padding: 0px 0px 02px 0px;
    height: 20px;
 }
 
 :-moz-placeholder { /* Firefox 18- */
    font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
    font-size: 16px;
-
+   padding: 0px 0px 02px 0px;
+   height: 20px;
 }
 
 :-ms-input-placeholder {
    font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
 }
+
+
 
 /* Affects all inputs with type="text", only way to style 'addOptions' */
 input[type="text"] {
-    min-width:150px;
+    min-width: 150px;
     height: 21px;
     margin: -2px 5px 10px 5px;
-    padding: 3px 0 0px 0px;
-    border-radius:10px;
-    border-left:none;
-    border-right:none;
+    padding: 0px 0px 02px 05px;
+    border-radius: 10px;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
 }
 
 #Content {
     min-width:500px;
     min-height:200px;
 }
+
+
 
 
 
