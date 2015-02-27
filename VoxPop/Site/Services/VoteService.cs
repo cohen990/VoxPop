@@ -8,10 +8,17 @@
 
     public class VoteService : IVoteService
     {
+        private readonly IVoteStore _voteStore;
+
+        public VoteService(IVoteStore voteStore)
+        {
+            _voteStore = voteStore;
+        }
+
         public async Task<BlogPostEntity> RetrieveVotes(BlogPostEntity entity)
         {
-            var voteStore = new TableVoteStore();
-            List<VoteEntity> votes = await voteStore.GetAllForBlogAsync(entity.RowKey);
+            // TODO: Add unit tests
+            List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
 
             foreach (var key in entity.Poll.Keys.ToList())
             {

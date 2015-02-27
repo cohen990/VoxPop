@@ -210,6 +210,7 @@
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\IBlogService.cs" />
     <Compile Include="Services\IVoteService.cs" />
+    <Compile Include="Services\PollService.cs" />
     <Compile Include="Services\VoteService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Storage\AuthenticationContext.cs" />
