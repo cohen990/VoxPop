@@ -28,7 +28,10 @@
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
-            var blogEntity = blog.AsEntity(imageUri, userName);
+            blog.ImageUri = imageUri;
+            blog.Author = userName;
+
+            var blogEntity = BlogPostEntity.For(blog);
 
             await _blogStore.CreateBlogAsync(blogEntity);
         }
@@ -62,7 +65,7 @@
 
             entity = await _voteService.RetrieveVotes(entity);
 
-            return BlogModel.For(entity);
+            return entity.ToModel();
         }
     }
 }
