@@ -18,7 +18,7 @@
         </div>
         <div>
             <div>
-                @Html.TextBoxFor(x => x.Title, new { placeholder = "  What's your story about?" })
+                @Html.TextBoxFor(x => x.Title, new { placeholder = "What's your story about?" })
             </div>
             @Html.ValidationMessageFor(x => x.Title)
             <p class="create-form-descriptions">Think of this either like a newspaper headline or the question at the top of a poll - or whatever you like!</p>
@@ -27,9 +27,9 @@
         <fieldset class="create-form-voting-box">
             <div id="pollOptions">
                 <label for="pollOptions" class="create-form-headings">Voting Options</label>
-                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder=" eg.  'I agree' " />
-                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder=" e.g.  'I disagree' " />
-                <span onclick="AddOption()" class="btn">Add more options...</span>
+                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="eg.  'I agree' " />
+                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="e.g.  'I disagree' " />
+                <span onclick="AddOption()" class="btn create-form-addMoreOptions">Add more options...</span>
             </div>
         </fieldset>
         <p class="create-form-descriptions">Give your Story a Vote - What are the possible answers to your Story? What responses do you think your readers would like to give? You can have as many Voting Options as you like but you must have at least two.</p>
@@ -60,7 +60,7 @@
                 @Html.LabelFor(x => x.ImageCaption)
             </div>
             <div>
-                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = " What is your image an image of?" })
+                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = "What is your image an image of?" })
                 @Html.ValidationMessageFor(x => x.ImageCaption)
             </div>
         </div>
@@ -89,6 +89,10 @@
 </div>
 
 <script src="~/Scripts/nicEdit.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+<script type="text/javascript">
+    bkLib.onDomLoaded(function () {
+    new nicEditor({ buttonList: ['fontSize', 'fontFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'xhtml', 'image', 'left','center','right', 'indent', 'outdent', 'upload','link','unlink','save','ol','ul','hr'] }).panelInstance('Content');
+    });
+</script>
 
 

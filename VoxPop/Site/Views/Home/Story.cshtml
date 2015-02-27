@@ -43,7 +43,7 @@
     </a>
 </div>
 
-<p class="story-content">@Model.Content</p>
+<p class="story-content">@Html.Raw(Model.Content)</p>
 
 <script>
     GenerateChart("storyChart", chartData)

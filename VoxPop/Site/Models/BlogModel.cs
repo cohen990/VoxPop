@@ -5,13 +5,16 @@
     using System.ComponentModel.DataAnnotations;
     using Services;
     using Storage.Models;
+    using System.Web.Mvc;
+
 
     public class BlogModel
     {
         public string Title { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.MultilineText), AllowHtml]
         public string Content { get; set; }
+
 
         public List<string> PollOptions { get; set; }
 
