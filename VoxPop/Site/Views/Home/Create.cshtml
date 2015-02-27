@@ -21,30 +21,50 @@
                 @Html.TextBoxFor(x => x.Title, new { placeholder = "  What's your story about?" })
             </div>
             @Html.ValidationMessageFor(x => x.Title)
-            <p class="create-form-descriptions">Think of this either like a Newspaper headline or the question at the top of a poll - or whatever you like!</p>
+            <p class="create-form-descriptions">Think of this either like a newspaper headline or the question at the top of a poll - or whatever you like!</p>
         </div>
 
         <fieldset class="create-form-voting-box">
             <div id="pollOptions">
                 <label for="pollOptions" class="create-form-headings">Voting Options</label>
-                <input class="create-form-pollOptions-boxes" pollOptions" type="text" placeholder=" eg.  'I agree' " />
+                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder=" eg.  'I agree' " />
                 <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder=" e.g.  'I disagree' " />
+                <span onclick="AddOption()" class="btn">Add more options...</span>
             </div>
-            <span onclick="AddOption()" class="btn">Add more options...</span>
         </fieldset>
+        <p class="create-form-descriptions">Give your Story a Vote - What are the possible answers to your Story? What responses do you think your readers would like to give? You can have as many Voting Options as you like but you must have at least two.</p>
 
-        <div class ="create-form-headings">
-            @Html.LabelFor(x => x.ImageUri)
-            <input name="image" type="file" accept="image/*" />
-        </div>
+        <div class="create-form-uploadImage-box">
+            <div class="create-form-headings">
+                @Html.LabelFor(x => x.ImageUri)
+            </div>
+            <div class="create-form-uploadPreview-box">
+                <label for="uploadImage">
+                    <img id="uploadPreview" class="create-form-uploadPreview" />
+                </label>
+                <script type="text/javascript">
+                    function PreviewImage() {
+                        var oFReader = new FileReader();
+                        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
 
-        <div class="create-form-headings">
-            @Html.LabelFor(x => x.ImageCaption)
+                        oFReader.onload = function (oFREvent) {
+                            document.getElementById("uploadPreview").src = oFREvent.target.result;
+                        };
+                    };
+                </script>
+                <input id="uploadImage" type="file" name="image" onchange="PreviewImage();" accept="image/*" />
+            </div>
         </div>
-        <div>
-            @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = " What is your image an image of?" })
-            @Html.ValidationMessageFor(x => x.ImageCaption)
+        <div class="create-form-ImageCaption-box">
+            <div class="create-form-headings">
+                @Html.LabelFor(x => x.ImageCaption)
+            </div>
+            <div>
+                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = " What is your image an image of?" })
+                @Html.ValidationMessageFor(x => x.ImageCaption)
+            </div>
         </div>
+        <p class="create-form-descriptions">Add an image that represents your Story. You can give your image a description in Image Caption or even use this space as a subtitle for your Story - again, do whatever you feel!</p>
 
         <div class="create-form-headings">
             @Html.LabelFor(x => x.Content)
@@ -53,14 +73,13 @@
             @Html.EditorFor(x => x.Content)
             @Html.ValidationMessageFor(x => x.Content)
         </div>
-
         <input type="submit" />
     }
 
 <script>
     var AddOption = function () {
         var newOption = document.createElement("input");
-        newOption.className = "create-form-new-pollOption-boxes";
+        newOption.setAttribute("class", "create-form-pollOption-boxes");
         newOption.setAttribute("name", "pollOptions");
         newOption.setAttribute("type", "text");
         document.getElementById("pollOptions").insertAdjacentElement("beforeend", newOption);
@@ -68,3 +87,8 @@
 </script>
 
 </div>
+
+<script src="~/Scripts/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
+
