@@ -2,12 +2,9 @@
 @{
     ViewBag.Title = "Create";
 }
-
 <h1 class="page-headings">Create a new Story here...</h1>
 <div class="create-intro">
-    <p>You can do whatever you want with a VoxPop Story, be it an issue personal to you, a campaign in your community or even a global concern - write about it!</p>
-    <p>Create short question to raise awareness and get feedback like a petition, or a long intricate article espousing something that's important to you and try to persuade people of your point - it's completely up to you.</p>
-    <p>Add a Vote to your Story - you can choose appropriate answers to your Story and all readers will be able to click to give an instant response.</p>
+    <p>You can do whatever you want with a VOXPOP Story, if it's an issue personal to you, a campaign in your community or a global concern - write about it!</p>
 </div>
 <div class="create-form-box">
 
@@ -24,15 +21,15 @@
             <p class="create-form-descriptions">Think of this either like a newspaper headline or the question at the top of a poll - or whatever you like!</p>
         </div>
 
-        <fieldset class="create-form-voting-box">
+        <fieldset class="create-form-votingOptions-box">
             <div id="pollOptions">
                 <label for="pollOptions" class="create-form-headings">Voting Options</label>
                 <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="eg.  'I agree' " />
                 <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="e.g.  'I disagree' " />
-                <span onclick="AddOption()" class="btn create-form-addMoreOptions">Add more options...</span>
+                <input type="button" value="Add More Options..." onclick="AddOption()" class="create-form-addMoreOptions">
             </div>
         </fieldset>
-        <p class="create-form-descriptions">Give your Story a Vote - What are the possible answers to your Story? What responses do you think your readers would like to give? You can have as many Voting Options as you like but you must have at least two.</p>
+        <p class="create-form-descriptions">Give your Story a Vote - What are the possible answers to your Story? What responses do you think your readers might like to give? You can add as many Voting Options as you like but you must have at least two.</p>
 
         <div class="create-form-uploadImage-box">
             <div class="create-form-headings">
@@ -60,20 +57,26 @@
                 @Html.LabelFor(x => x.ImageCaption)
             </div>
             <div>
-                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = "What is your image an image of?" })
+                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = "What's your image an image of?" })
                 @Html.ValidationMessageFor(x => x.ImageCaption)
             </div>
         </div>
-        <p class="create-form-descriptions">Add an image that represents your Story. You can give your image a description in Image Caption or even use this space as a subtitle for your Story - again, do whatever you feel!</p>
+        <p class="create-form-descriptions">Add an image that represents your Story. Give your image a description in Image Caption or even use this space as a subtitle for your Story - again, do whatever you feel!</p>
 
-        <div class="create-form-headings">
+        <div class="create-form-headings create-form-headings-Content">
             @Html.LabelFor(x => x.Content)
         </div>
         <div>
-            @Html.EditorFor(x => x.Content)
+            <div class="create-form-Content-box">
+                @Html.TextAreaFor(x => x.Content)
+            </div>
             @Html.ValidationMessageFor(x => x.Content)
         </div>
-        <input type="submit" />
+
+        <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
+
+
+        <input class="create-form-submit" type="submit" />
     }
 
 <script>
@@ -88,11 +91,39 @@
 
 </div>
 
-<script src="~/Scripts/nicEdit.js" type="text/javascript"></script>
+<script src="~/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    bkLib.onDomLoaded(function () {
-    new nicEditor({ buttonList: ['fontSize', 'fontFormat', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'xhtml', 'image', 'left','center','right', 'indent', 'outdent', 'upload','link','unlink','save','ol','ul','hr'] }).panelInstance('Content');
+    tinymce.init({
+        selector: 'textarea',
+        plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullscreen |  insertfile undo redo",
+        importcss_append: true,
+        file_picker_callback: function (callback, value, meta) {
+            // Provide file and text for the link dialog
+            if (meta.filetype == 'file') $('#my_form input').click(); {
+                callback('mypage.html', {text: 'My text'});
+            }
+
+            // Provide image and alt text for the image dialog
+            if (meta.filetype == 'image') $('#my_form input').click(); {
+                callback('myimage.jpg', {alt: 'My alt text'});
+            }
+
+            // Provide alternative source and posted for the media dialog
+            if (meta.filetype == 'media') $('#my_form input').click(); {
+                callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
+            }
+        }
     });
 </script>
 
+
+<iframe id="form_target" name="form_target" style="display:none"></iframe>
+<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
+</form>
 
