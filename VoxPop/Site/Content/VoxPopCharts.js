@@ -3,15 +3,15 @@
         value: 1,
         color: "#d6d6c2",
         highlight: "#ddd",
-        label: "There are no votes on this poll"
+        label: "Be the first to vote on this Story"
 
     }];
 
 function GetPollData(optionName, votes) {
     var result = {
         value: votes,
-        color: "#FFd1d1",
-        highlight: "#ff6e7f",
+        color: "#FFd1d1", 
+        highlight: "#ff6e7f", 
         label: optionName,
     }
 
@@ -35,7 +35,11 @@ function GenerateChart(identifier, data) {
     }
 
     var myPieChart = new Chart(context).Pie(data, {
-        animationEasing: "easeOutQuart"
+        animationEasing: "easeOutQuart",
+        animateScale: true,
+        //segmentShowStroke : true,
+        //segmentStrokeColor: "#040404",
+        //segmentStrokeWidth : 4
 
     });
 }

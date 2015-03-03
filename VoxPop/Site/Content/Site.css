@@ -240,24 +240,44 @@ a {
 }
 
 .story-votebuttons-title {
-     margin: 10px 10px 0px -10px;
+     margin: 10px 0px 0px 15px;
 
 }
 
-.story-votebuttons {
+ .story-votebuttons {
     display:block;
-    float:left;
-    padding: 0px 0px 17px 30px;
-    margin: 50px 0px 0px -130px;
-    width: 80px;
+    float:right;
+    padding: 0px 10px 17px 20px;
+    margin: 25px 19px 0 0;
+    width: 90px;
+    max-height: 270px;
+    overflow:hidden;
+    background-color: #ffffff;
     border: .25em dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 27px;
+    transition-duration: 1s;
 }
 
 .story-votebuttons:hover {
     background: #fafafa;
+    max-height:500px;
+}
+
+
+.story-votebuttons-option {
+    margin: 15px 0 15px 0;
+ }
+
+.story-votebuttons-value {
+    float:left;
+    margin: 0 10px 15px 10px;
+}
+
+.story-votebuttons-button {
+    margin: 0 0 15px 0;
+
 }
 
 .story-chart-box {
