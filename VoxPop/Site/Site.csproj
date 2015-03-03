@@ -233,11 +233,29 @@
     <Content Include="Images\1352236885442170385Add Symbol.svg.hi.png" />
     <Content Include="Images\VPlogoVec.svg" />
     <Content Include="Images\VPlogoVecHov.svg" />
+    <Content Include="login-signup-modal-window\css\reset.css" />
+    <Content Include="login-signup-modal-window\css\style.css" />
+    <Content Include="login-signup-modal-window\img\cd-icon-close.svg" />
+    <Content Include="login-signup-modal-window\img\cd-icon-email.svg" />
+    <Content Include="login-signup-modal-window\img\cd-icon-menu.svg" />
+    <Content Include="login-signup-modal-window\img\cd-icon-password.svg" />
+    <Content Include="login-signup-modal-window\img\cd-icon-username.svg" />
+    <Content Include="login-signup-modal-window\img\cd-logo.svg" />
+    <Content Include="login-signup-modal-window\index.html" />
+    <Content Include="login-signup-modal-window\js\main.js" />
+    <Content Include="login-signup-modal-window\js\modernizr.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
+    <Content Include="login-signup-modal-window\.DS_Store" />
+    <Content Include="login-signup-modal-window\js\.DS_Store" />
+    <Content Include="login-signup-modal-window\partials\_layout.scss" />
+    <Content Include="login-signup-modal-window\partials\_mixins.scss" />
+    <Content Include="login-signup-modal-window\partials\_variables.scss" />
+    <Content Include="login-signup-modal-window\readme.pdf" />
+    <Content Include="login-signup-modal-window\scss\style.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -251,6 +269,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\noScroll.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

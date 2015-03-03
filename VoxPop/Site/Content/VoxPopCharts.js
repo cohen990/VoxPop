@@ -4,6 +4,7 @@
         color: "#d6d6c2",
         highlight: "#ddd",
         label: "There are no votes on this poll"
+
     }];
 
 function GetPollData(optionName, votes) {
@@ -11,7 +12,7 @@ function GetPollData(optionName, votes) {
         value: votes,
         color: "#FFd1d1",
         highlight: "#ff6e7f",
-        label: optionName
+        label: optionName,
     }
 
     return result;
@@ -33,5 +34,8 @@ function GenerateChart(identifier, data) {
         data = EmptyChart;
     }
 
-    var myPieChart = new Chart(context).Pie(data);
+    var myPieChart = new Chart(context).Pie(data, {
+        animationEasing: "easeOutQuart"
+
+    });
 }

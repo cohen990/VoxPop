@@ -88,6 +88,11 @@ a {
     margin-left: 20px;
 }
 
+#LoginButton {
+    float: right;
+    margin-right:5px;
+}
+
 #SearchButton {
     float: right;
     margin-right: 20px;
@@ -395,12 +400,12 @@ input[type="text"] {
 /*Content editor box*/
 #Content {
     margin-top:100px;
-    min-width:460px;
+    min-width:480px;
     min-height:200px;
 }
 
 /*Content editor box - both this and the above IDs work together somehow
-    (also REMEMBER the below ID changes - normally increases/decreases by 1 - whenever the toolbar od plugins are altered) */
+    (also REMEMBER the below ID changes - normally increases/decreases by 1 - whenever the toolbar or plugins are altered) */
 #mceu_16 {
     border-radius:20px;
     overflow:hidden;

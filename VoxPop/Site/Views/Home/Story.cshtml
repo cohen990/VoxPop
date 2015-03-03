@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Story";
 }
+@Scripts.Render("~/Scripts/noScroll.js")
 
 <script>
     var chartData = [];
@@ -48,3 +49,5 @@
 <script>
     GenerateChart("storyChart", chartData)
 </script>
+
+
