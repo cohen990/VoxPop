@@ -1,8 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - VOXPOP</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -12,6 +10,7 @@
 </head>
 
 <body>
+    @Html.Partial("_LoginPartial")
     <div>
         <a href="@Url.Action("Index", "Home")" class="Logo">
         </a>
@@ -28,8 +27,14 @@
                 <p class="navbar-link-text">Search VP</p>
             </a>
         </div>
-   </div>
-
+        <nav class="main-nav">
+            <div id="LoginButton">
+                <a class="cd-signin navbar-link" href="#0">
+                    <p class="navbar-link-text">LOGIN/REG</p>
+                </a>
+            </div>
+            </nav>
+    </div>
    <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,3 +44,30 @@
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $scope.scrollPos = {}; // scroll position of each view
+
+    $(window).on('scroll', function() {
+        if ($scope.okSaveScroll) { // false between $routeChangeStart and $routeChangeSuccess
+            $scope.scrollPos[$location.path()] = $(window).scrollTop();
+            //console.log($scope.scrollPos);
+        }
+    });
+
+    $scope.scrollClear = function(path) {
+        $scope.scrollPos[path] = 0;
+    }
+
+    $scope.$on('$routeChangeStart', function() {
+        $scope.okSaveScroll = false;
+    });
+
+    $scope.$on('$routeChangeSuccess', function() {
+        $timeout(function() { // wait for DOM, then restore scroll position
+            $(window).scrollTop($scope.scrollPos[$location.path()] ? $scope.scrollPos[$location.path()] : 0);
+            $scope.okSaveScroll = true;
+        }, 0);
+    });
+
+</script>
