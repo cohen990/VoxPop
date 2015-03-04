@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Create";
 }
+
+<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
+
 <h1 class="page-headings">Create a new Story here...</h1>
 <div class="create-intro">
     <p>You can do whatever you want with a VOXPOP Story, if it's an issue personal to you, a campaign in your community or a global concern - write about it!</p>
@@ -91,38 +94,20 @@
 
 </div>
 
-<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     tinymce.init({
         selector: 'textarea',
         plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
+                "advlist autolink lists link image charmap print anchor",
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste"
         ],
-        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullscreen |  insertfile undo redo",
+        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
         importcss_append: true,
-        file_picker_callback: function (callback, value, meta) {
-            // Provide file and text for the link dialog
-            if (meta.filetype == 'file') $('#my_form input').click(); {
-                callback('mypage.html', {text: 'My text'});
-            }
-
-            // Provide image and alt text for the image dialog
-            if (meta.filetype == 'image') $('#my_form input').click(); {
-                callback('myimage.jpg', {alt: 'My alt text'});
-            }
-
-            // Provide alternative source and posted for the media dialog
-            if (meta.filetype == 'media') $('#my_form input').click(); {
-                callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
-            }
-        }
+        removed_menuitems: 'newdocument',
     });
 </script>
 
-
-<iframe id="form_target" name="form_target" style="display:none"></iframe>
 <form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
     <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
 </form>

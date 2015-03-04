@@ -3,6 +3,7 @@ namespace Site.Storage.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.Security.Application;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
     using Services;
@@ -155,7 +156,7 @@ namespace Site.Storage.Models
             var entity = new BlogPostEntity(
                 model.Title,
                 model.ImageUri,
-                model.Content,
+                Sanitizer.GetSafeHtmlFragment(model.Content),
                 model.PollOptions.EncodePollOptions(),
                 model.ImageCaption,
                 model.Author);

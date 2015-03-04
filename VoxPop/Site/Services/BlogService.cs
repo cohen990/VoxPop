@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
+    using Microsoft.Security.Application;
     using Models;
     using Storage;
     using Storage.Models;
@@ -30,7 +31,6 @@
 
             blog.ImageUri = imageUri;
             blog.Author = userName;
-
             var blogEntity = BlogPostEntity.For(blog);
 
             await _blogStore.CreateBlogAsync(blogEntity);
