@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 
-<link rel="stylesheet" href="~/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
+@*<link rel="stylesheet" href="~/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
 <link rel="stylesheet" href="~/login-signup-modal-window/css/style.css"> <!-- Gem style -->
 <script src="~/login-signup-modal-window/js/modernizr.js"></script> <!-- Modernizr -->
-@* ---REIstitute after modal box is hooked up to L/R forms
+                                 ---REIstitute after modal box is hooked up to L/R forms*@
 
 
 @if (Request.IsAuthenticated)
@@ -29,57 +29,58 @@ else
 
 }
 
-*@
 
 
-<nav class="main-nav">
-    <ul>
-        <!-- insert more links here -->
-        <li>
-            
-        </li>
-    </ul>
-</nav>
 
-    <div class="cd-user-modal">
-        <!-- this is the entire modal form, including the background -->
-        <div class="cd-user-modal-container">
-            <!-- this is the container wrapper -->
-            <ul class="cd-switcher">
+@*<nav class="main-nav">
+        <ul>
+            <!-- insert more links here -->
+            <li>
 
-                <li><a href="#0" class="mod-but">Log-in</a></li>
-                <li><a href="#0" class="mod-but">Register</a></li>
-            </ul>
-            <div id="cd-login">
-                <!-- log in form -->
-                <form class="cd-form"></form>
-                <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
-                <!-- <a href="#0" class="cd-close-form">Close</a> -->
-            </div> <!-- cd-login -->
-            <div id="cd-signup">
-                <!-- sign up form -->
-                <form class="cd-form"></form>
-                <!-- <a href="#0" class="cd-close-form">Close</a> -->
-            </div> <!-- cd-signup -->
+            </li>
+        </ul>
+    </nav>
 
-            <div id="cd-reset-password">
-                <!-- reset password form -->
-                <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
-                <form class="cd-form">
-                    <p class="fieldset">
-                        <label class="image-replace cd-email" for="reset-email">E-mail</label>
-                        <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
-                        <span class="cd-error-message">Error message here!</span>
-                    </p>
-                    <p class="fieldset">
-                        <input class="full-width has-padding" type="submit" value="Reset password">
-                    </p>
-                </form>
-                <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
-            </div> <!-- cd-reset-password -->
+        <div class="cd-user-modal">
+            <!-- this is the entire modal form, including the background -->
+            <div class="cd-user-modal-container">
+                <!-- this is the container wrapper -->
+                <ul class="cd-switcher">
 
-            <a href="#0" class="cd-close-form">Close</a>
-        </div> <!-- cd-user-modal-container -->
-    </div> <!-- cd-user-modal -->
-    <script src="~/login-signup-modal-window/js/jquery-1.11.0.min.js"></script>
-    <script src="~/login-signup-modal-window/js/main.js"></script> <!-- Gem jQuery -->
+                    <li><a href="#0" class="mod-but">Log-in</a></li>
+                    <li><a href="#0" class="mod-but">Register</a></li>
+                </ul>
+                <div id="cd-login">
+                    <!-- log in form -->
+                    <form class="cd-form"></form>
+                    <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+                </div> <!-- cd-login -->
+                <div id="cd-signup">
+                    <!-- sign up form -->
+                    <form class="cd-form"></form>
+                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+                </div> <!-- cd-signup -->
+
+                <div id="cd-reset-password">
+                    <!-- reset password form -->
+                    <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+                    <form class="cd-form">
+                        <p class="fieldset">
+                            <label class="image-replace cd-email" for="reset-email">E-mail</label>
+                            <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+                            <span class="cd-error-message">Error message here!</span>
+                            <span class="cd-error-message">Error message here!</span>
+                        </p>
+                        <p class="fieldset">
+                            <input class="full-width has-padding" type="submit" value="Reset password">
+                        </p>
+                    </form>
+                    <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+                </div> <!-- cd-reset-password -->
+
+                <a href="#0" class="cd-close-form">Close</a>
+            </div> <!-- cd-user-modal-container -->
+        </div> <!-- cd-user-modal -->
+        <script src="~/login-signup-modal-window/js/jquery-1.11.0.min.js"></script>
+        <script src="~/login-signup-modal-window/js/main.js"></script> <!-- Gem jQuery -->*@
