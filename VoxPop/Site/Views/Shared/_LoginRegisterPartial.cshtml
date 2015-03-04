@@ -1,0 +1,49 @@
+﻿@using Site.Models
+<link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
+<link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/style.css"> <!-- Gem style -->
+<script src="~/Libraries/login-signup-modal-window/js/modernizr.js"></script> <!-- Modernizr -->
+@*---REIstitute after modal box is hooked up to L/R forms*@
+
+<div class="cd-user-modal">
+    <!-- this is the entire modal form, including the background -->
+    <div class="cd-user-modal-container">
+        <!-- this is the container wrapper -->
+        <ul class="cd-switcher">
+
+            <li><a href="#0" class="mod-but">Log-in</a></li>
+            <li><a href="#0" class="mod-but">Register</a></li>
+        </ul>
+        <div id="cd-login">
+            <!-- log in form -->
+            @Html.Partial("_LoginFormPartial", new LoginViewModel())
+            <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+            <!-- <a href="#0" class="cd-close-form">Close</a> -->
+        </div> <!-- cd-login -->
+        <div id="cd-signup">
+            <!-- sign up form -->
+            @Html.Partial("_RegisterFormPartial", new RegisterViewModel())
+            <!-- <a href="#0" class="cd-close-form">Close</a> -->
+        </div> <!-- cd-signup -->
+
+        <div id="cd-reset-password">
+            <!-- reset password form -->
+            <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+            <form class="cd-form">
+                <p class="fieldset">
+                    <label class="image-replace cd-email" for="reset-email">E-mail</label>
+                    <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+                    <span class="cd-error-message">Error message here!</span>
+                    <span class="cd-error-message">Error message here!</span>
+                </p>
+                <p class="fieldset">
+                    <input class="full-width has-padding" type="submit" value="Reset password">
+                </p>
+            </form>
+            <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+        </div> <!-- cd-reset-password -->
+
+        <a href="#0" class="cd-close-form">Close</a>
+    </div> <!-- cd-user-modal-container -->
+</div> <!-- cd-user-modal -->
+<script src="~/Libraries/login-signup-modal-window/js/jquery-1.11.0.min.js"></script>
+<script src="~/Libraries/login-signup-modal-window/js/main.js"></script> <!-- Gem jQuery -->
