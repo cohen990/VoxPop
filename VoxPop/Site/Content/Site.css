@@ -5,14 +5,18 @@
 
 /* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
 
-body
-{
+body {
     margin:0px;
 }
 
 * {
     font-family: 'Segoe WP SemiLight';
     color: #060606;
+}
+
+a {
+    color: #422dff;
+    text-decoration:none;
 }
 
 .Logo {
@@ -82,6 +86,11 @@ body
 #CreateButton {
     float: left;
     margin-left: 20px;
+}
+
+#LoginButton {
+    float: right;
+    margin-right:5px;
 }
 
 #SearchButton {
@@ -215,7 +224,6 @@ body
     color: #808080;
     font-size: 14.5px;
     font-weight:500;
-    display: block;
     clear:both;
     float:left;
     margin: 2px 0px 0px 49px;
@@ -232,24 +240,44 @@ body
 }
 
 .story-votebuttons-title {
-     margin: 10px 10px 0px -10px;
+     margin: 10px 0px 0px 15px;
 
 }
 
-.story-votebuttons {
+ .story-votebuttons {
     display:block;
-    float:left;
-    padding: 0px 0px 17px 30px;
-    margin: 50px 0px 0px -130px;
-    width: 80px;
+    float:right;
+    padding: 0px 10px 17px 20px;
+    margin: 25px 19px 0 0;
+    width: 90px;
+    max-height: 270px;
+    overflow:hidden;
+    background-color: #ffffff;
     border: .25em dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 27px;
+    transition-duration: 1s;
 }
 
 .story-votebuttons:hover {
     background: #fafafa;
+    max-height:500px;
+}
+
+
+.story-votebuttons-option {
+    margin: 15px 0 15px 0;
+ }
+
+.story-votebuttons-value {
+    float:left;
+    margin: 0 10px 15px 10px;
+}
+
+.story-votebuttons-button {
+    margin: 0 0 15px 0;
+
 }
 
 .story-chart-box {
@@ -271,6 +299,152 @@ body
     margin: 0px 250px 100px 50px;
     padding:  10px 0px 0px 0px;
 }
+
+/* CREATE Page */
+.create-intro {
+    margin: 0px auto 0px auto;
+    width: 950px;
+}
+
+.create-form-box {
+    margin: 0px auto 0px auto;
+    padding: 35px;
+    max-width:590px;
+    border: .25em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+}
+
+.create-form-headings {
+    font-weight:bolder;
+    float:left;
+    clear:left;
+    margin-right: 10px;
+}
+
+.create-form-pollOptions-boxes {
+    width:200px;
+}
+
+.create-form-addMoreOptions {
+    display: block;
+    margin: 5px 0 15px;
+/*  border-radius:8px;
+    background-color: ButtonFace; */
+}
+
+.create-form-uploadImage-box {
+    height: 266px;
+    margin: 40px 0px 0px 0px;
+}
+.create-form-uploadPreview {
+    min-width: 239px;
+    max-width:379px;
+    min-height: 239px;
+    cursor: pointer;
+    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat 239px;
+    background-size:50%;
+    background-position:center;
+}
+
+.create-form-uploadPreview-box {
+    width: 239px;
+    margin-bottom:40px;
+    float:left;
+}
+
+.create-form-ImageCaption-box {
+}
+
+/*Styles Title textBox*/
+#Title {
+    width: 300px;
+}
+
+/*Styles ImageCaption textBox*/
+#ImageCaption{
+    min-width: 300px;
+}
+.create-form-descriptions {
+    margin: 15px 0px 55px 0px;
+}
+
+.create-form-votingOptions-box {
+    margin: 30px 0px 30px 0px;
+    padding-top:10px;
+    border-radius: 19px;
+    border-left:none;
+    border-right:none;
+    margin-bottom:10px;
+}
+
+::-webkit-input-placeholder {
+   font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
+}
+
+:-ms-input-placeholder {
+   font-size: 16px;
+   padding: 0px 0px 02px 0px;
+   height: 20px;
+}
+
+
+
+/* Affects all inputs with type="text", only way to style 'addOptions' */
+input[type="text"] {
+    min-width: 170px;
+    height: 21px;
+    margin: -2px 5px 10px 5px;
+    padding: 0px 0px 02px 05px;
+    border-radius: 10px;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+}
+
+/*Content editor box*/
+#Content {
+    margin-top:100px;
+    min-width:480px;
+    min-height:200px;
+}
+
+/*Content editor box - both this and the above IDs work together somehow
+    (also REMEMBER the below ID changes - normally increases/decreases by 1 - whenever the toolbar or plugins are altered) */
+#mceu_16 {
+    border-radius:20px;
+    overflow:hidden;
+    clear:left;
+    margin: 0px 20px 0px 20px;
+
+}
+
+.create-form-Content-box {
+    padding-top:30px;
+}
+
+.create-form-headings-Content {
+    margin-bottom: 10px;
+}
+
+.create-form-submit {
+}
+
 
 
 
