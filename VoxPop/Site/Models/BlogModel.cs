@@ -15,7 +15,6 @@
         [DataType(DataType.MultilineText), AllowHtml]
         public string Content { get; set; }
 
-
         public List<string> PollOptions { get; set; }
 
         [Display(Name="Image Caption")]
@@ -36,6 +35,7 @@
         {
             PollOptions = new List<string>();
         }
+
     }
 }
 
