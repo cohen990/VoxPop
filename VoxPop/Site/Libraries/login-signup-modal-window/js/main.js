@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-	var $form_modal = $('.cd-user-modal'),
+    var $form_modal = $('.cd-user-modal'),
 		$form_login = $form_modal.find('#cd-login'),
 		$form_signup = $form_modal.find('#cd-signup'),
 		$form_forgot_password = $form_modal.find('#cd-reset-password'),
@@ -15,19 +15,19 @@ jQuery(document).ready(function($){
 
 		if( $(event.target).is($main_nav) ) {
 			// on mobile open the submenu
-			$(this).children('ul').toggleClass('is-visible');
+		    $(this).children('ul').toggleClass('is-visible');
 		} else {
 			// on mobile close submenu
 			$main_nav.children('ul').removeClass('is-visible');
 			//show modal layer
-			$form_modal.addClass('is-visible');	
+			$form_modal.addClass('is-visible');
 			//show the selected form
 			( $(event.target).is('.cd-signup') ) ? signup_selected() : login_selected();
 		}
-
 	});
 
-	//close modal
+
+    //close modal
 	$('.cd-user-modal').on('click', function(event){
 		if( $(event.target).is($form_modal) || $(event.target).is('.cd-close-form') ) {
 			$form_modal.removeClass('is-visible');
