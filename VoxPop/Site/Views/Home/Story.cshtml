@@ -6,9 +6,9 @@
 <script>
     var chartData = [];
 </script>
-
-<h1 class="story-headings">@Model.Title</h1>
 <div class="story-width">
+    <h1 class="story-headings">@Model.Title</h1>
+
     <div>
         <img src="@Model.ImageUri" class="story-pic">
     </div>
@@ -34,15 +34,15 @@
                             <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
                             <input class="story-votebuttons-button" type="submit" value="+1">
                         }
-                        <script>
+                        @*<script>
                             chartData.push(GetPollData("@poll.Key", @poll.Value));
-                        </script>
+                        </script>*@
                     }
                     <a class="story-votebuttons-exta trigger" href="javascript:;">More Voting Options...</a>
-                    foreach (var pollItem in Model.Poll)
+                    foreach (var poll in Model.Poll)
                     {
                         <script>
-                            chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                            chartData.push(GetPollData("@poll.Key", @poll.Value));
                         </script>
                     }
                 }
@@ -69,48 +69,44 @@
         </div>
     </div>
     <p class="story-pic-caption">@Model.ImageCaption</p>
-</div>
-
-
-
-<p class="story-content">@Html.Raw(Model.Content)</p>
-
-<script>
-    GenerateChart("storyChart", chartData)
-</script>
-
-<script src="~/Scripts/modally-baby.js"></script>
-
-<div class="page-wrapper">
-</div>
-<div class="modal-wrapper">
-    <div class="modal">
-        <div class="modal-content">
-            <h1 class="story-modal-headings">@Model.Title</h1>
-            <h2 class="story-votebuttons-modal-title">Vote</h2>
-            <div class="story-votebuttons-modal-option-div">
-                @foreach (var pollItem in Model.Poll)
-                {
-                    @Html.Raw("<div class=\"story-votebuttons-modal-option-box\">")
-                    <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
-                    <span class="story-votebuttons-modal-value">@pollItem.Value</span>
-                    using (Html.BeginForm("Vote", "Home"))
-                    {
-                        <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                        <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                        <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                        <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
-                        <input class="story-votebuttons-modal-button" type="submit" value="+1">
-                    }
-                    <script>
-                        chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
-                    </script>
-                    @Html.Raw("</div>")
-                }
-            </div>
-        </div>
-
-
-
+    <div class="story-content">
+        @Html.Raw(Model.Content)
     </div>
-</div>
+    </div>
+    <script>
+        GenerateChart("storyChart", chartData)
+    </script>
+
+    <script src="~/Scripts/modally-baby.js"></script>
+
+    <div class="modal-wrapper">
+        <div class="modal">
+            <div class="modal-content">
+                <h1 class="story-modal-headings">@Model.Title</h1>
+                <h2 class="story-votebuttons-modal-title">Vote</h2>
+                <div class="story-votebuttons-modal-option-div">
+                    @foreach (var pollItem in Model.Poll)
+                    {
+                        @Html.Raw("<div class=\"story-votebuttons-modal-option-box\">")
+                        <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
+                        <span class="story-votebuttons-modal-value">@pollItem.Value</span>
+                        using (Html.BeginForm("Vote", "Home"))
+                        {
+                            <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                            <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
+                            <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
+                            <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
+                            <input class="story-votebuttons-modal-button" type="submit" value="+1">
+                        }
+                        <script>
+                            chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                        </script>
+                        @Html.Raw("</div>")
+                    }
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
