@@ -1,8 +1,4 @@
-﻿/* {
-    border:dashed 2px black;
-
-}*/
-
+﻿/**              ***               **/
 /* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
 
 body {
@@ -112,6 +108,7 @@ a {
     min-width: 600px;
 }
 
+/**              ***               **/
 /* Index Page Stuff*/
 
 .index-links {
@@ -188,10 +185,17 @@ a {
     shape-outside: circle(50%);
 }
 
+
+/**              ***               **/
 /*Story Page Stuff*/
+.story-outer-width {
+    width: 1175px;
+    margin: 0 auto 0 auto;
+}
+
 .story-width {
     max-width: 1075px;
-    margin: auto auto 0 auto;
+    margin: 0 0 0 100px;
 }
 
 .story-headings {
@@ -200,19 +204,32 @@ a {
     margin: 20px 0px 20px 0;
 }
 
-.story-date {
-    float: right;
-    margin: -48px 10px 0px 0px;
+.story-author-date-box {
+    margin: 83.5px 0 0 5px;
+    width: 75px;
+    padding: 10px;
+    border: .3em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 20px;
+    float: left;
+    position: relative;
+    right: 5px;
+    transition-duration: 1s;
+}
+
+.story-author-date-box:hover {
+    background: #fafafa;
+    max-height: 500px;
 }
 
 .story-pic {
     display: inline-block;
-    float: left;
-    margin: 10px 5px 0px 0;
+    float:left;
+    margin: 10px 5px 0 0;
     height: 370px;
     width: 550px;
     object-fit:cover;
-
 }
 
 .story-pic-caption {
@@ -222,6 +239,19 @@ a {
     clear: both;
     float: left;
     margin: 2px 0 -10px 0;
+}
+
+.story-chart-box {
+    margin: 10px 0px 0px 15px;
+    height: 362px;
+    min-width: 490px;
+    border: .25em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    display: block;
+    float: left;
+    position: static;
 }
 
 .story-chart {
@@ -269,19 +299,6 @@ a {
     margin: 0 0 15px 0;
 }
 
-.story-chart-box {
-    margin: 10px 0px 0px 25px;
-    height: 362px;
-    min-width: 490px;
-    border: .25em dashed #060606;
-    border-left: none;
-    border-right: none;
-    border-radius: 30px;
-    display: block;
-    float: left;
-    position: static;
-}
-
 .story-content {
     clear: both;
     max-width: 950px;
@@ -297,7 +314,7 @@ img {
 }
 
 
-
+/**              ***               **/
 /*Story Page Modal - Appears if there are >4 Vote Options */
 .story-modal-headings {
     display: block;
@@ -425,6 +442,7 @@ img {
     padding: 5%;
 }
 
+/**              ***               **/
 /* CREATE Page */
 .create-intro {
     margin: 0px auto 0px auto;
@@ -439,6 +457,7 @@ img {
     border-left: none;
     border-right: none;
     border-radius: 30px;
+    overflow:visible;
 }
 
 .create-form-headings {
@@ -465,13 +484,13 @@ img {
 }
 
 .create-form-uploadPreview {
-    min-width: 239px;
-    max-width: 379px;
-    min-height: 239px;
+    width: 480px;
+    height: 323px;
     cursor: pointer;
-    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat 239px;
-    background-size: 50%;
+    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat;
+    background-size: 15%;
     background-position: center;
+    object-fit:cover;
 }
 
 .create-form-uploadPreview-box {
@@ -485,16 +504,16 @@ img {
 
 /*Styles Title textBox*/
 #Title {
-    width: 300px;
+    width: 500px;
 }
 
 /*Styles ImageCaption textBox*/
 #ImageCaption {
-    min-width: 300px;
+    min-width: 425px;
 }
 
 .create-form-descriptions {
-    margin: 15px 0px 55px 0px;
+    margin: 15px 0px 90px 0px;
 }
 
 .create-form-votingOptions-box {
@@ -504,6 +523,11 @@ img {
     border-left: none;
     border-right: none;
     margin-bottom: 10px;
+    transition-duration: .5s;
+}
+
+.create-form-votingOptions-box:hover {
+    background-color: #fafafa;
 }
 
 ::-webkit-input-placeholder {
@@ -577,4 +601,63 @@ input[type="text"] {
 .create-form-submit {
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/**              ***               **/
+/*Login/Register forms*/
+#Email, #Password, #ConfirmPassword, #FirstName, #LastName {
+    min-width: 300px;
+    height: 21px;
+    margin: 10px 5px 10px 5px;
+    padding: 0px 0px 2px 05px;
+    border-radius: 10px;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+}
+
+.login-reg-form-headings {
+    font-weight: bolder;
+    clear:left;
+    float:left;
+    margin: 10px;
+}
+
+.login-reg-form-headings-first-name {
+    margin-left:64px;
+}
+
+.login-reg-form-headings-last-name {
+    margin-left: 65px;
+}
+
+.login-reg-form-headings-email {
+    margin-left: 101px;
+}
+
+.login-reg-form-headings-pw {
+    margin-left: 71px;
+}
+
+.login-reg-form-checkbox {
+    margin: 15px 0 15px 125px;
+}
+
+.login-reg-form-but-log {
+    margin: 30px 0 0 90px;
+    font-weight: bold;
+}
+
+.login-reg-form-but-reg {
+    margin: 30px 0 0 75px;
+    font-weight: bold;
+}
+
+.login-reg-form-hr-line{
+    margin: 25px 0 25px 0;
+}
+
+.login-reg-form-page-titles {
+    margin: 10px 0px 20px 50px;
 }

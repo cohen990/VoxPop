@@ -150,7 +150,7 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new Politico { UserName = model.Email, Email = model.Email };
+                var user = new Politico { UserName = model.FirstName + " " + model.LastName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -366,7 +366,7 @@
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new Politico { UserName = model.Email, Email = model.Email };
+                var user = new Politico { UserName = model.FirstName + " " + model.LastName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

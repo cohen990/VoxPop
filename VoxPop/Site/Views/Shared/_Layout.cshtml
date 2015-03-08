@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @*@Html.Partial("_LoginPartial")*@
+    @Html.Partial("_LoginPartial")
     @Html.Partial("_LoginRegisterPartial")
     <div>
         <a href="@Url.Action("Index", "Home")" class="Logo">
@@ -38,7 +38,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr class="login-reg-form-hr-line"/>
         <footer>
             <p>&copy; @DateTime.Now.Year - VOXPOP</p>
         </footer>
