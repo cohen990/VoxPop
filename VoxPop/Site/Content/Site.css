@@ -88,9 +88,23 @@ a {
     margin-right: 5px;
 }
 
-#SearchButton {
+#Search {
     float: right;
-    margin-right: 20px;
+    margin: auto 20px auto 0;
+}
+
+#search-bar {
+    margin-top: 9px;
+    width:200px;
+    height:25px;
+    border:hidden;
+    border-radius: 11px;
+}
+
+.search-bar-icon {
+    margin: 0 0 -4px -40px;
+    height:18px;
+    display:inline;
 }
 
 .navbar-link-text {

@@ -240,6 +240,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1352236885442170385Add Symbol.svg.hi.png" />
+    <Content Include="Images\search-icon-hi.png" />
     <Content Include="Images\VPlogoVec.svg" />
     <Content Include="Images\VPlogoVecHov.svg" />
     <Content Include="Libraries\login-signup-modal-window\css\reset.css" />
