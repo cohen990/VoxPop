@@ -79,7 +79,7 @@
         <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
 
 
-        <input class="create-form-submit" type="submit" value="Create!" />
+        <input class="create-form-submit" type="submit" value="CREATE!" />
     }
 
 <script>
@@ -98,13 +98,14 @@
     tinymce.init({
         selector: 'textarea',
         plugins: [
-                "advlist autolink lists link image charmap print anchor",
+                "advlist autolink lists link charmap print anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
+                "insertdatetime table contextmenu paste"
         ],
         toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
         importcss_append: true,
         removed_menuitems: 'newdocument',
+        resize: "both"
     });
 </script>
 
