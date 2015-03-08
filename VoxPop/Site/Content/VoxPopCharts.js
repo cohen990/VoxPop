@@ -23,6 +23,8 @@ function GenerateChart(identifier, data) {
     noVotes = true;
 
     for (var i = 0; i < data.length; i++) {
+        data[i].label = DecodeHtml(data[i].label);
+
         if (data[i].value !== 0) {
             noVotes = false;
         }
@@ -42,4 +44,8 @@ function GenerateChart(identifier, data) {
         //segmentStrokeWidth : 4
 
     });
+}
+
+function DecodeHtml(inputString) {
+    return $("<div/>").html(inputString).text();
 }
