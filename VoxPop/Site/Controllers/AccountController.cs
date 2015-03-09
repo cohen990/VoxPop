@@ -8,6 +8,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models;
+    using Services;
     using Storage;
     using Storage.Models;
 
@@ -74,7 +75,10 @@
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result =
+                await
+                    SignInManager.SignInWithEmailAsync(model.Email, model.Password, model.RememberMe,
+                        shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -150,7 +154,14 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new Politico { AuthorName = model.FirstName + " " + model.LastName, UserName = model.Email, Email = model.Email };
+                var user = new Politico
+                {
+                    AuthorFirstName = model.FirstName,
+                    AuthorLastName = model.LastName,
+                    UserName = Politico.GenerateNewUserName(model.FirstName, model.LastName),
+                    Email = model.Email
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
