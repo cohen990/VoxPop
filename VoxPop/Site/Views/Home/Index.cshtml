@@ -11,16 +11,14 @@
         <script>
             chartData = []
         </script>
-        <div>
-            <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey" class="index-links">
-                <div>
-                    <img src="@blogPost.ImageUri" class="index-pic">
-                </div>
+        <div class="index-links">
+            <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey">
+                <img src="@blogPost.ImageUri" class="index-pic">
                 <div class="index-chart">
-                    <canvas class="index-chart" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
+                    <canvas id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
                 </div>
                 <div class="index-titles line-clamp">
-                    <p>@blogPost.Title</p>
+                    @blogPost.Title
                 </div>
             </a>
         </div>

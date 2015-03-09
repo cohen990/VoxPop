@@ -31,6 +31,8 @@
 
         public string Author { get; set; }
 
+        public string Timestamp { get; set; }
+
         public BlogModel()
         {
             PollOptions = new List<string>();
