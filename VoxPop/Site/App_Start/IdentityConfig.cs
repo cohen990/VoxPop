@@ -39,7 +39,7 @@
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new ElCamino.AspNet.Identity.AzureTable.UserStore<Politico>(context.Get<AuthenticationContext>()));
+            var manager = new ApplicationUserManager(new UserStore<Politico>(context.Get<AuthenticationContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<Politico>(manager)
             {
@@ -82,6 +82,15 @@
                     new DataProtectorTokenProvider<Politico>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        public async Task<string> GetFullName(string userName)
+        {
+            var politico = await Store.FindByNameAsync(userName);
+
+            var fullname = politico.AuthorFirstName + " " + politico.AuthorLastName;
+
+            return fullname;
         }
     }
 
