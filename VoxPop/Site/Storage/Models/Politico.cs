@@ -25,5 +25,8 @@
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string AuthorName { get; set; }
+
     }
 }
