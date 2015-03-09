@@ -5,9 +5,9 @@
     using System.Web;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
     using Models;
     using Services;
-    using Storage.Models;
 
     public class HomeController : Controller
     {
@@ -52,9 +52,13 @@
         {
             var userName = User.Identity.GetUserName();
 
+            var userManager = HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+
+            var author = await userManager.GetFullName(userName);
+
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateBlogAsync(blog, image, userName);
+            await _blogService.CreateBlogAsync(blog, image, author);
 
             return RedirectToAction("Index");
         }
