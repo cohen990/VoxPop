@@ -31,6 +31,9 @@
 
         public string Author { get; set; }
 
+        [DataType(DataType.DateTime)]
+        public DateTime TimeCreated { get; set; }
+
         public BlogModel()
         {
             PollOptions = new List<string>();
