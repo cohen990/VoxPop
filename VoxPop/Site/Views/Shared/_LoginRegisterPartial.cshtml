@@ -1,4 +1,5 @@
 ﻿@using Site.Models
+@using Microsoft.AspNet.Identity
 
 <link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
 <link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/style.css"> <!-- Gem style -->
@@ -15,7 +16,24 @@
         </ul>
         <div id="cd-login">
             <!-- log in form -->
-            @Html.Partial("_LoginFormPartial", new LoginViewModel())
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+                }
+            }
+            else
+            {
+                @Html.Partial("_LoginFormPartial", new LoginViewModel())
+            }
             <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
             <!-- <a href="#0" class="cd-close-form">Close</a> -->
         </div> <!-- cd-login -->

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title - VOXPOP</title>
@@ -10,7 +12,6 @@
 </head>
 
 <body>
-    @Html.Partial("_LoginPartial")
     @Html.Partial("_LoginRegisterPartial")
     <div>
         <a href="@Url.Action("Index", "Home")" class="Logo">
@@ -25,7 +26,7 @@
         </div>
         <div id="Search">
             <form method="get" id="searchform" name="searchform" action="http://www.google.com/search" target="_blank">
-                <input type="hidden" name="sitesearch" value="http://www.VOXPOP.london" />    
+                <input type="hidden" name="sitesearch" value="http://www.VOXPOP.london" />
                 <input type="text" id="search-bar" name="q" value="" maxlength="255" placeholder=" Search VOXPOP. . . " />
                 <input type="image" class="submit btn search-bar-icon" src="~/Images/search-icon-hi.png" alt="Go">
             </form>
@@ -33,14 +34,27 @@
         <nav class="main-nav">
             <div id="LoginButton">
                 <a class="cd-signin navbar-link" href="#0">
-                    <p class="navbar-link-text">LOGIN/REG</p>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <p class="navbar-link-text">@User.Identity.GetUserName()</p>
+                            
+                        }
+                    }
+                    else
+                    {
+                        <p class="navbar-link-text">LOGIN/REG</p>
+                    }
                 </a>
             </div>
         </nav>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr class="login-reg-form-hr-line"/>
+        <hr class="login-reg-form-hr-line" />
         <footer>
             <p>&copy; @DateTime.Now.Year - VOXPOP</p>
         </footer>
