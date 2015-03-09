@@ -15,7 +15,7 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName, DateTime currentTime)
         {
             PartitionKey = userName;
             RowKey = Guid.NewGuid().ToString("N");
@@ -25,6 +25,7 @@ namespace Site.Storage.Models
             Content = blogContent;
             ImageCaption = blogImageCaption;
             Author = userName;
+            TimeCreated = currentTime;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -50,6 +51,7 @@ namespace Site.Storage.Models
             ImageUri = new Uri(properties["ImageUri"].StringValue);
             ImageCaption = properties["ImageCaption"].StringValue;
             Author = properties["Author"].StringValue;
+            TimeCreated = properties["TimeCreated"].DateTime.Value;
 
             var pollString = properties["Poll"].StringValue;
 
@@ -81,6 +83,7 @@ namespace Site.Storage.Models
             result.Add("ImageUri", new EntityProperty(ImageUri.ToString()));
             result.Add("ImageCaption", new EntityProperty(ImageCaption));
             result.Add("Author", new EntityProperty(Author));
+            result.Add("TimeCreated", new EntityProperty(TimeCreated));
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -107,12 +110,17 @@ namespace Site.Storage.Models
         public string RowKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity's timestamp.
+        /// Gets or sets the entity's timestamp. This value changes every time the entity is updated.
         /// </summary>
         /// <value>
         /// The entity's timestamp. The property is populated by the Windows Azure Table Service.
         /// </value>
         public DateTimeOffset Timestamp { get; set; }
+
+        /// <summary>
+        /// Does not change. Is guaranteed to be the <see cref="DateTime"/> when it was created.
+        /// </summary>
+        public DateTime TimeCreated { get; private set; }
 
         /// <summary>
         /// Gets or sets the entity's current ETag.  Set this value to '*'
@@ -159,7 +167,8 @@ namespace Site.Storage.Models
                 Sanitizer.GetSafeHtmlFragment(model.Content),
                 model.PollOptions.EncodePollOptions(),
                 model.ImageCaption,
-                model.Author);
+                model.Author,
+                DateTime.Now);
 
             return entity;
         }
@@ -176,7 +185,8 @@ namespace Site.Storage.Models
                 PartitionKey = PartitionKey,
                 Poll = Poll.DecodePoll(),
                 RowKey = RowKey,
-                Title = Title
+                Title = Title,
+                TimeCreated = TimeCreated
             };
         }
     }
