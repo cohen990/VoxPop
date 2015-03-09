@@ -26,7 +26,15 @@
             return userIdentity;
         }
 
-        public string AuthorName { get; set; }
+        public string AuthorFirstName { get; set; }
 
+        public string AuthorLastName { get; set; }
+
+        public static string GenerateNewUserName(string firstName, string lastName)
+        {
+            var username = firstName + lastName + Guid.NewGuid().ToString("N").Substring(0, 5);
+
+            return username.ToLowerInvariant();
+        }
     }
 }
