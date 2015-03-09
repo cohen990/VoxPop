@@ -87,14 +87,20 @@
     <div class="modal">
         <div class="modal-content">
             <h1 class="story-modal-headings">@Model.Title</h1>
+            <div>
+                <canvas class="story-chart" id="modalChart" height="150" width="150"></canvas>
+            </div>
+            <script>
+                GenerateChart("modalChart", chartData)
+            </script>
             <h2 class="story-votebuttons-modal-title">Vote</h2>
             <div class="story-votebuttons-modal-option-div">
                 @foreach (var pollItem in Model.Poll)
                 {
-                    @Html.Raw("<div class=\"story-votebuttons-modal-option-box\">")
+                    <div class="story-votebuttons-modal-option-box">
                     <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
                     <span class="story-votebuttons-modal-value">@pollItem.Value</span>
-                    using (Html.BeginForm("Vote", "Home"))
+                    @using (Html.BeginForm("Vote", "Home"))
                     {
                         <input type="hidden" name="pollItemKey" value="@pollItem.Key">
                         <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
@@ -105,7 +111,7 @@
                     <script>
                         chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
                     </script>
-                    @Html.Raw("</div>")
+                    </div>
                 }
             </div>
         </div>
