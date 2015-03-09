@@ -1,8 +1,4 @@
-﻿/* {
-    border:dashed 2px black;
-
-}*/
-
+﻿/**              ***               **/
 /* LAYOUT - Affects Layout.cshtml and other site-wide styling*/
 
 body {
@@ -92,9 +88,23 @@ a {
     margin-right: 5px;
 }
 
-#SearchButton {
+#Search {
     float: right;
-    margin-right: 20px;
+    margin: auto 20px auto 0;
+}
+
+#search-bar {
+    margin-top: 9px;
+    width:200px;
+    height:25px;
+    border:hidden;
+    border-radius: 11px;
+}
+
+.search-bar-icon {
+    margin: 0 0 -4px -40px;
+    height:18px;
+    display:inline;
 }
 
 .navbar-link-text {
@@ -112,110 +122,150 @@ a {
     min-width: 600px;
 }
 
+/**              ***               **/
 /* Index Page Stuff*/
 
 .index-links {
     text-decoration: none;
-    height: 260px;
+    /*max-height: 260px;*/
     max-width: 560px;
-    min-width: 535px;
+    min-width: 525px;
     border: 3px dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 30px;
-    margin: -10px auto 0px auto;
-    margin-bottom: 45px;
-    display: block;
+    margin: -10px auto 45px auto;
+    padding: 5px 40px 20px 40px;
+    transition-duration: .5s;
 }
 
-    .index-links:hover {
-        background: #fafafa;
-    }
+.index-links:hover {
+    background: #fafafa;
+}
 
 .index-titles {
-    display: inline-block;
-    height: 90px;
-    margin: 0px 0px 0px 30px;
+    /*min-height: 90px;*/
+    min-width: 560px;
+    /*margin: 0px 0px 0px 30px;*/
     font-size: 22px;
     font-weight: 900;
     color: #060606;
-    overflow: hidden;
+    clear:left;
+    /*overflow:hidden;*/
 }
 
 
     .index-titles:hover {
         text-decoration: underline;
-        display: inline-block;
-        height: 90px;
-        margin: 0px 0px 0px 30px;
+        /*display: inline-block;*/
+        /*min-height: 90px;*/
+        /*margin: 0px 0px 0px 30px;*/
         font-size: 22px;
         font-weight: 900;
         color: #060606;
-        overflow: hidden;
+        clear:left;
+        /*overflow: hidden;*/
     }
 
-.line-clamp {
+/*.line-clamp {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-}
+}*/
 
-    .line-clamp:hover {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
+/* .line-clamp:hover {
+     display: -webkit-box;
+     -webkit-line-clamp: 3;
+     -webkit-box-orient: vertical;
+}*/
 
 .index-pic {
     display: inline-block;
     float: left;
-    margin: 25px 0px -20px 30px;
-    height: 165px;
-    width: 250px;
+    margin: 15px 0 0 0;
+    height: 185px;
+    width: 275px;
+    object-fit:cover;
+
 }
 
 .index-chart {
-    display: inline-block;
     float: right;
     height: 240px;
     width: 240px;
-    margin: 5px 2px 0 -5px;
-    border-radius: 50%;
-    -webkit-shape-outside: circle();
-    shape-outside: circle();
+    margin: 3px 0 0 0;
+    /*border-radius: 50%;*/
+    -webkit-shape-outside: circle(50%);
+    shape-outside: circle(50%);
 }
 
+
+/**              ***               **/
 /*Story Page Stuff*/
+.story-outer-width {
+    width: 1175px;
+    margin: 0 auto 0 auto;
+}
+
 .story-width {
-    min-width: 1200px;
+    max-width: 1075px;
+    margin: 0 0 0 100px;
 }
 
 .story-headings {
     display: block;
     font-size: 40px;
-    margin: 20px 0px 20px 50px;
+    margin: 20px 0px 20px 0;
 }
 
-.story-date {
-    float: right;
-    margin: -48px 5px 0px 0px;
+.story-author-date-box {
+    margin: 83.5px 0 0 5px;
+    width: 75px;
+    padding: 10px;
+    border: .3em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 20px;
+    float: left;
+    position: relative;
+    right: 5px;
+    transition-duration: 1s;
+}
+
+.story-author-date-box:hover {
+    background: #fafafa;
+    max-height: 500px;
 }
 
 .story-pic {
     display: inline-block;
-    float: left;
-    margin: 10px 0px 0px 50px;
+    float:left;
+    margin: 10px 5px 0 0;
     height: 370px;
     width: 550px;
+    object-fit:cover;
 }
 
 .story-pic-caption {
     color: #808080;
-    font-size: 14.5px;
+    font-size: 17px;
     font-weight: 500;
     clear: both;
     float: left;
-    margin: 2px 0px 0px 49px;
+    margin: 2px 0 -10px 0;
+}
+
+.story-chart-box {
+    margin: 10px 0px 0px 15px;
+    height: 362px;
+    min-width: 490px;
+    border: .25em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    display: block;
+    float: left;
+    position: static;
 }
 
 .story-chart {
@@ -245,10 +295,10 @@ a {
     transition-duration: 1s;
 }
 
-    .story-votebuttons:hover {
-        background: #fafafa;
-        max-height: 500px;
-    }
+ .story-votebuttons:hover {
+    background: #fafafa;
+    max-height: 500px;
+}
 
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
@@ -263,27 +313,23 @@ a {
     margin: 0 0 15px 0;
 }
 
-.story-chart-box {
-    margin: 10px 0px 0px 25px;
-    height: 362px;
-    min-width: 490px;
-    border: .25em dashed #060606;
-    border-left: none;
-    border-right: none;
-    border-radius: 30px;
-    display: block;
-    float: left;
-    position: static;
-}
-
 .story-content {
     clear: both;
-    width: 750px;
-    margin: 0px 250px 100px 50px;
-    padding: 10px 0px 0px 0px;
+    max-width: 950px;
+    margin-top: -10px;
+    padding: 1px 0 0 0;
+    position: relative;
+    z-index: -999999;
 }
 
-/*Too many vote options - Story page modal*/
+/*Prevents oversized user images*/
+img {
+    max-width:950px;
+}
+
+
+/**              ***               **/
+/*Story Page Modal - Appears if there are >4 Vote Options */
 .story-modal-headings {
     display: block;
     font-size: 40px;
@@ -292,15 +338,15 @@ a {
 
 .story-votebuttons-modal-title {
     margin: 10px 0px 0px 15px;
-    font-size:30px;
+    font-size: 30px;
 }
 
 .story-votebuttons-modal-option-box {
     display: inline-block;
-    padding: 0 10px 0 25px;
+    padding: 0 20px 0 25px;
     margin: 15px;
     min-width: 80px;
-    max-width: 160px;
+    max-width: 100px;
     border: .25em dashed #060606;
     border-left: none;
     border-right: none;
@@ -310,7 +356,7 @@ a {
 }
 
 .story-votebuttons-modal-option-div {
-    max-width: 600px;
+    /*max-width: 600px;*/
     margin: auto;
 }
 
@@ -346,10 +392,11 @@ a {
     cursor: auto;
     visibility: hidden;
     opacity: 0;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;}
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
 
     .modal-wrapper.open {
         opacity: 1;
@@ -367,11 +414,11 @@ a {
     border: 5px dashed #060606;
     border-left: none;
     border-right: none;
-   opacity:0;
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
-  -o-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 .modal-wrapper.open .modal {
@@ -409,6 +456,7 @@ a {
     padding: 5%;
 }
 
+/**              ***               **/
 /* CREATE Page */
 .create-intro {
     margin: 0px auto 0px auto;
@@ -423,6 +471,7 @@ a {
     border-left: none;
     border-right: none;
     border-radius: 30px;
+    overflow:visible;
 }
 
 .create-form-headings {
@@ -449,13 +498,13 @@ a {
 }
 
 .create-form-uploadPreview {
-    min-width: 239px;
-    max-width: 379px;
-    min-height: 239px;
+    width: 480px;
+    height: 323px;
     cursor: pointer;
-    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat 239px;
-    background-size: 50%;
+    background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat;
+    background-size: 15%;
     background-position: center;
+    object-fit:cover;
 }
 
 .create-form-uploadPreview-box {
@@ -469,16 +518,16 @@ a {
 
 /*Styles Title textBox*/
 #Title {
-    width: 300px;
+    width: 500px;
 }
 
 /*Styles ImageCaption textBox*/
 #ImageCaption {
-    min-width: 300px;
+    min-width: 425px;
 }
 
 .create-form-descriptions {
-    margin: 15px 0px 55px 0px;
+    margin: 15px 0px 90px 0px;
 }
 
 .create-form-votingOptions-box {
@@ -488,6 +537,11 @@ a {
     border-left: none;
     border-right: none;
     margin-bottom: 10px;
+    transition-duration: .5s;
+}
+
+.create-form-votingOptions-box:hover {
+    background-color: #fafafa;
 }
 
 ::-webkit-input-placeholder {
@@ -544,6 +598,12 @@ input[type="text"] {
     margin: 0px auto 0px auto;
 }
 
+.mce-content-body img[data-mce-selected], hr[data-mce-selected] {
+    max-width:950px;
+}
+
+.mceContentBody img{ max-width: 300px !important; }
+
 .create-form-Content-box {
     padding-top: 30px;
 }
@@ -555,4 +615,63 @@ input[type="text"] {
 .create-form-submit {
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/**              ***               **/
+/*Login/Register forms*/
+#Email, #Password, #ConfirmPassword, #FirstName, #LastName {
+    min-width: 300px;
+    height: 21px;
+    margin: 10px 5px 10px 5px;
+    padding: 0px 0px 2px 05px;
+    border-radius: 10px;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+}
+
+.login-reg-form-headings {
+    font-weight: bolder;
+    clear:left;
+    float:left;
+    margin: 10px;
+}
+
+.login-reg-form-headings-first-name {
+    margin-left:64px;
+}
+
+.login-reg-form-headings-last-name {
+    margin-left: 65px;
+}
+
+.login-reg-form-headings-email {
+    margin-left: 101px;
+}
+
+.login-reg-form-headings-pw {
+    margin-left: 71px;
+}
+
+.login-reg-form-checkbox {
+    margin: 15px 0 15px 125px;
+}
+
+.login-reg-form-but-log {
+    margin: 30px 0 0 90px;
+    font-weight: bold;
+}
+
+.login-reg-form-but-reg {
+    margin: 30px 0 0 75px;
+    font-weight: bold;
+}
+
+.login-reg-form-hr-line{
+    margin: 25px 0 25px 0;
+}
+
+.login-reg-form-page-titles {
+    margin: 10px 0px 20px 50px;
 }

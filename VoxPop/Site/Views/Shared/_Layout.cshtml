@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @*@Html.Partial("_LoginPartial")*@
+    @Html.Partial("_LoginPartial")
     @Html.Partial("_LoginRegisterPartial")
     <div>
         <a href="@Url.Action("Index", "Home")" class="Logo">
@@ -23,10 +23,12 @@
                 <p class="navbar-link-text">CREATE</p>
             </a>
         </div>
-        <div id="SearchButton">
-            <a href="@Url.Action("Search","Home")" class="navbar-link">
-                <p class="navbar-link-text">SEARCH</p>
-            </a>
+        <div id="Search">
+            <form method="get" id="searchform" name="searchform" action="http://www.google.com/search" target="_blank">
+                <input type="hidden" name="sitesearch" value="http://www.VOXPOP.london" />    
+                <input type="text" id="search-bar" name="q" value="" maxlength="255" placeholder=" Search VOXPOP. . . " />
+                <input type="image" class="submit btn search-bar-icon" src="~/Images/search-icon-hi.png" alt="Go">
+            </form>
         </div>
         <nav class="main-nav">
             <div id="LoginButton">
@@ -38,7 +40,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr class="login-reg-form-hr-line"/>
         <footer>
             <p>&copy; @DateTime.Now.Year - VOXPOP</p>
         </footer>
@@ -87,3 +89,4 @@
     });
 
 </script>
+
