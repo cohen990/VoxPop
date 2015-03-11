@@ -83,15 +83,6 @@
             }
             return manager;
         }
-
-        public async Task<string> GetFullName(string userName)
-        {
-            var politico = await Store.FindByNameAsync(userName);
-
-            var fullname = politico.AuthorFirstName + " " + politico.AuthorLastName;
-
-            return fullname;
-        }
     }
 
     // Configure the application sign-in manager which is used in this application.

@@ -25,12 +25,17 @@
             _voteService = voteService;
         }
 
-        public async Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase imageFile, string author)
+        public async Task CreateBlogAsync(
+            BlogModel blog,
+            HttpPostedFileBase imageFile,
+            string authorName,
+            string authorIdentifier)
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             blog.ImageUri = imageUri;
-            blog.Author = author;
+            blog.AuthorIdentifier = authorIdentifier;
+            blog.Author = authorName;
             var blogEntity = BlogPostEntity.For(blog);
 
             await _blogStore.CreateBlogAsync(blogEntity);
