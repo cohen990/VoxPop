@@ -5,7 +5,6 @@
     using System.Web;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.Owin;
     using Models;
     using Services;
 
@@ -38,10 +37,10 @@
             return View();
         }
 
-        [Route("Story/{partitionKey}/{rowKey}")]
-        public async Task<ActionResult> Story(string rowKey, string partitionKey)
+        [Route("Story/{authorIdentifier}/{articleIdentifier}")]
+        public async Task<ActionResult> Story(string articleIdentifier, string authorIdentifier)
         {
-            var blog = await _blogService.GetBlog(rowKey, partitionKey);
+            var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
 
             return View(blog);
         }
@@ -50,15 +49,12 @@
         [HttpPost]
         public async Task<ActionResult> Create(BlogModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
-            var userName = User.Identity.GetUserName();
-
-            var userManager = HttpContext.GetOwinContext().Get<ApplicationUserManager>();
-
-            var author = await userManager.GetFullName(userName);
+            var authorName = ClaimsService.GetAuthenticatedUsersFullName();
+            var authorIdentifier = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey);
 
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateBlogAsync(blog, image, author);
+            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier);
 
             return RedirectToAction("Index");
         }
