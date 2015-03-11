@@ -1,16 +1,20 @@
 ﻿namespace Site.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using App_Start;
+    using ElCamino.AspNet.Identity.AzureTable.Model;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models;
     using Services;
     using Storage.Models;
+    using ValueProviderCollection = System.Web.ModelBinding.ValueProviderCollection;
 
     [Authorize]
     public class AccountController : Controller
@@ -77,7 +81,7 @@
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result =
                 await
-                    SignInManager.SignInWithEmailAsync(model.Email, model.Password, model.RememberMe,
+                    SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
                         shouldLockout: false);
             switch (result)
             {
@@ -158,13 +162,20 @@
                 {
                     AuthorFirstName = model.FirstName,
                     AuthorLastName = model.LastName,
-                    UserName = Politico.GenerateNewUserName(model.FirstName, model.LastName),
+                    UserName = model.Email,
                     Email = model.Email
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddClaimAsync(user.Id,
+                        new Claim(VoxPopConstants.IdentifierClaimKey, user.GenerateNewIdentifier()));
+                    await UserManager.AddClaimAsync(user.Id,
+                        new Claim(VoxPopConstants.FirstNameClaimKey, model.FirstName));
+                    await UserManager.AddClaimAsync(user.Id,
+                        new Claim(VoxPopConstants.LastNameClaimKey, model.LastName));
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

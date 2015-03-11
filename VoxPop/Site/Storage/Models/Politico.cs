@@ -30,11 +30,26 @@
 
         public string AuthorLastName { get; set; }
 
-        public static string GenerateNewUserName(string firstName, string lastName)
+        public static string GenerateNewIdentifier(string firstName, string lastName)
         {
             var username = firstName + lastName + Guid.NewGuid().ToString("N").Substring(0, 5);
 
             return username.ToLowerInvariant();
+        }
+
+        public string GenerateNewIdentifier()
+        {
+            return GenerateNewIdentifier(AuthorFirstName, AuthorLastName);
+        }
+
+        public string GetFullName()
+        {
+            return GetFullName(AuthorFirstName, AuthorLastName);
+        }
+
+        public static string GetFullName(string firstname, string lastname)
+        {
+            return firstname + " " + lastname;
         }
     }
 }
