@@ -18,7 +18,7 @@
                 return SignInStatus.Failure;
             }
 
-            var user = await manager.UserManager.FindByEmailAsync(emailAddress);
+            var user = await manager.UserManager.FindByNameAsync("aaronjerez2ae3b");
 
             if (user == null)
             {

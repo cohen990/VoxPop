@@ -73,6 +73,10 @@
                 return View(model);
             }
 
+            var thing = SignInManager.UserManager.FindByEmail("aaron_jerez@hotmail.com");
+
+            var user = await SignInManager.UserManager.FindByEmailAsync("aaron_jerez@hotmail.com");
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result =
