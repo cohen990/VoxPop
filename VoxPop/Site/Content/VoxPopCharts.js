@@ -8,11 +8,12 @@
     }];
 
 function GetPollData(optionName, votes) {
+
     var result = {
         value: votes,
         color: "#FFd1d1",
         highlight: "#ff6e7f",
-        label: optionName,
+        label: optionName
     }
 
     return result;
