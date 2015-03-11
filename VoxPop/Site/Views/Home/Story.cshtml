@@ -3,9 +3,11 @@
     ViewBag.Title = "Story";
 }
 
+<script src="~/Scripts/modally-baby.js"></script>
 <script>
     var chartData = [];
 </script>
+
 <div class="story-outer-width">
     <div class="story-author-date-box">
         <p class="story-author">by <a>@Model.Author</a></p>
@@ -80,8 +82,6 @@
 <script>
     GenerateChart("storyChart", chartData)
 </script>
-
-<script src="~/Scripts/modally-baby.js"></script>
 
 <div class="modal-wrapper">
     <div class="modal">
