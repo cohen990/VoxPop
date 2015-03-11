@@ -15,16 +15,16 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userName, DateTime currentTime)
+        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userIdentifier, DateTime currentTime, string author)
         {
-            PartitionKey = userName;
+            PartitionKey = userIdentifier;
             RowKey = Guid.NewGuid().ToString("N");
 
             Title = blogTitle;
             ImageUri = imageUri;
             Content = blogContent;
             ImageCaption = blogImageCaption;
-            Author = userName;
+            Author = author;
             TimeCreated = currentTime;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
@@ -167,8 +167,9 @@ namespace Site.Storage.Models
                 Sanitizer.GetSafeHtmlFragment(model.Content),
                 model.PollOptions.EncodePollOptions(),
                 model.ImageCaption,
-                model.Author,
-                DateTime.Now);
+                model.AuthorIdentifier,
+                DateTime.Now,
+                model.Author);
 
             return entity;
         }
@@ -186,6 +187,7 @@ namespace Site.Storage.Models
                 Poll = Poll.DecodePoll(),
                 RowKey = RowKey,
                 Title = Title,
+                AuthorIdentifier = PartitionKey,
                 TimeCreated = TimeCreated
             };
         }
