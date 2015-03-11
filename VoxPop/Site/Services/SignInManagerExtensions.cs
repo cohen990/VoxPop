@@ -20,6 +20,11 @@
 
             var user = await manager.UserManager.FindByEmailAsync(emailAddress);
 
+            if (user == null)
+            {
+                return SignInStatus.Failure;
+            }
+
             return await manager.PasswordSignInAsync(user.UserName, password, isPersistent, shouldLockout);
         }
     }
