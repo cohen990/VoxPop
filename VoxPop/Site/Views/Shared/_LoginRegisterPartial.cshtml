@@ -1,6 +1,5 @@
 ﻿@using Site.Models
 @using Microsoft.AspNet.Identity
-@using Microsoft.AspNet.Identity.Owin;
 
 
 <link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
@@ -14,13 +13,21 @@
         <ul class="cd-switcher">
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#0" class="mod-but">Author/Voter</a></li>
+                <li><a href="#0" class="mod-but">My VOXPOP</a></li>
             }
             else
             {
                 <li><a href="#0" class="mod-but">Login</a></li>
             }
-            <li><a href="#0" class="mod-but">Register</a></li>
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim("firstname")? Register</a></li>
+            }
+            else
+            {
+                <li><a href="#0" class="mod-but">Register</a></li>
+
+            }
         </ul>
         <div id="cd-login">
             <!-- log in form -->
@@ -30,13 +37,9 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    var userName = User.Identity.GetUserName();
-
-                    var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
-
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @("Hello, " + @User.Identity.GetUserName() + ".")
+                            @("Hello, " + @Site.Services.ClaimsService.GetClaim("firstname") + ".")
                         </li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
@@ -45,8 +48,10 @@
             else
             {
                 @Html.Partial("_LoginFormPartial", new LoginViewModel())
+
+                <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
             }
-            <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+
             <!-- <a href="#0" class="cd-close-form">Close</a> -->
         </div> <!-- cd-login -->
         <div id="cd-signup">
