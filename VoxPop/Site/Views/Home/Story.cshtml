@@ -3,9 +3,11 @@
     ViewBag.Title = "Story";
 }
 
+<script src="~/Scripts/modally-baby.js"></script>
 <script>
     var chartData = [];
 </script>
+
 <div class="story-outer-width">
     <div class="story-author-date-box">
         <p class="story-author">by <a>@Model.Author</a></p>
@@ -36,9 +38,6 @@
                                 <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
                                 <input class="story-votebuttons-button" type="submit" value="+1">
                             }
-                            @*<script>
-                                    chartData.push(GetPollData("@poll.Key", @poll.Value));
-                                </script>*@
                         }
                         <a class="story-votebuttons-exta trigger" href="javascript:;">More Voting Options...</a>
                         foreach (var poll in Model.Poll)
@@ -81,8 +80,6 @@
     GenerateChart("storyChart", chartData)
 </script>
 
-<script src="~/Scripts/modally-baby.js"></script>
-
 <div class="modal-wrapper">
     <div class="modal">
         <div class="modal-content">
@@ -109,7 +106,7 @@
                         <input class="story-votebuttons-modal-button" type="submit" value="+1">
                     }
                     <script>
-                        chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                        chartData.push(GetPollData("@pollItem.Key", new Array =[@pollItem.Value]));
                     </script>
                     </div>
                 }
