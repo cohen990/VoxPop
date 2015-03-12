@@ -36,7 +36,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @("Hello, " + @userManager.GetFullName(userName) + ".")
+                            @("Hello, " + @User.Identity.GetUserName() + ".")
                         </li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>

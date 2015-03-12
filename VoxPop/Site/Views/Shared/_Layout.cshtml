@@ -42,8 +42,8 @@
 
                         var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
 
-                        @*<p class="navbar-link-text">@User.Identity.GetUserName()</p>*@
-                        <p class="navbar-link-text">@userManager.GetFullName(userName)</p>
+                        <p class="navbar-link-text">@User.Identity.GetUserName()</p>
+                        @*<p class="navbar-link-text">@userManager.GetFullName(userName)</p>*@
 
                     }
                     else
