@@ -1,5 +1,7 @@
 ﻿@using Site.Models
 @using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+
 
 <link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/reset.css"> <!-- CSS reset -->
 <link rel="stylesheet" href="~/Libraries/login-signup-modal-window/css/style.css"> <!-- Gem style -->
@@ -10,8 +12,14 @@
     <div class="cd-user-modal-container">
         <!-- this is the container wrapper -->
         <ul class="cd-switcher">
-
-            <li><a href="#0" class="mod-but">Login</a></li>
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="#0" class="mod-but">Author/Voter</a></li>
+            }
+            else
+            {
+                <li><a href="#0" class="mod-but">Login</a></li>
+            }
             <li><a href="#0" class="mod-but">Register</a></li>
         </ul>
         <div id="cd-login">
@@ -22,9 +30,13 @@
                 {
                     @Html.AntiForgeryToken()
 
+                    var userName = User.Identity.GetUserName();
+
+                    var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
+
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            @("Hello, " + @userManager.GetFullName(userName) + ".")
                         </li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>

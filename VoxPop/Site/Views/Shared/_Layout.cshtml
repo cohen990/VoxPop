@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
 
 <!DOCTYPE html>
 <html>
@@ -37,12 +38,13 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <p class="navbar-link-text">@User.Identity.GetUserName()</p>
-                            
-                        }
+                        var userName = User.Identity.GetUserName();
+
+                        var userManager = HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
+
+                        @*<p class="navbar-link-text">@User.Identity.GetUserName()</p>*@
+                        <p class="navbar-link-text">@userManager.GetFullName(userName)</p>
+
                     }
                     else
                     {

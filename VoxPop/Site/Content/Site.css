@@ -293,11 +293,15 @@ a {
     border-right: none;
     border-radius: 27px;
     transition-duration: 1s;
+    position:relative;
+    z-index:auto;
 }
 
  .story-votebuttons:hover {
     background: #fafafa;
     max-height: 500px;
+    position:relative;
+    z-index:auto;
 }
 
 .story-votebuttons-option {
@@ -318,8 +322,6 @@ a {
     max-width: 950px;
     margin-top: -10px;
     padding: 1px 0 0 0;
-    position: relative;
-    z-index: -999999;
 }
 
 /*Prevents oversized user images*/
