@@ -34,7 +34,6 @@
         <nav class="main-nav">
             <div id="LoginButton">
                 <a class="cd-signin navbar-link" href="#0">
-
                     @if (Request.IsAuthenticated)
                     {
                         <p class="navbar-link-text">@Site.Services.ClaimsService.GetAuthenticatedUsersFullName().ToUpperInvariant()</p>

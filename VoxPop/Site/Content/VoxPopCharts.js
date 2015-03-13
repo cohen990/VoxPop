@@ -7,17 +7,35 @@
 
     }];
 
-function GetPollData(optionName, votes) {
+//Segment colours
+//r/b/y/g/p/o/r/b/y/g/p/o/r(repeated)
+var colors = ["#FFd1d1", "#bbdeff", "#fffd9f", "#7fff80", "#d8b2d8", "#ffc04c", "#ff1919", "#3abed7", "#ffff32", "#32ff33", "#993299", "#ffae19", "#FFd1d1"]
+var highlighters = ["#FF7C8B", "#9fd1ff", "#FFFB53", "#5AFF5B", "#bf7fbf", "#ffb732", "#ff0000", "#22b6d2", "#ffff00", "#00ff01", "#993299", "#FFA500", "#FF7C8B"]
+var colornumber = 0;
 
+//Resets colors to start after each chart
+function initializeChart() {
+    if (colornumber >= numPoll) {
+        colornumber = 0;
+    }
+    else  {}
+}
+//
+
+function GetPollData(optionName, votes) {
     var result = {
         value: votes,
-        color: "#FFd1d1",
-        highlight: "#ff6e7f",
+        color: colors[colornumber],
+        highlight: highlighters[colornumber],
         label: optionName
-    }
+    };
+    colornumber++;
+    initializeChart();
+
 
     return result;
 }
+
 
 function GenerateChart(identifier, data) {
 
@@ -33,6 +51,7 @@ function GenerateChart(identifier, data) {
 
     var context = document.getElementById(identifier).getContext("2d");
 
+
     if (noVotes === true) {
         data = EmptyChart;
     }
@@ -40,13 +59,19 @@ function GenerateChart(identifier, data) {
     var myPieChart = new Chart(context).Pie(data, {
         animationEasing: "easeOutQuart",
         animateScale: true,
+        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%"
         //segmentShowStroke : true,
         //segmentStrokeColor: "#040404",
         //segmentStrokeWidth : 4
-
     });
+
 }
 
 function DecodeHtml(inputString) {
     return $("<div/>").html(inputString).text();
 }
+
+
+
+
+
