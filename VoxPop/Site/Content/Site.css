@@ -374,13 +374,14 @@ img {
     background: #fafafa;
 }
 
-.box-1:hover {
+/*.box-1:hover {
     background: #FFd1d1;
+    animation-fill-mode:backwards;
 }
 
 .box-2:hover {
     background: #bbdeff;
-}
+}*/
 
 .story-votebuttons-modal-option-div {
     /*max-width: 600px;*/

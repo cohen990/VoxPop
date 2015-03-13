@@ -26,10 +26,12 @@
 
         foreach (var pollItem in blogPost.Poll)
         {
-
+            string option = @pollItem.Key.Replace("+", " ");
             <script>
-                chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                chartData.push(GetPollData("@option", @pollItem.Value));
                 var numPoll = @blogPost.Poll.Count;
+                var votesPerOption = pollItem.Value;
+
             </script>
         }
         <script>
