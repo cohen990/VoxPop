@@ -4,6 +4,7 @@
 }
 
 <h1 class="page-headings">Top Stories</h1>
+
 @if (@Model != null)
 {
     foreach (var blogPost in Model)
@@ -25,13 +26,16 @@
 
         foreach (var pollItem in blogPost.Poll)
         {
+            string option = @pollItem.Key.Replace("+", " ");
             <script>
-                chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                chartData.push(GetPollData("@option", @pollItem.Value));
+                var numPoll = @blogPost.Poll.Count;
+                var votesPerOption = pollItem.Value;
+
             </script>
         }
-
         <script>
-            GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData)
+            GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
         </script>
     }
 }

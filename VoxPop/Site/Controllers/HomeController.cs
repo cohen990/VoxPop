@@ -25,6 +25,21 @@
             return View(blogs);
         }
 
+        public ActionResult AuthorStories(string authorIdentifier)
+        {
+            var blogs = _blogService.GetAuthorBlogs(authorIdentifier);
+
+            return View(blogs);
+        }
+
+        [Route("Story/{authorIdentifier}/{articleIdentifier}")]
+        public async Task<ActionResult> Story(string articleIdentifier, string authorIdentifier)
+        {
+            var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+
+            return View(blog);
+        }
+
         [Authorize]
         [HttpGet]
         public ActionResult Create()
@@ -35,14 +50,6 @@
         public ActionResult Search()
         {
             return View();
-        }
-
-        [Route("Story/{authorIdentifier}/{articleIdentifier}")]
-        public async Task<ActionResult> Story(string articleIdentifier, string authorIdentifier)
-        {
-            var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
-
-            return View(blog);
         }
 
         [Authorize]
