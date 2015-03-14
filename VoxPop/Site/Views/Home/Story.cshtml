@@ -10,7 +10,7 @@
 
 <div class="story-outer-width">
     <div class="story-author-date-box">
-        <p class="story-author">by <a>@Model.Author</a></p>
+        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", new { authID = @Model.PartitionKey, auth = @Model.Author }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
     <div class="story-width">
