@@ -4,12 +4,14 @@
 }
 
 <h1 class="page-headings">Top Stories</h1>
+
 @if (@Model != null)
 {
     foreach (var blogPost in Model)
     {
         <script>
-            chartData = []
+            chartData = [];
+            VoxPopCharts.InitializeChart();
         </script>
         <div class="index-links">
             <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey">
@@ -23,15 +25,15 @@
             </a>
         </div>
 
-        foreach (var pollItem in blogPost.Poll)
+        foreach (KeyValuePair<string, int> pollItem in blogPost.Poll)
         {
+            string option = @pollItem.Key.Replace("+", " ");
             <script>
-                chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
             </script>
         }
-
         <script>
-            GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData)
+            VoxPopCharts.GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
         </script>
     }
 }
