@@ -21,7 +21,7 @@
             }
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim("firstname")? Register</a></li>
+                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey)? Register</a></li>
             }
             else
             {
@@ -39,7 +39,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @("Hello, " + @Site.Services.ClaimsService.GetClaim("firstname") + ".")
+                            @("Hello, " + @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey) + ".")
                         </li>
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
