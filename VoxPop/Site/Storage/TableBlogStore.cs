@@ -30,17 +30,14 @@ namespace Site.Storage
             return entities;
         }
 
-        public async Task CreateBlogAsync(BlogPostEntity entity)
+        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string entityPartitionKey)
         {
-            var operation = TableOperation.Insert(entity);
-            await _table.ExecuteAsync(operation);
-        }
+            var query = new TableQuery<BlogPostEntity>();
 
-        public void MergeBlog(BlogPostEntity entity)
-        {
-            TableOperation operation = TableOperation.Merge(entity);
+            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query).Select(x => x);
 
-            _table.Execute(operation);
+            return entities;
+
         }
 
         public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)
@@ -52,6 +49,19 @@ namespace Site.Storage
             var entity = result.Result as BlogPostEntity;
 
             return entity;
+        }
+
+        public async Task CreateBlogAsync(BlogPostEntity entity)
+        {
+            var operation = TableOperation.Insert(entity);
+            await _table.ExecuteAsync(operation);
+        }
+
+        public void MergeBlog(BlogPostEntity entity)
+        {
+            TableOperation operation = TableOperation.Merge(entity);
+
+            _table.Execute(operation);
         }
 
         private CloudStorageAccount GetStorageAccount()
