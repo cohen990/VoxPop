@@ -45,13 +45,11 @@
                         foreach (var poll in Model.Poll)
                         {
                             <script>
-                                chartData.push(GetPollData("@poll.Key", @poll.Value));
+                                chartData.push(VoxPopCharts.GetPollData("@poll.Key", @poll.Value));
                                 var numPoll = @Model.Poll.Count;
                             </script>
                         }
-                    }
-                    else
-                    {
+                    } else {
                         foreach (var pollItem in Model.Poll)
                         {
                             <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
@@ -65,7 +63,7 @@
                                 <input class="story-votebuttons-button" type="submit" value="+1">
                             }
                             <script>
-                                chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
+                                chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
                                 var numPoll = @Model.Poll.Count;
                             </script>
                         }
@@ -81,47 +79,7 @@
 </div>
 
 <script>
-    GenerateChart("storyChart", chartData);
+    VoxPopCharts.GenerateChart("storyChart", chartData);
 </script>
 
-<div class="modal-wrapper">
-    <div class="modal">
-        <div class="modal-content">
-            <h1 class="story-modal-headings">@Model.Title</h1>
-            <div>
-                <canvas class="story-modal-chart" id="modalChart" height="150" width="150"></canvas>
-            </div>
-            <script>
-                GenerateChart("modalChart", chartData)
-            </script>
-            <h2 class="story-votebuttons-modal-title">Vote</h2>
-            <div class="story-votebuttons-modal-option-div">
-                @{
-                    int counter=0;
-                }
-                @foreach (var pollItem in Model.Poll)
-                {
-                    counter++;
-                    <div class="story-votebuttons-modal-option-box box-@counter">
-                        <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
-                        <span class="story-votebuttons-modal-value">@pollItem.Value</span>
-                        @using (Html.BeginForm("Vote", "Home"))
-                        {
-                            <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                            <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                            <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                            <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
-                            <input class="story-votebuttons-modal-button" type="submit" value="+1">
-                        }
-                        <script>
-                            var numPoll = @Model.Poll.Count;
-                            chartData.push(GetPollData("@pollItem.Key", @pollItem.Value));
-                        </script>
-                    </div>
-
-                }
-            </div>
-        </div>
-
-    </div>
-</div>
+@Html.Partial("_ModalVoteWindow")

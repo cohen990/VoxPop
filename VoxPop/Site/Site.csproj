@@ -422,6 +422,7 @@
     <Content Include="Views\Shared\_LoginFormPartial.cshtml" />
     <Content Include="Views\Shared\_LoginRegisterPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterFormPartial.cshtml" />
+    <None Include="Views\Home\_ModalVoteWindow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
