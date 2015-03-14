@@ -8,6 +8,7 @@
 
 @if (@Model != null)
 {
+    int storyCount = 1;
     string currentAuthorUN = Request.QueryString["authID"];
     foreach (var blogPost in Model)
     {
@@ -27,7 +28,6 @@
                     </div>
                 </a>
             </div>
-
             foreach (var pollItem in blogPost.Poll)
             {
                 string option = @pollItem.Key.Replace("+", " ");
@@ -41,6 +41,21 @@
             <script>
                 GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
             </script>
+
         }
+        else if ((@blogPost.PartitionKey != currentAuthorUN) && (storyCount == Model.Count()))
+        {
+            <div class="author-stories-intro">
+                <p>You haven't written any Stories on VOXPOP. Feel you creative juices flowing...? Great! @Html.ActionLink("Get cracking", "Create"). If you're not up to it quite yet why don't you have a @Html.ActionLink("browse through and maybe even Vote on", "Index") the latest Stories.</p>
+            </div>
+        }
+        else
+        {
+            storyCount++;
+        }
+
     }
 }
+
+
+

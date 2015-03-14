@@ -484,7 +484,7 @@ img {
 /* CREATE Page */
 .create-intro {
     margin: 0px auto 0px auto;
-    width: 950px;
+    max-width: 950px;
 }
 
 .create-form-box {
@@ -698,4 +698,11 @@ input[type="text"] {
 
 .login-reg-form-page-titles {
     margin: 10px 0px 20px 50px;
+}
+
+
+/*Author Stories Page*/
+.author-stories-intro {
+    max-width:80%;
+    margin: 0 auto 35% auto;
 }

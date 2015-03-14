@@ -41,7 +41,12 @@
                         <li>
                             @("Hello, " + @Site.Services.ClaimsService.GetClaim("firstname") + ".")
                         </li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        <li>
+                            @Html.ActionLink("Your Stories", "AuthorStories", new { authID = @Site.Services.ClaimsService.GetClaim("identifier"), auth = @Site.Services.ClaimsService.GetAuthenticatedUsersFullName() }, null)
+                        </li>
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        </li>
                     </ul>
                 }
             }
