@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Site.Storage.Models.BlogPostEntity>
+@{
+    ViewBag.Title = "AuthorStories";
+    string name = Request.QueryString["auth"];
+}
+
+<h1 class="page-headings">Stories by @name</h1>
+
+@if (@Model != null)
+{
+    string currentAuthorUN = Request.QueryString["authID"];
+    foreach (var blogPost in Model)
+    {
+        if (@blogPost.PartitionKey == currentAuthorUN)
+        {
+            <script>
+                chartData = []
+            </script>
+            <div class="index-links">
+                <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey">
+                    <img src="@blogPost.ImageUri" class="index-pic">
+                    <div class="index-chart">
+                        <canvas id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
+                    </div>
+                    <div class="index-titles line-clamp">
+                        @blogPost.Title
+                    </div>
+                </a>
+            </div>
+
+            foreach (var pollItem in blogPost.Poll)
+            {
+                string option = @pollItem.Key.Replace("+", " ");
+                <script>
+                    chartData.push(GetPollData("@option", @pollItem.Value));
+                    var numPoll = @blogPost.Poll.Count;
+                    var votesPerOption = pollItem.Value;
+
+                </script>
+            }
+            <script>
+                GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
+            </script>
+        }
+    }
+}
