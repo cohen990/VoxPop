@@ -1,0 +1,36 @@
+﻿<div class="modal-wrapper">
+    <div class="modal">
+        <div class="modal-content">
+            <h1 class="story-modal-headings">@Model.Title</h1>
+            <div>
+                <canvas class="story-modal-chart" id="modalChart" height="150" width="150"></canvas>
+            </div>
+            <script>
+                VoxPopCharts.GenerateChart("modalChart", chartData)
+            </script>
+            <h2 class="story-votebuttons-modal-title">Vote</h2>
+            <div class="story-votebuttons-modal-option-div">
+                @foreach (var pollItem in Model.Poll)
+                {
+                    <div class="story-votebuttons-modal-option-box">
+                        <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
+                        <span class="story-votebuttons-modal-value">@pollItem.Value</span>
+                        @using (Html.BeginForm("Vote", "Home"))
+                        {
+                            <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                            <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
+                            <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
+                            <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
+                            <input class="story-votebuttons-modal-button" type="submit" value="+1">
+                        }
+                        <script>
+                            var numPoll = @Model.Poll.Count;
+                            chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                        </script>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
