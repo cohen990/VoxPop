@@ -11,7 +11,7 @@
 </div>
 <div class="create-form-box">
 
-    @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
     {
         <div class="create-form-headings">
             @Html.LabelFor(x => x.Title)

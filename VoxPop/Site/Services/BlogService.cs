@@ -64,6 +64,15 @@
             return entity.ToModel();
         }
 
+        public void UpdateBlog(BlogModel updatedBlog)
+        {
+            BlogPostEntity originalBlog = _blogStore.GetBlog(updatedBlog.BlogIdentifier, updatedBlog.AuthorIdentifier);
+
+            originalBlog.UpdateContent(updatedBlog.Content);
+
+            _blogStore.MergeBlog(originalBlog);
+        }
+
         public IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey)
         {
             IEnumerable<BlogPostEntity> blogs = _blogStore.GetAuthorBlogs(blogPartitionKey);

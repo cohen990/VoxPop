@@ -37,7 +37,6 @@ namespace Site.Storage
             IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query).Select(x => x);
 
             return entities;
-
         }
 
         public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)

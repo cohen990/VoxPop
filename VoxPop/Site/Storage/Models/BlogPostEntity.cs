@@ -159,6 +159,11 @@ namespace Site.Storage.Models
 
         public string Author { get; set; }
 
+        public void UpdateContent(string content)
+        {
+            Content = Sanitizer.GetSafeHtmlFragment(content);
+        }
+
         public static BlogPostEntity For(BlogModel model)
         {
             var entity = new BlogPostEntity(
@@ -183,9 +188,8 @@ namespace Site.Storage.Models
                 Author = Author,
                 Content = Content,
                 ImageUri = ImageUri,
-                PartitionKey = PartitionKey,
                 Poll = Poll.DecodePoll(),
-                RowKey = RowKey,
+                BlogIdentifier = RowKey,
                 Title = Title,
                 AuthorIdentifier = PartitionKey,
                 TimeCreated = TimeCreated
