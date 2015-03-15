@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Site.Storage.Models.BlogPostEntity>
+@{
+    ViewBag.Title = "AuthorStories";
+    string name = Request.QueryString["auth"];
+}
+
+<h1 class="page-headings">Stories by @name</h1>
+
+@if (@Model != null)
+{
+    int storyCount = 1;
+    string currentAuthorUN = Request.QueryString["authID"];
+    foreach (var blogPost in Model)
+    {
+        if (@blogPost.PartitionKey == currentAuthorUN)
+        {
+            <script>
+                chartData = [];
+                VoxPopCharts.InitializeChart();
+            </script>
+            <div class="index-links">
+                <a href="~/Story/@blogPost.PartitionKey/@blogPost.RowKey">
+                    <img src="@blogPost.ImageUri" class="index-pic">
+                    <div class="index-chart">
+                        <canvas id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
+                    </div>
+                    <div class="index-titles line-clamp">
+                        @blogPost.Title
+                    </div>
+                </a>
+            </div>
+            foreach (var pollItem in blogPost.Poll)
+            {
+                string option = @pollItem.Key.Replace("+", " ");
+                <script>
+                    chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
+                </script>
+            }
+            <script>
+                VoxPopCharts.GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
+            </script>
+
+        }
+        else if ((@blogPost.PartitionKey != currentAuthorUN) && (storyCount == Model.Count()))
+        {
+            <div class="author-stories-intro">
+                <p>You haven't written any Stories on VOXPOP. Feel you creative juices flowing...? Great! @Html.ActionLink("Get cracking", "Create"). If you're not up to it quite yet why don't you have a @Html.ActionLink("browse through and maybe even Vote on", "Index") the latest Stories.</p>
+            </div>
+        }
+        else
+        {
+            storyCount++;
+        }
+    }
+}
+
+
+

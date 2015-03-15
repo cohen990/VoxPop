@@ -21,7 +21,7 @@
             }
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey)? Register</a></li>
+                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey)? &nbspRegister</a></li>
             }
             else
             {
@@ -41,7 +41,12 @@
                         <li>
                             @("Hello, " + @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey) + ".")
                         </li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        <li>
+                            @Html.ActionLink("Your Stories", "AuthorStories", new { authID = @Site.Services.ClaimsService.GetClaim("identifier"), auth = @Site.Services.ClaimsService.GetAuthenticatedUsersFullName() }, null)
+                        </li>
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        </li>
                     </ul>
                 }
             }

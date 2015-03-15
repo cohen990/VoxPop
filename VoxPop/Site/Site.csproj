@@ -423,6 +423,7 @@
     <Content Include="Views\Shared\_LoginRegisterPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterFormPartial.cshtml" />
     <None Include="Views\Home\_ModalVoteWindow.cshtml" />
+    <Content Include="Views\Home\AuthorStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
