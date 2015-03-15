@@ -263,7 +263,9 @@
     </Content>
     <Content Include="Libraries\login-signup-modal-window\css\reset.css" />
     <Content Include="Libraries\login-signup-modal-window\css\style.css" />
-    <Content Include="Libraries\login-signup-modal-window\img\cd-icon-close.svg" />
+    <Content Include="Libraries\login-signup-modal-window\img\cd-icon-close.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-email.svg" />
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-menu.svg" />
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-password.svg" />
