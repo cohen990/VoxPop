@@ -426,7 +426,7 @@
     <Content Include="Views\Shared\_LoginFormPartial.cshtml" />
     <Content Include="Views\Shared\_LoginRegisterPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterFormPartial.cshtml" />
-    <None Include="Views\Stories\_ModalVoteWindow.cshtml" />
+    <Content Include="Views\Stories\_ModalVoteWindow.cshtml" />
     <Content Include="Views\Stories\authorStories.cshtml" />
     <Content Include="Views\Stories\Edit.cshtml" />
     <Content Include="Views\Stories\Create.cshtml" />
