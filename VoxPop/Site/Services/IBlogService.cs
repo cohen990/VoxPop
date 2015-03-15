@@ -16,6 +16,8 @@
 
         Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey);
 
+        void UpdateBlog(BlogModel updatedBlog);
+
         Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string authorName, string authorIdentifier);
     }
 }

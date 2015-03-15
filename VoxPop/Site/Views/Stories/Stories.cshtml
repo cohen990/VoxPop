@@ -10,7 +10,7 @@
 
 <div class="story-outer-width">
     <div class="story-author-date-box">
-        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", new { authID = @Model.PartitionKey, auth = @Model.Author }, null)</p>
+        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", new { authID = @Model.AuthorIdentifier, auth = @Model.Author }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
     <div class="story-width">
@@ -31,12 +31,12 @@
                             var poll = Model.Poll.ElementAt(i);
                             <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
                             <span class="story-votebuttons-value">@poll.Value</span>
-                            using (Html.BeginForm("Vote", "Home"))
+                            using (Html.BeginForm("Vote", "Stories"))
                             {
                                 <input type="hidden" name="pollItemKey" value="@poll.Key">
-                                <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                                <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                                <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
+                                <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
                                 <input class="story-votebuttons-button" type="submit" value="+1">
                             }
                         }
@@ -49,17 +49,19 @@
                                 var numPoll = @Model.Poll.Count;
                             </script>
                         }
-                    } else {
+                    }
+                    else
+                    {
                         foreach (var pollItem in Model.Poll)
                         {
                             <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
                             <span class="story-votebuttons-value">@pollItem.Value</span>
-                            using (Html.BeginForm("Vote", "Home"))
+                            using (Html.BeginForm("Vote", "Stories"))
                             {
                                 <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                                <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                                <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                                <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
+                                <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
                                 <input class="story-votebuttons-button" type="submit" value="+1">
                             }
                             <script>
@@ -75,6 +77,10 @@
         <div class="story-content">
             @Html.Raw(Model.Content)
         </div>
+        @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
+        {
+            <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit this Story</a>
+        }
     </div>
 </div>
 
@@ -82,4 +88,4 @@
     VoxPopCharts.GenerateChart("storyChart", chartData);
 </script>
 
-@Html.Partial("_ModalVoteWindow")
+@Html.Partial("_ModalVoteWindow", @Model)
