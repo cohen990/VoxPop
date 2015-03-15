@@ -8,6 +8,8 @@
     {
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
+        IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey);
+
         Task CreateBlogAsync(BlogPostEntity entity);
 
         void MergeBlog(BlogPostEntity entity);

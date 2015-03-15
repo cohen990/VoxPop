@@ -55,15 +55,6 @@
             return sortedBlogs;
         }
 
-        public async Task Vote(VoteModel model)
-        {
-            var voteStore = new TableVoteStore();
-
-            var voteEntity = VoteEntity.For(model);
-
-            await voteStore.VoteAsync(voteEntity);
-        }
-
         public async Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey)
         {
             BlogPostEntity entity = _blogStore.GetBlog(blogRowKey, blogPartitionKey);
@@ -71,6 +62,29 @@
             entity = await _voteService.RetrieveVotes(entity);
 
             return entity.ToModel();
+        }
+
+        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey)
+        {
+            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAuthorBlogs(blogPartitionKey);
+
+            IEnumerable<BlogPostEntity> blogsWithVotes = blogs
+                .Select(x => _voteService.RetrieveVotes(x)
+                    .GetAwaiter()
+                    .GetResult());
+
+            List<BlogPostEntity> sortedBlogs = blogsWithVotes.OrderByDescending(b => b.Timestamp).ToList();
+
+            return sortedBlogs;
+        }
+
+        public async Task Vote(VoteModel model)
+        {
+            var voteStore = new TableVoteStore();
+
+            var voteEntity = VoteEntity.For(model);
+
+            await voteStore.VoteAsync(voteEntity);
         }
     }
 }
