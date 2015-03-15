@@ -7,7 +7,7 @@ body {
 
 * {
     font-family: 'Segoe WP SemiLight';
-    color: #060606;
+    /*color: #060606;*/
 }
 
 a {
@@ -705,4 +705,9 @@ input[type="text"] {
 .author-stories-intro {
     max-width:80%;
     margin: 0 auto 35% auto;
+}
+
+/* Validation */
+.field-validation-error {
+    color: red;
 }

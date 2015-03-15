@@ -7,6 +7,7 @@ namespace Site.Controllers
     using System.Web;
     using Microsoft.AspNet.Identity;
     using Models;
+    using Ninject.Infrastructure.Language;
     using Services;
 
     public class StoriesController : Controller
@@ -66,6 +67,26 @@ namespace Site.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(BlogModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
+            pollOptions = pollOptions.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+
+            if (!pollOptions.Any() || pollOptions.All(string.IsNullOrWhiteSpace))
+            {
+                ModelState.AddModelError("pollOptions", "Poll options are required");
+            }
+            if (pollOptions.Distinct().Count() != pollOptions.Count())
+            {
+                ModelState.AddModelError("pollOptionsDuplicated", "Poll options must be unique");
+            }
+            if (image == null)
+            {
+                ModelState.AddModelError("image", "You must provide an image");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             var authorName = ClaimsService.GetAuthenticatedUsersFullName();
             var authorIdentifier = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey);
 
