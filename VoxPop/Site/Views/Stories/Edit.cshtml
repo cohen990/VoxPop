@@ -13,6 +13,8 @@
 
     @using (Html.BeginForm("Update", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
     {
+        @Html.AntiForgeryToken()
+
         <div class="create-form-headings create-form-headings-Content">
             @Html.LabelFor(x => x.Content)
         </div>

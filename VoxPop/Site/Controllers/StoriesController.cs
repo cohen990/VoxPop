@@ -4,8 +4,10 @@ namespace Site.Controllers
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web;
+    using System.Web.Helpers;
     using Microsoft.AspNet.Identity;
     using Models;
     using Services;
@@ -42,8 +44,14 @@ namespace Site.Controllers
         }
 
         [Route("Stories/Edit/{authorIdentifier}/{articleIdentifier}")]
+        [Authorize]
         public async Task<ActionResult> Edit(string articleIdentifier, string authorIdentifier)
         {
+            if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != authorIdentifier)
+            {
+                return View("Error");
+            }
+
             BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
 
             return View(blog);
@@ -96,8 +104,15 @@ namespace Site.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(BlogModel updatedBlog)
         {
+            if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != updatedBlog.AuthorIdentifier)
+            {
+                return View("Error");
+            }
+
             _blogService.UpdateBlog(updatedBlog);
 
             // TODO: shitty hack - remove
