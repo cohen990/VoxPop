@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -385,11 +386,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Home\Vote.cshtml" />
-    <Content Include="Views\Home\Story.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
@@ -422,8 +419,13 @@
     <Content Include="Views\Shared\_LoginFormPartial.cshtml" />
     <Content Include="Views\Shared\_LoginRegisterPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterFormPartial.cshtml" />
-    <None Include="Views\Home\_ModalVoteWindow.cshtml" />
-    <Content Include="Views\Home\AuthorStories.cshtml" />
+    <None Include="Views\Stories\_ModalVoteWindow.cshtml" />
+    <Content Include="Views\Stories\authorStories.cshtml" />
+    <Content Include="Views\Stories\Edit.cshtml" />
+    <Content Include="Views\Stories\Create.cshtml" />
+    <Content Include="Views\Stories\Stories.cshtml" />
+    <Content Include="Views\Stories\Vote.cshtml" />
+    <Content Include="Views\Stories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
