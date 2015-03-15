@@ -33,6 +33,7 @@
                             <span class="story-votebuttons-value">@poll.Value</span>
                             using (Html.BeginForm("Vote", "Stories"))
                             {
+                                @Html.AntiForgeryToken()
                                 <input type="hidden" name="pollItemKey" value="@poll.Key">
                                 <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                                 <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
@@ -58,6 +59,7 @@
                             <span class="story-votebuttons-value">@pollItem.Value</span>
                             using (Html.BeginForm("Vote", "Stories"))
                             {
+                                @Html.AntiForgeryToken()
                                 <input type="hidden" name="pollItemKey" value="@pollItem.Key">
                                 <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                                 <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
