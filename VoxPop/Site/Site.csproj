@@ -249,10 +249,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\1352236885442170385Add Symbol.svg.hi.png" />
-    <Content Include="Images\search-icon-hi.png" />
-    <Content Include="Images\VPlogoVec.svg" />
-    <Content Include="Images\VPlogoVecHov.svg" />
+    <Content Include="Images\1352236885442170385Add Symbol.svg.hi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\search-icon-hi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\VPlogoVec.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\VPlogoVecHov.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Libraries\login-signup-modal-window\css\reset.css" />
     <Content Include="Libraries\login-signup-modal-window\css\style.css" />
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-close.svg" />
