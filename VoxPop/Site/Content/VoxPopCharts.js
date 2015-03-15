@@ -70,7 +70,7 @@
         return result;
     }
 
-    var PrepareData = function(data) {
+    var GetPreparedData = function(data) {
 
         var noVotes = true;
 
@@ -92,7 +92,7 @@
 
     var GenerateChart = function (identifier, data) {
 
-        PrepareData(data);
+        data = GetPreparedData(data);
 
         var context = document.getElementById(identifier).getContext("2d");
 
@@ -114,6 +114,7 @@
         DecodeHtml: DecodeHtml,
         GenerateChart: GenerateChart,
         GetPollData: GetPollData,
-        InitializeChart: InitializeChart
+        InitializeChart: InitializeChart,
+        GetPreparedData: GetPreparedData
     }
 })();
