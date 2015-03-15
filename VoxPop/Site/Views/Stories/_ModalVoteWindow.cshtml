@@ -1,4 +1,5 @@
-﻿<div class="modal-wrapper">
+﻿@model Site.Models.BlogModel
+<div class="modal-wrapper">
     <div class="modal">
         <div class="modal-content">
             <h1 class="story-modal-headings">@Model.Title</h1>
@@ -15,12 +16,12 @@
                     <div class="story-votebuttons-modal-option-box">
                         <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
                         <span class="story-votebuttons-modal-value">@pollItem.Value</span>
-                        @using (Html.BeginForm("Vote", "Home"))
+                        @using (Html.BeginForm("Vote", "Stories"))
                         {
                             <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                            <input type="hidden" name="blogPostPartitionKey" value="@Model.PartitionKey">
-                            <input type="hidden" name="blogPostRowKey" value="@Model.RowKey">
-                            <input type="hidden" name="returnUrl" value="/Story/@Model.PartitionKey/@Model.RowKey">
+                            <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                            <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                            <input type="hidden" name="returnUrl" value="/Story/@Model.AuthorIdentifier/@Model.BlogIdentifier">
                             <input class="story-votebuttons-modal-button" type="submit" value="+1">
                         }
                         <script>

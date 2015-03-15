@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Services;
-    using Storage.Models;
     using System.Web.Mvc;
 
 
@@ -25,9 +23,7 @@
 
         public Dictionary<string, int> Poll { get; set; }
 
-        public string PartitionKey { get; set; }
-
-        public string RowKey { get; set; }
+        public string BlogIdentifier { get; set; }
 
         public string Author { get; set; }
 
