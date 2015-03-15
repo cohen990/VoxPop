@@ -2,12 +2,9 @@
 
 namespace Site.Controllers
 {
-    using System;
     using System.Linq;
-    using System.Net;
     using System.Threading.Tasks;
     using System.Web;
-    using System.Web.Helpers;
     using Microsoft.AspNet.Identity;
     using Models;
     using Services;
@@ -66,6 +63,7 @@ namespace Site.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(BlogModel blog, HttpPostedFileBase image, params string[] pollOptions)
         {
             var authorName = ClaimsService.GetAuthenticatedUsersFullName();
@@ -79,6 +77,7 @@ namespace Site.Controllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Vote(
             string pollItemKey,
             string blogPostPartitionKey,
