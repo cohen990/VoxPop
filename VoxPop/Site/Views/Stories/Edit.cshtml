@@ -1,0 +1,54 @@
+﻿@model Site.Models.BlogModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
+
+<h1 class="page-headings">Edit</h1>
+<div class="create-intro">
+    <p>Change or update the content of your Story</p>
+</div>
+<div class="create-form-box">
+
+    @using (Html.BeginForm("Update", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
+    {
+        <div class="create-form-headings create-form-headings-Content">
+            @Html.LabelFor(x => x.Content)
+        </div>
+        <div>
+            <div class="create-form-Content-box">
+                @Html.TextAreaFor(x => x.Content)
+            </div>
+            @Html.ValidationMessageFor(x => x.Content)
+        </div>
+
+        <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
+
+        @Html.HiddenFor(x => x.AuthorIdentifier)
+
+        @Html.HiddenFor(x => x.BlogIdentifier)
+
+        <input class="create-form-submit" type="submit" value="UPDATE" />
+    }
+
+</div>
+
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        plugins: [
+                "advlist autolink lists link charmap print anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime table contextmenu paste"
+        ],
+        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
+        importcss_append: true,
+        removed_menuitems: 'newdocument',
+        resize: "both"
+    });
+</script>
+
+<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
+</form>
