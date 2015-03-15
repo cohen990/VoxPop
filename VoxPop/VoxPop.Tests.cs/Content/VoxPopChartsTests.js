@@ -66,7 +66,6 @@ describe("Call GetPollData twice", function () {
         var inputNumber = 2;
         var initialResult = VoxPopCharts.GetPollData(inputName, inputNumber);
         var result = VoxPopCharts.GetPollData(inputName, inputNumber);
-        debugger;
         expect(result.color === initialResult.color).toBeFalsy();
     });
 });
@@ -77,7 +76,6 @@ describe("Call GetPollData twice", function () {
         var inputNumber = 2;
         var initialResult = VoxPopCharts.GetPollData(inputName, inputNumber);
         var result = VoxPopCharts.GetPollData(inputName, inputNumber);
-        debugger;
         expect(result.highlight === initialResult.highlight).toBeFalsy();
     });
 });
@@ -108,3 +106,28 @@ describe("Call GetPollData exhausting color list", function () {
         expect(result.color).toBe("#FFd1d1");
     });
 });
+
+describe("Call PrepareData with no votes", function() {
+    it("return empty chart", function() {
+        var data1 = {
+            label: "option1",
+            color: "#fff",
+            highlight: "#000",
+            value: 0,
+        };
+        var data2 = {
+            label: "option1",
+            color: "#fff",
+            highlight: "#000",
+            value: 0,
+        };
+        var data = [
+            data1,
+            data2
+        ];
+
+        var result = VoxPopCharts.PrepareData(data);
+
+        expect(result[0].label).toBe("Be the first to vote on this Story");
+    });
+})
