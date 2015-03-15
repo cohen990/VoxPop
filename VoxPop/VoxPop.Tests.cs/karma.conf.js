@@ -1,24 +1,23 @@
 // Karma configuration
-// Generated on Sat Mar 14 2015 17:12:58 GMT+0000 (GMT Standard Time)
+// Generated on Sun Mar 15 2015 16:06:18 GMT+0000 (GMT Standard Time)
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '..\\',
+    basePath: '../',
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'VoxPop.Tests.cs\\test-main.js',
-      {pattern: 'Site\\Content\\*.js', included: true},
-      { pattern: 'Site\\Scripts\\jquery-1.10.2.js', included: true },
-      {pattern: 'VoxPop.Tests.cs\\Content\\*.js', included: true}
+      'VoxPop.Tests.cs/Content/*.js',
+      'Site/Content/*.js',
+      'Site/Scripts/jquery-1.10.2.js'
     ],
 
 
