@@ -3,6 +3,12 @@
     ViewBag.Title = "Index";
 }
 
+@section MetaTags
+{
+    <meta property="title" content="Got questions? Get Answers." />
+    <meta property="description" content="With VOXPOP you can write stories on issues that are important to you and get feedback from readers." />
+}
+
 <h1 class="page-headings">Top Stories</h1>
 
 @if (@Model != null)
