@@ -8,17 +8,19 @@
 
     public class BlogModel
     {
+        [Required]
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText), AllowHtml]
+        [Required]
         public string Content { get; set; }
 
         public List<string> PollOptions { get; set; }
 
-        [Display(Name="Image Caption")]
+        [Display(Name = "Image Caption")]
+        [Required]
         public string ImageCaption { get; set; }
 
-        [Display(Name="Add an Image")]
         public Uri ImageUri { get; set; }
 
         public Dictionary<string, int> Poll { get; set; }
