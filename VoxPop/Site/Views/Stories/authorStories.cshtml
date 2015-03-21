@@ -1,7 +1,14 @@
-﻿@model IEnumerable<Site.Storage.Models.BlogPostEntity>
+﻿@using Site.Services
+@model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
     ViewBag.Title = "AuthorStories";
     string name = Request.QueryString["auth"];
+}
+
+@section MetaTags
+{
+    <meta property="title" content="Got questions? Get Answers." />
+    <meta property="description" content="Stories by @ClaimsService.GetAuthenticatedUsersFullName()" />
 }
 
 <h1 class="page-headings">Stories by @name</h1>
