@@ -3,6 +3,12 @@
     ViewBag.Title = "Story";
 }
 
+@section MetaTags
+{
+    <meta property="title" content="@Model.Title" />
+    <meta property="description" content="@Model.Content" />
+}
+
 <script src="~/Scripts/modally-baby.js"></script>
 <script>
     var chartData = [];
