@@ -17,7 +17,7 @@ a {
 
 .global-hr-line {
     position: relative;
-    top:100px;
+    top: 100px;
     clear: both;
     margin-bottom: 10px;
 }
@@ -103,16 +103,16 @@ a {
 
 #search-bar {
     margin-top: 9px;
-    width:200px;
-    height:25px;
-    border:hidden;
+    width: 200px;
+    height: 25px;
+    border: hidden;
     border-radius: 11px;
 }
 
 .search-bar-icon {
     margin: 0 0 -4px -40px;
-    height:18px;
-    display:inline;
+    height: 18px;
+    display: inline;
 }
 
 .navbar-link-text {
@@ -147,9 +147,9 @@ a {
     transition-duration: .5s;
 }
 
-.index-links:hover {
-    background: #fafafa;
-}
+    .index-links:hover {
+        background: #fafafa;
+    }
 
 .index-titles {
     /*min-height: 90px;*/
@@ -158,8 +158,8 @@ a {
     font-size: 22px;
     font-weight: 900;
     color: #060606;
-    clear:left;
-    overflow-wrap:break-word;
+    clear: left;
+    overflow-wrap: break-word;
     /*overflow:hidden;*/
 }
 
@@ -172,7 +172,7 @@ a {
         font-size: 22px;
         font-weight: 900;
         color: #060606;
-        clear:left;
+        clear: left;
         /*overflow: hidden;*/
     }
 
@@ -194,8 +194,7 @@ a {
     margin: 15px 0 0 0;
     height: 185px;
     width: 275px;
-    object-fit:cover;
-
+    object-fit: cover;
 }
 
 .index-chart {
@@ -244,18 +243,18 @@ a {
     transition-duration: 1s;
 }
 
-.story-author-date-box:hover {
-    background: #fafafa;
-    max-height: 500px;
-}
+    .story-author-date-box:hover {
+        background: #fafafa;
+        max-height: 500px;
+    }
 
 .story-pic {
     display: inline-block;
-    float:left;
+    float: left;
     margin: 10px 5px 0 0;
     height: 370px;
     width: 550px;
-    object-fit:cover;
+    object-fit: cover;
 }
 
 .story-pic-caption {
@@ -305,16 +304,16 @@ a {
     border-right: none;
     border-radius: 27px;
     transition-duration: 1s;
-    position:relative;
-    z-index:auto;
+    position: relative;
+    z-index: auto;
 }
 
- .story-votebuttons:hover {
-    background: #fafafa;
-    max-height: 500px;
-    position:relative;
-    z-index:auto;
-}
+    .story-votebuttons:hover {
+        background: #fafafa;
+        max-height: 500px;
+        position: relative;
+        z-index: auto;
+    }
 
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
@@ -338,23 +337,24 @@ a {
 
 /*Prevents oversized user images*/
 img {
-    max-width:950px;
+    max-width: 950px;
 }
 
 
 /**              ***               **/
 /*Story Page Modal - Appears if there are >4 Vote Options */
 .story-modal-chart {
-    display: inline-block;
     float: right;
-    margin: -110px 0 0 -100px;
-    padding: 0;
-    border-radius: 100%;
     height: 150px;
     width: 150px;
-    position:relative;
-    z-index:auto;
+    position: relative;
+    z-index: auto;
+    border-radius: 50%;
+    -webkit-shape-outside: circle(50%);
+    shape-outside: circle(50%);
+    margin-left:-30px;
 }
+
 .story-modal-headings {
     display: inline-block;
     font-size: 40px;
@@ -364,8 +364,7 @@ img {
 .story-votebuttons-modal-title {
     margin: 10px 0px 0px 15px;
     font-size: 30px;
-    display:inline-block;
-
+    display: inline-block;
 }
 
 .story-votebuttons-modal-option-box {
@@ -382,9 +381,9 @@ img {
     object-position: center;
 }
 
-.story-votebuttons-modal-option-box:hover {
-    background: #fafafa;
-}
+    .story-votebuttons-modal-option-box:hover {
+        background: #fafafa;
+    }
 
 /*.box-1:hover {
     background: #FFd1d1;
@@ -440,7 +439,7 @@ img {
 
 .modal {
     position: relative;
-    z-index:auto;
+    z-index: auto;
     top: 75px;
     max-width: 775px;
     background: #FFF;
@@ -507,7 +506,7 @@ img {
     border-left: none;
     border-right: none;
     border-radius: 30px;
-    overflow:visible;
+    overflow: visible;
 }
 
 .create-form-headings {
@@ -540,7 +539,7 @@ img {
     background: url('../Images/1352236885442170385Add Symbol.svg.hi.png') no-repeat;
     background-size: 15%;
     background-position: center;
-    object-fit:cover;
+    object-fit: cover;
 }
 
 .create-form-uploadPreview-box {
@@ -576,9 +575,9 @@ img {
     transition-duration: .5s;
 }
 
-.create-form-votingOptions-box:hover {
-    background-color: #fafafa;
-}
+    .create-form-votingOptions-box:hover {
+        background-color: #fafafa;
+    }
 
 ::-webkit-input-placeholder {
     font-size: 16px;
@@ -635,10 +634,12 @@ input[type="text"] {
 }
 
 .mce-content-body img[data-mce-selected], hr[data-mce-selected] {
-    max-width:950px;
+    max-width: 950px;
 }
 
-.mceContentBody img{ max-width: 300px !important; }
+.mceContentBody img {
+    max-width: 300px !important;
+}
 
 .create-form-Content-box {
     padding-top: 30px;
@@ -669,8 +670,8 @@ input[type="text"] {
 
 .login-reg-form-headings {
     font-weight: bolder;
-    clear:left;
-    float:left;
+    clear: left;
+    float: left;
     margin: 10px;
 }
 
@@ -679,7 +680,7 @@ input[type="text"] {
 }
 
 .login-reg-form-headings-first-name {
-    margin-left:64px;
+    margin-left: 64px;
 }
 
 .login-reg-form-headings-last-name {
@@ -708,7 +709,7 @@ input[type="text"] {
     font-weight: bold;
 }
 
-.login-reg-form-hr-line{
+.login-reg-form-hr-line {
     margin: 25px 0 25px 0;
 }
 
@@ -720,7 +721,7 @@ input[type="text"] {
 /**              ***               **/
 /*Author Stories Page*/
 .author-stories-intro {
-    max-width:80%;
+    max-width: 80%;
     margin: 0 auto 35% auto;
 }
 
@@ -735,7 +736,7 @@ input[type="text"] {
 /**              ***               **/
 /*Splash Page*/
 .splash-page-reg-box {
-    float: right ;
+    float: right;
     padding: 35px;
     width: 475px;
     margin: 0 10% 0 0;
@@ -746,9 +747,9 @@ input[type="text"] {
     transition-duration: 1s;
 }
 
-.splash-page-reg-box:hover {
-    background: #fafafa;
-}
+    .splash-page-reg-box:hover {
+        background: #fafafa;
+    }
 
 .splash-page-blurb-box {
     float: left;
@@ -760,4 +761,3 @@ input[type="text"] {
 .edit-intro {
     margin-left: 5%;
 }
-
