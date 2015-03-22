@@ -2,7 +2,9 @@
 {
     using System;
     using System.IO;
+    using System.Net.Mime;
     using System.Web;
+    using System.Web.UI.WebControls;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
@@ -47,6 +49,7 @@
 
             CloudBlockBlob blockBlob = _container.GetBlockBlobReference(reference);
             stream.Seek(0, SeekOrigin.Begin);
+            blockBlob.Properties.ContentType = "image";
             blockBlob.UploadFromStream(stream);
 
             return blockBlob.Uri;
