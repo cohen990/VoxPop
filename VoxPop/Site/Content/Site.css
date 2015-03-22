@@ -145,6 +145,7 @@ a {
     margin: -10px auto 45px auto;
     padding: 5px 40px 20px 40px;
     transition-duration: .5s;
+    word-break: break-all;
 }
 
 .index-links:hover {
