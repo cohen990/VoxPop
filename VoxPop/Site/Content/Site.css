@@ -710,3 +710,9 @@ input[type="text"] {
 .field-validation-error {
     color: red;
 }
+
+/*Edit Page*/
+.edit-intro {
+    margin-left: 5%;
+}
+
