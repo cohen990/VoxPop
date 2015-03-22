@@ -221,6 +221,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaTagModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -443,6 +444,8 @@
     <Content Include="Views\Stories\Stories.cshtml" />
     <Content Include="Views\Stories\Vote.cshtml" />
     <Content Include="Views\Stories\Index.cshtml" />
+    <Content Include="Views\Shared\_DefaultMetaTags.cshtml" />
+    <Content Include="Views\Shared\_MetaTags.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
