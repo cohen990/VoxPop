@@ -12,8 +12,8 @@
 <script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
 
 <h1 class="page-headings">Edit</h1>
-<div class="create-intro">
-    <p>Change or update the content of your Story</p>
+<div class="edit-intro">
+    <p>Change or update the your Story's content.</p>
 </div>
 <div class="create-form-box">
 
@@ -31,7 +31,7 @@
             @Html.ValidationMessageFor(x => x.Content)
         </div>
 
-        <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
+        <p class="create-form-descriptions">Edit you Story's Content to perfection here - you can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
 
         @Html.HiddenFor(x => x.AuthorIdentifier)
 

@@ -87,7 +87,7 @@
         </div>
         @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
         {
-            <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit this Story</a>
+            <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>
         }
     </div>
 </div>
