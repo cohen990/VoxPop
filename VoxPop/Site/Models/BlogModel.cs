@@ -21,6 +21,7 @@
         [Required]
         public string ImageCaption { get; set; }
 
+        [Display(Name = "Image")]
         public Uri ImageUri { get; set; }
 
         public Dictionary<string, int> Poll { get; set; }
