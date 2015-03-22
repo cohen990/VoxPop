@@ -15,13 +15,14 @@
     var chartData = [];
 </script>
 
+<h1 class="story-headings">@Model.Title</h1>
+
 <div class="story-outer-width">
     <div class="story-author-date-box">
         <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", new { authID = @Model.AuthorIdentifier, auth = @Model.Author }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
     <div class="story-width">
-        <h1 class="story-headings">@Model.Title</h1>
         <img src="@Model.ImageUri" class="story-pic">
         <div>
             <div class="story-chart-box">
