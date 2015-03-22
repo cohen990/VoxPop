@@ -1,4 +1,4 @@
-﻿@using Site.Services
+﻿@using Site.Models
 @model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
     ViewBag.Title = "AuthorStories";
@@ -7,8 +7,12 @@
 
 @section MetaTags
 {
-    <meta property="title" content="Got questions? Get Answers." />
-    <meta property="description" content="Stories by @ClaimsService.GetAuthenticatedUsersFullName()" />
+    @Html.Partial("_MetaTags", new MetaTagModel
+    {
+        Description = "Stories by " + Model.First().Author,
+        Title = "Got questions? Get Answers.",
+        ImageUri = Model.First().ImageUri
+    })
 }
 
 <h1 class="page-headings">Stories by @name</h1>
