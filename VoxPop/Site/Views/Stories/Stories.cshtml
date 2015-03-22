@@ -1,4 +1,5 @@
 ﻿@using Site.Models
+@using Site.Services
 @model BlogModel
 @{
     ViewBag.Title = "Story";
@@ -6,7 +7,7 @@
 
 @section MetaTags
 {
-    @Html.Partial("_MetaTags", new MetaTagModel{ Description = HttpUtility.HtmlDecode(Model.Content), Title = Model.Title, ImageUri = Model.ImageUri})
+    @Html.Partial("_MetaTags", new MetaTagModel{ Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri})
 }
 
 <script src="~/Scripts/modally-baby.js"></script>
