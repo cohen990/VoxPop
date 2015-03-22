@@ -15,6 +15,14 @@ a {
     text-decoration: none;
 }
 
+.global-hr-line {
+    position: relative;
+    top:100px;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+
 .Logo {
     background: url('../Images/VPlogoVec.svg') no-repeat;
     display: block;
@@ -662,6 +670,10 @@ input[type="text"] {
     margin: 10px;
 }
 
+.login-reg-form-speil {
+    margin-left: 10px;
+}
+
 .login-reg-form-headings-first-name {
     margin-left:64px;
 }
@@ -700,17 +712,46 @@ input[type="text"] {
     margin: 10px 0px 20px 50px;
 }
 
+
+/**              ***               **/
 /*Author Stories Page*/
 .author-stories-intro {
     max-width:80%;
     margin: 0 auto 35% auto;
 }
 
+
+/**              ***               **/
 /* Validation */
 .field-validation-error {
     color: red;
 }
 
+
+/**              ***               **/
+/*Splash Page*/
+.splash-page-reg-box {
+    float: right ;
+    padding: 35px;
+    width: 475px;
+    margin: 0 10% 0 0;
+    border: .25em dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    transition-duration: 1s;
+}
+
+.splash-page-reg-box:hover {
+    background: #fafafa;
+}
+
+.splash-page-blurb-box {
+    float: left;
+    margin: 0 0 0 6%;
+    width: 25%;
+    transition-duration: 1s;
+}
 /*Edit Page*/
 .edit-intro {
     margin-left: 5%;

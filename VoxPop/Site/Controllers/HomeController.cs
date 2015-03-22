@@ -17,13 +17,18 @@
             _blogService = blogService;
         }
 
-        public ActionResult Index()
-        {
-            return RedirectToActionPermanent("Index", "Stories");
-        }
-
         public ActionResult Search()
         {
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToActionPermanent("Index", "Stories");
+            }
+
             return View();
         }
     }
