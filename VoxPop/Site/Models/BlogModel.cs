@@ -38,7 +38,6 @@
         {
             PollOptions = new List<string>();
         }
-
     }
 }
 
