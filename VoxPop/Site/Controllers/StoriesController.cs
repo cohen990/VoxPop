@@ -21,9 +21,16 @@ namespace Site.Controllers
 
         public ActionResult Index()
         {
-            var blogs = _blogService.GetAllBlogs();
+            if (User.Identity.IsAuthenticated)
+            {
+                var blogs = _blogService.GetAllBlogs();
 
-            return View(blogs);
+                return View(blogs);
+            }
+
+            return RedirectToActionPermanent("Index", "Home");
+
+
         }
 
         public ActionResult AuthorStories(string authorIdentifier)
