@@ -387,7 +387,7 @@ ul.cd-switcher {
 }
 
 .cd-form .cd-error-message {
-    display: inline-block;
+    display:inline-block inline-block;
     position: absolute;
     left: -5px;
     bottom: -35px;
