@@ -3,6 +3,7 @@
 
 body {
     margin: 0px;
+    min-height: 100%;
 }
 
 * {
@@ -16,10 +17,12 @@ a {
 }
 
 .global-hr-line {
-    position: relative;
-    top: 100px;
-    clear: both;
-    margin-bottom: 10px;
+    margin-top: 20%;
+    margin-bottom: -19%;
+}
+
+.global-footer {
+   padding-bottom: 16px;
 }
 
 
