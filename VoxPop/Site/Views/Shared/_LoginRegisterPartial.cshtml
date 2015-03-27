@@ -21,7 +21,7 @@
             }
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey)? &nbspRegister</a></li>
+                <li><a href="#0" class="mod-but">Not, @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey)?</a></li>
             }
             else
             {
@@ -45,6 +45,9 @@
                             @Html.ActionLink("Your Stories", "AuthorStories", new { authID = @Site.Services.ClaimsService.GetClaim("identifier"), auth = @Site.Services.ClaimsService.GetAuthenticatedUsersFullName() }, null)
                         </li>
                         <li>
+                            <p class="cd-form-bottom-message"><a href="#0">Contact VOXPOP</a></p>
+</li>
+                        <li>
                             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                         </li>
                     </ul>
@@ -67,11 +70,24 @@
 
         <div id="cd-reset-password">
             <!-- reset password form -->
+            @if (Request.IsAuthenticated)
+            {
+                <h3 class="login-reg-form-page-titles">Got a problem? Don't let it bring you down.</h3>
+                <hr class="login-reg-form-hr-line" />
+                <p>If you have an issue or even better a suggestion for how you'd like to see VOXPOP improved, get in touch - <strong><a href="mailto:admin@VOXPOP.london">admin@VOXPOP.london</a></strong>.</p>
+                @*<p>&nbsp;</p>*@
+                <p>We'll be with you faster then you can say, 'Have you tried turning it off and on again?'</p>
+                <p class="cd-form-bottom-message"><a href="#0">Back to My VOXPOP</a></p>
 
-            <h3 class="login-reg-form-page-titles">Lost or forgotten your password?</h3>
-            <hr class="login-reg-form-hr-line" />
-            <p>Please email us at <strong>admin@VOXPOP.london</strong> and we will respond to you with instructions on how to reset it and get you Creating and Voting again ASAP!</p>
-            <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+            }
+            else
+            {
+
+                <h3 class="login-reg-form-page-titles">Lost or forgotten your password?</h3>
+                <hr class="login-reg-form-hr-line" />
+                <p>Please email us at <strong><a href="mailto:admin@VOXPOP.london">admin@VOXPOP.london</a></strong> and we will respond to you with instructions on how to reset it and get you Creating and Voting again ASAP!</p>
+                <p class="cd-form-bottom-message"><a href="#0">Back to Login</a></p>
+            }
 
         </div> <!-- cd-reset-password -->
 
