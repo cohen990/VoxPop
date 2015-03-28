@@ -7,7 +7,7 @@
 
 @section MetaTags
 {
-    @Html.Partial("_MetaTags", new MetaTagModel{ Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri})
+    @Html.Partial("_MetaTags", new MetaTagModel { Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri })
 }
 
 <script src="~/Scripts/modally-baby.js"></script>
@@ -29,7 +29,7 @@
                 <div>
                     <canvas class="story-chart" id="storyChart" height="350" width="350"></canvas>
                 </div>
-                <div class="story-votebuttons">
+                <div id="story-votebuttons" class="story-votebuttons">
                     <h2 class="story-votebuttons-title">Vote</h2>
                     @if (Model.Poll.Count > 4)
                     {
@@ -37,17 +37,19 @@
                         for (int i = 0; i < 4; i++)
                         {
                             var poll = Model.Poll.ElementAt(i);
-                            <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
-                            <span class="story-votebuttons-value">@poll.Value</span>
-                            using (Html.BeginForm("Vote", "Stories"))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="pollItemKey" value="@poll.Key">
-                                <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
-                                <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
-                                <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
-                                <input class="story-votebuttons-button" type="submit" value="+1">
-                            }
+                            <div id="story-votebuttons-box" class="story-votebuttons-box">
+                                <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
+                                <span class="story-votebuttons-value">@poll.Value</span>
+                                @using (Html.BeginForm("Vote", "Stories"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="pollItemKey" value="@poll.Key">
+                                    <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                    <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                    <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                                    <input class="story-votebuttons-button" type="submit" value="+1">
+                                }
+                            </div>
                         }
                         <a class="story-votebuttons-exta trigger" href="javascript:;">More Voting Options...</a>
 
@@ -63,21 +65,25 @@
                     {
                         foreach (var pollItem in Model.Poll)
                         {
-                            <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
-                            <span class="story-votebuttons-value">@pollItem.Value</span>
-                            using (Html.BeginForm("Vote", "Stories"))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                                <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
-                                <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
-                                <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
-                                <input class="story-votebuttons-button" type="submit" value="+1">
-                            }
-                            <script>
-                                chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
-                                var numPoll = @Model.Poll.Count;
-                            </script>
+                            <div class="story-votebuttons-box">
+
+                                <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
+                                <span class="story-votebuttons-value">@pollItem.Value</span>
+                                @using (Html.BeginForm("Vote", "Stories"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                                    <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                    <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                    <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                                    <input class="story-votebuttons-button" type="submit" value="+1">
+                                }
+                                <script>
+                                    chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                                    var numPoll = @Model.Poll.Count;
+                                </script>
+
+                            </div>
                         }
                     }
                 </div>

@@ -288,6 +288,8 @@ a {
     width: 363px;
 }
 
+
+
 .story-votebuttons-title {
     margin: 10px 0px 0px 15px;
 }
@@ -308,12 +310,12 @@ a {
     z-index: auto;
 }
 
-    .story-votebuttons:hover {
-        background: #fafafa;
-        max-height: 500px;
-        position: relative;
-        z-index: auto;
-    }
+.story-votebuttons:hover {
+    background: #fafafa;
+    max-height: 500px;
+    position: relative;
+    z-index: auto;
+}
 
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
@@ -381,9 +383,9 @@ img {
     object-position: center;
 }
 
-    .story-votebuttons-modal-option-box:hover {
-        background: #fafafa;
-    }
+.story-votebuttons-modal-option-box:hover {
+    background: #fafafa;
+}
 
 /*.box-1:hover {
     background: #FFd1d1;
