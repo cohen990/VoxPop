@@ -103,8 +103,16 @@
             segmentShowStroke: true,
             segmentStrokeColor: "#060606",
             segmentStrokeWidth: 5,
-            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"><%=segments[i].value%>%</div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
         });
+
+        find("div.story-votebuttons-box").each(function (index, elem) {
+            $(elem).mouseover(function () {
+                var activeSegment = myPieChart.segments[index];
+                activeSegment.save();
+                activeSegment.fillColor = activeSegment.highlightColor;
+                myPieChart.showTooltip([activeSegment], true);
+                activeSegment.restore();
+            })})
 
     }
 
@@ -119,30 +127,5 @@
         InitializeChart: InitializeChart,
         GetPreparedData: GetPreparedData
     }
-
-//                       //
-
-    var helpers = Chart.helpers;
-    var legendHolder = document.getElementById('my-doughnut-legend')
-    legendHolder.innerHTML = myPieChart.generateLegend();
-    // Include a html legend template after the module doughnut itself
-    helpers.each(legendHolder.firstChild.childNodes, function(legendNode, index){
-        helpers.addEvent(legendNode, 'mouseover', function(){
-            var activeSegment = myPieChart.segments[index];
-            activeSegment.save();
-            activeSegment.fillColor = activeSegment.highlightColor;
-            myPieChart.showTooltip([activeSegment]);
-            activeSegment.restore();
-        });
-    });
-    helpers.addEvent(legendHolder.firstChild, 'mouseout', function(){
-        myPieChart.draw();
-    });
-    canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
-
-    myPieChart.generateLegend();
-    document.getElementById('my-doughnut-legend').innerHTML = myPieChart.generateLegend();
-
-//                           //
 
 })();

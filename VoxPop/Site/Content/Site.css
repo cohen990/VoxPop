@@ -292,6 +292,8 @@ a {
     width: 363px;
 }
 
+
+
 .story-votebuttons-title {
     margin: 15px 0 0 30px;
     width: auto;
@@ -387,9 +389,9 @@ img {
     object-position: center;
 }
 
-    .story-votebuttons-modal-option-box:hover {
-        background: #fafafa;
-    }
+.story-votebuttons-modal-option-box:hover {
+    background: #fafafa;
+}
 
 /*.box-1:hover {
     background: #FFd1d1;
