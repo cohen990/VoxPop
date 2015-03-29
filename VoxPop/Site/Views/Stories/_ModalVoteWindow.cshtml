@@ -3,17 +3,18 @@
     <div class="modal">
         <div class="modal-content">
             <h1 class="story-modal-headings">@Model.Title</h1>
-            <div class ="story-modal-chart">
-                <canvas id="modalChart" height="150" width="150"></canvas>
-            </div>
+            <canvas class="story-modal-chart" id="modalChart" height="150" width="150"></canvas>
             <script>
                 VoxPopCharts.GenerateChart("modalChart", chartData)
             </script>
             <h2 class="story-votebuttons-modal-title">Vote</h2>
             <div class="story-votebuttons-modal-option-div">
+                @{int count = 0;}
                 @foreach (var pollItem in Model.Poll)
                 {
+                    count++;
                     <div class="story-votebuttons-modal-option-box">
+                        <div class="story-votebuttons-modal-option-box-@count"></div>
                         <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
                         <span class="story-votebuttons-modal-value">@pollItem.Value</span>
                         @using (Html.BeginForm("Vote", "Stories"))
