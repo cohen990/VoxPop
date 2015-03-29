@@ -31,13 +31,16 @@
                 </div>
                 <div id="story-votebuttons" class="story-votebuttons">
                     <h2 class="story-votebuttons-title">Vote</h2>
+                    @{int count = 0;}
                     @if (Model.Poll.Count > 4)
                     {
 
                         for (int i = 0; i < 4; i++)
                         {
+                            count++;
                             var poll = Model.Poll.ElementAt(i);
-                            <div id="story-votebuttons-box" class="story-votebuttons-box">
+                            <div class="story-votebuttons-box">
+                                <div class="box-@count"></div>
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
                                 <span class="story-votebuttons-value">@poll.Value</span>
                                 @using (Html.BeginForm("Vote", "Stories"))
@@ -65,24 +68,26 @@
                     {
                         foreach (var pollItem in Model.Poll)
                         {
+                            count++;
                             <div class="story-votebuttons-box">
 
-                                <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
-                                <span class="story-votebuttons-value">@pollItem.Value</span>
-                                @using (Html.BeginForm("Vote", "Stories"))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                                    <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
-                                    <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
-                                    <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
-                                    <input class="story-votebuttons-button" type="submit" value="+1">
-                                }
-                                <script>
-                                    chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
-                                    var numPoll = @Model.Poll.Count;
-                                </script>
-
+                                <div class="story-votebuttons-box-@count">
+                                    <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
+                                    <span class="story-votebuttons-value">@pollItem.Value</span>
+                                    @using (Html.BeginForm("Vote", "Stories"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                                        <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                        <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                        <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                                        <input class="story-votebuttons-button" type="submit" value="+1">
+                                    }
+                                    <script>
+                                        chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                                        var numPoll = @Model.Poll.Count;
+                                    </script>
+                                </div>
                             </div>
                         }
                     }
@@ -102,6 +107,7 @@
 
 <script>
     VoxPopCharts.GenerateChart("storyChart", chartData);
+    VoxPopCharts.InitializeButtons();
 </script>
 
 @Html.Partial("_ModalVoteWindow", @Model)
