@@ -29,6 +29,8 @@
 
     var colournumber = 0;
 
+    var myPieChart;
+
     //Resets colours to start after each chart
     function InitializeChart() {
         colournumber = 0;
@@ -96,7 +98,7 @@
 
         var context = document.getElementById(identifier).getContext("2d");
 
-        var myPieChart = new Chart(context).Pie(data, {
+        myPieChart = new Chart(context).Pie(data, {
             //responsive: true,
             animationEasing: "easeOutQuart",
             animateScale: true,
@@ -104,20 +106,30 @@
             segmentStrokeColor: "#060606",
             segmentStrokeWidth: 5,
         });
-
-        find("div.story-votebuttons-box").each(function (index, elem) {
-            $(elem).mouseover(function () {
-                var activeSegment = myPieChart.segments[index];
-                activeSegment.save();
-                activeSegment.fillColor = activeSegment.highlightColor;
-                myPieChart.showTooltip([activeSegment], true);
-                activeSegment.restore();
-            })})
-
     }
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();
+    }
+
+    function InitializeButtons() {
+        //var voteButtons = document.getElementsByClassName("story-votebuttons-box");
+
+        //for (var i = 0; i < voteButtons.length; i++) {
+        //    console.log(i);
+        //    var j = i;
+        //    voteButtons[i].addEventListener("mouseover", function (event) {
+        //        var activeSegment = myPieChart.segments[j];
+        //        console.log(activeSegment);
+        //        activeSegment.save();
+        //        debugger;
+        //        activeSegment.fillColor = activeSegment.highlightColor;
+        //        myPieChart.showTooltip([activeSegment], true);
+
+        //        //activeSegment.restore();
+        //        console.log("hi");
+        //    })
+        //}
     }
 
     return {
@@ -125,7 +137,8 @@
         GenerateChart: GenerateChart,
         GetPollData: GetPollData,
         InitializeChart: InitializeChart,
-        GetPreparedData: GetPreparedData
+        GetPreparedData: GetPreparedData,
+        InitializeButtons: InitializeButtons
     }
 
 })();
