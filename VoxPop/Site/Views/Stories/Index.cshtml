@@ -30,7 +30,7 @@
 
         foreach (KeyValuePair<string, int> pollItem in blogPost.Poll)
         {
-            string option = @pollItem.Key.Replace("+", " ");
+            string option = @pollItem.Key.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
             <script>
                 chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
             </script>
