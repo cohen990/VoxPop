@@ -226,7 +226,7 @@ a {
 
 .story-headings {
     display: block;
-    font-size: 40px;
+    font-size: 51px;
     margin: 20px auto 20px auto;
     width: 1075px;
     position: relative;
@@ -247,10 +247,10 @@ a {
     transition-duration: 1s;
 }
 
-    .story-author-date-box:hover {
-        background: #fafafa;
-        max-height: 500px;
-    }
+.story-author-date-box:hover {
+     background: #fafafa;
+     max-height: 500px;
+}
 
 .story-pic {
     display: inline-block;
@@ -271,9 +271,9 @@ a {
 }
 
 .story-chart-box {
-    margin: 10px 0px 0px 15px;
+    margin: 10px 0px 0px 5px;
     height: 362px;
-    min-width: 490px;
+    min-width: 515px;
     border: .25em dashed #060606;
     border-left: none;
     border-right: none;
@@ -293,15 +293,17 @@ a {
 }
 
 .story-votebuttons-title {
-    margin: 10px 0px 0px 15px;
+    margin: 15px 0 0 30px;
+    width: auto;
 }
 
 .story-votebuttons {
-    padding: 0px 10px 17px 20px;
-    margin: 20px 0 0 0;
-    width: 90px;
+    padding: 0px 10px 17px 15px;
+    margin: 20px 10px 0 0;
     max-height: 280px;
-    overflow: hidden;
+    width: 110px;
+    overflow-y:hidden;
+    word-break: break-word;
     background-color: #ffffff;
     border: .25em dashed #060606;
     border-left: none;
@@ -312,19 +314,19 @@ a {
     z-index: auto;
 }
 
-    .story-votebuttons:hover {
-        background: #fafafa;
-        max-height: 500px;
-        position: relative;
-        z-index: auto;
-    }
+.story-votebuttons:hover {
+    background: #fafafa;
+    max-height: 500px;
+    position: relative;
+    z-index: auto;
+}
 
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
 }
 
 .story-votebuttons-value {
-    margin: 0 10px 15px 10px;
+    margin: 0 10px 15px 25px;
     float: left;
 }
 
