@@ -39,8 +39,7 @@
                         {
                             count++;
                             var poll = Model.Poll.ElementAt(i);
-                            <div class="story-votebuttons-box">
-                                <div class="box-@count"></div>
+                            <div class="story-votebuttons-box-@count">
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
                                 <span class="story-votebuttons-value">@poll.Value</span>
                                 @using (Html.BeginForm("Vote", "Stories"))
