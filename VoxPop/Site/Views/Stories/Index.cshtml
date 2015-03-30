@@ -21,9 +21,7 @@
         <div class="index-links">
             <a href="~/Stories/@blogPost.PartitionKey/@blogPost.RowKey">
                 <img src="@blogPost.ImageUri" class="index-pic">
-                <div class="index-chart">
-                    <canvas id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
-                </div>
+                <canvas class="index-chart" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
                 <div class="index-titles line-clamp">
                     @blogPost.Title
                 </div>
