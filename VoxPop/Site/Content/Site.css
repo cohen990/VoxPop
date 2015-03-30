@@ -17,11 +17,15 @@ a {
 
 .global-hr-line {
     position: relative;
-    top: 100px;
+    z-index: -1000;
     clear: both;
-    margin-bottom: 10px;
+    margin-top: 22%;
+    margin-bottom: -21%;
 }
 
+.global-footer {
+    padding-bottom: 16px;
+}
 
 .Logo {
     background: url('../Images/VPlogoVec.svg') no-repeat;
@@ -352,7 +356,7 @@ img {
     border-radius: 50%;
     -webkit-shape-outside: circle(50%);
     shape-outside: circle(50%);
-    margin-left:-30px;
+    margin-left: -30px;
 }
 
 .story-modal-headings {
