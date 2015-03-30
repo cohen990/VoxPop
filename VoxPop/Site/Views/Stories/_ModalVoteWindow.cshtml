@@ -13,8 +13,7 @@
                 @foreach (var pollItem in Model.Poll)
                 {
                     count++;
-                    <div class="story-votebuttons-modal-option-box">
-                        <div class="story-votebuttons-modal-option-box-@count"></div>
+                    <div class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
                         <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
                         <span class="story-votebuttons-modal-value">@pollItem.Value</span>
                         @using (Html.BeginForm("Vote", "Stories"))

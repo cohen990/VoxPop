@@ -336,15 +336,15 @@ a {
     min-height: 74px;
 }
 
-.story-votebuttons-box-1 {
+/*.story-votebuttons-box-1 {
     width: 60px;
     height: 41px;
     background-color: #FFd1d1;
     border-radius: 15px;
 
     position:static;
-    /*margin:auto;*/
-}
+    margin:auto;
+}*/
 
 .story-content {
     clear: both;
