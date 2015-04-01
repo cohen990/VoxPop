@@ -15,7 +15,7 @@
     })
 }
 
-<h1 class="page-headings">Stories by @name</h1>
+<h1 class="page-headings">Stories by<strong class="author-stories-names"> @name</strong></h1>
 
 @if (@Model != null)
 {
@@ -33,7 +33,7 @@
                 <a href="~/Stories/@blogPost.PartitionKey/@blogPost.RowKey">
                     <img src="@blogPost.ImageUri" class="index-pic">
                     <div class="index-chart">
-                        <canvas id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="240"></canvas>
+                        <canvas class="index-chart-canvas" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="330"></canvas>
                     </div>
                     <div class="index-titles line-clamp">
                         @blogPost.Title
@@ -42,7 +42,7 @@
             </div>
             foreach (var pollItem in blogPost.Poll)
             {
-                string option = @pollItem.Key.Replace("+", " ");
+                string option = @pollItem.Key.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
                 <script>
                     chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
                 </script>
