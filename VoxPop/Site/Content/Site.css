@@ -55,11 +55,11 @@ a {
 }
 
 .navbar {
-    height: 45px;
+    height: 2.75em;
     width: 100%;
     min-width: 1000px;
     background: #FFd1d1;
-    border: .25em solid #060606;
+    border: 0.25em solid #060606;
     border-right: none;
     border-left: none;
     display: inline-block;
@@ -67,14 +67,14 @@ a {
 
 .navbar-link {
     text-decoration: none;
-    height: 45px;
-    display: inline-block;
-    margin: -3px 0px 0px 0px;
-    border: 3px solid #060606;
+    height: 50%;
+    display: inline-table;
+    margin-top:-.2em;
+    position:relative;
+    border: 0.25em solid #060606;
     border-radius: 11px;
     border-left: none;
     border-right: none;
-    position: page;
 }
 
     .navbar-link:hover {
@@ -139,7 +139,6 @@ a {
 
 .index-links {
     text-decoration: none;
-    /*max-height: 260px;*/
     max-width: 560px;
     min-width: 525px;
     border: 3px dashed #060606;
@@ -148,7 +147,7 @@ a {
     border-radius: 30px;
     margin: -10px auto 45px auto;
     padding: 5px 40px 20px 40px;
-    transition-duration: .5s;
+    transition: 1s;
 }
 
     .index-links:hover {
@@ -205,10 +204,15 @@ a {
     float: right;
     height: 240px;
     width: 240px;
-    margin: 3px 0 0 0;
+    margin-top: 1.5px;
     border-radius: 50%;
     -webkit-shape-outside: circle(50%);
     shape-outside: circle(50%);
+    border: #060606 solid 2px;
+}
+
+.index-chart-canvas {
+    margin-left: -45px;
 }
 
 
@@ -247,10 +251,10 @@ a {
     transition-duration: 1s;
 }
 
-.story-author-date-box:hover {
-     background: #fafafa;
-     max-height: 500px;
-}
+    .story-author-date-box:hover {
+        background: #fafafa;
+        max-height: 500px;
+    }
 
 .story-pic {
     display: inline-block;
@@ -286,15 +290,18 @@ a {
 .story-chart {
     display: inline-block;
     float: left;
-    margin: 5.5px 6px 0px -5px;
-    height: 350px;
-    width: 363px;
+    margin: 5px;
     border-radius: 50%;
     -webkit-shape-outside: circle(50%);
     shape-outside: circle(50%);
+    border: solid 4px #060606;
+    height: 345px;
+    width: 345px;
 }
 
-
+.story-chart-canvas {
+    margin: -0.5px 0 0 -161px;
+}
 
 .story-votebuttons-title {
     margin: 15px 0 0 30px;
@@ -306,9 +313,9 @@ a {
     margin: 20px 10px 0 0;
     max-height: 280px;
     width: 110px;
-    overflow-y:hidden;
+    overflow-y: hidden;
     word-break: break-word;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     border: .25em dashed #060606;
     border-left: none;
     border-right: none;
@@ -404,6 +411,7 @@ img {
     border-radius: 25px;
     transition-duration: 1s;
     object-position: center;
+    word-break: break-word;
 }
 
     .story-votebuttons-modal-option-box:hover {
@@ -748,6 +756,12 @@ input[type="text"] {
 .author-stories-intro {
     max-width: 80%;
     margin: 0 auto 35% auto;
+}
+
+.author-stories-names {
+    font-weight: 900;
+    font-size:-webkit-xxx-large;
+
 }
 
 

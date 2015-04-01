@@ -4,7 +4,7 @@
             value: 1,
             color: "#ddd",
             highlight: "#bbb",
-            label: "Be the first to vote on this Story"
+            label: "Be the first to vote on this Story",
 
         }
     ];
@@ -98,14 +98,32 @@
 
         var context = document.getElementById(identifier).getContext("2d");
 
-        myPieChart = new Chart(context).Pie(data, {
-            //responsive: true,
-            animationEasing: "easeOutQuart",
-            animateScale: true,
-            segmentShowStroke: true,
-            segmentStrokeColor: "#060606",
-            segmentStrokeWidth: 5,
-        });
+        if (data === EmptyChart)
+        {
+            myPieChart = new Chart(context).Pie(data, {
+                tooltipCornerRadius: 15,
+                tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= '' %>",
+                animationEasing: "easeOutQuart",
+                animateScale: true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#060606",
+                segmentStrokeWidth: 5
+            });
+        }
+
+        else
+        {
+            myPieChart = new Chart(context).Pie(data, {
+                tooltipCornerRadius: 15,
+                animationEasing: "easeOutQuart",
+                //animateScale: true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#060606",
+                segmentStrokeWidth: 5
+
+            });
+        }
+
     }
 
     function DecodeHtml(inputString) {
