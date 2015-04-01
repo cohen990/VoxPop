@@ -23,6 +23,11 @@
         <img class="logo-load" />
     </div>
     <div class="navbar">
+        <div id="top-stories-button" class="navbar-link">
+            <a href="@Url.Action("Index", "Stories")">
+                <p class="navbar-link-text">TOP STORIES</p>
+            </a>
+        </div>
         <div id="CreateButton" class="navbar-link">
             <a href="@Url.Action("Create","Stories")">
                 <p class="navbar-link-text">CREATE</p>
@@ -31,7 +36,7 @@
         <div id="Search">
             <form method="get" id="searchform" name="searchform" action="http://www.google.com/search" target="_blank">
                 <input type="hidden" name="sitesearch" value="http://www.VOXPOP.london" />
-                <input type="text" id="search-bar" name="q" value="" maxlength="255" placeholder=" Search VOXPOP. . . " />
+                <input type="text" id="search-bar" name="q" value="" maxlength="255" placeholder=" Search for Stories and Authors... " />
                 <input type="image" class="submit btn search-bar-icon" src="~/Images/search-icon-hi.png" alt="Go">
             </form>
         </div>
