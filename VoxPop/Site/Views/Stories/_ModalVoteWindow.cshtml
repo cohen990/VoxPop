@@ -3,7 +3,9 @@
     <div class="modal">
         <div class="modal-content">
             <h1 class="story-modal-headings">@Model.Title</h1>
-            <canvas class="story-modal-chart" id="modalChart" height="150" width="150"></canvas>
+            <div class="story-modal-chart">
+                <canvas class="story-modal-chart-canvas" id="modalChart" height="150" width="600"></canvas>
+            </div>
             <script>
                 VoxPopCharts.GenerateChart("modalChart", chartData)
             </script>

@@ -23,8 +23,8 @@
         <img class="logo-load" />
     </div>
     <div class="navbar">
-        <div id="CreateButton">
-            <a href="@Url.Action("Create","Stories")" class="navbar-link">
+        <div id="CreateButton" class="navbar-link">
+            <a href="@Url.Action("Create","Stories")">
                 <p class="navbar-link-text">CREATE</p>
             </a>
         </div>
@@ -36,8 +36,8 @@
             </form>
         </div>
         <nav class="main-nav">
-            <div id="LoginButton">
-                <a class="cd-signin navbar-link" href="#0">
+            <div id="LoginButton" class="navbar-link">
+                <a class="cd-signin" href="#0">
                     @if (Request.IsAuthenticated)
                     {
                         <p class="navbar-link-text">@Site.Services.ClaimsService.GetAuthenticatedUsersFullName().ToUpperInvariant()</p>
