@@ -1,4 +1,5 @@
 ﻿var VoxPopCharts = (function () {
+
     var EmptyChart = [
         {
             value: 1,
@@ -28,8 +29,6 @@
     ];
 
     var colournumber = 0;
-
-    var myPieChart;
 
     //Resets colours to start after each chart
     function InitializeChart() {
@@ -98,9 +97,8 @@
 
         var context = document.getElementById(identifier).getContext("2d");
 
-        if (data === EmptyChart)
-        {
-            myPieChart = new Chart(context).Pie(data, {
+        if (data === EmptyChart) {
+            var myPieChart = new Chart(context).Pie(data, {
                 tooltipCornerRadius: 15,
                 tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= '' %>",
                 animationEasing: "easeOutQuart",
@@ -111,52 +109,82 @@
             });
         }
 
-        else
-        {
-            myPieChart = new Chart(context).Pie(data, {
+        else {
+            var myPieChart = new Chart(context).Pie(data, {
                 tooltipCornerRadius: 15,
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
                 segmentShowStroke: true,
                 segmentStrokeColor: "#060606",
                 segmentStrokeWidth: 5
-
             });
         }
+        //for (var i = 0; i < numPoll; i++) {
+            document.getElementById("story-votebuttons-box-" + 0).addEventListener("mouseover", function () {
+
+                var activeSegment = myPieChart.segments[0];
+                activeSegment.fillColor = activeSegment.highlightColor;
+                myPieChart.showTooltip([activeSegment]);
+
+            });
+            document.getElementById("story-votebuttons-box-" + 1).addEventListener("mouseover", function () {
+
+                var activeSegment = myPieChart.segments[1];
+                activeSegment.fillColor = activeSegment.highlightColor;
+                myPieChart.showTooltip([activeSegment]);
+
+            });
+            document.getElementById("story-votebuttons-box-" + 2).addEventListener("mouseover", function () {
+
+                var activeSegment = myPieChart.segments[2];
+                activeSegment.fillColor = activeSegment.highlightColor;
+                myPieChart.showTooltip([activeSegment]);
+
+            });
+
 
     }
+
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();
     }
 
-    function InitializeButtons() {
-        //var voteButtons = document.getElementsByClassName("story-votebuttons-box");
+    //function InitializeButtons() {
 
-        //for (var i = 0; i < voteButtons.length; i++) {
-        //    console.log(i);
-        //    var j = i;
-        //    voteButtons[i].addEventListener("mouseover", function (event) {
-        //        var activeSegment = myPieChart.segments[j];
-        //        console.log(activeSegment);
-        //        activeSegment.save();
-        //        debugger;
-        //        activeSegment.fillColor = activeSegment.highlightColor;
-        //        myPieChart.showTooltip([activeSegment], true);
 
-        //        //activeSegment.restore();
-        //        console.log("hi");
-        //    })
-        //}
-    }
+    //document.getElementById("story-votebuttons-box-0").addEventListener("mouseover", displayTooltip);
+
+    //function displayTooltip() {
+    //    var activeSegment = myPieChart.segments[0];
+
+    //    myPieChart.showTooltip([activeSegment], true);
+    //};
+
+    //for (var index = 0; index < numPoll; index++) {
+    //    document.getElementById("story-votebuttons-box-0").addEventListener("mouseover", displayTooltip);
+
+    //    function displayTooltip() {
+    //        var activeSegment = myPieChart.segments[0];
+    //        myPieChart.showTooltip([activeSegment]);
+    //    };
+
+    //    document.getElementById("story-votebuttons-box-" + index).addEventListener("mouseout", clearTooltip);
+
+    //    function clearTooltip() {
+    //        myPieChart.draw();
+    //    };
+    //}
+    //}
 
     return {
         DecodeHtml: DecodeHtml,
         GenerateChart: GenerateChart,
         GetPollData: GetPollData,
         InitializeChart: InitializeChart,
-        GetPreparedData: GetPreparedData,
-        InitializeButtons: InitializeButtons
+        GetPreparedData: GetPreparedData
+        //InitializeButtons: InitializeButtons
     }
 
 })();
+

@@ -450,6 +450,7 @@
     <Content Include="Views\Shared\_DefaultMetaTags.cshtml" />
     <Content Include="Views\Shared\_MetaTags.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Stories\hoverTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
