@@ -10,12 +10,15 @@
     @Html.Partial("_MetaTags", new MetaTagModel { Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri })
 }
 
+<script type="text/javascript" src="http://use.typekit.net/dqv7hih.js"></script>
+<script type="text/javascript">try { Typekit.load(); } catch (e) { }</script>
+
 <script src="~/Scripts/modally-baby.js"></script>
 <script>
     var chartData = [];
 </script>
 
-<h1 class="story-headings">@Model.Title</h1>
+<h1 id="story-headings" class="story-headings">@Model.Title</h1>
 
 <div class="story-outer-width">
     <div class="story-author-date-box">
@@ -37,9 +40,9 @@
 
                         for (int i = 0; i < 4; i++)
                         {
-                            count++;
                             var poll = Model.Poll.ElementAt(i);
-                            <div class="story-votebuttons-box-@count">
+                            <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
+                                @{count++;}
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
                                 <span class="story-votebuttons-value">@poll.Value</span>
                                 @using (Html.BeginForm("Vote", "Stories"))
@@ -67,10 +70,10 @@
                     {
                         foreach (var pollItem in Model.Poll)
                         {
-                            count++;
                             <div class="story-votebuttons-box">
 
-                                <div class="story-votebuttons-box-@count">
+                                <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
+                                    @{count++;}
                                     <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
                                     <span class="story-votebuttons-value">@pollItem.Value</span>
                                     @using (Html.BeginForm("Vote", "Stories"))
@@ -106,7 +109,6 @@
 
 <script>
     VoxPopCharts.GenerateChart("storyChart", chartData);
-    VoxPopCharts.InitializeButtons();
 </script>
 
 @Html.Partial("_ModalVoteWindow", @Model)
