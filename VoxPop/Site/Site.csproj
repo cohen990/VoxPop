@@ -375,6 +375,7 @@
     <Content Include="Libraries\login-signup-modal-window\readme.pdf" />
     <Content Include="Libraries\login-signup-modal-window\scss\style.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\modally-baby.js" />
