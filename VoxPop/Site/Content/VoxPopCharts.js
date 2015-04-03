@@ -120,93 +120,42 @@
             });
         }
 
-        //document.getElementById("story-votebuttons-box-0").addEventListener("mouseover", displayHighlight());
-
-        //function displayHighlight() {
-        //    var activeSegment = myPieChart.segments[0];
-        //    activeSegment.fillColor = activeSegment.highlightColor;
-        //    myPieChart.showTooltip([activeSegment]);
-        //};
-
-
+        //Links votebutton boxes to segments
         for (var i = 0; i < data.length; i++) {
             (function (i) {
 
                 document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseover", function () {
+
                     var activeSegment = myPieChart.segments[i];
+                    activeSegment.save();
                     activeSegment.fillColor = activeSegment.highlightColor;
-                    myPieChart.showTooltip([activeSegment]);
+                    if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0")
+                    {
+                        myPieChart.showTooltip([activeSegment]);
+                    }
+                    activeSegment.restore();
                 });
+
+                //document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
+                //    myPieChart.draw();
+                //});
             }(i));
         }
 
         //for (var i = 0; i < data.length; i++) {
+        //    (function (i) {
+        //        document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
+        //            myPieChart.draw();
+        //        });
+        //    }(i));
         //}
-
-
-        //for (var i = 0; i < data.length; i++) {
-        //}
-
-
-
-
-
-        //document.getElementById("story-votebuttons-box-" + 0).addEventListener("mouseover", function () {
-
-        //    var activeSegment = myPieChart.segments[0];
-        //    activeSegment.fillColor = activeSegment.highlightColor;
-        //    myPieChart.showTooltip([activeSegment]);
-
-        //});
-        //document.getElementById("story-votebuttons-box-" + 1).addEventListener("mouseover", function () {
-
-        //    var activeSegment = myPieChart.segments[1];
-        //    activeSegment.fillColor = activeSegment.highlightColor;
-        //    myPieChart.showTooltip([activeSegment]);
-
-        //});
-        //document.getElementById("story-votebuttons-box-" + 2).addEventListener("mouseover", function () {
-
-        //    var activeSegment = myPieChart.segments[2];
-        //    activeSegment.fillColor = activeSegment.highlightColor;
-        //    myPieChart.showTooltip([activeSegment]);
-
-        //});
 
 
     }
-
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();
     }
-
-    //function InitializeButtons() {
-
-
-    //document.getElementById("story-votebuttons-box-0").addEventListener("mouseover", displayTooltip);
-
-    //function displayTooltip() {
-    //    var activeSegment = myPieChart.segments[0];
-
-    //    myPieChart.showTooltip([activeSegment], true);
-    //};
-
-    //for (var index = 0; index < numPoll; index++) {
-    //    document.getElementById("story-votebuttons-box-0").addEventListener("mouseover", displayTooltip);
-
-    //    function displayTooltip() {
-    //        var activeSegment = myPieChart.segments[0];
-    //        myPieChart.showTooltip([activeSegment]);
-    //    };
-
-    //    document.getElementById("story-votebuttons-box-" + index).addEventListener("mouseout", clearTooltip);
-
-    //    function clearTooltip() {
-    //        myPieChart.draw();
-    //    };
-    //}
-    //}
 
     return {
         DecodeHtml: DecodeHtml,
@@ -214,7 +163,6 @@
         GetPollData: GetPollData,
         InitializeChart: InitializeChart,
         GetPreparedData: GetPreparedData
-        //InitializeButtons: InitializeButtons
     }
 
 })();

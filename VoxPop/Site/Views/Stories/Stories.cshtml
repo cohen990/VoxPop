@@ -42,9 +42,9 @@
                         {
                             var poll = Model.Poll.ElementAt(i);
                             <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
-                                @{count++;}
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
-                                <span class="story-votebuttons-value">@poll.Value</span>
+                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@poll.Value</span>
+                                @{count++;}
                                 @using (Html.BeginForm("Vote", "Stories"))
                                 {
                                     @Html.AntiForgeryToken()
@@ -62,7 +62,6 @@
                         {
                             <script>
                                 chartData.push(VoxPopCharts.GetPollData("@poll.Key", @poll.Value));
-                                var numPoll = @Model.Poll.Count;
                             </script>
                         }
                     }
@@ -73,9 +72,9 @@
                             <div class="story-votebuttons-box">
 
                                 <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
-                                    @{count++;}
                                     <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
-                                    <span class="story-votebuttons-value">@pollItem.Value</span>
+                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
+                                    @{count++;}
                                     @using (Html.BeginForm("Vote", "Stories"))
                                     {
                                         @Html.AntiForgeryToken()
@@ -87,7 +86,6 @@
                                     }
                                     <script>
                                         chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
-                                        var numPoll = @Model.Poll.Count;
                                     </script>
                                 </div>
                             </div>
