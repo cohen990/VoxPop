@@ -121,37 +121,46 @@
         }
 
         //Links votebutton boxes to segments
-        for (var i = 0; i < data.length; i++) {
-            (function (i) {
-
-                document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseover", function () {
-
-                    var activeSegment = myPieChart.segments[i];
-                    activeSegment.save();
-                    activeSegment.fillColor = activeSegment.highlightColor;
-                    if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0")
-                    {
-                        myPieChart.showTooltip([activeSegment]);
-                    }
-                    activeSegment.restore();
-                });
-
-                //document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
-                //    myPieChart.draw();
-                //});
-            }(i));
-        }
-
         //for (var i = 0; i < data.length; i++) {
         //    (function (i) {
+
+        //        document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseenter", function () {
+
+        //            var activeSegment = myPieChart.segments[i];
+        //            activeSegment.save();
+        //            activeSegment.fillColor = activeSegment.highlightColor;
+        //            if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0") {
+        //                myPieChart.showTooltip([activeSegment]);
+        //            }
+        //            activeSegment.restore();
+        //        });
+
         //        document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
         //            myPieChart.draw();
         //        });
         //    }(i));
         //}
+        for (var i = 0; i < data.length; i++) {
+            (function (i) {
 
+                document.getElementById("story-votebuttons-modal-option-box-" + i).addEventListener("mouseenter", function () {
 
+                    var activeSegment = myPieChart.segments[i];
+                    activeSegment.save();
+                    activeSegment.fillColor = activeSegment.highlightColor;
+                    if (document.getElementById("story-votebuttons-modal-value-" + i).innerHTML !== "0") {
+                        myPieChart.showTooltip([activeSegment]);
+                    }
+                    activeSegment.restore();
+                });
+
+                document.getElementById("story-votebuttons-modal-option-box-" + i).addEventListener("mouseleave", function () {
+                    myPieChart.draw();
+                });
+            }(i));
+        }
     }
+
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();
