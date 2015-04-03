@@ -9,15 +9,16 @@
             <script>
                 VoxPopCharts.GenerateChart("modalChart", chartData)
             </script>
+
             <h2 class="story-votebuttons-modal-title">Vote</h2>
             <div class="story-votebuttons-modal-option-div">
                 @{int count = 0;}
                 @foreach (var pollItem in Model.Poll)
                 {
-                    count++;
-                    <div class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
+                    <div id="story-votebuttons-modal-option-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
                         <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
-                        <span class="story-votebuttons-modal-value">@pollItem.Value</span>
+                        <span id="story-votebuttons-modal-value-@count" class="story-votebuttons-modal-value">@pollItem.Value</span>
+                        @{count++;}
                         @using (Html.BeginForm("Vote", "Stories"))
                         {
                             @Html.AntiForgeryToken()
@@ -28,11 +29,11 @@
                             <input class="story-votebuttons-modal-button" type="submit" value="+1">
                         }
                         <script>
-                            var numPoll = @Model.Poll.Count;
                             chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
                         </script>
                     </div>
                 }
+
             </div>
         </div>
 
