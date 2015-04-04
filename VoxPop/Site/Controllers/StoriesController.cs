@@ -19,12 +19,6 @@ namespace Site.Controllers
             _blogService = blogService;
         }
 
-        public ActionResult hoverTest()
-        {
-            return View();
-        }
-
-
         public ActionResult Index()
         {
             var blogs = _blogService.GetAllBlogs();

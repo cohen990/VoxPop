@@ -1,23 +1,20 @@
 ﻿@model Site.Models.BlogModel
+
 <div class="modal-wrapper">
     <div class="modal">
         <div class="modal-content">
             <h1 class="story-modal-headings">@Model.Title</h1>
             <div class="story-modal-chart">
-                <canvas class="story-modal-chart-canvas" id="modalChart" height="150" width="600"></canvas>
+                <canvas class="story-modal-chart-canvas" id="modalChart" height="150" width="325"></canvas>
             </div>
-            <script>
-                VoxPopCharts.GenerateChart("modalChart", chartData)
-            </script>
-
             <h2 class="story-votebuttons-modal-title">Vote</h2>
             <div class="story-votebuttons-modal-option-div">
                 @{int count = 0;}
                 @foreach (var pollItem in Model.Poll)
                 {
-                    <div id="story-votebuttons-modal-option-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
+                    <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
                         <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
-                        <span id="story-votebuttons-modal-value-@count" class="story-votebuttons-modal-value">@pollItem.Value</span>
+                        <span id="modal-value-@count" class="story-votebuttons-modal-value">@pollItem.Value</span>
                         @{count++;}
                         @using (Html.BeginForm("Vote", "Stories"))
                         {
@@ -30,12 +27,17 @@
                         }
                         <script>
                             chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                            var numPoll = @Model.Poll.Count;
                         </script>
                     </div>
                 }
-
             </div>
+            <script>
+                VoxPopCharts.GenerateChart("modalChart", chartData);
+            </script>
         </div>
-
     </div>
 </div>
+@*<script>
+        VoxPopCharts.GenerateChart("modalChart", chartData);
+    </script>*@
