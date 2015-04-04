@@ -1,7 +1,7 @@
 ﻿@using Site.Models
 @model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
-    ViewBag.Title = "AuthorStories";
+    ViewBag.Title = @Model.First().Author;
     string name = Request.QueryString["auth"];
 }
 
@@ -49,6 +49,7 @@
             }
             <script>
                 VoxPopCharts.GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
+                var numPoll;
             </script>
 
         }
