@@ -55,6 +55,7 @@
     //
 
     function GetPollData(optionName, votes) {
+
         var result = {
             value: votes,
             color: colourList[colournumber].colour,
@@ -76,6 +77,10 @@
         var noVotes = true;
 
         for (var i = 0; i < data.length; i++) {
+            if (i >= numPoll) {
+                data[i].value = 0;
+            }
+
             data[i].label = DecodeHtml(data[i].label);
 
             if (data[i].value !== 0) {
@@ -120,47 +125,48 @@
             });
         }
 
-        //Links votebutton boxes to segments
-        //for (var i = 0; i < data.length; i++) {
-        //    (function (i) {
-
-        //        document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseenter", function () {
-
-        //            var activeSegment = myPieChart.segments[i];
-        //            activeSegment.save();
-        //            activeSegment.fillColor = activeSegment.highlightColor;
-        //            if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0") {
-        //                myPieChart.showTooltip([activeSegment]);
-        //            }
-        //            activeSegment.restore();
-        //        });
-
-        //        document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
-        //            myPieChart.draw();
-        //        });
-        //    }(i));
-        //}
-        for (var i = 0; i < data.length; i++) {
+        //Links Voting Modal votebutton boxes to segments
+        for (var i = 0; i < numPoll; i++) {
             (function (i) {
 
-                document.getElementById("story-votebuttons-modal-option-box-" + i).addEventListener("mouseenter", function () {
+                document.getElementById("modal-box-" + i).addEventListener("mouseenter", function () {
 
                     var activeSegment = myPieChart.segments[i];
                     activeSegment.save();
                     activeSegment.fillColor = activeSegment.highlightColor;
-                    if (document.getElementById("story-votebuttons-modal-value-" + i).innerHTML !== "0") {
+                    if (document.getElementById("modal-value-" + i).innerHTML !== "0") {
                         myPieChart.showTooltip([activeSegment]);
                     }
                     activeSegment.restore();
                 });
 
-                document.getElementById("story-votebuttons-modal-option-box-" + i).addEventListener("mouseleave", function () {
+                document.getElementById("modal-box-" + i).addEventListener("mouseleave", function () {
+                    myPieChart.draw();
+                });
+            }(i));
+
+        }
+
+        //Links Story votebutton boxes to thier chart segments
+        for (var i = 0; i < data.length; i++) {
+            (function (i) {
+
+                document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseover", function () {
+                    var activeSegment = myPieChart.segments[i];
+                    activeSegment.save();
+                    activeSegment.fillColor = activeSegment.highlightColor;
+                    if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0") {
+                        myPieChart.showTooltip([activeSegment]);
+                    }
+                    activeSegment.restore();
+                });
+
+                document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
                     myPieChart.draw();
                 });
             }(i));
         }
     }
-
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();

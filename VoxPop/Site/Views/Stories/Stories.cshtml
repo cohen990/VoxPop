@@ -41,9 +41,9 @@
                         for (int i = 0; i < 4; i++)
                         {
                             var poll = Model.Poll.ElementAt(i);
-                            <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
+                            <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes hover-link-box-@count">
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
-                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@poll.Value</span>
+                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value hover-link-value-@count">@poll.Value</span>
                                 @{count++;}
                                 @using (Html.BeginForm("Vote", "Stories"))
                                 {
@@ -71,9 +71,9 @@
                         {
                             <div class="story-votebuttons-box">
 
-                                <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes">
+                                <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes hover-link-box-@count">
                                     <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
-                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
+                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value hover-link-value-@count">@pollItem.Value</span>
                                     @{count++;}
                                     @using (Html.BeginForm("Vote", "Stories"))
                                     {
@@ -107,6 +107,7 @@
 
 <script>
     VoxPopCharts.GenerateChart("storyChart", chartData);
+    var numPoll;
 </script>
 
 @Html.Partial("_ModalVoteWindow", @Model)
