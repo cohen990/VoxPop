@@ -1,4 +1,5 @@
 ﻿var VoxPopCharts = (function () {
+
     var EmptyChart = [
         {
             value: 1,
@@ -29,8 +30,6 @@
 
     var colournumber = 0;
 
-    var myPieChart;
-
     //Resets colours to start after each chart
     function InitializeChart() {
         colournumber = 0;
@@ -56,6 +55,7 @@
     //
 
     function GetPollData(optionName, votes) {
+
         var result = {
             value: votes,
             color: colourList[colournumber].colour,
@@ -77,6 +77,10 @@
         var noVotes = true;
 
         for (var i = 0; i < data.length; i++) {
+            if (i >= numPoll) {
+                data[i].value = 0;
+            }
+
             data[i].label = DecodeHtml(data[i].label);
 
             if (data[i].value !== 0) {
@@ -98,9 +102,8 @@
 
         var context = document.getElementById(identifier).getContext("2d");
 
-        if (data === EmptyChart)
-        {
-            myPieChart = new Chart(context).Pie(data, {
+        if (data === EmptyChart) {
+            var myPieChart = new Chart(context).Pie(data, {
                 tooltipCornerRadius: 15,
                 tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= '' %>",
                 animationEasing: "easeOutQuart",
@@ -111,43 +114,62 @@
             });
         }
 
-        else
-        {
-            myPieChart = new Chart(context).Pie(data, {
+        else {
+            var myPieChart = new Chart(context).Pie(data, {
                 tooltipCornerRadius: 15,
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
                 segmentShowStroke: true,
                 segmentStrokeColor: "#060606",
                 segmentStrokeWidth: 5
-
             });
         }
 
+        //Links Voting Modal votebutton boxes to segments
+        for (var i = 0; i < numPoll; i++) {
+            (function (i) {
+
+                document.getElementById("modal-box-" + i).addEventListener("mouseenter", function () {
+
+                    var activeSegment = myPieChart.segments[i];
+                    activeSegment.save();
+                    activeSegment.fillColor = activeSegment.highlightColor;
+                    if (document.getElementById("modal-value-" + i).innerHTML !== "0") {
+                        myPieChart.showTooltip([activeSegment]);
+                    }
+                    activeSegment.restore();
+                });
+
+                document.getElementById("modal-box-" + i).addEventListener("mouseleave", function () {
+                    myPieChart.draw();
+                });
+            }(i));
+
+        }
+
+        //Links Story votebutton boxes to thier chart segments
+        for (var i = 0; i < data.length; i++) {
+            (function (i) {
+
+                document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseover", function () {
+                    var activeSegment = myPieChart.segments[i];
+                    activeSegment.save();
+                    activeSegment.fillColor = activeSegment.highlightColor;
+                    if (document.getElementById("story-votebuttons-value-" + i).innerHTML !== "0") {
+                        myPieChart.showTooltip([activeSegment]);
+                    }
+                    activeSegment.restore();
+                });
+
+                document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
+                    myPieChart.draw();
+                });
+            }(i));
+        }
     }
 
     function DecodeHtml(inputString) {
         return $("<div/>").html(inputString).text();
-    }
-
-    function InitializeButtons() {
-        //var voteButtons = document.getElementsByClassName("story-votebuttons-box");
-
-        //for (var i = 0; i < voteButtons.length; i++) {
-        //    console.log(i);
-        //    var j = i;
-        //    voteButtons[i].addEventListener("mouseover", function (event) {
-        //        var activeSegment = myPieChart.segments[j];
-        //        console.log(activeSegment);
-        //        activeSegment.save();
-        //        debugger;
-        //        activeSegment.fillColor = activeSegment.highlightColor;
-        //        myPieChart.showTooltip([activeSegment], true);
-
-        //        //activeSegment.restore();
-        //        console.log("hi");
-        //    })
-        //}
     }
 
     return {
@@ -155,8 +177,8 @@
         GenerateChart: GenerateChart,
         GetPollData: GetPollData,
         InitializeChart: InitializeChart,
-        GetPreparedData: GetPreparedData,
-        InitializeButtons: InitializeButtons
+        GetPreparedData: GetPreparedData
     }
 
 })();
+

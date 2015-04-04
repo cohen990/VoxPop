@@ -306,9 +306,7 @@ a {
 }
 
 .story-chart-canvas {
-    /*margin: 0px 0 0 -160.5px;*/
     margin: -5px 0 0 -166.5px;
-
 }
 
 .story-votebuttons-title {
@@ -354,7 +352,7 @@ a {
     margin: 0 0 15px 0;
 }
 
-.story-votebuttons-box {
+.story-votebuttons-boxes {
     min-height: 74px;
 }
 
@@ -397,7 +395,7 @@ img {
 }
 
 .story-modal-chart-canvas {
-    margin: 0 0 0 -225px;
+    margin: 0 0 0 -87.5px;
 }
 
 .story-modal-headings {
