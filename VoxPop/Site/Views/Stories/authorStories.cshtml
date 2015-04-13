@@ -1,15 +1,15 @@
 ﻿@using Site.Models
 @model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
-    ViewBag.Title = @Model.First().Author;
     string name = Request.QueryString["auth"];
+    ViewBag.Title = @name;
 }
 
 @section MetaTags
 {
     @Html.Partial("_MetaTags", new MetaTagModel
     {
-        Description = "Stories by " + Model.First().Author,
+        Description = "Stories by " + @name,
         Title = "Got questions? Get Answers.",
         ImageUri = Model.First().ImageUri
     })

@@ -166,6 +166,19 @@
                 });
             }(i));
         }
+
+        //Segments --> Boxes
+        for (var i = 0; i < data.length; i++) {
+            (function (i) {
+
+                var activeSegment = myPieChart.segments[i];
+                if (activeSegment.fillColor === activeSegment.highlightColor) {
+                    $("#story-votebuttons-box-colour-" + i).addClass("hover").addClass("highlight-" + i);
+                }
+
+            }(i));
+        }
+
     }
 
     function DecodeHtml(inputString) {
