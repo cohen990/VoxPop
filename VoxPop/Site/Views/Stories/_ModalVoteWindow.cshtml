@@ -1,4 +1,5 @@
 ﻿@model Site.Models.BlogModel
+<script src="~/Scripts/vote-ops.js"></script>
 
 <div class="modal-wrapper">
     <div class="modal">
@@ -13,9 +14,8 @@
                 @foreach (var pollItem in Model.Poll)
                 {
                     <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
-                        <h4 class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
-                        <span id="modal-value-@count" class="story-votebuttons-modal-value">@pollItem.Value</span>
-                        @{count++;}
+                        <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@pollItem.Key&nbsp:</h4>
+                        <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span>
                         @using (Html.BeginForm("Vote", "Stories"))
                         {
                             @Html.AntiForgeryToken()
@@ -23,8 +23,10 @@
                             <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                             <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
                             <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
-                            <input class="story-votebuttons-modal-button" type="submit" value="+1">
+                            <input id="story-votebuttons-modal-button-@count" class="story-votebuttons-modal-button" type="submit" value="+1">
                         }
+                        <div id="story-votebuttons-modal-box-colour-@count" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@count"></div>
+                        @{count++;}
                         <script>
                             chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
                             var numPoll = @Model.Poll.Count;
@@ -38,6 +40,3 @@
         </div>
     </div>
 </div>
-@*<script>
-        VoxPopCharts.GenerateChart("modalChart", chartData);
-    </script>*@
