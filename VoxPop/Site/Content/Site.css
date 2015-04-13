@@ -326,45 +326,100 @@ a {
     border-left: none;
     border-right: none;
     border-radius: 27px;
-    transition-duration: 1s;
+    transition-duration: 1.5s;
     position: relative;
     z-index: auto;
 }
 
     .story-votebuttons:hover {
         background: #fafafa;
-        max-height: 500px;
-        padding-bottom:10px;
+        max-height: 550px;
+        padding-bottom: 10px;
         position: relative;
         z-index: auto;
     }
 
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    transition: 1.5s;
+}
+
+.story-votebuttons-option-highlight {
+    text-shadow: -1px -1px 0 #fafafa, 1px -1px 0 #fafafa, -1px 1px 0 #fafafa, 1px 1px 0 #fafafa;
 }
 
 .story-votebuttons-value {
     margin: 0 10px 15px 25px;
     float: left;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    transition: 1.5s;
+}
+
+.story-votebuttons-value-highlight {
+    text-shadow: -1px -1px 0 #fafafa, 1px -1px 0 #fafafa, -1px 1px 0 #fafafa, 1px 1px 0 #fafafa;
 }
 
 .story-votebuttons-button {
     margin: 0 0 15px 0;
+    outline: solid 2px #fff;
+    transition: 1.5s;
 }
+
+.story-votebuttons-button-highlight {
+    outline: solid 2px #fafafa;
+}
+
 
 .story-votebuttons-boxes {
-    min-height: 74px;
+    margin-bottom: 45px;
 }
 
-/*.story-votebuttons-box-1 {
-    width: 60px;
-    height: 41px;
-    background-color: #FFd1d1;
+.story-votebuttons-box-colour {
+    width: 70px;
+    height: 45px;
     border-radius: 15px;
+    position: static;
+    margin: -75px auto 0 auto;
+    transition: .25s;
+}
 
-    position:static;
-    margin:auto;
-}*/
+.hover {
+    width: 75px;
+    height: 50px;
+}
+
+.story-votebuttons-box-colour-0 {
+    background-color: #FFd1d1;
+}
+
+.highlight-0 {
+    background-color: #FF7C8B;
+}
+
+.story-votebuttons-box-colour-1 {
+    background-color: #bbdeff;
+}
+
+.highlight-1 {
+    background-color: #88c5ff;
+}
+
+.story-votebuttons-box-colour-2 {
+    background-color: #fffd9f;
+}
+
+.highlight-2 {
+    background-color: #FFFB53;
+}
+
+.story-votebuttons-box-colour-3 {
+    background-color: #7fff80;
+}
+
+.highlight-3 {
+    background-color: #49ff4a;
+}
 
 .story-content {
     clear: both;
