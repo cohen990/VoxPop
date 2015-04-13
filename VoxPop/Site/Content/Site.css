@@ -320,7 +320,7 @@ a {
     max-height: 280px;
     width: 110px;
     overflow-y: hidden;
-    word-break: break-word;
+    /*word-break: break-word;*/
     background-color: none;
     border: 4.5px dashed #060606;
     border-left: none;
@@ -478,7 +478,7 @@ img {
     border-radius: 25px;
     transition-duration: 1.5s;
     object-position: center;
-    word-break: break-word;
+    /*word-break: break-word;*/
 }
 
     .story-votebuttons-modal-option-box:hover {

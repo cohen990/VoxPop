@@ -39,7 +39,8 @@
                         {
                             var poll = Model.Poll.ElementAt(i);
                             <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
-                                <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
+                                @{var option = @poll.Key.Trim();}
+                                <h4 class="story-votebuttons-option">@option&nbsp:</h4>
                                 <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@poll.Value</span>
                                 @using (Html.BeginForm("Vote", "Stories"))
                                 {
@@ -69,7 +70,8 @@
                             <div class="story-votebuttons-box">
 
                                 <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
-                                    <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
+                                    @{var option = @pollItem.Key.Trim();}
+                                    <h4 class="story-votebuttons-option">@option&nbsp:</h4>
                                     <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
                                     @using (Html.BeginForm("Vote", "Stories"))
                                     {
