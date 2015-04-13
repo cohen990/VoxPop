@@ -122,10 +122,14 @@
                 segmentShowStroke: true,
                 segmentStrokeColor: "#060606",
                 segmentStrokeWidth: 5
+
+
             });
         }
 
-        //Links Voting Modal votebutton boxes to segments
+
+
+        //Links Voting Modal votebutton boxes to segments and back again
         for (var i = 0; i < numPoll; i++) {
             (function (i) {
 
@@ -143,11 +147,33 @@
                 document.getElementById("modal-box-" + i).addEventListener("mouseleave", function () {
                     myPieChart.draw();
                 });
+
+                $("#modalChart").mousemove(
+                    function (evt) {
+
+                        var activePoints = myPieChart.getSegmentsAtEvent(evt);
+                        var activeLabel = activePoints[0].label;
+                        var segments = myPieChart.segments;
+                        for (var index = 0; index < segments.length; index++) {
+                            if (activeLabel == segments[index].label) {
+                                $("#story-votebuttons-modal-box-colour-" + index).addClass("modal-hover").addClass("modal-highlight-" + index);
+                            }
+                            else {
+                                $("#story-votebuttons-modal-box-colour-" + index).removeClass("modal-hover").removeClass("modal-highlight-" + index);
+                            }
+                        }
+                    });
+                $("#modalChart").mouseleave(
+                    function () {
+                        $("#story-votebuttons-modal-box-colour-" + i).removeClass("modal-hover").removeClass("modal-highlight-" + i);
+                    });
+
+
             }(i));
 
         }
 
-        //Links Story votebutton boxes to thier chart segments
+        //Links Story votebutton boxes to their chart segments and back again
         for (var i = 0; i < data.length; i++) {
             (function (i) {
 
@@ -164,21 +190,28 @@
                 document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
                     myPieChart.draw();
                 });
+
+                $("#storyChart").mousemove(
+                    function (evt) {
+
+                        var activePoints = myPieChart.getSegmentsAtEvent(evt);
+                        var activeLabel = activePoints[0].label;
+                        var segments = myPieChart.segments;
+                        for (var index = 0; index < segments.length; index++) {
+                            if (activeLabel == segments[index].label) {
+                                $("#story-votebuttons-box-colour-" + index).addClass("hover").addClass("highlight-" + index);
+                            }
+                            else {
+                                $("#story-votebuttons-box-colour-" + index).removeClass("hover").removeClass("highlight-" + index);
+                            }
+                        }
+                    });
+                $("#storyChart").mouseleave(
+                    function () {
+                        $("#story-votebuttons-box-colour-" + i).removeClass("hover").removeClass("highlight-" + i);
+                    });
             }(i));
         }
-
-        //Segments --> Boxes
-        for (var i = 0; i < data.length; i++) {
-            (function (i) {
-
-                var activeSegment = myPieChart.segments[i];
-                if (activeSegment.fillColor === activeSegment.highlightColor) {
-                    $("#story-votebuttons-box-colour-" + i).addClass("hover").addClass("highlight-" + i);
-                }
-
-            }(i));
-        }
-
     }
 
     function DecodeHtml(inputString) {

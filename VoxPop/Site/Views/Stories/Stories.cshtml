@@ -35,7 +35,6 @@
                     @{int count = 0;}
                     @if (Model.Poll.Count > 4)
                     {
-
                         for (int i = 0; i < 4; i++)
                         {
                             var poll = Model.Poll.ElementAt(i);
@@ -55,8 +54,7 @@
                                 @{count++;}
                             </div>
                         }
-                        <a class="story-votebuttons-exta trigger" href="javascript:;">More Voting Options...</a>
-
+                        <a class="story-votebuttons-extra trigger" href="javascript:;">More Voting Options...</a>
                         foreach (var poll in Model.Poll)
                         {
                             <script>
