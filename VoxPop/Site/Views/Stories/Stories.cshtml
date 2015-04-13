@@ -10,10 +10,8 @@
     @Html.Partial("_MetaTags", new MetaTagModel { Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri })
 }
 
-<script type="text/javascript" src="http://use.typekit.net/dqv7hih.js"></script>
-<script type="text/javascript">try { Typekit.load(); } catch (e) { }</script>
-
 <script src="~/Scripts/modally-baby.js"></script>
+<script src="~/Scripts/vote-ops.js"></script>
 <script>
     var chartData = [];
 </script>
@@ -37,14 +35,12 @@
                     @{int count = 0;}
                     @if (Model.Poll.Count > 4)
                     {
-
                         for (int i = 0; i < 4; i++)
                         {
                             var poll = Model.Poll.ElementAt(i);
-                            <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes hover-link-box-@count">
+                            <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
                                 <h4 class="story-votebuttons-option">@poll.Key&nbsp:</h4>
-                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value hover-link-value-@count">@poll.Value</span>
-                                @{count++;}
+                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@poll.Value</span>
                                 @using (Html.BeginForm("Vote", "Stories"))
                                 {
                                     @Html.AntiForgeryToken()
@@ -54,10 +50,11 @@
                                     <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
                                     <input class="story-votebuttons-button" type="submit" value="+1">
                                 }
+                                <div id="story-votebuttons-box-colour-@count" class="story-votebuttons-box-colour story-votebuttons-box-colour-@count"></div>
+                                @{count++;}
                             </div>
                         }
-                        <a class="story-votebuttons-exta trigger" href="javascript:;">More Voting Options...</a>
-
+                        <a class="story-votebuttons-extra trigger" href="javascript:;">More Voting Options...</a>
                         foreach (var poll in Model.Poll)
                         {
                             <script>
@@ -71,10 +68,9 @@
                         {
                             <div class="story-votebuttons-box">
 
-                                <div id="story-votebuttons-box-@count" class="story-votebuttons-boxes hover-link-box-@count">
+                                <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
                                     <h4 class="story-votebuttons-option">@pollItem.Key&nbsp:</h4>
-                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value hover-link-value-@count">@pollItem.Value</span>
-                                    @{count++;}
+                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
                                     @using (Html.BeginForm("Vote", "Stories"))
                                     {
                                         @Html.AntiForgeryToken()
@@ -84,6 +80,8 @@
                                         <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
                                         <input class="story-votebuttons-button" type="submit" value="+1">
                                     }
+                                    <div id="story-votebuttons-box-colour-@count" class="story-votebuttons-box-colour story-votebuttons-box-colour-@count"></div>
+                                    @{count++;}
                                     <script>
                                         chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
                                     </script>
