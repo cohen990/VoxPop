@@ -339,6 +339,7 @@ a {
         z-index: auto;
     }
 
+
 .story-votebuttons-option {
     margin: 15px 0 15px 0;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
@@ -467,7 +468,7 @@ img {
 
 .story-votebuttons-modal-option-box {
     display: inline-block;
-    padding: 0 20px 0 25px;
+    padding: 0 20px 0 20px;
     margin: 15px;
     min-width: 80px;
     max-width: 100px;
@@ -475,7 +476,7 @@ img {
     border-left: none;
     border-right: none;
     border-radius: 25px;
-    transition-duration: 1s;
+    transition-duration: 1.5s;
     object-position: center;
     word-break: break-word;
 }
@@ -484,14 +485,6 @@ img {
         background: #fafafa;
     }
 
-/*.box-1:hover {
-    background: #FFd1d1;
-    animation-fill-mode:backwards;
-}
-
-.box-2:hover {
-    background: #bbdeff;
-}*/
 
 .story-votebuttons-modal-option-div {
     /*max-width: 600px;*/
@@ -500,16 +493,152 @@ img {
 
 .story-votebuttons-modal-option {
     margin: 15px 0 15px 0;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+
+.story-votebuttons-modal-option-highlight {
+    text-shadow: -1px -1px 0 #fafafa, 1px -1px 0 #fafafa, -1px 1px 0 #fafafa, 1px 1px 0 #fafafa;
 }
 
 .story-votebuttons-modal-value {
     margin: 0 10px 15px 10px;
     float: left;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
+
+.story-votebuttons-modal-value-highlight {
+    text-shadow: -1px -1px 0 #fafafa, 1px -1px 0 #fafafa, -1px 1px 0 #fafafa, 1px 1px 0 #fafafa;
+}
+
 
 .story-votebuttons-modal-button {
     margin: 0 0 15px 0;
+    outline: solid 2px #fff;
 }
+
+.story-votebuttons-modal-button-highlight {
+    outline: solid 2px #fafafa;
+}
+
+
+.story-votebuttons-modal-box-colour {
+    width: 70px;
+    height: 45px;
+    border-radius: 15px;
+    position: static;
+    margin: -75px auto 0 auto;
+    transition: .25s;
+}
+
+.modal-hover {
+    width: 75px;
+    height: 50px;
+}
+
+.story-votebuttons-modal-box-colour-0 {
+    background-color: #FFd1d1;
+}
+
+.modal-highlight-0 {
+    background-color: #FF7C8B;
+}
+
+.story-votebuttons-modal-box-colour-1 {
+    background-color: #bbdeff;
+}
+
+.modal-highlight-1 {
+    background-color: #88c5ff;
+}
+
+.story-votebuttons-modal-box-colour-2 {
+    background-color: #fffd9f;
+}
+
+.modal-highlight-2 {
+    background-color: #FFFB53;
+}
+
+.story-votebuttons-modal-box-colour-3 {
+    background-color: #7fff80;
+}
+
+.modal-highlight-3 {
+    background-color: #49ff4a;
+}
+
+.story-votebuttons-modal-box-colour-4 {
+    background-color: #d8b2d8;
+}
+
+.modal-highlight-4 {
+    background-color: #bf7fbf;
+}
+
+.story-votebuttons-modal-box-colour-5 {
+    background-color: #ffd27f;
+}
+
+.modal-highlight-5 {
+    background-color: #ffc04c;
+}
+
+.story-votebuttons-modal-box-colour-6 {
+    background-color: #ff2a2a;
+}
+
+.modal-highlight-6 {
+    background-color: #ff0000;
+}
+
+.story-votebuttons-modal-box-colour-7 {
+    background-color: #37c4df;
+}
+
+.modal-highlight-7 {
+    background-color: #1d9db5;
+}
+
+.story-votebuttons-modal-box-colour-8 {
+    background-color: #ffff32;
+}
+
+.modal-highlight-8 {
+    background-color: #ffff00;
+}
+
+.story-votebuttons-modal-box-colour-9 {
+    background-color: #32ff33;
+}
+
+.modal-highlight-9 {
+    background-color: #00ff01;
+}
+
+.story-votebuttons-modal-box-colour-10 {
+    background-color: #993299;
+}
+
+.modal-highlight-10 {
+    background-color: #732573;
+}
+
+.story-votebuttons-modal-box-colour-11 {
+    background-color: #ffae19;
+}
+
+.modal-highlight-11 {
+    background-color: #e59400;
+}
+
+.story-votebuttons-modal-box-colour-12 {
+    background-color: #FFd1d1;
+}
+
+.modal-highlight-12 {
+    background-color: #FF7C8B;
+}
+
 
 
 
