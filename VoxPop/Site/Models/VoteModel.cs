@@ -9,5 +9,7 @@
         public string BlogPostPartitionKey { get; set; }
 
         public string BlogPostRowKey { get; set; }
+
+        public string VoterComment { get; set; }
     }
 }
