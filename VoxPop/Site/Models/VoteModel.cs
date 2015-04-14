@@ -10,6 +10,6 @@
 
         public string BlogPostRowKey { get; set; }
 
-        public string VoterComment { get; set; }
+        public string voterComment { get; set; }
     }
 }

@@ -18,12 +18,12 @@
     <p>Have YOUR say on (name)'s Story.</p>
 </div>
 <div class="create-form-box">
-    @using (Html.BeginForm("Vote", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Vote", "Stories"))
     {
         @Html.AntiForgeryToken()
 
         <div class="create-form-headings create-form-headings-Content">
-            @Html.LabelFor(x => x.VoterComment)
+            @Html.LabelFor(x => x.voterComment)
         </div>
         <div>
             <div class="create-form-Content-box">
