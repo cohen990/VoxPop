@@ -103,6 +103,7 @@ namespace Site.Controllers
             string pollItemKey,
             string blogPostPartitionKey,
             string blogPostRowKey,
+            string voterComment,
             string returnUrl = null)
         {
             var model = new VoteModel
@@ -110,7 +111,8 @@ namespace Site.Controllers
                 PollItemKey = pollItemKey,
                 BlogPostPartitionKey = blogPostPartitionKey,
                 BlogPostRowKey = blogPostRowKey,
-                UserId = User.Identity.GetUserId()
+                UserId = User.Identity.GetUserId(),
+                VoterComment = voterComment
             };
 
             _blogService.Vote(model);
@@ -139,6 +141,15 @@ namespace Site.Controllers
             var targetUri = string.Format("~/Stories/{0}/{1}", updatedBlog.AuthorIdentifier, updatedBlog.BlogIdentifier);
 
             return Redirect(targetUri);
+        }
+
+        [Route("Stories/Comment/{authorIdentifier}/{articleIdentifier}")]
+        [Authorize]
+        public async Task<ActionResult> Comment(string articleIdentifier, string authorIdentifier)
+        {
+            BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+
+            return View(blog);
         }
     }
 }

@@ -378,6 +378,7 @@
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\comment-vote-ops.js" />
     <Content Include="Scripts\vote-ops.js" />
     <Content Include="Scripts\modally-baby.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -447,11 +448,11 @@
     <Content Include="Views\Stories\Edit.cshtml" />
     <Content Include="Views\Stories\Create.cshtml" />
     <Content Include="Views\Stories\Stories.cshtml" />
-    <Content Include="Views\Stories\Vote.cshtml" />
     <Content Include="Views\Stories\Index.cshtml" />
     <Content Include="Views\Shared\_DefaultMetaTags.cshtml" />
     <Content Include="Views\Shared\_MetaTags.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Stories\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

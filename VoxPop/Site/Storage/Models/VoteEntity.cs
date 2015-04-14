@@ -88,13 +88,16 @@
         /// </summary>
         public string PollOptionKey { get; set; }
 
+        public string voterComment { get; set; }
+
         public static VoteEntity For(VoteModel model)
         {
             return new VoteEntity
             {
                 PollOptionKey = model.PollItemKey.EncodePollOption(),
                 PartitionKey = model.BlogPostRowKey,
-                RowKey = model.UserId
+                RowKey = model.UserId,
+                voterComment = model.VoterComment
             };
         }
     }
