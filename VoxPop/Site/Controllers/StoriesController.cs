@@ -101,18 +101,18 @@ namespace Site.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Vote(
             string pollItemKey,
+            string userComment,
             string blogPostPartitionKey,
             string blogPostRowKey,
-            string voterComment,
             string returnUrl = null)
         {
             var model = new VoteModel
             {
                 PollItemKey = pollItemKey,
+                UserComment = userComment,
                 BlogPostPartitionKey = blogPostPartitionKey,
                 BlogPostRowKey = blogPostRowKey,
                 UserId = User.Identity.GetUserId(),
-                VoterComment = voterComment
             };
 
             _blogService.Vote(model);

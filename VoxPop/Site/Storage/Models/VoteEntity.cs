@@ -95,9 +95,9 @@
             return new VoteEntity
             {
                 PollOptionKey = model.PollItemKey.EncodePollOption(),
+                voterComment = model.UserComment,
                 PartitionKey = model.BlogPostRowKey,
-                RowKey = model.UserId,
-                voterComment = model.VoterComment
+                RowKey = model.UserId
             };
         }
     }
