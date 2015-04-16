@@ -1,6 +1,6 @@
 ﻿@using Site.Models
 @using Site.Services
-@*@model BlogModel*@
+@model BlogModel
 @{
     ViewBag.Title = "Comment";
 }
@@ -18,20 +18,20 @@
     <p>Have YOUR say on (name)'s Story.</p>
 </div>
 <div class="create-form-box">
-    @using (Html.BeginForm("Vote", "Stories"))
-    {
-        @Html.AntiForgeryToken()
-
+    @*@using (Html.BeginForm("Vote", "Stories"))
+    {*@
+        @*@Html.AntiForgeryToken()*@
         <div class="create-form-headings create-form-headings-Content">
-            @Html.LabelFor(x => x.voterComment)
+            Comment
         </div>
         <div>
             <div class="create-form-Content-box">
-                @Html.TextAreaFor(x => x.VoterComment)
+                @*@{var Comment = ' ';}
+                <input type="text" name="@Comment">*@
             </div>
-            @Html.ValidationMessageFor(x => x.VoterComment)
+            @*@Html.ValidationMessageFor(x => x.userComment)*@
         </div>
-    }
+    @*}*@
     <div class="story-votebuttons-modal-option-div">
         @{int count = 0;}
         @foreach (var pollItem in Model.Poll)
@@ -43,7 +43,7 @@
                 @using (Html.BeginForm("Vote", "Stories"))
                 {
                     @Html.AntiForgeryToken()
-
+                    <input type="text" name="userComment">
                     <input type="hidden" name="pollItemKey" value="@pollItem.Key">
                     <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                     <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
@@ -58,7 +58,6 @@
             </div>
         }
     </div>
-
 </div>
 
 
