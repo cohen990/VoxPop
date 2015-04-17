@@ -95,5 +95,15 @@
 
             await voteStore.VoteAsync(voteEntity);
         }
+
+        public async Task Comment(CommentModel model)
+        {
+            var commentStore = new TableCommentStore();
+
+            var commentEntity = CommentEntity.For(model);
+
+            await commentStore.CommentAsync(commentEntity);
+        }
+
     }
 }

@@ -101,7 +101,7 @@ namespace Site.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Vote(
             string pollItemKey,
-            string userComment,
+            //string userComment,
             string blogPostPartitionKey,
             string blogPostRowKey,
             string returnUrl = null)
@@ -109,7 +109,7 @@ namespace Site.Controllers
             var model = new VoteModel
             {
                 PollItemKey = pollItemKey,
-                UserComment = userComment,
+                //UserComment = userComment,
                 BlogPostPartitionKey = blogPostPartitionKey,
                 BlogPostRowKey = blogPostRowKey,
                 UserId = User.Identity.GetUserId(),
@@ -145,11 +145,41 @@ namespace Site.Controllers
 
         [Route("Stories/Comment/{authorIdentifier}/{articleIdentifier}")]
         [Authorize]
-        public async Task<ActionResult> Comment(string articleIdentifier, string authorIdentifier)
+        public async Task<ActionResult> StoriesComment(string articleIdentifier, string authorIdentifier)
         {
             BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
 
             return View(blog);
         }
+
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comment(
+            string commentPollItemKey,
+            string userComment,
+            string commentBlogPostPartitionKey,
+            string commentBlogPostRowKey,
+            string commentReturnUrl = null)
+        {
+            var model = new CommentModel
+            {
+                PollItemKey = commentPollItemKey,
+                VotersComment = userComment,
+                BlogPostPartitionKey = commentBlogPostPartitionKey,
+                BlogPostRowKey = commentBlogPostRowKey,
+                UserId = User.Identity.GetUserId(),
+            };
+
+            _blogService.Comment(model);
+
+            if (Url.IsLocalUrl(commentReturnUrl))
+            {
+                return Redirect(commentReturnUrl);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }
