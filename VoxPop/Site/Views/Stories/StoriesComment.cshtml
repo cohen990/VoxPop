@@ -1,0 +1,87 @@
+﻿@model Site.Models.BlogModel
+@{
+    ViewBag.Title = "Comment";
+}
+
+@section MetaTags
+{
+    @Html.Partial("_DefaultMetaTags")
+}
+
+<script src="~/Scripts/comment-vote-ops.js"></script>
+<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
+
+<h1 class="page-headings">Comment</h1>
+<div class="edit-intro">
+    <p>Have YOUR say on (name)'s Story.</p>
+</div>
+<div class="create-form-box">
+    @using (Html.BeginForm("Comment", "Stories")) 
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="create-form-headings create-form-headings-Content">
+            Comment
+        </div>
+        <div>
+            <div class="create-form-Content-box">
+                <input type="text" name="userComment">
+                <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
+                <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
+            </div>
+        </div>
+
+        <p class="create-form-descriptions">Comment is free, but facts are sacred...</p>
+
+        @*@Html.HiddenFor(x => x.AuthorIdentifier)
+
+        @Html.HiddenFor(x => x.BlogIdentifier)*@
+
+        <div class="story-votebuttons-modal-option-div">
+            @{int count = 0;}
+            @foreach (var pollItem in Model.Poll)
+            {
+                <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
+                    @{var option = pollItem.Key.Trim();}
+                    <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@option&nbsp:</h4>
+                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span>
+                    @using (Html.BeginForm("Vote", "Stories"))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                        <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                        <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                        <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                        <input id="story-votebuttons-modal-button-@count" class="story-votebuttons-modal-button" type="submit" value="+1">
+                    }
+                    <div id="story-votebuttons-modal-box-colour-@count" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@count"></div>
+                    @{count++;}
+                    <script>
+                        chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                    </script>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        plugins: [
+                "advlist autolink lists link charmap print anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime table contextmenu paste"
+        ],
+        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
+        importcss_append: true,
+        removed_menuitems: 'newdocument',
+        resize: "both"
+    });
+</script>
+
+<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
+</form>
