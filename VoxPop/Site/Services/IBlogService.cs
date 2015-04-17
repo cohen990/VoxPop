@@ -14,6 +14,8 @@
 
         Task Vote(VoteModel model);
 
+        Task Comment(CommentModel model);
+
         Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey);
 
         void UpdateBlog(BlogModel updatedBlog);
