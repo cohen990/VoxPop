@@ -154,13 +154,25 @@ namespace Site.Controllers
 
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Comment(
+        public async Task<ActionResult> Comment(
+            string pollItemKey,
+            string blogPostPartitionKey,
+            string blogPostRowKey,
+
             string commentPollItemKey,
             string userComment,
             string commentBlogPostPartitionKey,
             string commentBlogPostRowKey,
             string commentReturnUrl = null)
         {
+            var model2 = new VoteModel
+            {
+                PollItemKey = pollItemKey,
+                BlogPostPartitionKey = blogPostPartitionKey,
+                BlogPostRowKey = blogPostRowKey,
+                UserId = User.Identity.GetUserId(),
+            };
+
             var model = new CommentModel
             {
                 PollItemKey = commentPollItemKey,
@@ -170,7 +182,10 @@ namespace Site.Controllers
                 UserId = User.Identity.GetUserId(),
             };
 
-            _blogService.Comment(model);
+            
+            _blogService.Vote(model2);
+
+            await _blogService.Comment(model);
 
             if (Url.IsLocalUrl(commentReturnUrl))
             {
