@@ -18,6 +18,7 @@
 <div class="create-form-box">
     @using (Html.BeginForm())
     {
+        string FirstName = "";
         <p>
             <label for="FirstName">First Name:</label>
             @Html.TextBox("FirstName")
@@ -46,7 +47,7 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <input type="hidden" name="userComment" value="FirstName">
+                        <input type="hidden" name="userComment" value="@FirstName">
 
                         <input type="hidden" name="commentPollItemKey" value="@pollItem.Key">
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
