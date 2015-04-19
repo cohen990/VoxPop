@@ -16,28 +16,24 @@
     <p>Have YOUR say on (name)'s Story.</p>
 </div>
 <div class="create-form-box">
-    @using (Html.BeginForm("Comment", "Stories")) 
+    @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+        <p>
+            <label for="FirstName">First Name:</label>
+            @Html.TextBox("FirstName")
+            @Html.ValidationMessage("FirstName", "*")
+        </p>
+        @*@Html.AntiForgeryToken()*@
 
         <div class="create-form-headings create-form-headings-Content">
             Comment
         </div>
-        <div>
-            <div class="create-form-Content-box">
-                <input type="text" name="userComment">
-                <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
-                <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
-            </div>
-        </div>
-
         <p class="create-form-descriptions">Comment is free, but facts are sacred...</p>
-
-        @*@Html.HiddenFor(x => x.AuthorIdentifier)
-
-        @Html.HiddenFor(x => x.BlogIdentifier)*@
-
+        <div class="create-form-Content-box">
+            @*@{var tempComment = "hello";}*@
+            @*@{string tempComment = " ";}*@
+            @*Html.TextArea(@{string tempComment = "Special Brew";})*@
+        </div>
         <div class="story-votebuttons-modal-option-div">
             @{int count = 0;}
             @foreach (var pollItem in Model.Poll)
@@ -46,9 +42,17 @@
                     @{var option = pollItem.Key.Trim();}
                     <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@option&nbsp:</h4>
                     <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span>
-                    @using (Html.BeginForm("Vote", "Stories"))
+                    @using (Html.BeginForm("Comment", "Stories"))
                     {
-                        @*@Html.AntiForgeryToken()*@
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="userComment" value="FirstName">
+
+                        <input type="hidden" name="commentPollItemKey" value="@pollItem.Key">
+                        <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
+                        <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
+
+
                         <input type="hidden" name="pollItemKey" value="@pollItem.Key">
                         <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
