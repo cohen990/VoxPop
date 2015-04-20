@@ -23,9 +23,17 @@
 
         public async Task CommentAsync(CommentEntity entity)
         {
-            var operation = TableOperation.InsertOrReplace(entity);
+            var operation = TableOperation.Insert(entity);
             await _table.ExecuteAsync(operation);
         }
+
+        public void MergeComment(CommentEntity entity)
+        {
+            TableOperation operation = TableOperation.Merge(entity);
+
+            _table.Execute(operation);
+        }
+
 
         private CloudStorageAccount GetStorageAccount()
         {
