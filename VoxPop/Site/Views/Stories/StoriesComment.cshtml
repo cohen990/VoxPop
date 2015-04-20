@@ -9,32 +9,22 @@
 }
 
 <script src="~/Scripts/comment-vote-ops.js"></script>
-<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
 
 <h1 class="page-headings">Comment</h1>
 <div class="edit-intro">
     <p>Have YOUR say on (name)'s Story.</p>
 </div>
 <div class="create-form-box">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Comment", "Stories"))
     {
-        string FirstName = "";
-        <p>
-            <label for="FirstName">First Name:</label>
-            @Html.TextBox("FirstName")
-            @Html.ValidationMessage("FirstName", "*")
-        </p>
-        @*@Html.AntiForgeryToken()*@
-
         <div class="create-form-headings create-form-headings-Content">
             Comment
         </div>
-        <p class="create-form-descriptions">Comment is free, but facts are sacred...</p>
         <div class="create-form-Content-box">
-            @*@{var tempComment = "hello";}*@
-            @*@{string tempComment = " ";}*@
-            @*Html.TextArea(@{string tempComment = "Special Brew";})*@
+            <textarea type="text" id="comment-1"></textarea>
         </div>
+        <p class="create-form-descriptions">Comment is free, but facts are sacred...</p>
+
         <div class="story-votebuttons-modal-option-div">
             @{int count = 0;}
             @foreach (var pollItem in Model.Poll)
@@ -47,8 +37,7 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <input type="hidden" name="userComment" value="@FirstName">
-
+                        <input type="hidden" name="userComment" class="comment-2">
                         <input type="hidden" name="commentPollItemKey" value="@pollItem.Key">
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
@@ -73,20 +62,14 @@
 
 
 <script type="text/javascript">
-    tinymce.init({
-        selector: 'textarea',
-        plugins: [
-                "advlist autolink lists link charmap print anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime table contextmenu paste"
-        ],
-        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
-        importcss_append: true,
-        removed_menuitems: 'newdocument',
-        resize: "both"
+    var $mail = $(".comment-2");
+
+    $("#comment-1").keyup(function() {
+        $mail.val( this.value );
+    });
+
+    $("#comment-1").blur(function() {
+        $mail.val( this.value );
     });
 </script>
 
-<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
-    <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
-</form>
