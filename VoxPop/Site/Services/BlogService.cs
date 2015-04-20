@@ -18,11 +18,14 @@
 
         private readonly IVoteService _voteService;
 
-        public BlogService(IBlogStore blogStore, IImageStore imageStore, IVoteService voteService)
+        private readonly ICommentStore _commentStore;
+
+        public BlogService(IBlogStore blogStore, IImageStore imageStore, IVoteService voteService, ICommentStore commentStore)
         {
             _blogStore = blogStore;
             _imageStore = imageStore;
             _voteService = voteService;
+            _commentStore = commentStore;
         }
 
         public async Task CreateBlogAsync(
@@ -54,6 +57,16 @@
 
             return sortedBlogs;
         }
+
+        public IEnumerable<CommentEntity> GetAllComments()
+        {
+            IEnumerable<CommentEntity> comments = _commentStore.GetAllComments();
+
+            List<CommentEntity> sortedComments = comments.OrderByDescending(b => b.Timestamp).ToList();
+
+            return sortedComments;
+        }
+
 
         public async Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey)
         {

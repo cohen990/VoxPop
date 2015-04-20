@@ -27,14 +27,6 @@
             await _table.ExecuteAsync(operation);
         }
 
-        public void MergeComment(CommentEntity entity)
-        {
-            TableOperation operation = TableOperation.Merge(entity);
-
-            _table.Execute(operation);
-        }
-
-
         private CloudStorageAccount GetStorageAccount()
         {
             string connectionString = CloudConfigurationManager.GetSetting("voxpop.commentstorage");
@@ -65,5 +57,15 @@
 
             return result;
         }
+
+        public IEnumerable<CommentEntity> GetAllComments()
+        {
+            var query = new TableQuery<CommentEntity>();
+
+            IEnumerable<CommentEntity> entities = _table.ExecuteQuery(query).Select(x => x);
+
+            return entities;
+        }
+
     }
 }

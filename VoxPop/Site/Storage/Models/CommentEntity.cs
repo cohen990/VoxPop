@@ -26,6 +26,7 @@
         public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
         {
             PollOptionKey = properties["PollOptionKey"].StringValue;
+            Commenter = properties["Commenter"].StringValue;
             Comment = properties["Comment"].StringValue;
         }
 
@@ -46,6 +47,7 @@
         {
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
             result.Add("PollOptionKey", new EntityProperty(PollOptionKey));
+            result.Add("Commenter", new EntityProperty(Commenter));
             result.Add("Comment", new EntityProperty(Comment));
 
             return result;
@@ -90,6 +92,10 @@
         /// </summary>
         public string PollOptionKey { get; set; }
 
+        //Unique ID of the user commenting
+        public string Commenter { get; set; }
+
+        //Their comment
         public string Comment { get; set; }
 
         public static CommentEntity For(CommentModel model)
@@ -97,9 +103,10 @@
             return new CommentEntity
             {
                 PollOptionKey = model.PollItemKey.EncodePollOption(),
+                Commenter = model.UserId,
                 Comment = model.VotersComment,
                 PartitionKey = model.BlogPostRowKey,
-                RowKey = model.UserId
+                RowKey = model.CommentTimestamp
             };
         }
     }

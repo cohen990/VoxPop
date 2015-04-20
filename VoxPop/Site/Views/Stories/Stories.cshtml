@@ -104,6 +104,9 @@
         }
     </div>
     <a href="~/Stories/Comment/@Model.AuthorIdentifier/@Model.BlogIdentifier">Comment</a>
+
+
+    @{Html.Partial("_CommentsBox", new Site.Storage.Models.CommentEntity());}
 </div>
 
 <script>
