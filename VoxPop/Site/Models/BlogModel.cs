@@ -39,8 +39,6 @@
         {
             PollOptions = new List<string>();
         }
-
-        public string tempComment { get; set; }
     }
 }
 

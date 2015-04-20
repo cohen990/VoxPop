@@ -9,6 +9,7 @@ namespace Site.Controllers
     using Models;
     using Ninject.Infrastructure.Language;
     using Services;
+    using System;
 
     public class StoriesController : Controller
     {
@@ -24,6 +25,13 @@ namespace Site.Controllers
             var blogs = _blogService.GetAllBlogs();
 
             return View(blogs);
+        }
+
+        public ActionResult _CommentsBox()
+        {
+            var comments = _blogService.GetAllComments();
+
+            return View(comments);
         }
 
         public ActionResult AuthorStories(string authorIdentifier)
@@ -101,7 +109,6 @@ namespace Site.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Vote(
             string pollItemKey,
-            //string userComment,
             string blogPostPartitionKey,
             string blogPostRowKey,
             string returnUrl = null)
@@ -109,7 +116,6 @@ namespace Site.Controllers
             var model = new VoteModel
             {
                 PollItemKey = pollItemKey,
-                //UserComment = userComment,
                 BlogPostPartitionKey = blogPostPartitionKey,
                 BlogPostRowKey = blogPostRowKey,
                 UserId = User.Identity.GetUserId(),
@@ -163,7 +169,8 @@ namespace Site.Controllers
             string userComment,
             string commentBlogPostPartitionKey,
             string commentBlogPostRowKey,
-            string commentReturnUrl = null)
+
+            string returnUrl = null)
         {
             var model2 = new VoteModel
             {
@@ -180,16 +187,16 @@ namespace Site.Controllers
                 BlogPostPartitionKey = commentBlogPostPartitionKey,
                 BlogPostRowKey = commentBlogPostRowKey,
                 UserId = User.Identity.GetUserId(),
+                CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fff", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             };
 
-            
             _blogService.Vote(model2);
 
             await _blogService.Comment(model);
 
-            if (Url.IsLocalUrl(commentReturnUrl))
+            if (Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(commentReturnUrl);
+                return Redirect(returnUrl);
             }
 
             return RedirectToAction("Index", "Home");

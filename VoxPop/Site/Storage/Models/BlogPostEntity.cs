@@ -15,7 +15,14 @@ namespace Site.Storage.Models
         {
         }
 
-        public BlogPostEntity(string blogTitle, Uri imageUri, string blogContent, IEnumerable<string> pollOptions, string blogImageCaption, string userIdentifier, DateTime currentTime, string author)
+        public BlogPostEntity(
+            string blogTitle,
+            Uri imageUri,
+            string blogContent,
+            IEnumerable<string> pollOptions, string blogImageCaption,
+            string userIdentifier,
+            DateTime currentTime,
+            string author)
         {
             PartitionKey = userIdentifier;
             RowKey = Guid.NewGuid().ToString("N");
@@ -115,6 +122,7 @@ namespace Site.Storage.Models
         /// <value>
         /// The entity's timestamp. The property is populated by the Windows Azure Table Service.
         /// </value>
+        /// This changes when a Story is updated --> can be used a 'Last Edited on...' in Stories
         public DateTimeOffset Timestamp { get; set; }
 
         /// <summary>
@@ -130,7 +138,7 @@ namespace Site.Storage.Models
         /// <value>
         /// The entity's timestamp.
         /// </value>
-        public string ETag { get; set;}
+        public string ETag { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the blog.

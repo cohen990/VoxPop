@@ -10,6 +10,8 @@
     {
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
+        IEnumerable<CommentEntity> GetAllComments();
+
         IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey);
 
         Task Vote(VoteModel model);
