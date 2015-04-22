@@ -1,5 +1,6 @@
 ﻿@using Site.Models
 @using Site.Services
+@using Site.Storage.Models;
 @model BlogModel
 @{
     ViewBag.Title = @Model.Title;
@@ -106,7 +107,7 @@
     <a href="~/Stories/Comment/@Model.AuthorIdentifier/@Model.BlogIdentifier">Comment</a>
 
 
-    @{Html.Partial("_CommentsBox", new Site.Storage.Models.CommentEntity());}
+    @Html.Partial("_CommentsBox", new List<CommentEntity>())
 </div>
 
 <script>

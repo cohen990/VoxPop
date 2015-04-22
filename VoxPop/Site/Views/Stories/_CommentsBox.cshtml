@@ -1,16 +1,18 @@
-﻿@model IEnumerable<Site.Storage.Models.CommentEntity>
-@section MetaTags
+﻿@model List<Site.Storage.Models.CommentEntity>
+@*@section MetaTags
 {
     @Html.Partial("_DefaultMetaTags")
-}
+}*@
 
 
 
 
-@if (@Model != null)
-{
-    foreach (var votersComment in Model)
+@*@if (@Model != null)
+{*@
+    @foreach (var votersComment in Model)
     {
         <p>@votersComment.Comment</p>
     }
-}
+@*}*@
+
+<p>Hello there.</p>
