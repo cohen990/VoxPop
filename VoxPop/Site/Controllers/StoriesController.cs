@@ -10,6 +10,9 @@ namespace Site.Controllers
     using Ninject.Infrastructure.Language;
     using Services;
     using System;
+    using System.Collections.Generic;
+    using Site.Storage.Models;
+
 
     public class StoriesController : Controller
     {
@@ -45,6 +48,8 @@ namespace Site.Controllers
         public async Task<ActionResult> Stories(string articleIdentifier, string authorIdentifier)
         {
             var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+
+            new List<CommentEntity>();
 
             return View(blog);
         }
