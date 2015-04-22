@@ -49,7 +49,7 @@ namespace Site.Controllers
         {
             var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
 
-            new List<CommentEntity>();
+            new List<Site.Storage.Models.CommentEntity>();
 
             return View(blog);
         }
