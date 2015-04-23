@@ -13,7 +13,6 @@ namespace Site.Controllers
     using System.Collections.Generic;
     using Site.Storage.Models;
 
-
     public class StoriesController : Controller
     {
         private readonly IBlogService _blogService;
@@ -30,9 +29,10 @@ namespace Site.Controllers
             return View(blogs);
         }
 
-        public ActionResult _CommentsBox()
+        [ChildActionOnly]
+        public ActionResult _CommentsBox(string blogRowKey)
         {
-            var comments = _blogService.GetAllComments();
+            var comments = _blogService.GetAllComments(blogRowKey);
 
             return View(comments);
         }
@@ -48,8 +48,6 @@ namespace Site.Controllers
         public async Task<ActionResult> Stories(string articleIdentifier, string authorIdentifier)
         {
             var blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
-
-            new List<Site.Storage.Models.CommentEntity>();
 
             return View(blog);
         }
@@ -182,7 +180,7 @@ namespace Site.Controllers
                 PollItemKey = pollItemKey,
                 BlogPostPartitionKey = blogPostPartitionKey,
                 BlogPostRowKey = blogPostRowKey,
-                UserId = User.Identity.GetUserId(),
+                UserId = User.Identity.GetUserId()
             };
 
             var model = new CommentModel
@@ -192,6 +190,7 @@ namespace Site.Controllers
                 BlogPostPartitionKey = commentBlogPostPartitionKey,
                 BlogPostRowKey = commentBlogPostRowKey,
                 UserId = User.Identity.GetUserId(),
+                CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
                 CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fff", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             };
 

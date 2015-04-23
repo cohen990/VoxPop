@@ -58,15 +58,14 @@
             return sortedBlogs;
         }
 
-        public IEnumerable<CommentEntity> GetAllComments()
+        public IEnumerable<CommentEntity> GetAllComments(string blogRowKey)
         {
-            IEnumerable<CommentEntity> comments = _commentStore.GetAllComments();
+            IEnumerable<CommentEntity> comments = _commentStore.GetAllComments(blogRowKey);
 
-            List<CommentEntity> sortedComments = comments.OrderByDescending(b => b.Timestamp).ToList();
+            List<CommentEntity> sortedComments = comments.OrderBy(b => b.RowKey).ToList();
 
             return sortedComments;
         }
-
 
         public async Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey)
         {
@@ -76,6 +75,7 @@
 
             return entity.ToModel();
         }
+
 
         public void UpdateBlog(BlogModel updatedBlog)
         {

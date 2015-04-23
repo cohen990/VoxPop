@@ -107,7 +107,7 @@
     <a href="~/Stories/Comment/@Model.AuthorIdentifier/@Model.BlogIdentifier">Comment</a>
 
 
-    @Html.Partial("_CommentsBox", new List<CommentEntity>())
+    @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier })
 </div>
 
 <script>
