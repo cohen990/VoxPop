@@ -10,7 +10,8 @@
     {
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
-        IEnumerable<CommentEntity> GetAllComments();
+        IEnumerable<CommentEntity> GetAllComments(string blogRowKey);
+
 
         IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey);
 

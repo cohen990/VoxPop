@@ -6,7 +6,7 @@
 
     public interface ICommentStore
     {
-        IEnumerable<CommentEntity> GetAllComments();
+        IEnumerable<CommentEntity> GetAllComments(string blogRowKey);
 
         Task CommentAsync(CommentEntity entity);
         Task<CommentEntity> GetAsync(string partitionKey, string rowKey);

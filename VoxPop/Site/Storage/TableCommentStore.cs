@@ -58,14 +58,28 @@
             return result;
         }
 
-        public IEnumerable<CommentEntity> GetAllComments()
+        public IEnumerable<CommentEntity> GetAllComments(string blogRowKey)
         {
             var query = new TableQuery<CommentEntity>();
 
-            IEnumerable<CommentEntity> entities = _table.ExecuteQuery(query).Select(x => x);
+            IEnumerable<CommentEntity> entities = _table.ExecuteQuery(query)
+                .Where(x => x.PartitionKey == blogRowKey)
+                .Select(x => x);
 
             return entities;
         }
+
+        public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)
+        {
+            TableOperation operation = TableOperation.Retrieve<BlogPostEntity>(entityPartitionKey, entityRowKey);
+
+            TableResult result = _table.Execute(operation);
+
+            var entity = result.Result as BlogPostEntity;
+
+            return entity;
+        }
+
 
     }
 }

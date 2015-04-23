@@ -1,18 +1,28 @@
-﻿@model List<Site.Storage.Models.CommentEntity>
-@*@section MetaTags
+﻿@model IEnumerable<Site.Storage.Models.CommentEntity>
+@Styles.Render("~/Content/css")
+@{
+    Layout = "";
+}
+
+@section MetaTags
 {
     @Html.Partial("_DefaultMetaTags")
-}*@
+}
 
+<h2>Voter Comments</h2>
 
-
-
-@*@if (@Model != null)
-{*@
-    @foreach (var votersComment in Model)
+@if (@Model != null)
+{
+    for (var i = 0; i < Model.Count(); i++)
     {
-        <p>@votersComment.Comment</p>
+        if (Model.ElementAt(i).PollOptionKey.Count() <= 2)
+        {
+            foreach (var voteComm in Model)
+            {
+                @voteComm.Comment;
+            }
+        }
     }
-@*}*@
 
-<p>Hello there.</p>
+}
+
