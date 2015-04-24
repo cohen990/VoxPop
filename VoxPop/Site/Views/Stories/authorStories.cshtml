@@ -23,7 +23,7 @@
     string currentAuthorUN = Request.QueryString["authID"];
     foreach (var blogPost in Model)
     {
-        if (@blogPost.PartitionKey == currentAuthorUN)
+        if (blogPost.PartitionKey == currentAuthorUN)
         {
             <script>
                 chartData = [];

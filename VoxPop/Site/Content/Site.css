@@ -990,7 +990,23 @@ input[type="text"] {
     width: 25%;
     transition-duration: 1s;
 }
+
+
+/**              ***               **/
 /*Edit Page*/
 .edit-intro {
     margin-left: 5%;
+}
+
+
+/**              ***               **/
+/*_CommentsBox Partial*/
+.comment-box-sbs-1 {
+    float: left;
+    max-width: 50%;
+}
+
+.comment-box-sbs-2 {
+    float: right;
+    max-width: 50%;
 }

@@ -1,28 +1,61 @@
-﻿@model IEnumerable<Site.Storage.Models.CommentEntity>
+﻿@model List<Site.Storage.Models.CommentEntity>
 @Styles.Render("~/Content/css")
-@{
-    Layout = "";
-}
-
+@using Microsoft.WindowsAzure.Storage.Table;
 @section MetaTags
 {
     @Html.Partial("_DefaultMetaTags")
 }
-
-<h2>Voter Comments</h2>
-
-@if (@Model != null)
-{
-    for (var i = 0; i < Model.Count(); i++)
-    {
-        if (Model.ElementAt(i).PollOptionKey.Count() <= 2)
-        {
-            foreach (var voteComm in Model)
-            {
-                @voteComm.Comment;
-            }
-        }
-    }
-
+@{
+    Layout = "";
 }
 
+@if (@Model.Select(x => x.PollOptionKey).Count() != 0)
+{
+
+    <h2>Voter Comments</h2>
+
+    if (Model.Select(x => x.PollOptionKey).Distinct().Count() <= 2)
+    {
+        var Op1 = Model.Select(x => x.PollOptionKey).Distinct().First();
+        var decodedOp1 = Op1.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+        var Op2 = Model.Select(x => x.PollOptionKey).Distinct().Last();
+        var decodedOp2 = Op2.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+
+        <div class="comment-box-sbs-1">
+            <h3>Comments for: @decodedOp1</h3>
+            @foreach (var voteComment in Model)
+            {
+                if (@voteComment.PollOptionKey == Op1)
+                {
+                    var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+                    <h6>@decodedOp</h6>
+                    <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+                }
+            }
+        </div>
+        if (Model.Select(x => x.PollOptionKey).Count() > 1)
+        {
+            <div class="comment-box-sbs-2">
+                <h3>Comments for: @decodedOp2</h3>
+                @foreach (var voteComment in Model)
+                {
+                    if (voteComment.PollOptionKey == Op2)
+                    {
+                        var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+                        <h6>@decodedOp</h6>
+                        <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+                    }
+                }
+            </div>
+        }
+    }
+    else
+    {
+        foreach (var voteComment in Model)
+        {
+            var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+            <h6>@decodedOp</h6>
+            <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+        }
+    }
+}
