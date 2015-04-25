@@ -15,7 +15,7 @@
 
     <h1 class="comment-box-title">Voter Comments</h1>
 
-    @*if (Model.Select(x => x.PollOptionKey).Distinct().Count() <= 2)
+    if (Model.Select(x => x.PollOptionKey).Distinct().Count() <= 2)
     {
         var Op1 = Model.Select(x => x.PollOptionKey).Distinct().First();
         var decodedOp1 = HttpUtility.UrlDecode(Op1);
@@ -47,18 +47,23 @@
                 }
             </div>
         }
-    }*@
-    if (Model.Select(x => x.CommentId).Distinct().Count() <= 2)
+    }
+
+    else
     {
-        <div style="background-color: red;">
-            @foreach (var voteComment in Model)
+        foreach (var voteComment in Model.OrderBy(x => x.RowKey) )
+        {
+            var i = 1;
+            if (voteComment.CommentId == Model.Select(x => x.CommentId).ElementAt(2) && voteComment.RowKey != Model.Select(x => x.RowKey).ElementAt(4))
             {
-                var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);
-                <h4>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h4>
-                <h6>@voteComment.Timestamp.ToString("g")</h6>
-                <p style="white-space:pre-wrap;">@voteComment.Comment @voteComment.CommentId</p>
-                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.CommentId }, null)
+                <div style="margin-left: 50px">
+                    @{var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);}
+                    <h4>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h4>
+                    <h6>@voteComment.Timestamp.ToString("g")</h6>
+                    <p style="white-space:pre-wrap;">@voteComment.Comment @voteComment.CommentId</p>
+                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.CommentId }, null)
+                </div>
             }
-        </div>
+        }
     }
 }
