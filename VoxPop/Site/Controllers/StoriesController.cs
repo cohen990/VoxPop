@@ -195,7 +195,10 @@ namespace Site.Controllers
                     UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
                     CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
                     CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
-                    CommentIdentifier = Guid.NewGuid().ToString("N").Substring(0, 6)
+                    CommentIdentifier = Guid.NewGuid().ToString("N").Substring(0, 6),
+                    ReplyYayOrNay = false,
+                    CommentPic = "BOHICA"
+
                 };
 
 
@@ -214,7 +217,9 @@ namespace Site.Controllers
                     UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
                     CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
                     CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
-                    CommentIdentifier = commentId
+                    CommentIdentifier = commentId,
+                    ReplyYayOrNay = true,
+                    CommentPic = "BOHICA"
                 };
 
 

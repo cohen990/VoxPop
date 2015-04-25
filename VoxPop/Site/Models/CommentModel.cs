@@ -20,6 +20,10 @@ namespace Site.Models
 
         public string CommentIdentifier { get; set; }
 
+        public bool ReplyYayOrNay { get; set; }
+
+        public string CommentPic { get; set; }
+
         public string BlogPostPartitionKey { get; set; }
 
         public string BlogPostRowKey { get; set; }
