@@ -1001,6 +1001,9 @@ input[type="text"] {
 
 /**              ***               **/
 /*_CommentsBox Partial*/
+.comment-box-title {
+    font-size:47px;
+}
 .comment-box-sbs-1 {
     float: left;
     max-width: 50%;

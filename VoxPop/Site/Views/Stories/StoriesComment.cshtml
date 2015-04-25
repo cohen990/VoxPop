@@ -36,8 +36,7 @@
                     @using (Html.BeginForm("Comment", "Stories"))
                     {
                         @Html.AntiForgeryToken()
-
-                        <input type="hidden" name="userComment" class="comment-2">
+                        <input type="hidden" name="userComment" class="comment-2" xml:space="preserve">
                         <input type="hidden" name="commentPollItemKey" value="@pollItem.Key">
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">

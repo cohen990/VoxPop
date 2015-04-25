@@ -62,7 +62,7 @@
         {
             IEnumerable<CommentEntity> comments = _commentStore.GetAllComments(blogRowKey);
 
-            List<CommentEntity> sortedComments = comments.OrderBy(b => b.RowKey).ToList();
+            List<CommentEntity> sortedComments = comments.OrderByDescending(b => b.RowKey).ToList();
 
             return sortedComments;
         }
@@ -86,9 +86,9 @@
             _blogStore.MergeBlog(originalBlog);
         }
 
-        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey)
+        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)
         {
-            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAuthorBlogs(blogPartitionKey);
+            IEnumerable<BlogPostEntity> blogs = _blogStore.GetAuthorBlogs(Auth);
 
             IEnumerable<BlogPostEntity> blogsWithVotes = blogs
                 .Select(x => _voteService.RetrieveVotes(x)
