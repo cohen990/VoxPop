@@ -18,6 +18,8 @@ namespace Site.Models
 
         public string VotersComment { get; set; }
 
+        public string CommentIdentifier { get; set; }
+
         public string BlogPostPartitionKey { get; set; }
 
         public string BlogPostRowKey { get; set; }

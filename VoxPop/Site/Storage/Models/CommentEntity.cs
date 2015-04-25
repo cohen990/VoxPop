@@ -29,6 +29,7 @@
             CommenterUsername = properties["CommenterUsername"].StringValue;
             Commenter = properties["Commenter"].StringValue;
             Comment = properties["Comment"].StringValue;
+            CommentId = properties["CommentId"].StringValue;
         }
 
         /// <summary>
@@ -51,6 +52,7 @@
             result.Add("CommenterUsername", new EntityProperty(CommenterUsername));
             result.Add("Commenter", new EntityProperty(Commenter));
             result.Add("Comment", new EntityProperty(Comment));
+            result.Add("CommentId", new EntityProperty(CommentId));
 
             return result;
         }
@@ -103,6 +105,9 @@
         //Their comment
         public string Comment { get; set; }
 
+        //ID unique to comment, only shared by replies to that comments
+        public string CommentId { get; set; }
+
         public static CommentEntity For(CommentModel model)
         {
             return new CommentEntity
@@ -111,6 +116,7 @@
                 CommenterUsername = model.UserId,
                 Commenter = model.CommenterName,
                 Comment = model.VotersComment,
+                CommentId = model.CommentIdentifier,
                 PartitionKey = model.BlogPostRowKey,
                 RowKey = model.CommentTimestamp
             };

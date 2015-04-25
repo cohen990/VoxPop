@@ -154,7 +154,7 @@ namespace Site.Controllers
 
         [Route("Stories/Comment/{authorIdentifier}/{articleIdentifier}")]
         [Authorize]
-        public async Task<ActionResult> StoriesComment(string articleIdentifier, string authorIdentifier)
+        public async Task<ActionResult> StoriesComment(string articleIdentifier, string authorIdentifier, string replyId)
         {
             BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
 
@@ -172,6 +172,7 @@ namespace Site.Controllers
             string userComment,
             string commentBlogPostPartitionKey,
             string commentBlogPostRowKey,
+            string commentId,
 
             string returnUrl = null)
         {
@@ -183,20 +184,44 @@ namespace Site.Controllers
                 UserId = User.Identity.GetUserId()
             };
 
-            var model = new CommentModel
+            if (commentId == "")
             {
-                PollItemKey = commentPollItemKey,
-                VotersComment = userComment,
-                BlogPostPartitionKey = commentBlogPostPartitionKey,
-                BlogPostRowKey = commentBlogPostRowKey,
-                UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
-                CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
-                CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fff", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            };
+                var model = new CommentModel
+                {
+                    PollItemKey = commentPollItemKey,
+                    VotersComment = userComment,
+                    BlogPostPartitionKey = commentBlogPostPartitionKey,
+                    BlogPostRowKey = commentBlogPostRowKey,
+                    UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
+                    CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
+                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
+                    CommentIdentifier = Guid.NewGuid().ToString("N").Substring(0, 6)
+                };
 
-            _blogService.Vote(model2);
 
-            await _blogService.Comment(model);
+                _blogService.Vote(model2);
+
+                await _blogService.Comment(model);
+            }
+            else
+            {
+                var model = new CommentModel
+                {
+                    PollItemKey = commentPollItemKey,
+                    VotersComment = userComment,
+                    BlogPostPartitionKey = commentBlogPostPartitionKey,
+                    BlogPostRowKey = commentBlogPostRowKey,
+                    UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
+                    CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
+                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
+                    CommentIdentifier = commentId
+                };
+
+
+                _blogService.Vote(model2);
+
+                await _blogService.Comment(model);
+            }
 
             if (Url.IsLocalUrl(returnUrl))
             {
@@ -204,8 +229,8 @@ namespace Site.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+
+
         }
-
-
     }
 }
