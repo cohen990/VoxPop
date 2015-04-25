@@ -37,9 +37,9 @@ namespace Site.Controllers
             return View(comments);
         }
 
-        public ActionResult AuthorStories(string authorIdentifier)
+        public ActionResult AuthorStories(string Auth)
         {
-            var blogs = _blogService.GetAuthorBlogs(authorIdentifier);
+            var blogs = _blogService.GetAuthorBlogs(Auth);
 
             return View(blogs);
         }
@@ -189,7 +189,7 @@ namespace Site.Controllers
                 VotersComment = userComment,
                 BlogPostPartitionKey = commentBlogPostPartitionKey,
                 BlogPostRowKey = commentBlogPostRowKey,
-                UserId = User.Identity.GetUserId(),
+                UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
                 CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
                 CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fff", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             };

@@ -30,11 +30,13 @@ namespace Site.Storage
             return entities;
         }
 
-        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string entityPartitionKey)
+        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)
         {
             var query = new TableQuery<BlogPostEntity>();
 
-            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query).Select(x => x);
+            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query)
+                .Where(x => x.PartitionKey == Auth)
+                .Select(x => x);
 
             return entities;
         }

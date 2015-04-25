@@ -1,10 +1,11 @@
 ﻿@model List<Site.Storage.Models.CommentEntity>
 @Styles.Render("~/Content/css")
-@using Microsoft.WindowsAzure.Storage.Table;
+
 @section MetaTags
 {
     @Html.Partial("_DefaultMetaTags")
 }
+
 @{
     Layout = "";
 }
@@ -12,38 +13,36 @@
 @if (@Model.Select(x => x.PollOptionKey).Count() != 0)
 {
 
-    <h2>Voter Comments</h2>
+    <h1 class="comment-box-title">Voter Comments</h1>
 
     if (Model.Select(x => x.PollOptionKey).Distinct().Count() <= 2)
     {
         var Op1 = Model.Select(x => x.PollOptionKey).Distinct().First();
-        var decodedOp1 = Op1.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+        var decodedOp1 = HttpUtility.UrlDecode(Op1);
         var Op2 = Model.Select(x => x.PollOptionKey).Distinct().Last();
-        var decodedOp2 = Op2.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
+        var decodedOp2 = HttpUtility.UrlDecode(Op2);
 
         <div class="comment-box-sbs-1">
-            <h3>Comments for: @decodedOp1</h3>
+            <h3>People who voted for @decodedOp1 say:</h3>
             @foreach (var voteComment in Model)
             {
                 if (@voteComment.PollOptionKey == Op1)
                 {
-                    var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
-                    <h6>@decodedOp</h6>
-                    <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+                    <h3>@Html.ActionLink(voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null)</h3> @voteComment.Timestamp.ToString("g")
+                    <p style="white-space:pre-wrap;">@voteComment.Comment</p>
                 }
             }
         </div>
-        if (Model.Select(x => x.PollOptionKey).Count() > 1)
+        if (Model.Select(x => x.PollOptionKey).Distinct().Count() > 1)
         {
             <div class="comment-box-sbs-2">
-                <h3>Comments for: @decodedOp2</h3>
+                <h3>People who voted for @decodedOp2 say:</h3>
                 @foreach (var voteComment in Model)
                 {
                     if (voteComment.PollOptionKey == Op2)
                     {
-                        var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
-                        <h6>@decodedOp</h6>
-                        <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+                        <h3>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null)</h3> @voteComment.Timestamp.ToString("g")
+                        <p style="white-space:pre-wrap;">@voteComment.Comment </p>
                     }
                 }
             </div>
@@ -53,9 +52,10 @@
     {
         foreach (var voteComment in Model)
         {
-            var decodedOp = @voteComment.PollOptionKey.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
-            <h6>@decodedOp</h6>
-            <p>@voteComment.Comment @voteComment.Timestamp.ToString("g")</p>
+            var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);
+            <h5>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h5>
+            <h6>@voteComment.Timestamp.ToString("g")</h6>
+            <p style="white-space:pre-wrap;">@voteComment.Comment</p>
         }
     }
 }

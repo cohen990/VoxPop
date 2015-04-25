@@ -1,69 +1,71 @@
 ﻿@using Site.Models
 @model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
-    string name = Request.QueryString["auth"];
-    ViewBag.Title = @name;
+    if (@Model.Select(x => x.Author).Count() != 0)
+    {
+        ViewBag.Title = @Model.First().Author;
+    }
+    else
+    {
+        ViewBag.Title = "Author Stories";
+    }
 }
 
 @section MetaTags
 {
-    @Html.Partial("_MetaTags", new MetaTagModel
+    @if (@Model.Select(x => x.Author).Count() != 0)
     {
-        Description = "Stories by " + @name,
-        Title = "Got questions? Get Answers.",
-        ImageUri = Model.First().ImageUri
-    })
+        @Html.Partial("_MetaTags", new MetaTagModel
+        {
+            Description = "Stories by " + @Model.First().Author,
+            Title = "Got questions? Get Answers.",
+            ImageUri = Model.First().ImageUri
+        })
+    }
 }
 
-<h1 class="page-headings">Stories by<strong class="author-stories-names"> @name</strong></h1>
-
-@if (@Model != null)
+@if (@Model.Select(x => x.Author).Count() != 0)
 {
-    int storyCount = 1;
-    string currentAuthorUN = Request.QueryString["authID"];
+<h1 class="page-headings">Stories by<strong class="author-stories-names"> @Model.First().Author</strong></h1>
+
+
     foreach (var blogPost in Model)
     {
-        if (blogPost.PartitionKey == currentAuthorUN)
+        <script>
+            chartData = [];
+            VoxPopCharts.InitializeChart();
+        </script>
+        <div class="index-links">
+            <a href="~/Stories/@blogPost.PartitionKey/@blogPost.RowKey">
+                <img src="@blogPost.ImageUri" class="index-pic">
+                <div class="index-chart">
+                    <canvas class="index-chart-canvas" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="330"></canvas>
+                </div>
+                <div class="index-titles line-clamp">
+                    @blogPost.Title
+                </div>
+            </a>
+        </div>
+        foreach (var pollItem in blogPost.Poll)
         {
+            string option = HttpUtility.UrlDecode(@pollItem.Key);
             <script>
-                chartData = [];
-                VoxPopCharts.InitializeChart();
+                chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
             </script>
-            <div class="index-links">
-                <a href="~/Stories/@blogPost.PartitionKey/@blogPost.RowKey">
-                    <img src="@blogPost.ImageUri" class="index-pic">
-                    <div class="index-chart">
-                        <canvas class="index-chart-canvas" id="@blogPost.RowKey@blogPost.PartitionKey" height="240" width="330"></canvas>
-                    </div>
-                    <div class="index-titles line-clamp">
-                        @blogPost.Title
-                    </div>
-                </a>
-            </div>
-            foreach (var pollItem in blogPost.Poll)
-            {
-                string option = @pollItem.Key.Replace("+", " ").Replace("%2c", ",").Replace("%27", "'").Replace("%3f", "?");
-                <script>
-                    chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
-                </script>
-            }
-            <script>
-                VoxPopCharts.GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
-                var numPoll;
-            </script>
-
         }
-        else if ((@blogPost.PartitionKey != currentAuthorUN) && (storyCount == Model.Count()))
-        {
-            <div class="author-stories-intro">
-                <p>You haven't written any Stories on VOXPOP. Feel you creative juices flowing...? Great! @Html.ActionLink("Get cracking", "Create"). If you're not up to it quite yet why don't you have a @Html.ActionLink("browse through and maybe even Vote on", "Index") the latest Stories.</p>
-            </div>
-        }
-        else
-        {
-            storyCount++;
-        }
+        <script>
+            VoxPopCharts.GenerateChart("@blogPost.RowKey@blogPost.PartitionKey", chartData);
+            var numPoll;
+        </script>
     }
+}
+else
+{
+    <h1 class="page-headings">Stories by...</h1>
+
+    <div class="author-stories-intro">
+        <p>You haven't written any Stories on VOXPOP. Feel you creative juices flowing...? Great! @Html.ActionLink("Get cracking", "Create"). If you're not up to it quite yet why don't you have a @Html.ActionLink("browse through and Vote", "Index") on the latest Stories.</p>
+    </div>
 }
 
 

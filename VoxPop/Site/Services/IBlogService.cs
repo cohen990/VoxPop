@@ -13,7 +13,7 @@
         IEnumerable<CommentEntity> GetAllComments(string blogRowKey);
 
 
-        IEnumerable<BlogPostEntity> GetAuthorBlogs(string blogPartitionKey);
+        IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth);
 
         Task Vote(VoteModel model);
 
