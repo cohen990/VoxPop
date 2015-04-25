@@ -30,6 +30,8 @@
             Commenter = properties["Commenter"].StringValue;
             Comment = properties["Comment"].StringValue;
             CommentId = properties["CommentId"].StringValue;
+            AmIAReply = properties["AmIAReply"].BooleanValue;
+            CommenterUserPic = properties["CommenterUserPic"].StringValue;
         }
 
         /// <summary>
@@ -53,6 +55,8 @@
             result.Add("Commenter", new EntityProperty(Commenter));
             result.Add("Comment", new EntityProperty(Comment));
             result.Add("CommentId", new EntityProperty(CommentId));
+            result.Add("AmIAReply", new EntityProperty(AmIAReply));
+            result.Add("CommenterUserPic", new EntityProperty(CommenterUserPic));
 
             return result;
         }
@@ -108,6 +112,12 @@
         //ID unique to comment, only shared by replies to that comments
         public string CommentId { get; set; }
 
+        //Is the curernt comment a reply or not?
+        public bool? AmIAReply { get; set; }
+
+        //For future implementation - userPic URL will go here
+        public string CommenterUserPic { get; set; }
+
         public static CommentEntity For(CommentModel model)
         {
             return new CommentEntity
@@ -117,6 +127,8 @@
                 Commenter = model.CommenterName,
                 Comment = model.VotersComment,
                 CommentId = model.CommentIdentifier,
+                AmIAReply = model.ReplyYayOrNay,
+                CommenterUserPic = model.CommentPic,
                 PartitionKey = model.BlogPostRowKey,
                 RowKey = model.CommentTimestamp
             };

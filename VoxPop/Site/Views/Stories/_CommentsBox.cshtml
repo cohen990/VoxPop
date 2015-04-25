@@ -24,12 +24,26 @@
 
         <div class="comment-box-sbs-1">
             <h3>People who voted for @decodedOp1 say:</h3>
-            @foreach (var voteComment in Model)
+            @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
             {
-                if (@voteComment.PollOptionKey == Op1)
+                if (@voteComment.value.PollOptionKey == Op1)
                 {
-                    <h3>@Html.ActionLink(voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null)</h3> @voteComment.Timestamp.ToString("g")
-                    <p style="white-space:pre-wrap;">@voteComment.Comment</p>
+                    <h3>@Html.ActionLink(voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3> @voteComment.value.Timestamp.ToString("g")
+                    <p style="white-space:pre-wrap;">@voteComment.value.Comment</p>
+                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.value.CommentId }, null)
+                    foreach (var replyComment in Model.OrderBy(x => x.RowKey))
+                    {
+                        if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
+                        {
+                            <div style="margin-left: 50px">
+                                @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
+                                <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp</h4>
+                                <h6>@replyComment.Timestamp.ToString("g")</h6>
+                                <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
+                                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId }, null)
+                            </div>
+                        }
+                    }
                 }
             }
         </div>
@@ -37,12 +51,26 @@
         {
             <div class="comment-box-sbs-2">
                 <h3>People who voted for @decodedOp2 say:</h3>
-                @foreach (var voteComment in Model)
+                @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
                 {
-                    if (voteComment.PollOptionKey == Op2)
+                    if (voteComment.value.PollOptionKey == Op2)
                     {
-                        <h3>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null)</h3> @voteComment.Timestamp.ToString("g")
-                        <p style="white-space:pre-wrap;">@voteComment.Comment </p>
+                        <h3>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3> @voteComment.value.Timestamp.ToString("g")
+                        <p style="white-space:pre-wrap;">@voteComment.value.Comment </p>
+                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.value.CommentId }, null)
+                        foreach (var replyComment in Model.OrderBy(x => x.RowKey))
+                        {
+                            if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
+                            {
+                                <div style="margin-left: 50px">
+                                    @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
+                                    <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp</h4>
+                                    <h6>@replyComment.Timestamp.ToString("g")</h6>
+                                    <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
+                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId }, null)
+                                </div>
+                            }
+                        }
                     }
                 }
             </div>
@@ -51,19 +79,58 @@
 
     else
     {
-        foreach (var voteComment in Model.OrderBy(x => x.RowKey) )
+        foreach (var voteComment in Model.Select((value, i) => new { i, value }))
         {
-            var i = 1;
-            if (voteComment.CommentId == Model.Select(x => x.CommentId).ElementAt(2) && voteComment.RowKey != Model.Select(x => x.RowKey).ElementAt(4))
+            if (voteComment.value.AmIAReply == false)
             {
-                <div style="margin-left: 50px">
-                    @{var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);}
-                    <h4>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h4>
-                    <h6>@voteComment.Timestamp.ToString("g")</h6>
-                    <p style="white-space:pre-wrap;">@voteComment.Comment @voteComment.CommentId</p>
-                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.CommentId }, null)
-                </div>
+                var decodedOp = HttpUtility.UrlDecode(voteComment.value.PollOptionKey);
+                <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null) voted @decodedOp</h4>
+                <h6>@voteComment.value.Timestamp.ToString("g")</h6>
+                <p style="white-space:pre-wrap;">@voteComment.value.Comment @voteComment.value.CommentId</p>
+                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.value.CommentId }, null)
+                foreach (var replyComment in Model.OrderBy(x => x.RowKey))
+                {
+                    if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
+                    {
+                        <div style="margin-left: 50px">
+                            @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
+                            <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp</h4>
+                            <h6>@replyComment.Timestamp.ToString("g")</h6>
+                            <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
+                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId }, null)
+                        </div>
+                    }
+                }
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        @*else
+                            {
+                                foreach (var voteComment in Model.OrderBy(x => x.RowKey))
+                                {
+                                    if (voteComment.CommentId == Model.Select(x => x.CommentId).ElementAt(i) && voteComment.RowKey != Model.Select(x => x.RowKey).ElementAt(i))
+                                    {
+                                        <div style="margin-left: 50px">
+                                            @{var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);}
+                                            <h4>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h4>
+                                            <h6>@voteComment.Timestamp.ToString("g")</h6>
+                                            <p style="white-space:pre-wrap;">@voteComment.Comment @voteComment.CommentId</p>
+                                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.CommentId }, null)
+                                        </div>
+                                    }
+                                }
+                            }*@
