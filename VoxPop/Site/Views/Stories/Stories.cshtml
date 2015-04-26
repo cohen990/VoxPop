@@ -21,7 +21,7 @@
 
 <div class="story-outer-width">
     <div class="story-author-date-box">
-        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { Auth= @Model.AuthorIdentifier }, null)</p>
+        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn= @Model.AuthorIdentifier }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
     <div class="story-width">
