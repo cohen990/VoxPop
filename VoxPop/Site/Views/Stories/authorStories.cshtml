@@ -11,7 +11,8 @@
     {
         ViewBag.Title = "Author Stories";
     }
-    var authorUN = Request.QueryString["Auth"];
+    var authorUN = Request.QueryString["AuthUn"];
+    var author = Request.QueryString["Auth"];
 }
 
 @section MetaTags
@@ -29,7 +30,7 @@
 
 @if (@Model.Select(x => x.Author).Count() != 0)
 {
-<h1 class="page-headings">Stories by<strong class="author-stories-names"> @Model.First().Author</strong></h1>
+    <h1 class="page-headings">Stories by<strong class="author-stories-names"> @Model.First().Author</strong></h1>
 
 
     foreach (var blogPost in Model)
@@ -72,10 +73,10 @@ else if (authorUN == ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey))
 }
 else
 {
-    <h1 class="page-headings">Stories by @authorUN</h1>
+    <h1 class="page-headings">Stories by @author</h1>
 
     <div class="author-stories-intro">
-        <p>@authorUN hasn't written any Stories on VOXPOP just yet. Why not have a @Html.ActionLink("browse through and Vote", "Index") on the latest Stories.</p>
+        <p>@author hasn't written any Stories on VOXPOP just yet. Why not have a @Html.ActionLink("browse through and Vote", "Index") on the latest Stories.</p>
     </div>
 
 }

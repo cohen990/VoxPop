@@ -1,5 +1,5 @@
 ﻿@model List<Site.Storage.Models.CommentEntity>
-           @using Site.Controllers
+@using Site.Controllers
 @Styles.Render("~/Content/css")
 
 @section MetaTags
@@ -29,20 +29,17 @@
             {
                 if (@voteComment.value.PollOptionKey == Op1 && voteComment.value.AmIAReply == false)
                 {
-                    <h3>@Html.ActionLink(voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3>
-                    @voteComment.value.Timestamp.ToString("g")
-
+                <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)</h4>
                     <p> @StoriesController.GetPrettyDate(voteComment.value.Timestamp)</p>
-
                     <p style="white-space:pre-wrap;">@voteComment.value.Comment</p>
-    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
                     foreach (var replyComment in Model.OrderBy(x => x.RowKey))
                     {
                         if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
                         {
                             <div style="margin-left: 50px">
                                 @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
-                                <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { Auth = @replyComment.WhoDidIReplyUsername }, null)</h4>
+                                <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null) </h4>
                                 <h6>@replyComment.Timestamp.ToString("g")</h6>
                                 <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
                                 @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
@@ -60,16 +57,16 @@
                 {
                     if (voteComment.value.PollOptionKey == Op2 && voteComment.value.AmIAReply == false)
                     {
-                        <h3>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3> @voteComment.value.Timestamp.ToString("g")
+                        <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)</h4>
                         <p style="white-space:pre-wrap;">@voteComment.value.Comment </p>
-    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
                         foreach (var replyComment in Model.OrderBy(x => x.RowKey))
                         {
                             if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
                             {
                                 <div style="margin-left: 50px">
                                     @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
-                                    <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { Auth = @replyComment.WhoDidIReplyUsername }, null) </h4>
+                                    <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null) </h4>
                                     <h6>@replyComment.Timestamp</h6>
                                     <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
                                     @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
@@ -89,17 +86,17 @@
             if (voteComment.value.AmIAReply == false)
             {
                 var decodedOp = HttpUtility.UrlDecode(voteComment.value.PollOptionKey);
-                <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null) voted @decodedOp</h4>
+                <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null) voted @decodedOp</h4>
                 <h6>@voteComment.value.Timestamp.ToString("g")</h6>
                 <p style="white-space:pre-wrap;">@voteComment.value.Comment @voteComment.value.CommentId</p>
-    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
                 foreach (var replyComment in Model.OrderBy(x => x.RowKey))
                 {
                     if (replyComment.CommentId == Model.Select(x => x.CommentId).ElementAt(voteComment.i) && replyComment.AmIAReply == true)
                     {
                         <div style="margin-left: 50px">
                             @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
-                            <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { Auth = @replyComment.WhoDidIReplyUsername }, null)</h4>
+                            <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null) </h4>
                             <h6>@replyComment.Timestamp.ToString("g")</h6>
                             <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
                             @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
