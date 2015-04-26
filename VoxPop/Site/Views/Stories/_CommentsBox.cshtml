@@ -1,4 +1,5 @@
-﻿@model List<Site.Storage.Models.CommentEntity>
+﻿@using Site.Controllers
+@model List<Site.Storage.Models.CommentEntity>
 @Styles.Render("~/Content/css")
 
 @section MetaTags
@@ -15,20 +16,24 @@
 
     <h1 class="comment-box-title">Voter Comments</h1>
 
-    if (Model.Select(x => x.PollOptionKey).Distinct().Count() <= 2)
+    if (Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().Count() <= 2)
     {
-        var Op1 = Model.Select(x => x.PollOptionKey).Distinct().First();
+        var Op1 = Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().First();
         var decodedOp1 = HttpUtility.UrlDecode(Op1);
-        var Op2 = Model.Select(x => x.PollOptionKey).Distinct().Last();
+        var Op2 = Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().Last();
         var decodedOp2 = HttpUtility.UrlDecode(Op2);
 
         <div class="comment-box-sbs-1">
             <h3>People who voted for @decodedOp1 say:</h3>
             @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
             {
-                if (@voteComment.value.PollOptionKey == Op1)
+                if (@voteComment.value.PollOptionKey == Op1 && voteComment.value.AmIAReply == false)
                 {
-                    <h3>@Html.ActionLink(voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3> @voteComment.value.Timestamp.ToString("g")
+                    <h3>@Html.ActionLink(voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3>
+                    @voteComment.value.Timestamp.ToString("g")
+
+                    @Html.BeginForm("TimeAgo", "Stories", new { dt = @voteComment.value.Timestamp })
+
                     <p style="white-space:pre-wrap;">@voteComment.value.Comment</p>
                     @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.value.CommentId }, null)
                     foreach (var replyComment in Model.OrderBy(x => x.RowKey))
@@ -47,13 +52,13 @@
                 }
             }
         </div>
-        if (Model.Select(x => x.PollOptionKey).Distinct().Count() > 1)
+        if (Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().Count() > 1)
         {
             <div class="comment-box-sbs-2">
                 <h3>People who voted for @decodedOp2 say:</h3>
                 @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
                 {
-                    if (voteComment.value.PollOptionKey == Op2)
+                    if (voteComment.value.PollOptionKey == Op2 && voteComment.value.AmIAReply == false)
                     {
                         <h3>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { Auth = @voteComment.value.CommenterUsername }, null)</h3> @voteComment.value.Timestamp.ToString("g")
                         <p style="white-space:pre-wrap;">@voteComment.value.Comment </p>
@@ -65,7 +70,7 @@
                                 <div style="margin-left: 50px">
                                     @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
                                     <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { Auth = @replyComment.CommenterUsername }, null) voted @decodedReplyOp</h4>
-                                    <h6>@replyComment.Timestamp.ToString("g")</h6>
+                                    <h6>@replyComment.Timestamp</h6>
                                     <p style="white-space:pre-wrap;">@replyComment.Comment @replyComment.CommentId</p>
                                     @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId }, null)
                                 </div>
@@ -104,33 +109,7 @@
             }
         }
     }
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        @*else
-                            {
-                                foreach (var voteComment in Model.OrderBy(x => x.RowKey))
-                                {
-                                    if (voteComment.CommentId == Model.Select(x => x.CommentId).ElementAt(i) && voteComment.RowKey != Model.Select(x => x.RowKey).ElementAt(i))
-                                    {
-                                        <div style="margin-left: 50px">
-                                            @{var decodedOp = HttpUtility.UrlDecode(voteComment.PollOptionKey);}
-                                            <h4>@Html.ActionLink(@voteComment.Commenter, "AuthorStories", new { Auth = @voteComment.CommenterUsername }, null) voted @decodedOp</h4>
-                                            <h6>@voteComment.Timestamp.ToString("g")</h6>
-                                            <p style="white-space:pre-wrap;">@voteComment.Comment @voteComment.CommentId</p>
-                                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @voteComment.CommentId }, null)
-                                        </div>
-                                    }
-                                }
-                            }*@
