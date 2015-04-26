@@ -22,6 +22,10 @@ namespace Site.Models
 
         public bool ReplyYayOrNay { get; set; }
 
+        public string RepliedTo { get; set; }
+
+        public string RepliedToUN { get; set; }
+
         public string CommentPic { get; set; }
 
         public string BlogPostPartitionKey { get; set; }

@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Comment";
     var ReplyId = Request.QueryString["replyId"];
+    var Replyee = Request.QueryString["replyee"];
+    var ReplyeeUN = Request.QueryString["replyeeUn"];
 }
 
 @section MetaTags
@@ -12,7 +14,7 @@
 
 <h1 class="page-headings">Comment</h1>
 <div class="edit-intro">
-    <p>Have YOUR say on (name)'s Story.</p>
+    <p>Have YOUR say on @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { Auth = @Model.AuthorIdentifier }, null)'s Story.</p>
 </div>
 <div class="create-form-box">
     @using (Html.BeginForm("Comment", "Stories"))
@@ -32,7 +34,7 @@
                 <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
                     @{var option = pollItem.Key.Trim();}
                     <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@option&nbsp:</h4>
-                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span> 
+                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span>
                     @using (Html.BeginForm("Comment", "Stories"))
                     {
                         @Html.AntiForgeryToken()
@@ -41,6 +43,8 @@
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
                         <input type="hidden" name="commentId" value="@ReplyId">
+                        <input type="hidden" name="repliedTo" value="@Replyee">
+                        <input type="hidden" name="repliedToUN" value="@ReplyeeUN">
 
 
                         <input type="hidden" name="pollItemKey" value="@pollItem.Key">

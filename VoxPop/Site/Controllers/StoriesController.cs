@@ -173,6 +173,8 @@ namespace Site.Controllers
             string commentBlogPostPartitionKey,
             string commentBlogPostRowKey,
             string commentId,
+            string repliedTo,
+            string repliedToUN,
 
             string returnUrl = null)
         {
@@ -197,6 +199,8 @@ namespace Site.Controllers
                     CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
                     CommentIdentifier = Guid.NewGuid().ToString("N").Substring(0, 6),
                     ReplyYayOrNay = false,
+                    RepliedTo = "",
+                    RepliedToUN = "",
                     CommentPic = "BOHICA"
 
                 };
@@ -219,6 +223,8 @@ namespace Site.Controllers
                     CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
                     CommentIdentifier = commentId,
                     ReplyYayOrNay = true,
+                    RepliedTo = repliedTo,
+                    RepliedToUN = repliedToUN,
                     CommentPic = "BOHICA"
                 };
 
@@ -234,43 +240,88 @@ namespace Site.Controllers
             }
 
             return RedirectToAction("Index", "Home");
-
-
         }
 
-        public static string TimeAgo(DateTimeOffset dt)
+        public static string GetPrettyDate(DateTimeOffset d)
         {
-            TimeSpan span = DateTime.Now - dt;
-            if (span.Days > 365)
+            // 1.
+            // Get time span elapsed since the date.
+            TimeSpan s = DateTimeOffset.Now.Subtract(d);
+
+            // 2.
+            // Get total number of days elapsed.
+            int dayDiff = (int)s.TotalDays;
+
+            // 3.
+            // Get total number of seconds elapsed.
+            int secDiff = (int)s.TotalSeconds;
+
+            // 4.
+            // Don't allow out of range values.
+            if (dayDiff < 0 || dayDiff >= 31)
             {
-                int years = (span.Days / 365);
-                if (span.Days % 365 != 0)
-                    years += 1;
-                return String.Format("about {0} {1} ago",
-                years, years == 1 ? "year" : "years");
+                return null;
             }
-            if (span.Days > 30)
+
+            // 5.
+            // Handle same-day times.
+            if (dayDiff == 0)
             {
-                int months = (span.Days / 30);
-                if (span.Days % 31 != 0)
-                    months += 1;
-                return String.Format("about {0} {1} ago",
-                months, months == 1 ? "month" : "months");
+                // A.
+                // Less than one minute ago.
+                if (secDiff < 60)
+                {
+                    return "just now";
+                }
+                // B.
+                // Less than 2 minutes ago.
+                if (secDiff < 120)
+                {
+                    return "1 minute ago";
+                }
+                // C.
+                // Less than one hour ago.
+                if (secDiff < 3600)
+                {
+                    return string.Format("{0} minutes ago",
+                        Math.Floor((double)secDiff / 60));
+                }
+                // D.
+                // Less than 2 hours ago.
+                if (secDiff < 7200)
+                {
+                    return "1 hour ago";
+                }
+                // E.
+                // Less than one day ago.
+                if (secDiff < 86400)
+                {
+                    return string.Format("{0} hours ago",
+                        Math.Floor((double)secDiff / 3600));
+                }
             }
-            if (span.Days > 0)
-                return String.Format("about {0} {1} ago",
-                span.Days, span.Days == 1 ? "day" : "days");
-            if (span.Hours > 0)
-                return String.Format("about {0} {1} ago",
-                span.Hours, span.Hours == 1 ? "hour" : "hours");
-            if (span.Minutes > 0)
-                return String.Format("about {0} {1} ago",
-                span.Minutes, span.Minutes == 1 ? "minute" : "minutes");
-            if (span.Seconds > 5)
-                return String.Format("about {0} seconds ago", span.Seconds);
-            if (span.Seconds <= 5)
-                return "just now";
-            return string.Empty;
+            // 6.
+            // Handle previous days.
+            if (dayDiff == 1)
+            {
+                return "yesterday at " + d.ToString("t");
+            }
+            if (dayDiff > 1)
+            {
+                return d.ToString("R");
+            }
+
+            //if (dayDiff < 7)
+            //{
+            //    return string.Format("{0} days ago",
+            //    dayDiff);
+            //}
+            //if (dayDiff < 31)
+            //{
+            //    return string.Format("{0} weeks ago",
+            //    Math.Ceiling((double)dayDiff / 7));
+            //}
+            return null;
         }
     }
 }
