@@ -1,4 +1,6 @@
 ﻿@using Site.Models
+@using Site.Services
+
 @model IEnumerable<Site.Storage.Models.BlogPostEntity>
 @{
     if (@Model.Select(x => x.Author).Count() != 0)
@@ -9,6 +11,7 @@
     {
         ViewBag.Title = "Author Stories";
     }
+    var authorUN = Request.QueryString["Auth"];
 }
 
 @section MetaTags
@@ -59,7 +62,7 @@
         </script>
     }
 }
-else
+else if (authorUN == ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey))
 {
     <h1 class="page-headings">Stories by...</h1>
 
@@ -67,6 +70,13 @@ else
         <p>You haven't written any Stories on VOXPOP. Feel you creative juices flowing...? Great! @Html.ActionLink("Get cracking", "Create"). If you're not up to it quite yet why don't you have a @Html.ActionLink("browse through and Vote", "Index") on the latest Stories.</p>
     </div>
 }
+else
+{
+    <h1 class="page-headings">Stories by @authorUN</h1>
 
+    <div class="author-stories-intro">
+        <p>@authorUN hasn't written any Stories on VOXPOP just yet. Why not have a @Html.ActionLink("browse through and Vote", "Index") on the latest Stories.</p>
+    </div>
 
+}
 

@@ -31,6 +31,8 @@
             Comment = properties["Comment"].StringValue;
             CommentId = properties["CommentId"].StringValue;
             AmIAReply = properties["AmIAReply"].BooleanValue;
+            WhoDidIReply = properties["WhoDidIReply"].StringValue;
+            WhoDidIReplyUsername = properties["WhoDidIReplyUsername"].StringValue;
             CommenterUserPic = properties["CommenterUserPic"].StringValue;
         }
 
@@ -56,6 +58,8 @@
             result.Add("Comment", new EntityProperty(Comment));
             result.Add("CommentId", new EntityProperty(CommentId));
             result.Add("AmIAReply", new EntityProperty(AmIAReply));
+            result.Add("WhoDidIReply", new EntityProperty(WhoDidIReply));
+            result.Add("WhoDidIReplyUsername", new EntityProperty(WhoDidIReplyUsername));
             result.Add("CommenterUserPic", new EntityProperty(CommenterUserPic));
 
             return result;
@@ -115,6 +119,12 @@
         //Is the curernt comment a reply or not?
         public bool? AmIAReply { get; set; }
 
+        //Who did commenter replied to? Should provide clarity if one comment sparks a reply battle with lots of users
+        public string WhoDidIReply { get; set; }
+
+        //Their Username
+        public string WhoDidIReplyUsername { get; set; }
+
         //For future implementation - userPic URL will go here
         public string CommenterUserPic { get; set; }
 
@@ -128,6 +138,8 @@
                 Comment = model.VotersComment,
                 CommentId = model.CommentIdentifier,
                 AmIAReply = model.ReplyYayOrNay,
+                WhoDidIReply = model.RepliedTo,
+                WhoDidIReplyUsername = model.RepliedToUN,
                 CommenterUserPic = model.CommentPic,
                 PartitionKey = model.BlogPostRowKey,
                 RowKey = model.CommentTimestamp
