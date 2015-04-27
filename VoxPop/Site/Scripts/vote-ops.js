@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
 /// Stories
     for (var i = 0; i < 4; i++) {
         (function (i) {
@@ -49,4 +48,6 @@
             });
         }(i));
     }
+
+
 })

@@ -13,6 +13,8 @@
 
 <script src="~/Scripts/modally-baby.js"></script>
 <script src="~/Scripts/vote-ops.js"></script>
+<script src="~/Scripts/vote-ops-comments.js"></script>
+
 <script>
     var chartData = [];
 </script>
@@ -21,7 +23,7 @@
 
 <div class="story-outer-width">
     <div class="story-author-date-box">
-        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn= @Model.AuthorIdentifier }, null)</p>
+        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
     <div class="story-width">
@@ -104,10 +106,7 @@
             <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>
         }
     </div>
-    <a href="~/Stories/Comment/@Model.AuthorIdentifier/@Model.BlogIdentifier">Comment</a>
-
-
-    @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier })
+    @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
 </div>
 
 <script>
