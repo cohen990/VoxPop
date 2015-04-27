@@ -30,6 +30,7 @@ else
             var decodedOp2 = HttpUtility.UrlDecode(Op2).Trim();
 
             <div class="comment-box-sbs-1">
+
                 <div id="comment-box-@Op1Index" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@Op1Index">
                     <h2 id="comment-option-@Op1Index" class="story-votebuttons-modal-option">@decodedOp1</h2>
                     <div id="comment-box-colour-@Op1Index" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@Op1Index"></div>
@@ -38,8 +39,8 @@ else
                 {
                     if (@voteComment.value.PollOptionKey == Op1 && voteComment.value.AmIAReply == false)
                     {
-                        <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)</h4>
-                        <p> @StoriesController.GetPrettyDate(voteComment.value.Timestamp)</p>
+                        @Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter, @class = "comment-box-sbs-commenter" }, null)
+                        <p class="comment-box-sbs-datetime">@StoriesController.GetPrettyDate(voteComment.value.Timestamp)</p>
                         <p style="white-space:pre-wrap;">@voteComment.value.Comment</p>
                         @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
                         foreach (var replyComment in Model.OrderBy(x => x.RowKey))
