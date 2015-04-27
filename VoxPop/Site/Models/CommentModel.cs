@@ -16,6 +16,8 @@ namespace Site.Models
 
         public string PollItemKey { get; set; }
 
+        public int PollItemIndex { get; set; }
+
         public string VotersComment { get; set; }
 
         public string CommentIdentifier { get; set; }

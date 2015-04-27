@@ -30,9 +30,13 @@ namespace Site.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult _CommentsBox(string blogRowKey)
+        public ActionResult _CommentsBox(string blogRowKey, string blogPartitionKey)
         {
             var comments = _blogService.GetAllComments(blogRowKey);
+
+            ViewBag.BlogID = blogRowKey;
+
+            ViewBag.BlogAuthID = blogPartitionKey;
 
             return View(comments);
         }
@@ -169,6 +173,7 @@ namespace Site.Controllers
             string blogPostRowKey,
 
             string commentPollItemKey,
+            int commentPollItemIndex,
             string userComment,
             string commentBlogPostPartitionKey,
             string commentBlogPostRowKey,
@@ -191,6 +196,7 @@ namespace Site.Controllers
                 var model = new CommentModel
                 {
                     PollItemKey = commentPollItemKey,
+                    PollItemIndex = commentPollItemIndex,
                     VotersComment = userComment,
                     BlogPostPartitionKey = commentBlogPostPartitionKey,
                     BlogPostRowKey = commentBlogPostRowKey,
@@ -202,7 +208,6 @@ namespace Site.Controllers
                     RepliedTo = "",
                     RepliedToUN = "",
                     CommentPic = "BOHICA"
-
                 };
 
 
@@ -215,6 +220,7 @@ namespace Site.Controllers
                 var model = new CommentModel
                 {
                     PollItemKey = commentPollItemKey,
+                    PollItemIndex = commentPollItemIndex,
                     VotersComment = userComment,
                     BlogPostPartitionKey = commentBlogPostPartitionKey,
                     BlogPostRowKey = commentBlogPostRowKey,
@@ -277,26 +283,26 @@ namespace Site.Controllers
                 // Less than 2 minutes ago.
                 if (secDiff < 120)
                 {
-                    return "1 minute ago";
+                    return "1min ago";
                 }
                 // C.
                 // Less than one hour ago.
                 if (secDiff < 3600)
                 {
-                    return string.Format("{0} minutes ago",
+                    return string.Format("{0}mins ago",
                         Math.Floor((double)secDiff / 60));
                 }
                 // D.
                 // Less than 2 hours ago.
                 if (secDiff < 7200)
                 {
-                    return "1 hour ago";
+                    return "1hr ago";
                 }
                 // E.
                 // Less than one day ago.
                 if (secDiff < 86400)
                 {
-                    return string.Format("{0} hours ago",
+                    return string.Format("{0}hrs ago",
                         Math.Floor((double)secDiff / 3600));
                 }
             }

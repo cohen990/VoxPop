@@ -383,6 +383,7 @@
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\comment-vote-ops.js" />
+    <Content Include="Scripts\vote-ops-comments.js" />
     <Content Include="Scripts\vote-ops.js" />
     <Content Include="Scripts\modally-baby.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

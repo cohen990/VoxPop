@@ -29,17 +29,18 @@
 
         <div class="story-votebuttons-modal-option-div">
             @{int count = 0;}
-            @foreach (var pollItem in Model.Poll)
+            @foreach (var pollItem in Model.Poll.Select((value, i) => new { i, value }))
             {
                 <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
-                    @{var option = pollItem.Key.Trim();}
+                    @{var option = pollItem.value.Key.Trim();}
                     <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@option&nbsp:</h4>
-                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.Value</span>
+                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.value.Value</span>
                     @using (Html.BeginForm("Comment", "Stories"))
                     {
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="userComment" class="comment-2" xml:space="preserve">
-                        <input type="hidden" name="commentPollItemKey" value="@pollItem.Key">
+                        <input type="hidden" name="commentPollItemKey" value="@pollItem.value.Key">
+                        <input type="hidden" name="commentPollItemIndex" value="@pollItem.i">
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
                         <input type="hidden" name="commentId" value="@ReplyId">
@@ -47,7 +48,7 @@
                         <input type="hidden" name="repliedToUN" value="@ReplyeeUN">
 
 
-                        <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                        <input type="hidden" name="pollItemKey" value="@pollItem.value.Key">
                         <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
                         <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
                         <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
@@ -56,7 +57,7 @@
                     <div id="story-votebuttons-modal-box-colour-@count" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@count"></div>
                     @{count++;}
                     <script>
-                        chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                        chartData.push(VoxPopCharts.GetPollData("@pollItem.value.Key", @pollItem.value.Value));
                     </script>
                 </div>
             }

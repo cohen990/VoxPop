@@ -26,7 +26,8 @@
         public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
         {
             PollOptionKey = properties["PollOptionKey"].StringValue;
-            CommenterUsername = properties["CommenterUsername"].StringValue;
+            PollOptionIndex = properties["PollOptionIndex"].Int32Value;
+           CommenterUsername = properties["CommenterUsername"].StringValue;
             Commenter = properties["Commenter"].StringValue;
             Comment = properties["Comment"].StringValue;
             CommentId = properties["CommentId"].StringValue;
@@ -53,6 +54,7 @@
         {
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
             result.Add("PollOptionKey", new EntityProperty(PollOptionKey));
+            result.Add("PollOptionIndex", new EntityProperty(PollOptionIndex));
             result.Add("CommenterUsername", new EntityProperty(CommenterUsername));
             result.Add("Commenter", new EntityProperty(Commenter));
             result.Add("Comment", new EntityProperty(Comment));
@@ -104,6 +106,9 @@
         /// </summary>
         public string PollOptionKey { get; set; }
 
+        // What index is our Option? Helps for colour allocation down the line...
+        public int? PollOptionIndex { get; set; }
+
         //Unique ID of the user commenting
         public string CommenterUsername { get; set; }
 
@@ -133,6 +138,7 @@
             return new CommentEntity
             {
                 PollOptionKey = model.PollItemKey.EncodePollOption(),
+                PollOptionIndex = model.PollItemIndex,
                 CommenterUsername = model.UserId,
                 Commenter = model.CommenterName,
                 Comment = model.VotersComment,

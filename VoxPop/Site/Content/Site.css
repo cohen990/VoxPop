@@ -1004,6 +1004,20 @@ input[type="text"] {
 .comment-box-title {
     font-size:47px;
 }
+
+.comment-box-title-link {
+    font-size:50.25px;
+}
+
+.comment-box {
+    padding: 50px;
+    display:inline-block;
+    border: 4.5px dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+}
+
 .comment-box-sbs-1 {
     float: left;
     max-width: 50%;
