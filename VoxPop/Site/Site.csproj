@@ -262,6 +262,7 @@
     <Content Include="Images\search-icon-hi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\User.svg" />
     <Content Include="Images\VPlogoVec.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
