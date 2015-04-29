@@ -259,16 +259,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\reply.svg" />
     <Content Include="Images\search-icon-hi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\User.svg" />
+    <Content Include="Images\User3.svg" />
     <Content Include="Images\VPlogoVec.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\VPlogoVecHov.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\VS2.svg" />
     <Content Include="Libraries\login-signup-modal-window\css\reset.css" />
     <Content Include="Libraries\login-signup-modal-window\css\style.css" />
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-close.svg">
