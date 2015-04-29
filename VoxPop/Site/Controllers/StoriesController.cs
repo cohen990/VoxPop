@@ -314,7 +314,9 @@ namespace Site.Controllers
             }
             if (dayDiff > 1)
             {
-                return d.ToString("R");
+                var dt = d.ToString("R");
+
+                return dt.Remove(dt.Length - 3);
             }
 
             //if (dayDiff < 7)

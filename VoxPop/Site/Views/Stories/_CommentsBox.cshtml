@@ -31,9 +31,11 @@ else
 
             <div class="comment-box-sbs-1">
 
-                <div id="comment-box-@Op1Index" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@Op1Index">
-                    <h2 id="comment-option-@Op1Index" class="story-votebuttons-modal-option">@decodedOp1</h2>
-                    <div id="comment-box-colour-@Op1Index" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@Op1Index"></div>
+                <div id="comment-box-@Op1Index" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@Op1Index comment-box-sbs-ops-boxes">
+                    <h2 id="comment-option-@Op1Index" class="story-votebuttons-modal-option">
+                        @decodedOp1
+                    </h2>
+                    <div id="comment-box-colour-@Op1Index" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@Op1Index comment-box-sbs-ops-colours"></div>
                 </div>
                 @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
                 {
@@ -41,10 +43,17 @@ else
                     {
                         <div class="comment-box comment-box-each ">
                             <div class="comment-box-user-pic"></div>
-                            @Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter, @class = "comment-box-sbs-commenter" }, null)
-                            <p class="comment-box-sbs-datetime">@StoriesController.GetPrettyDate(voteComment.value.Timestamp)</p>
+                            <div class="comment-box-sbs-commenter">
+                                @Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)
+                                <div class="comment-box-sbs-datetime">
+                                    @StoriesController.GetPrettyDate(voteComment.value.Timestamp)
+                                </div>
+                            </div>
                             <p class="comment-box-comment-text">@voteComment.value.Comment</p>
-                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                            <div class="comment-box-reply-button">
+                                @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
+                                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                            </div>
                         </div>
                         foreach (var replyComment in Model.OrderBy(x => x.RowKey))
                         {
@@ -52,22 +61,60 @@ else
                             {
                                 <div class="comment-box comment-box-reply">
                                     @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
-                                    <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null) </h4>
-                                    <h6>@StoriesController.GetPrettyDate(replyComment.Timestamp)</h6>
-                                    <p class="comment-box-comment-text">@replyComment.Comment</p>
-                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                    <div class="comment-box-user-pic comment-box-user-pic-replier"></div>
+                                    <div class="comment-box-sbs-commenter comment-box-reply-sbs-commenter">
+                                        <div class="comment-box-reply-sbs-commenter-inner">
+                                            @Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null)
+                                            voted
+                                        </div>
+                                        <div id="comment-box-reply-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@replyComment.PollOptionIndex comment-box-reply-ops-boxes">
+                                            @if (decodedReplyOp.Length <= 14)
+                                            {
+                                                <h2 id="comment-reply-option-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option comment-box-reply-ops">
+                                                    @decodedReplyOp
+                                                </h2>
+                                            }
+                                            else
+                                            {
+                                                <h2 id="comment-reply-option-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option comment-box-reply-ops">
+                                                    @decodedReplyOp.Substring(0, 14)...
+                                                </h2>
+                                            }
+                                            <div id="comment-box-reply-colour-@replyComment.PollOptionIndex" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@replyComment.PollOptionIndex comment-box-reply-ops-colours"></div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-box-replied-to">
+                                        <div class="comment-box-sbs-datetime comment-box-sbs-datetime-reply">
+                                            @StoriesController.GetPrettyDate(replyComment.Timestamp)
+                                        </div>
+                                        <div class="comment-box-replied-to-inner">
+                                            <div class="comment-box-reply-button-pic comment-box-reply-button-pic-reply"></div>
+                                            @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null)
+                                        </div>
+                                    </div>
+                                    <p class="comment-box-comment-text comment-box-reply-comment-text">@replyComment.Comment</p>
+                                    <div class="comment-box-reply-button">
+                                        @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
+                                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                    </div>
                                 </div>
                             }
                         }
                     }
                 }
             </div>
+
+
             if (Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().Count() > 1)
             {
+                <div class="comment-box-sbs-divider"><div class="comment-box-sbs-divider-icon"></div></div>
+
                 <div class="comment-box-sbs-2">
-                    <div id="comment-box-@Op2Index" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@Op2Index">
-                        <h2 id="comment-option-@Op2Index" class="story-votebuttons-modal-option">@decodedOp2</h2>
-                        <div id="comment-box-colour-@Op2Index" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@Op2Index"></div>
+                    <div id="comment-box-@Op2Index" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@Op2Index comment-box-sbs-ops-boxes">
+                        <h2 id="comment-option-@Op2Index" class="story-votebuttons-modal-option">
+                            @decodedOp2
+                        </h2>
+                        <div id="comment-box-colour-@Op2Index" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@Op2Index comment-box-sbs-ops-colours"></div>
                     </div>
                     @foreach (var voteComment in Model.Select((value, i) => new { i, value }))
                     {
@@ -75,10 +122,18 @@ else
                         if (voteComment.value.PollOptionKey == Op2 && voteComment.value.AmIAReply == false)
                         {
                             <div class="comment-box comment-box-each ">
-                                <h4>@Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)</h4>
-                                <p>@StoriesController.GetPrettyDate(voteComment.value.Timestamp)</p>
-                                <p class="comment-box-comment-text">@voteComment.value.Comment </p>
-                                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                                <div class="comment-box-user-pic"></div>
+                                <div class="comment-box-sbs-commenter">
+                                    @Html.ActionLink(@voteComment.value.Commenter, "AuthorStories", new { AuthUn = @voteComment.value.CommenterUsername, Auth = voteComment.value.Commenter }, null)
+                                    <div class="comment-box-sbs-datetime">
+                                        @StoriesController.GetPrettyDate(voteComment.value.Timestamp)
+                                    </div>
+                                </div>
+                                <p class="comment-box-comment-text">@voteComment.value.Comment</p>
+                                <div class="comment-box-reply-button">
+                                    @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
+                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                                </div>
                             </div>
                             foreach (var replyComment in Model.OrderBy(x => x.RowKey))
                             {
@@ -86,10 +141,42 @@ else
                                 {
                                     <div class="comment-box comment-box-reply">
                                         @{var decodedReplyOp = HttpUtility.UrlDecode(replyComment.PollOptionKey);}
-                                        <h4>@Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null) voted @decodedReplyOp replied to @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null) </h4>
-                                        <h6>@StoriesController.GetPrettyDate(replyComment.Timestamp)</h6>
-                                        <p class="comment-box-comment-text">@replyComment.Comment </p>
-                                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                        <div class="comment-box-user-pic comment-box-user-pic-replier"></div>
+                                        <div class="comment-box-sbs-commenter comment-box-reply-sbs-commenter">
+                                            <div class="comment-box-reply-sbs-commenter-inner">
+                                                @Html.ActionLink(@replyComment.Commenter, "AuthorStories", new { AuthUn = @replyComment.CommenterUsername, Auth = replyComment.Commenter }, null)
+                                                voted
+                                            </div>
+                                            <div id="comment-box-reply-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@replyComment.PollOptionIndex comment-box-reply-ops-boxes">
+                                                @if (decodedReplyOp.Length <= 14)
+                                                {
+                                                    <h2 id="comment-reply-option-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option comment-box-reply-ops">
+                                                        @decodedReplyOp
+                                                    </h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 id="comment-reply-option-@replyComment.PollOptionIndex" class="story-votebuttons-modal-option comment-box-reply-ops">
+                                                        @decodedReplyOp.Substring(0, 14)...
+                                                    </h2>
+                                                }
+                                                <div id="comment-box-reply-colour-@replyComment.PollOptionIndex" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@replyComment.PollOptionIndex comment-box-reply-ops-colours"></div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-box-replied-to">
+                                            <div class="comment-box-sbs-datetime comment-box-sbs-datetime-reply">
+                                                @StoriesController.GetPrettyDate(replyComment.Timestamp)
+                                            </div>
+                                            <div class="comment-box-replied-to-inner">
+                                                <div class="comment-box-reply-button-pic comment-box-reply-button-pic-reply"></div>
+                                                @Html.ActionLink(@replyComment.WhoDidIReply, "AuthorStories", "Stories", new { AuthUn = @replyComment.WhoDidIReplyUsername, Auth = replyComment.WhoDidIReply }, null)
+                                            </div>
+                                        </div>
+                                        <p class="comment-box-comment-text comment-box-reply-comment-text">@replyComment.Comment</p>
+                                        <div class="comment-box-reply-button">
+                                            @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
+                                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                        </div>
                                     </div>
                                 }
                             }
