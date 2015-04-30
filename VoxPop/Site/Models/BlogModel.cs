@@ -8,7 +8,7 @@
 
     public class BlogModel
     {
-        [Required]
+        [Required(ErrorMessage = "Your Story needs a title...!")]
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText), AllowHtml]
@@ -18,7 +18,7 @@
         public List<string> PollOptions { get; set; }
 
         [Display(Name = "Image Caption")]
-        [Required]
+        [Required(ErrorMessage = "Looks like you skipped adding an Image Caption")]
         public string ImageCaption { get; set; }
 
         [Display(Name = "Image")]
