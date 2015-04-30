@@ -21,10 +21,14 @@ a {
     clear: both;
     margin-top: 22%;
     margin-bottom: -21%;
+
+    height:1px;
+    width: 100%;
+    background: lightgray;
 }
 
 .global-footer {
-    padding-bottom: 16px;
+    padding: 10px 0 16px 0;
 }
 
 .Logo {
@@ -939,6 +943,11 @@ input[type="text"] {
 
 .login-reg-form-hr-line {
     margin: 25px 0 25px 0;
+
+        height:1px;
+    width: 100%;
+    background: lightgray;
+
 }
 
 .login-reg-form-page-titles {
@@ -1001,6 +1010,11 @@ input[type="text"] {
 
 /**              ***               **/
 /*_CommentsBox Partial*/
+.comment-partial {
+    margin: 0 0 0 5%;
+    display: inline-block;
+}
+
 .comment-box-title {
     font-size: 47px;
     margin: 0 0 -35px 15px;
@@ -1010,8 +1024,13 @@ input[type="text"] {
 }
 
 .comment-box-title-link {
-    font-size: 50.25px;
+    font-size: 50px;
+    transition-duration: .5s;
 }
+
+    .comment-box-title-link:hover {
+        font-size: 53px;
+    }
 
 .comment-box {
     padding: 50px;
@@ -1021,11 +1040,12 @@ input[type="text"] {
     border-left: none;
     border-right: none;
     border-radius: 30px;
+    width: 87.5%;
 }
 
 .comment-box-sbs-ops-boxes {
     min-height: 75px;
-    margin: 0 0 50px 200px;
+    margin: 0 0 50px 40%;
 }
 
 .comment-box-sbs-ops-colours {
@@ -1033,12 +1053,17 @@ input[type="text"] {
 }
 
 .comment-box-reply-ops-boxes {
-margin:-47px 0 -15px 155px;
-display: inline-block;
-float: right;
-min-height: 65px;
-border: none;
+    margin: -19px 0 -15px -11px;
+    display: inline-block;
+    float: left;
+    min-height: 65px;
+    border: none;
 }
+
+    .comment-box-reply-ops-boxes:hover {
+        background: none;
+    }
+
 
 .comment-box-reply-ops-colours {
     margin-top: -57px;
@@ -1051,27 +1076,40 @@ border: none;
 
 .comment-box-sbs-1 {
     float: left;
-    width: 44%;
+    width: 41%;
 }
 
 .comment-box-sbs-divider {
-    min-height: 550px;
-    width:1.3px;
-    background: lightgray;
-    float: left;
-    margin: -10px 0 0 88px;
+    float: right;
+    width: 42%;
+    margin-right: 4.25%;
+    border-left: solid 1.3px lightgray;
+    padding-left: 3.8%;
 }
 
 .comment-box-sbs-divider-icon {
     background: url('../Images/VS2.svg') no-repeat;
     height: 30px;
     width: 30px;
-    margin: 35px 0 0 -12.5px;
+    margin: 25px 0 0 -12.4%;
+    float: left;
+}
+
+.comment-box-sbs-divider-icon-text {
+    background: #fff;
+    color: lightgray;
+    height: 21.5px;
+    width: 21.5px;
+    margin: 2.5px 0 0 2px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    -webkit-shape-outside: circle(50%);
+    text-align: center;
 }
 
 .comment-box-sbs-2 {
     float: right;
-    width: 44%;
+    width: 100%;
 }
 
 .comment-box-each {
@@ -1086,7 +1124,7 @@ border: none;
     }
 
 .comment-box-reply {
-    margin:0 0 20px 70px;
+    margin: 0 0 20px 70px;
     padding: 25px;
     border-top: none;
     transition-duration: 1.5s;
@@ -1113,20 +1151,33 @@ border: none;
 }
 
 .comment-box-user-pic-replier {
-    height: 60px;
-    width: 60px;
+    height: 55px;
+    width: 55px;
 }
 
 
 .comment-box-sbs-commenter {
     float: left;
-    margin-top: -5px;
+    margin: -60px 0 0 10px;
     font-size: larger;
     font-weight: 600;
+    min-width: 100%;
+    display: block;
 }
 
 .comment-box-reply-sbs-commenter {
     margin-top: 0;
+}
+
+.comment-box-reply-sbs-commenter-inner {
+    display: inline-block;
+    float: left;
+}
+
+.comment-box-not-sbs-commenter {
+    margin: -55px 0 0 7px;
+    position: relative;
+    z-index: 10;
 }
 
 .comment-box-sbs-datetime {
@@ -1137,9 +1188,13 @@ border: none;
     margin: -3px 0 0 3px;
 }
 
+.comment-box-not-sbs-datetime {
+    margin-top: 37px;
+}
+
 .comment-box-sbs-datetime-reply {
-    margin: 1px 0 0 15px;
-    float: left;
+    margin: 3.25px 0 0 7px;
+    float: right;
 }
 
 .comment-box-comment-text {
@@ -1169,6 +1224,7 @@ border: none;
 
 .comment-box-replied-to {
     display: inline-block;
+    margin-top: 2px;
 }
 
 .comment-box-reply-button-pic-reply {
@@ -1176,6 +1232,6 @@ border: none;
 }
 
 .comment-box-replied-to-inner {
-    float: right;
+    float: left;
     margin-left: 15px;
 }
