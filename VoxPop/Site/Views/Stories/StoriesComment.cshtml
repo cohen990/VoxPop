@@ -1,6 +1,6 @@
 ﻿@model Site.Models.BlogModel
 @{
-    ViewBag.Title = "Comment";
+    ViewBag.Title = "Voter Comment";
     var ReplyId = Request.QueryString["replyId"];
     var Replyee = Request.QueryString["replyee"];
     var ReplyeeUN = Request.QueryString["replyeeUn"];
@@ -11,23 +11,38 @@
     @Html.Partial("_DefaultMetaTags")
 }
 <script src="~/Scripts/comment-vote-ops.js"></script>
-
-<h1 class="page-headings">Comment</h1>
+<script>
+    $(document).on('mousemove', 'textarea', function(e) { var a=$(this).offset().top+$(this).outerHeight()-16,b=$(this).offset().left+$(this).outerWidth()-16;$(this).css({cursor:e.pageY>a&&e.pageX>b?"nw-resize":""}); })
+</script>
+<h1 class="page-headings">Voter Comment</h1>
 <div class="edit-intro">
     <p>Have YOUR say on @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { Auth = @Model.AuthorIdentifier }, null)'s Story.</p>
 </div>
 <div class="create-form-box">
-    @using (Html.BeginForm("Comment", "Stories"))
+    @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
     {
         <div class="create-form-headings create-form-headings-Content">
             Comment
         </div>
-        <div class="create-form-Content-box">
-            <textarea type="text" id="comment-1"></textarea>
-        </div>
-        <p class="create-form-descriptions">Comment is free, but facts are sacred...</p>
+        <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?" name="usersCommentsTA"></textarea>
+        ModelState error;
+        bool missingComment = ViewData.ModelState.TryGetValue("usersCommentsTA", out error);
 
-        <div class="story-votebuttons-modal-option-div">
+        if (missingComment && error.Errors.Count != 0)
+        {
+            string message = error.Errors.Single().ErrorMessage;
+
+            <div>
+                <span class="field-validation-error" data-valmsg-for="comment-1" data-valmsg-replace="true"><span for="comment-1" class="">@message</span></span>
+            </div>
+        }
+        <p class="create-form-descriptions">
+            Comment is free, but facts are sacred... Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story - <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">@Model.Title</a>.
+        </p>
+        <div class="create-form-headings create-form-headings-Content">
+            Voting Options
+        </div>
+        <div class="stories-comment-votebuttons-option-div">
             @{int count = 0;}
             @foreach (var pollItem in Model.Poll.Select((value, i) => new { i, value }))
             {
@@ -38,7 +53,7 @@
                     @using (Html.BeginForm("Comment", "Stories"))
                     {
                         @Html.AntiForgeryToken()
-                        <input type="hidden" name="userComment" class="comment-2" xml:space="preserve">
+                        <input id="inputComment" type="hidden" name="userComment" class="comment-2">
                         <input type="hidden" name="commentPollItemKey" value="@pollItem.value.Key">
                         <input type="hidden" name="commentPollItemIndex" value="@pollItem.i">
                         <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">

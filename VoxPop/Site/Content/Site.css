@@ -21,8 +21,7 @@ a {
     clear: both;
     margin-top: 22%;
     margin-bottom: -21%;
-
-    height:1px;
+    height: 1px;
     width: 100%;
     background: lightgray;
 }
@@ -943,11 +942,9 @@ input[type="text"] {
 
 .login-reg-form-hr-line {
     margin: 25px 0 25px 0;
-
-        height:1px;
+    height: 1px;
     width: 100%;
     background: lightgray;
-
 }
 
 .login-reg-form-page-titles {
@@ -1011,16 +1008,19 @@ input[type="text"] {
 /**              ***               **/
 /*_CommentsBox Partial*/
 .comment-partial {
-    margin: 0 0 0 5%;
+    margin: 100px 0 0 5%;
     display: inline-block;
 }
 
 .comment-box-title {
     font-size: 47px;
-    margin: 0 0 -35px 15px;
+    margin: 0 0 -35px 25px;
     position: relative;
     z-index: +1;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    background-color: #fff;
+display:inline-block;
+float:left;
 }
 
 .comment-box-title-link {
@@ -1234,4 +1234,28 @@ input[type="text"] {
 .comment-box-replied-to-inner {
     float: left;
     margin-left: 15px;
+}
+
+
+
+/**              ***               **/
+/*StoriesComment*/
+.stories-comment-box {
+    border-radius: 19px;
+    border-left: none;
+    border-right: none;
+    max-width: 499px;
+    min-width: 425px;
+    min-height: 40px;
+    display: block;
+    padding: 0 10px 0 10px;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.stories-comment-votebuttons-option-div {
+    width: 460px;
+    margin: -10px auto 0 auto;
+    object-position: right;
+    display: inline-block;
 }

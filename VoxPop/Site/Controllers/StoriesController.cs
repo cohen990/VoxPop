@@ -191,6 +191,19 @@ namespace Site.Controllers
                 UserId = User.Identity.GetUserId()
             };
 
+            if (userComment == "")
+            {
+                _blogService.Vote(model2);
+
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                return RedirectToAction("Index", "Home");
+
+            }
+
             if (commentId == "")
             {
                 var model = new CommentModel
@@ -209,7 +222,6 @@ namespace Site.Controllers
                     RepliedToUN = "",
                     CommentPic = "BOHICA"
                 };
-
 
                 _blogService.Vote(model2);
 
@@ -233,7 +245,6 @@ namespace Site.Controllers
                     RepliedToUN = repliedToUN,
                     CommentPic = "BOHICA"
                 };
-
 
                 _blogService.Vote(model2);
 

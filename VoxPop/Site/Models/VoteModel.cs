@@ -6,8 +6,6 @@
 
         public string PollItemKey { get; set; }
 
-        //public string UserComment { get; set; }
-
         public string BlogPostPartitionKey { get; set; }
 
         public string BlogPostRowKey { get; set; }
