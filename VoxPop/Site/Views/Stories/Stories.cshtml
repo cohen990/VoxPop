@@ -106,7 +106,9 @@
             <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>
         }
     </div>
-    @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
+    <div class="comment-partial">
+        @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
+    </div>
 </div>
 
 <script>
