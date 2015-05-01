@@ -1,0 +1,162 @@
+﻿@model Site.Models.ResponseModel
+@{
+    ViewBag.Title = "Create a Response";
+}
+
+@section MetaTags
+{
+    @Html.Partial("_DefaultMetaTags")
+}
+
+<script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
+
+<h1 class="page-headings">Create a new Story here...</h1>
+<div class="create-intro">
+    <p>You can do whatever you want with a VOXPOP Story, if it's an issue personal to you, a campaign in your community or a global concern - write about it!</p>
+</div>
+<div class="create-form-box">
+
+    @using (Html.BeginForm("CreateResponse", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="replyeeTitle" value="@ViewBag.replyeeTitle">
+        <input type="hidden" name="replyee" value="@ViewBag.replyee">
+        <input type="hidden" name="replyeeBlogIdentifier" value="@ViewBag.replyeeBlogIdentifier">
+        <input type="hidden" name="replyeeIdentifier" value="@ViewBag.replyeeIdentifier">
+
+        <div class="create-form-headings">
+            @Html.LabelFor(x => x.Title)
+        </div>
+        <div>
+            <div>
+                @Html.TextBoxFor(x => x.Title, new { placeholder = "What's your story about?" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Title)
+            <p class="create-form-descriptions">Think of this either like a newspaper headline or the question at the top of a poll - or whatever you like!</p>
+        </div>
+
+        <fieldset class="create-form-votingOptions-box">
+            @{
+        ModelState error;
+        bool missingPollOptions = ViewData.ModelState.TryGetValue("pollOptions", out error);
+
+        if (missingPollOptions && error.Errors.Count != 0)
+        {
+            string message = error.Errors.Single().ErrorMessage;
+            <div>
+                <span class="field-validation-error" data-valmsg-for="pollOptions" data-valmsg-replace="true"><span for="pollOptions" class="">@message</span></span>
+            </div>
+        }
+
+        bool duplicatedPollOptions = ViewData.ModelState.TryGetValue("pollOptionsDuplicated", out error);
+
+        if (duplicatedPollOptions && error.Errors.Count != 0)
+        {
+            string message = error.Errors.Single().ErrorMessage;
+
+            <div>
+                <span class="field-validation-error" data-valmsg-for="pollOptions" data-valmsg-replace="true"><span for="pollOptions" class="">@message</span></span>
+            </div>
+        }
+            }
+            <div id="pollOptions">
+                <label for="pollOptions" class="create-form-headings">Voting Options</label>
+                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="eg.  'I agree' " />
+                <input class="create-form-pollOptions-boxes" name="pollOptions" type="text" placeholder="e.g.  'I disagree' " />
+                <input type="button" value="Add More Options..." onclick="AddOption()" class="create-form-addMoreOptions">
+            </div>
+        </fieldset>
+        <p class="create-form-descriptions">Give your Story a Vote - What are the possible answers to your Story? What responses do you think your readers might like to give? You can add as many Voting Options as you like but you must have at least two.</p>
+
+        <div class="create-form-uploadImage-box">
+            <div class="create-form-headings">
+                @Html.LabelFor(x => x.ImageUri)
+            </div>
+            <div class="create-form-uploadPreview-box">
+                <label for="uploadImage">
+                    <img id="uploadPreview" class="create-form-uploadPreview" />
+                </label>
+                <script type="text/javascript">
+                    function PreviewImage() {
+                        var oFReader = new FileReader();
+                        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+                        oFReader.onload = function (oFREvent) {
+                            document.getElementById("uploadPreview").src = oFREvent.target.result;
+                        };
+                    };
+                </script>
+                <input id="uploadImage" type="file" name="image" onchange="PreviewImage();" accept="image/*" />
+                @{
+        bool missingImage = ViewData.ModelState.TryGetValue("image", out error);
+
+        if (missingImage && error.Errors.Count != 0)
+        {
+            string message = error.Errors.Single().ErrorMessage;
+
+            <div>
+                <span class="field-validation-error" data-valmsg-for="uploadImage" data-valmsg-replace="true"><span for="uploadImage" class="">@message</span></span>
+            </div>
+        }
+                }
+            </div>
+        </div>
+        <div class="create-form-ImageCaption-box">
+            <div class="create-form-headings">
+                @Html.LabelFor(x => x.ImageCaption)
+            </div>
+            <div>
+                @Html.TextBoxFor(x => x.ImageCaption, new { placeholder = "What's your image an image of?" })
+            </div>
+            @Html.ValidationMessageFor(x => x.ImageCaption)
+        </div>
+        <p class="create-form-descriptions">Add an image that represents your Story. Give your image a description in Image Caption or even use this space as a subtitle for your Story - again, do whatever you feel!</p>
+
+        <div class="create-form-headings create-form-headings-Content">
+            @Html.LabelFor(x => x.Content)
+        </div>
+        <div>
+            <div class="create-form-Content-box">
+                @Html.TextAreaFor(x => x.Content)
+            </div>
+            @Html.ValidationMessageFor(x => x.Content)
+        </div>
+
+        <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
+
+
+        <input class="create-form-submit" type="submit" value="CREATE!" />
+    }
+
+    <script>
+        var AddOption = function () {
+            var newOption = document.createElement("input");
+            newOption.setAttribute("class", "create-form-pollOption-boxes");
+            newOption.setAttribute("name", "pollOptions");
+            newOption.setAttribute("type", "text");
+            document.getElementById("pollOptions").insertAdjacentElement("beforeend", newOption);
+        }
+    </script>
+
+</div>
+
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        plugins: [
+                "advlist autolink lists link charmap print anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime table contextmenu paste"
+        ],
+        toolbar: "styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | fullscreen |  insertfile undo redo",
+        importcss_append: true,
+        removed_menuitems: 'newdocument',
+        resize: "both"
+    });
+</script>
+
+<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
+</form>
+
