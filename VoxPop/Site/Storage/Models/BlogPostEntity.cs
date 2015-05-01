@@ -19,7 +19,8 @@ namespace Site.Storage.Models
             string blogTitle,
             Uri imageUri,
             string blogContent,
-            IEnumerable<string> pollOptions, string blogImageCaption,
+            IEnumerable<string> pollOptions, 
+            string blogImageCaption,
             string userIdentifier,
             DateTime currentTime,
             string author)

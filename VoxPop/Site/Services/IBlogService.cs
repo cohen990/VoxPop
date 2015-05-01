@@ -10,6 +10,8 @@
     {
         IEnumerable<BlogPostEntity> GetAllBlogs();
 
+        IEnumerable<ResponseEntity> GetAllResponses(string blogRowKey);
+
         IEnumerable<CommentEntity> GetAllComments(string blogRowKey);
 
 
@@ -21,8 +23,20 @@
 
         Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey);
 
+        Task<ResponseModel> GetResponse(string blogRowKey, string blogPartitionKey);
+
         void UpdateBlog(BlogModel updatedBlog);
 
         Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string authorName, string authorIdentifier);
+
+        Task CreateResponseAsync(
+            ResponseModel response,
+            HttpPostedFileBase image,
+            string authorName,
+            string authorIdentifier,
+            string replyeeTitle,
+            string replyee,
+            string replyeeBlogIdentifier,
+            string replyeeIdentifier);
     }
 }

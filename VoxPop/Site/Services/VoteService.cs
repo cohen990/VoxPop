@@ -28,6 +28,21 @@
 
             return entity;
         }
+
+        public async Task<ResponseEntity> RetrieveVotes(ResponseEntity entity)
+        {
+            // TODO: Add unit tests
+            List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
+
+            foreach (var key in entity.Poll.Keys.ToList())
+            {
+                string pollOptionKey = key;
+                entity.Poll[pollOptionKey] = votes.Count(x => x.PollOptionKey == pollOptionKey);
+            }
+
+            return entity;
+        }
+
     }
 
 

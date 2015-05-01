@@ -219,6 +219,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MetaTagModel.cs" />
@@ -235,15 +236,18 @@
     <Compile Include="Services\VoteService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Storage\AuthenticationContext.cs" />
+    <Compile Include="Storage\IResponseStore.cs" />
     <Compile Include="Storage\IImageStore.cs" />
     <Compile Include="Storage\BlobImageStore.cs" />
     <Compile Include="Storage\IBlogStore.cs" />
     <Compile Include="Storage\ICommentStore.cs" />
     <Compile Include="Storage\IVoteStore.cs" />
+    <Compile Include="Storage\Models\ResponseEntity.cs" />
     <Compile Include="Storage\Models\BlogPostEntity.cs" />
     <Compile Include="Storage\Models\Politico.cs" />
     <Compile Include="Storage\Models\CommentEntity.cs" />
     <Compile Include="Storage\Models\VoteEntity.cs" />
+    <Compile Include="Storage\TableResponseStore.cs" />
     <Compile Include="Storage\TableBlogStore.cs" />
     <Compile Include="Storage\TableCommentStore.cs" />
     <Compile Include="Storage\TableVoteStore.cs" />
@@ -462,6 +466,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Stories\StoriesComment.cshtml" />
     <Content Include="Views\Stories\_CommentsBox.cshtml" />
+    <Content Include="Views\Stories\CreateResponse.cshtml" />
+    <Content Include="Views\Stories\_ResponsesBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
