@@ -1019,8 +1019,8 @@ input[type="text"] {
     z-index: +1;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
     background-color: #fff;
-display:inline-block;
-float:left;
+    display: inline-block;
+    float: left;
 }
 
 .comment-box-title-link {
@@ -1244,11 +1244,11 @@ float:left;
     border-radius: 19px;
     border-left: none;
     border-right: none;
-    max-width: 499px;
+    max-width: 485px;
     min-width: 425px;
     min-height: 40px;
     display: block;
-    padding: 0 10px 0 10px;
+    padding: 2px 10px 2px 10px;
     font-size: 15px;
     margin-bottom: 25px;
 }
@@ -1258,4 +1258,8 @@ float:left;
     margin: -10px auto 0 auto;
     object-position: right;
     display: inline-block;
+}
+
+.stories-comment-box-headings{
+    margin-top: 2.5px;
 }

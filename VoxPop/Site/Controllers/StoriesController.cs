@@ -41,6 +41,17 @@ namespace Site.Controllers
             return View(comments);
         }
 
+        [ChildActionOnly]
+        public ActionResult _ResponsesBox(string blogRowKey)
+        {
+            var responses = _blogService.GetAllResponses(blogRowKey);
+
+            ViewBag.BlogID = blogRowKey;
+
+            return View(responses);
+        }
+
+
         public ActionResult AuthorStories(string Auth)
         {
             var blogs = _blogService.GetAuthorBlogs(Auth);
@@ -111,6 +122,72 @@ namespace Site.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult CreateResponse(string replyeeTitle, string replyee, string replyeeBlogIdentifier, string replyeeIdentifier)
+        {
+            ViewBag.replyeeTitle = replyeeTitle;
+            ViewBag.replyee = replyee;
+            ViewBag.replyeeBlogIdentifier = replyeeBlogIdentifier;
+            ViewBag.replyeeIdentifier = replyeeIdentifier;
+
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateResponse(
+            BlogModel blog,
+            ResponseModel response,
+            HttpPostedFileBase image,
+            string replyeeTitle,
+            string replyee,
+            string replyeeBlogIdentifier,
+            string replyeeIdentifier,
+            params string[] pollOptions)
+        {
+            pollOptions = pollOptions.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+
+            if (!pollOptions.Any() || pollOptions.All(string.IsNullOrWhiteSpace))
+            {
+                ModelState.AddModelError("pollOptions", "Poll options are required");
+            }
+            if (pollOptions.Distinct().Count() != pollOptions.Count())
+            {
+                ModelState.AddModelError("pollOptionsDuplicated", "Poll options must be unique");
+            }
+            if (image == null)
+            {
+                ModelState.AddModelError("image", "You must provide an image");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var authorName = ClaimsService.GetAuthenticatedUsersFullName();
+            var authorIdentifier = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey);
+
+            blog.PollOptions = pollOptions.ToList();
+
+            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier);
+
+            await _blogService.CreateResponseAsync(
+                response,
+                image,
+                authorName,
+                authorIdentifier,
+                replyeeTitle,
+                replyee,
+                replyeeBlogIdentifier,
+                replyeeIdentifier);
+
+            return RedirectToAction("Index");
+        }
+
 
         [Authorize]
         [ValidateAntiForgeryToken]

@@ -6,5 +6,7 @@
     public interface IVoteService
     {
         Task<BlogPostEntity> RetrieveVotes(BlogPostEntity entity);
+
+        Task<ResponseEntity> RetrieveVotes(ResponseEntity entity);
     }
 }

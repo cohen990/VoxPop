@@ -21,27 +21,16 @@
 <div class="create-form-box">
     @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
     {
-        <div class="create-form-headings create-form-headings-Content">
+        <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
             Comment
         </div>
-        <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?" name="usersCommentsTA"></textarea>
-        ModelState error;
-        bool missingComment = ViewData.ModelState.TryGetValue("usersCommentsTA", out error);
-
-        if (missingComment && error.Errors.Count != 0)
-        {
-            string message = error.Errors.Single().ErrorMessage;
-
-            <div>
-                <span class="field-validation-error" data-valmsg-for="comment-1" data-valmsg-replace="true"><span for="comment-1" class="">@message</span></span>
-            </div>
-        }
+        <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?"></textarea>
         <p class="create-form-descriptions">
             Comment is free, but facts are sacred... Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story - <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">@Model.Title</a>.
         </p>
-        <div class="create-form-headings create-form-headings-Content">
-            Voting Options
-        </div>
+    <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+        Voting Options
+    </div>
         <div class="stories-comment-votebuttons-option-div">
             @{int count = 0;}
             @foreach (var pollItem in Model.Poll.Select((value, i) => new { i, value }))

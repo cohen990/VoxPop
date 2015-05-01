@@ -14,15 +14,18 @@
     {
         private readonly IBlogStore _blogStore;
 
+        private readonly IResponseStore _responseStore;
+
         private readonly IImageStore _imageStore;
 
         private readonly IVoteService _voteService;
 
         private readonly ICommentStore _commentStore;
 
-        public BlogService(IBlogStore blogStore, IImageStore imageStore, IVoteService voteService, ICommentStore commentStore)
+        public BlogService(IBlogStore blogStore, IResponseStore responseStore, IImageStore imageStore, IVoteService voteService, ICommentStore commentStore)
         {
             _blogStore = blogStore;
+            _responseStore = responseStore;
             _imageStore = imageStore;
             _voteService = voteService;
             _commentStore = commentStore;
@@ -44,6 +47,31 @@
             await _blogStore.CreateBlogAsync(blogEntity);
         }
 
+        public async Task CreateResponseAsync(
+            ResponseModel response,
+            HttpPostedFileBase imageFile,
+            string authorName,
+            string authorIdentifier,
+            string replyeeTitle,
+            string replyee,
+            string replyeeBlogIdentifier,
+            string replyeeIdentifier)
+        {
+            Uri imageUri = _imageStore.StoreImageAsync(imageFile);
+
+            response.ImageUri = imageUri;
+            response.AuthorIdentifier = authorIdentifier;
+            response.Author = authorName;
+            response.ReplyeeTitle = replyeeTitle;
+            response.Replyee = replyee;
+            response.ReplyeeRowKey = replyeeBlogIdentifier;
+            response.ReplyeePartitionKey = replyeeIdentifier;
+            var responseEntity = ResponseEntity.For(response);
+
+            await _responseStore.CreateResponseAsync(responseEntity);
+
+        }
+
         public IEnumerable<BlogPostEntity> GetAllBlogs()
         {
             IEnumerable<BlogPostEntity> blogs = _blogStore.GetAllBlogs();
@@ -57,6 +85,22 @@
 
             return sortedBlogs;
         }
+
+        public IEnumerable<ResponseEntity> GetAllResponses(string blogRowKey)
+        {
+            IEnumerable<ResponseEntity> responses = _responseStore.GetAllResponses(blogRowKey);
+
+            IEnumerable<ResponseEntity> responsesWithVotes = responses
+                .Select(x => _voteService.RetrieveVotes(x)
+                    .GetAwaiter()
+                    .GetResult());
+
+            List<ResponseEntity> sortedResponses = responsesWithVotes.OrderByDescending(b => b.Timestamp).ToList();
+
+            return sortedResponses;
+        }
+
+
 
         public IEnumerable<CommentEntity> GetAllComments(string blogRowKey)
         {
@@ -76,6 +120,14 @@
             return entity.ToModel();
         }
 
+        public async Task<ResponseModel> GetResponse(string blogRowKey, string blogPartitionKey)
+        {
+            ResponseEntity entity = _responseStore.GetResponse(blogRowKey, blogPartitionKey);
+
+            entity = await _voteService.RetrieveVotes(entity);
+
+            return entity.ToModel();
+        }
 
         public void UpdateBlog(BlogModel updatedBlog)
         {
@@ -84,6 +136,13 @@
             originalBlog.UpdateContent(updatedBlog.Content);
 
             _blogStore.MergeBlog(originalBlog);
+
+
+            ResponseEntity originalResponse = _responseStore.GetResponse(updatedBlog.BlogIdentifier, updatedBlog.AuthorIdentifier);
+
+            originalResponse.UpdateContent(updatedBlog.Content);
+
+            _responseStore.MergeResponse(originalResponse);
         }
 
         public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)
