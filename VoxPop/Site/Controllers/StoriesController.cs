@@ -46,7 +46,7 @@ namespace Site.Controllers
         {
             var responses = _blogService.GetAllResponses(blogRowKey);
 
-            ViewBag.BlogID = blogRowKey;
+            //ViewBag.BlogID = blogRowKey;
 
             return View(responses);
         }
@@ -212,14 +212,21 @@ namespace Site.Controllers
             {
                 return View("Error");
             }
-            //BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
-            //return View(blog);
 
-            BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
-            ResponseModel response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
+            if (_blogService.GetResponse(articleIdentifier, authorIdentifier) != null)
+            {
+                BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+                ResponseModel response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
 
-            return View(blog);
+                return View(blog);
 
+            }
+            else
+            {
+                BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+
+                return View(blog);
+            }
         }
 
         [HttpPost]
@@ -234,7 +241,10 @@ namespace Site.Controllers
 
             _blogService.UpdateBlog(updatedBlog);
 
-            _blogService.UpdateResponse(updatedResponse);
+            if (updatedResponse != null)
+            {
+                _blogService.UpdateResponse(updatedResponse);
+            }
 
             // TODO: shitty hack - remove
             var targetUri = string.Format("~/Stories/{0}/{1}", updatedBlog.AuthorIdentifier, updatedBlog.BlogIdentifier);
