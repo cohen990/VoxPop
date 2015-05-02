@@ -26,6 +26,17 @@
         <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier }, null)</p>
         <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
     </div>
+    @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
+    {
+        @Html.ActionLink("Edit", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+    }
+    @Html.ActionLink("Respond to this Story", "CreateResponse", new
+    {
+        replyeeTitle = Model.Title,
+        replyee = Model.Author,
+        replyeeBlogIdentifier = Model.BlogIdentifier,
+        replyeeIdentifier = Model.AuthorIdentifier
+    })
     <div class="story-width">
         <img src="@Model.ImageUri" class="story-pic">
         <div>
@@ -104,21 +115,9 @@
         <div class="response-partial">
             @Html.Action("_ResponsesBox", "Stories", new { blogRowKey = Model.BlogIdentifier })
         </div>
-        @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
-        {
-            @*<a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>*@
-            @Html.ActionLink("Edit", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
-        }
-        @Html.ActionLink("Respond to this Story", "CreateResponse", new
-        {
-            replyeeTitle = Model.Title,
-            replyee = Model.Author,
-            replyeeBlogIdentifier = Model.BlogIdentifier,
-            replyeeIdentifier = Model.AuthorIdentifier
-        })
-    </div>
-    <div class="comment-partial">
-        @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
+        <div class="comment-partial">
+            @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
+        </div>
     </div>
 </div>
 
