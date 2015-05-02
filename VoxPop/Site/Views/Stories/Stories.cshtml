@@ -30,6 +30,8 @@
     {
         @Html.ActionLink("Edit", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
     }
+    @Html.ActionLink("Comment", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+
     @Html.ActionLink("Respond to this Story", "CreateResponse", new
     {
         replyeeTitle = Model.Title,
