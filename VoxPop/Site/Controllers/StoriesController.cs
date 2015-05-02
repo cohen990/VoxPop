@@ -67,20 +67,6 @@ namespace Site.Controllers
             return View(blog);
         }
 
-        [Route("Stories/Edit/{authorIdentifier}/{articleIdentifier}")]
-        [Authorize]
-        public async Task<ActionResult> Edit(string articleIdentifier, string authorIdentifier)
-        {
-            if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != authorIdentifier)
-            {
-                return View("Error");
-            }
-
-            BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
-
-            return View(blog);
-        }
-
         [Authorize]
         [HttpGet]
         public ActionResult Create()
@@ -115,10 +101,11 @@ namespace Site.Controllers
 
             var authorName = ClaimsService.GetAuthenticatedUsersFullName();
             var authorIdentifier = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey);
+            var blogIdentifier = Guid.NewGuid().ToString("N");
 
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier);
+            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier, blogIdentifier);
 
             return RedirectToAction("Index");
         }
@@ -170,10 +157,11 @@ namespace Site.Controllers
 
             var authorName = ClaimsService.GetAuthenticatedUsersFullName();
             var authorIdentifier = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey);
+            var sharedBlogIdentifier = Guid.NewGuid().ToString("N");
 
             blog.PollOptions = pollOptions.ToList();
 
-            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier);
+            await _blogService.CreateBlogAsync(blog, image, authorName, authorIdentifier, sharedBlogIdentifier);
 
             await _blogService.CreateResponseAsync(
                 response,
@@ -183,7 +171,8 @@ namespace Site.Controllers
                 replyeeTitle,
                 replyee,
                 replyeeBlogIdentifier,
-                replyeeIdentifier);
+                replyeeIdentifier,
+                sharedBlogIdentifier);
 
             return RedirectToAction("Index");
         }
@@ -215,10 +204,28 @@ namespace Site.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("Stories/Edit/{authorIdentifier}/{articleIdentifier}")]
+        [Authorize]
+        public async Task<ActionResult> Edit(string articleIdentifier, string authorIdentifier)
+        {
+            if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != authorIdentifier)
+            {
+                return View("Error");
+            }
+            //BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+            //return View(blog);
+
+            BlogModel blog = await _blogService.GetBlog(articleIdentifier, authorIdentifier);
+            ResponseModel response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
+
+            return View(blog);
+
+        }
+
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(BlogModel updatedBlog)
+        public ActionResult Update(BlogModel updatedBlog, ResponseModel updatedResponse)
         {
             if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != updatedBlog.AuthorIdentifier)
             {
@@ -226,6 +233,8 @@ namespace Site.Controllers
             }
 
             _blogService.UpdateBlog(updatedBlog);
+
+            _blogService.UpdateResponse(updatedResponse);
 
             // TODO: shitty hack - remove
             var targetUri = string.Format("~/Stories/{0}/{1}", updatedBlog.AuthorIdentifier, updatedBlog.BlogIdentifier);

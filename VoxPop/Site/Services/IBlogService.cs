@@ -27,7 +27,9 @@
 
         void UpdateBlog(BlogModel updatedBlog);
 
-        Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string authorName, string authorIdentifier);
+        void UpdateResponse(ResponseModel updatedResponse);
+
+        Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string authorName, string authorIdentifier, string sharedBlogIdentifier);
 
         Task CreateResponseAsync(
             ResponseModel response,
@@ -37,6 +39,7 @@
             string replyeeTitle,
             string replyee,
             string replyeeBlogIdentifier,
-            string replyeeIdentifier);
+            string replyeeIdentifier,
+            string sharedBlogIdentifier);
     }
 }

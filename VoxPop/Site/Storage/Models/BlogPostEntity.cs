@@ -19,14 +19,16 @@ namespace Site.Storage.Models
             string blogTitle,
             Uri imageUri,
             string blogContent,
-            IEnumerable<string> pollOptions, 
+            IEnumerable<string> pollOptions,
             string blogImageCaption,
             string userIdentifier,
             DateTime currentTime,
-            string author)
+            string author,
+            string sharedBlogIdentifier
+            )
         {
             PartitionKey = userIdentifier;
-            RowKey = Guid.NewGuid().ToString("N");
+            RowKey = sharedBlogIdentifier;
 
             Title = blogTitle;
             ImageUri = imageUri;
@@ -175,22 +177,22 @@ namespace Site.Storage.Models
 
         public static BlogPostEntity For(BlogModel model)
         {
-            var entity = new BlogPostEntity(
-                model.Title,
-                model.ImageUri,
-                Sanitizer.GetSafeHtmlFragment(model.Content),
-                model.PollOptions.EncodePollOptions(),
-                model.ImageCaption,
-                model.AuthorIdentifier,
-                DateTime.Now,
-                model.Author);
+                var entity = new BlogPostEntity(
+                    model.Title,
+                    model.ImageUri,
+                    Sanitizer.GetSafeHtmlFragment(model.Content),
+                    model.PollOptions.EncodePollOptions(),
+                    model.ImageCaption,
+                    model.AuthorIdentifier,
+                    DateTime.Now,
+                    model.Author,
+                    model.BlogIdentifier);
 
-            return entity;
+                return entity;
         }
 
         public BlogModel ToModel()
         {
-
             return new BlogModel
             {
                 ImageCaption = ImageCaption,
