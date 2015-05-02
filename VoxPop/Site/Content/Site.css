@@ -430,7 +430,7 @@ a {
     clear: both;
     float: left;
     max-width: 675px;
-    margin-top: -10px;
+    margin: -10px 0 100px 0;
     padding: 1px 0 0 0;
 }
 
@@ -1012,34 +1012,34 @@ input[type="text"] {
 .comment-partial {
     display: table;
     /*float: left;*/
-    position:relative;
-    margin: 25px 0 0 -75px;
+    position: relative;
+    margin: 0 0 0 -75px;
     min-width: 700px;
 }
 
 .comment-box {
-    padding: 50px;
+    padding: 25px;
     margin: 10px 0 10px 0;
     border: 4.5px dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 30px;
-    min-width: 650px;
+    min-width: 705px;
     max-width: 100%;
     display: table;
 }
 
 .comment-box-main {
-    border-bottom:none;
+    border-bottom: none;
 }
 
 .comment-box-title {
     font-size: 47px;
-    margin: 0 0 -35px 25px;
-    position: relative;
+    margin: -33px 0 -35px 25px;
+    position: absolute;
     z-index: +1;
-    /*text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
-    /*background-color: #fff;*/
+    background-color: #fff;
+    float: none;
 }
 
 .comment-box-title-link {
@@ -1053,7 +1053,9 @@ input[type="text"] {
 
 .comment-box-sbs-ops-boxes {
     min-height: 75px;
-    margin: 0 0 50px 40%;
+    max-width: none;
+    border: none;
+    margin: 0 0 50px 28%;
 }
 
 .comment-box-sbs-ops-colours {
@@ -1061,12 +1063,12 @@ input[type="text"] {
 }
 
 .comment-box-reply-ops-boxes {
-    margin: -19px 0 -15px -11px;
+    margin: -16.9px 0 -15px -11px;
     display: inline-block;
     float: left;
     min-height: 65px;
     border: none;
-    position:absolute;
+    position: absolute;
 }
 
     .comment-box-reply-ops-boxes:hover {
@@ -1079,28 +1081,28 @@ input[type="text"] {
 }
 
 .comment-box-reply-ops {
-    font-size: 25px;
+    font-size: 21px;
     font-weight: 900;
 }
 
 .comment-box-sbs-1 {
     float: left;
-    width: 41%;
+    width: 45%;
 }
 
 .comment-box-sbs-divider {
     float: right;
-    width: 42%;
-    margin-right: 4.25%;
-    border-left: solid 1.3px lightgray;
-    padding-left: 3.8%;
+    width: 45%;
+    border-left: solid 1.5px lightgray;
+    padding-left: 6.8%;
+    margin-right: -13px;
 }
 
 .comment-box-sbs-divider-icon {
-    background: url('../Images/VS2.svg') no-repeat;
-    height: 30px;
-    width: 30px;
-    margin: 25px 0 0 -38.5px;
+    background: #fff;
+    height: 0px;
+    width: 0px;
+    margin: 25px 0 0 -61.5px;
     float: left;
 }
 
@@ -1124,8 +1126,8 @@ input[type="text"] {
 .comment-box-each {
     padding: 25px;
     transition-duration: 1.5s;
-    min-width:80%;
-    margin-bottom: 10px;
+    min-width: 80%;
+    margin-bottom: 20px;
 }
 
     .comment-box-each:hover {
@@ -1133,12 +1135,12 @@ input[type="text"] {
     }
 
 .comment-box-reply {
-    margin: 0 0 20px 15%;
+    margin: -10px 0 20px 15%;
     padding: 25px;
     border-top: none;
     transition-duration: 1.5s;
     min-width: 80%;
-    position:relative;
+    position: relative;
 }
 
     .comment-box-reply:hover {
@@ -1177,7 +1179,7 @@ input[type="text"] {
 
 .comment-box-reply-sbs-commenter {
     margin-top: 0;
-    position:relative;
+    position: relative;
 }
 
 .comment-box-reply-sbs-commenter-inner {
@@ -1222,6 +1224,7 @@ input[type="text"] {
     display: inline-block;
     font-size: larger;
     font-weight: 500;
+    margin: 15px 0 -15px 0;
 }
 
 .comment-box-reply-button-pic {
@@ -1235,7 +1238,7 @@ input[type="text"] {
 
 .comment-box-replied-to {
     display: inline-block;
-    margin-top: 2px;
+    margin-top: 8px;
 }
 
 .comment-box-reply-button-pic-reply {
@@ -1288,7 +1291,9 @@ input[type="text"] {
     font-weight: bolder;
     font-size: 38px;
     background-color: #fff;
-    display: inline;
+    display: inline-block;
+    position:absolute;
+    margin: -35px 0px 0px 18px;
 }
 
 .response-box {
@@ -1297,7 +1302,8 @@ input[type="text"] {
     border-right: none;
     border-bottom: none;
     border-radius: 30px;
-    /*padding: 40px 15px 0 15px;*/
+    padding: 0 15px 0 15px;
+    margin-top: 50px;
 }
 
 .response-links {
@@ -1308,7 +1314,7 @@ input[type="text"] {
     border-left: none;
     border-right: none;
     border-radius: 30px;
-    margin: -10px auto 45px auto;
+    margin: 30px auto 45px auto;
     padding: 15px 15px 20px 26px;
     transition: 1s;
 }
