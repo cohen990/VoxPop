@@ -129,9 +129,16 @@
         {
             ResponseEntity entity = _responseStore.GetResponse(blogRowKey, blogPartitionKey);
 
-            entity = await _voteService.RetrieveVotes(entity);
+            if (entity != null)
+            {
+                entity = await _voteService.RetrieveVotes(entity);
 
-            return entity.ToModel();
+                return entity.ToModel();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void UpdateBlog(BlogModel updatedBlog)
@@ -147,9 +154,13 @@
         {
             ResponseEntity originalResponse = _responseStore.GetResponse(updatedResponse.BlogIdentifier, updatedResponse.AuthorIdentifier);
 
-            originalResponse.UpdateContent(updatedResponse.Content);
+            if (originalResponse != null)
+            {
 
-            _responseStore.MergeResponse(originalResponse);
+                originalResponse.UpdateContent(updatedResponse.Content);
+
+                _responseStore.MergeResponse(originalResponse);
+            }
         }
 
         public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)

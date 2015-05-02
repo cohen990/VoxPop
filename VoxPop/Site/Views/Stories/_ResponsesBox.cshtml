@@ -9,3 +9,40 @@
 @{
     Layout = "";
 }
+@if (@Model.Select(x => x.PartitionKey).Count() != 0)
+{
+    <p class="response-heading">Responses (@Model.Select(x => x.ReplyeePartitionKey).Count())</p>
+    <div class="response-box">
+        @foreach (var response in Model)
+        {
+        <script>
+            chartData = [];
+            VoxPopCharts.InitializeChart();
+        </script>
+        <div class="response-links">
+            <a href="~/Stories/@response.PartitionKey/@response.RowKey">
+                <img src="@response.ImageUri" class="index-pic response-pic">
+                <div class="index-chart response-chart">
+                    <canvas class="index-chart-canvas response-chart-canvas" id="@response.RowKey@response.PartitionKey" height="125" width="165"></canvas>
+                </div>
+                <div class="index-titles line-clamp response-link-titles">
+                    @response.Title
+                </div>
+            </a>
+        </div>
+
+        foreach (KeyValuePair<string, int>
+            pollItem in response.Poll)
+            {
+            string option = HttpUtility.UrlDecode(@pollItem.Key);
+            <script>
+                chartData.push(VoxPopCharts.GetPollData("@option", @pollItem.Value));
+            </script>
+            }
+            <script>
+                VoxPopCharts.GenerateChart("@response.RowKey@response.PartitionKey", chartData);
+                var numPoll;
+            </script>
+            }
+    </div>
+}

@@ -101,11 +101,13 @@
         <div class="story-content">
             @Html.Raw(Model.Content)
         </div>
-        @Html.Action("_ResponsesBox", "Stories", new { blogRowKey = Model.BlogIdentifier })
-
+        <div class="response-partial">
+            @Html.Action("_ResponsesBox", "Stories", new { blogRowKey = Model.BlogIdentifier })
+        </div>
         @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
         {
-            <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>
+            @*<a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">Edit your Story</a>*@
+            @Html.ActionLink("Edit", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
         }
         @Html.ActionLink("Respond to this Story", "CreateResponse", new
         {
