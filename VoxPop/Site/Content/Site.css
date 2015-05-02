@@ -235,6 +235,7 @@ a {
 .story-width {
     max-width: 1075px;
     margin: 0 0 0 100px;
+    position: relative;
 }
 
 .story-headings {
@@ -427,6 +428,7 @@ a {
 
 .story-content {
     clear: both;
+    float: left;
     max-width: 675px;
     margin-top: -10px;
     padding: 1px 0 0 0;
@@ -1008,8 +1010,27 @@ input[type="text"] {
 /**              ***               **/
 /*_CommentsBox Partial*/
 .comment-partial {
-    margin: 100px 0 0 5%;
-    display: inline-block;
+    display: table;
+    /*float: left;*/
+    position:relative;
+    margin: 25px 0 0 -75px;
+    min-width: 700px;
+}
+
+.comment-box {
+    padding: 50px;
+    margin: 10px 0 10px 0;
+    border: 4.5px dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    min-width: 650px;
+    max-width: 100%;
+    display: table;
+}
+
+.comment-box-main {
+    border-bottom:none;
 }
 
 .comment-box-title {
@@ -1017,10 +1038,8 @@ input[type="text"] {
     margin: 0 0 -35px 25px;
     position: relative;
     z-index: +1;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-    background-color: #fff;
-    display: inline-block;
-    float: left;
+    /*text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
+    /*background-color: #fff;*/
 }
 
 .comment-box-title-link {
@@ -1031,17 +1050,6 @@ input[type="text"] {
     .comment-box-title-link:hover {
         font-size: 53px;
     }
-
-.comment-box {
-    padding: 50px;
-    margin: 10px 0 10px 0;
-    display: inline-block;
-    border: 4.5px dashed #060606;
-    border-left: none;
-    border-right: none;
-    border-radius: 30px;
-    width: 87.5%;
-}
 
 .comment-box-sbs-ops-boxes {
     min-height: 75px;
@@ -1058,6 +1066,7 @@ input[type="text"] {
     float: left;
     min-height: 65px;
     border: none;
+    position:absolute;
 }
 
     .comment-box-reply-ops-boxes:hover {
@@ -1091,7 +1100,7 @@ input[type="text"] {
     background: url('../Images/VS2.svg') no-repeat;
     height: 30px;
     width: 30px;
-    margin: 25px 0 0 -12.4%;
+    margin: 25px 0 0 -38.5px;
     float: left;
 }
 
@@ -1115,7 +1124,7 @@ input[type="text"] {
 .comment-box-each {
     padding: 25px;
     transition-duration: 1.5s;
-    width: 99%;
+    min-width:80%;
     margin-bottom: 10px;
 }
 
@@ -1124,11 +1133,12 @@ input[type="text"] {
     }
 
 .comment-box-reply {
-    margin: 0 0 20px 70px;
+    margin: 0 0 20px 15%;
     padding: 25px;
     border-top: none;
     transition-duration: 1.5s;
-    width: 87%;
+    min-width: 80%;
+    position:relative;
 }
 
     .comment-box-reply:hover {
@@ -1167,6 +1177,7 @@ input[type="text"] {
 
 .comment-box-reply-sbs-commenter {
     margin-top: 0;
+    position:relative;
 }
 
 .comment-box-reply-sbs-commenter-inner {
@@ -1269,16 +1280,15 @@ input[type="text"] {
 /*Response Stories*/
 .response-partial {
     float: right;
-    margin: -80px 0 0 0;
+    margin: 0 0 0 0;
     display: inline-block;
 }
 
 .response-heading {
     font-weight: bolder;
     font-size: 38px;
-    float: left;
     background-color: #fff;
-    margin:-33px 0 0 17px;
+    display: inline;
 }
 
 .response-box {
@@ -1287,7 +1297,7 @@ input[type="text"] {
     border-right: none;
     border-bottom: none;
     border-radius: 30px;
-    padding: 40px 15px 40px 15px;
+    /*padding: 40px 15px 0 15px;*/
 }
 
 .response-links {

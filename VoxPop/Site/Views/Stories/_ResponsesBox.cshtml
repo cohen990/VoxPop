@@ -11,8 +11,9 @@
 }
 @if (@Model.Select(x => x.PartitionKey).Count() != 0)
 {
-    <p class="response-heading">Responses (@Model.Select(x => x.ReplyeePartitionKey).Count())</p>
     <div class="response-box">
+        <div class="response-heading">Responses (@Model.Select(x => x.ReplyeePartitionKey).Count())</div>
+
         @foreach (var response in Model)
         {
         <script>

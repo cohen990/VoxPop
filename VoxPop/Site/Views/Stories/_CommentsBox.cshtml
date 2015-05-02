@@ -17,7 +17,7 @@
 else
 {
     <h1 class="comment-box-title">Voter <a href="~/Stories/Comment/@Html.Raw(ViewBag.BlogAuthID)/@Html.Raw(ViewBag.BlogID)" class="comment-box-title-link">Comment</a>s</h1>
-    <div class="comment-box">
+    <div class="comment-box comment-box-main">
         @if (Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().Count() == 2)
         {
             var Op1 = Model.Where(x => x.AmIAReply == false).Select(x => x.PollOptionKey).Distinct().First();
