@@ -1,4 +1,6 @@
-﻿namespace Site.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Site.Models
 {
     using System;
     using System.Collections.Generic;

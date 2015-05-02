@@ -27,11 +27,11 @@ namespace Site.Storage.Models
             string replyeeTitle,
             string replyee,
             string replyeeBlogIdentifier,
-            string replyeeIdentifier
-                        )
+            string replyeeIdentifier,
+            string sharedBlogIdentifier)
         {
             PartitionKey = userIdentifier;
-            RowKey = Guid.NewGuid().ToString("N");
+            RowKey = sharedBlogIdentifier;
 
             Title = blogTitle;
             ImageUri = imageUri;
@@ -226,8 +226,9 @@ namespace Site.Storage.Models
                 model.Author,
                 model.ReplyeeTitle,
                 model.Replyee,
-                   model.ReplyeeRowKey,
-                model.ReplyeePartitionKey);
+                model.ReplyeeRowKey,
+                model.ReplyeePartitionKey,
+                model.BlogIdentifier);
 
 
             return entity;

@@ -35,13 +35,18 @@
             BlogModel blog,
             HttpPostedFileBase imageFile,
             string authorName,
-            string authorIdentifier)
+            string authorIdentifier,
+            string sharedBlogIdentifier)
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             blog.ImageUri = imageUri;
             blog.AuthorIdentifier = authorIdentifier;
             blog.Author = authorName;
+            if (sharedBlogIdentifier != "")
+            {
+                blog.BlogIdentifier = sharedBlogIdentifier;
+            }
             var blogEntity = BlogPostEntity.For(blog);
 
             await _blogStore.CreateBlogAsync(blogEntity);
@@ -55,13 +60,15 @@
             string replyeeTitle,
             string replyee,
             string replyeeBlogIdentifier,
-            string replyeeIdentifier)
+            string replyeeIdentifier,
+            string sharedBlogIdentifier)
         {
             Uri imageUri = _imageStore.StoreImageAsync(imageFile);
 
             response.ImageUri = imageUri;
             response.AuthorIdentifier = authorIdentifier;
             response.Author = authorName;
+            response.BlogIdentifier = sharedBlogIdentifier;
             response.ReplyeeTitle = replyeeTitle;
             response.Replyee = replyee;
             response.ReplyeeRowKey = replyeeBlogIdentifier;
@@ -100,8 +107,6 @@
             return sortedResponses;
         }
 
-
-
         public IEnumerable<CommentEntity> GetAllComments(string blogRowKey)
         {
             IEnumerable<CommentEntity> comments = _commentStore.GetAllComments(blogRowKey);
@@ -136,11 +141,13 @@
             originalBlog.UpdateContent(updatedBlog.Content);
 
             _blogStore.MergeBlog(originalBlog);
+        }
 
+        public void UpdateResponse(ResponseModel updatedResponse)
+        {
+            ResponseEntity originalResponse = _responseStore.GetResponse(updatedResponse.BlogIdentifier, updatedResponse.AuthorIdentifier);
 
-            ResponseEntity originalResponse = _responseStore.GetResponse(updatedBlog.BlogIdentifier, updatedBlog.AuthorIdentifier);
-
-            originalResponse.UpdateContent(updatedBlog.Content);
+            originalResponse.UpdateContent(updatedResponse.Content);
 
             _responseStore.MergeResponse(originalResponse);
         }
@@ -176,6 +183,5 @@
 
             await commentStore.CommentAsync(commentEntity);
         }
-
     }
 }
