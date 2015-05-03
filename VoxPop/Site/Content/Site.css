@@ -233,9 +233,8 @@ a {
 }
 
 .story-width {
-    max-width: 1075px;
+    min-width: 1075px;
     margin: 0 0 0 100px;
-    position: relative;
 }
 
 .story-headings {
@@ -247,24 +246,36 @@ a {
     left: 45px;
 }
 
+.story-outer-space-left {
+    float: left;
+    position: relative;
+    right: 5px;
+}
+
 .story-author-date-box {
-    margin: 10px 0 0 5px;
-    width: 75px;
-    padding: 10px;
     border: 4.5px dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 20px;
-    float: left;
-    position: relative;
-    right: 5px;
     transition-duration: 1s;
+    padding: 10px;
+    margin: 10px 0 0 5px;
+    width: 75px;
 }
 
     .story-author-date-box:hover {
         background: #fafafa;
         max-height: 500px;
     }
+
+.story-interact {
+    padding: 0;
+    margin: 50px 0 0 5px;
+    width: 75px;
+    right: 5px;
+    font-size: large;
+    font-weight: 900;
+}
 
 .story-pic {
     display: inline-block;
@@ -281,7 +292,7 @@ a {
     font-weight: 500;
     clear: both;
     float: left;
-    margin: 2px 0 -10px 0;
+    margin: 2px 0 0 0;
 }
 
 .story-chart-box {
@@ -294,7 +305,8 @@ a {
     border-radius: 30px;
     display: block;
     float: left;
-    position: static;
+    position: relative;
+    z-index: 2;
 }
 
 .story-chart {
@@ -429,8 +441,8 @@ a {
 .story-content {
     clear: both;
     float: left;
-    max-width: 675px;
-    margin: -10px 0 100px 0;
+    max-width: 665px;
+    margin: -10px 0 70px 0;
     padding: 1px 0 0 0;
 }
 
@@ -1008,54 +1020,84 @@ input[type="text"] {
 
 
 /**              ***               **/
+/*StoriesComment*/
+.stories-comment-box {
+    border-radius: 19px;
+    border-left: none;
+    border-right: none;
+    max-width: 485px;
+    min-width: 425px;
+    height: 21px;
+    display: block;
+    padding: 0 10px 2px 10px;
+    font-size: 15px;
+    margin: 0 0 25px 0;
+}
+
+.stories-comment-votebuttons-option-div {
+    width: 460px;
+    margin: -10px auto 0 auto;
+    object-position: right;
+    display: inline-block;
+}
+
+.stories-comment-box-headings {
+    margin-top: 1px;
+}
+
+.stories-comment-respond-link{
+    font-weight:900;
+    display:inline;
+}
+
+
+
+/**              ***               **/
 /*_CommentsBox Partial*/
 .comment-partial {
-    display: table;
-    /*float: left;*/
     position: relative;
-    margin: 0 0 0 -75px;
-    min-width: 700px;
+    margin: 0 0 0 -120px;
+    clear: left;
 }
 
 .comment-box {
     padding: 25px;
-    margin: 10px 0 10px 0;
     border: 4.5px dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 30px;
-    min-width: 705px;
+    min-width: 740px;
     max-width: 100%;
-    display: table;
 }
 
 .comment-box-main {
     border-bottom: none;
+    display: table-caption;
+    padding-top: 50px;
 }
 
 .comment-box-title {
-    font-size: 47px;
-    margin: -33px 0 -35px 25px;
+    font-size: 40px;
+    margin: -95px 0 0 -10px;
     position: absolute;
     z-index: +1;
-    background-color: #fff;
-    float: none;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 .comment-box-title-link {
-    font-size: 50px;
+    font-size: 45px;
     transition-duration: .5s;
 }
 
     .comment-box-title-link:hover {
-        font-size: 53px;
+        font-size: 55px;
     }
 
 .comment-box-sbs-ops-boxes {
     min-height: 75px;
     max-width: none;
     border: none;
-    margin: 0 0 50px 28%;
+    margin: 0 0 50px 35%;
 }
 
 .comment-box-sbs-ops-colours {
@@ -1081,21 +1123,13 @@ input[type="text"] {
 }
 
 .comment-box-reply-ops {
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 900;
 }
 
 .comment-box-sbs-1 {
     float: left;
     width: 45%;
-}
-
-.comment-box-sbs-divider {
-    float: right;
-    width: 45%;
-    border-left: solid 1.5px lightgray;
-    padding-left: 6.8%;
-    margin-right: -13px;
 }
 
 .comment-box-sbs-divider-icon {
@@ -1111,7 +1145,7 @@ input[type="text"] {
     color: lightgray;
     height: 21.5px;
     width: 21.5px;
-    margin: 2.5px 0 0 2px;
+    margin: 2.5px 0 0 14px;
     border-radius: 50%;
     shape-outside: circle(50%);
     -webkit-shape-outside: circle(50%);
@@ -1120,7 +1154,9 @@ input[type="text"] {
 
 .comment-box-sbs-2 {
     float: right;
-    width: 100%;
+    width: 45%;
+    border-left: 1.5px lightgray solid;
+    padding-left: 4.8%;
 }
 
 .comment-box-each {
@@ -1135,8 +1171,9 @@ input[type="text"] {
     }
 
 .comment-box-reply {
-    margin: -10px 0 20px 15%;
+    margin: -10px 0 20px 10%;
     padding: 25px;
+    border: 3.5px dashed #060606;
     border-top: none;
     transition-duration: 1.5s;
     min-width: 80%;
@@ -1170,8 +1207,8 @@ input[type="text"] {
 
 .comment-box-sbs-commenter {
     float: left;
-    margin: -60px 0 0 10px;
-    font-size: larger;
+    margin: -60px 0 0 5px;
+    font-size: medium;
     font-weight: 600;
     min-width: 100%;
     display: block;
@@ -1213,10 +1250,12 @@ input[type="text"] {
 .comment-box-comment-text {
     margin-top: 35px;
     white-space: pre-wrap;
+    font-size: 14.5px;
 }
 
 .comment-box-reply-comment-text {
-    margin: 7px 0 0 0;
+    margin-top: 7px;
+    font-size: 14px;
 }
 
 .comment-box-reply-button {
@@ -1224,11 +1263,21 @@ input[type="text"] {
     display: inline-block;
     font-size: larger;
     font-weight: 500;
-    margin: 15px 0 -15px 0;
+    margin-top: -10px;
+    font-size: inherit;
 }
 
 .comment-box-reply-button-pic {
     background: url('../Images/reply.svg') no-repeat;
+    height: 35px;
+    width: 35px;
+    background-size: 85%;
+    float: left;
+    margin-top: -4px;
+}
+
+.comment-box-reply-button-pic-reply {
+    background: url('../Images/reply2.svg') no-repeat;
     height: 35px;
     width: 35px;
     background-size: 85%;
@@ -1248,34 +1297,13 @@ input[type="text"] {
 .comment-box-replied-to-inner {
     float: left;
     margin-left: 15px;
+    font-size: medium;
 }
 
-
-
-/**              ***               **/
-/*StoriesComment*/
-.stories-comment-box {
-    border-radius: 19px;
-    border-left: none;
-    border-right: none;
-    max-width: 485px;
-    min-width: 425px;
-    height: 20px;
-    display: block;
-    padding: 3px 10px 2px 10px;
-    font-size: 15px;
-    margin: 0 0 25px 0;
-}
-
-.stories-comment-votebuttons-option-div {
-    width: 460px;
-    margin: -10px auto 0 auto;
-    object-position: right;
-    display: inline-block;
-}
-
-.stories-comment-box-headings {
-    margin-top: 1.5px;
+.comment-box-end-link {
+    clear: both;
+    font-size: large;
+    font-weight: 900;
 }
 
 
@@ -1285,15 +1313,18 @@ input[type="text"] {
     float: right;
     margin: 0 0 0 0;
     display: inline-block;
+    position: relative;
+    z-index: 1;
 }
 
 .response-heading {
     font-weight: bolder;
     font-size: 38px;
-    background-color: #fff;
+    /*background-color: #fff;*/
     display: inline-block;
-    position:absolute;
-    margin: -35px 0px 0px 18px;
+    position: absolute;
+    margin: -39px 0px 0px 18px;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 .response-box {
@@ -1303,8 +1334,14 @@ input[type="text"] {
     border-bottom: none;
     border-radius: 30px;
     padding: 0 15px 0 15px;
-    margin-top: 50px;
+    margin-top: 80px;
+    background-color: #fafafa;
+    transition: 1s;
 }
+
+    .response-box:hover {
+        background: #fff;
+    }
 
 .response-links {
     text-decoration: none;
@@ -1317,10 +1354,11 @@ input[type="text"] {
     margin: 30px auto 45px auto;
     padding: 15px 15px 20px 26px;
     transition: 1s;
+    background: #fff;
 }
 
     .response-links:hover {
-        background: #fafafa;
+        background: #f2f2f2;
     }
 
 .response-pic {
@@ -1337,9 +1375,21 @@ input[type="text"] {
 }
 
 .response-chart-canvas {
-    margin: -3.51px 0 0 -23.01px;
+    margin: -3.51px 0 0 -65.6px;
 }
 
 .response-link-titles {
     min-width: inherit;
+}
+
+.response-in-response-to {
+    font-size: small;
+    line-height: 95px;
+    margin-bottom: -45px;
+    display:inline-block;
+}
+
+.response-in-response-to-links {
+    font-size:medium;
+    display:inline-block;
 }
