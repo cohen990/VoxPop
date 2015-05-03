@@ -20,7 +20,7 @@ namespace Site.Models
         public List<string> PollOptions { get; set; }
 
         [Display(Name = "Image Caption")]
-        [Required(ErrorMessage = "Looks like you skipped adding an Image Caption")]
+        [Required(ErrorMessage = "Looks like you've skipped adding an Image Caption")]
         public string ImageCaption { get; set; }
 
         [Display(Name = "Image")]

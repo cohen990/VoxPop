@@ -35,12 +35,12 @@
             </p>
             <p>
                 @Html.ActionLink("RESPOND", "CreateResponse", new
-            {
-                replyeeTitle = Model.Title,
-                replyee = Model.Author,
-                replyeeBlogIdentifier = Model.BlogIdentifier,
-                replyeeIdentifier = Model.AuthorIdentifier
-            })
+                {
+                    replyeeTitle = Model.Title,
+                    replyee = Model.Author,
+                    replyeeBlogIdentifier = Model.BlogIdentifier,
+                    replyeeIdentifier = Model.AuthorIdentifier
+                })
             </p>
             <p>
                 @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
@@ -48,7 +48,6 @@
                     @Html.ActionLink("EDIT", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
                 }
             </p>
-
         </div>
     </div>
     <div class="story-width">
