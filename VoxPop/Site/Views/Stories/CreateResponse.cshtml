@@ -7,12 +7,19 @@
 {
     @Html.Partial("_DefaultMetaTags")
 }
-
+@{
+    var replyeeTitle = Request.QueryString["replyeeTitle"];
+    var replyee = Request.QueryString["replyee"];
+    var replyeeBlogIdentifier = Request.QueryString["replyeeBlogIdentifier"];
+    var replyeeIdentifier = Request.QueryString["replyeeIdentifier"];
+}
 <script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
 
-<h1 class="page-headings">Create a Response to the Story 'Story X' here...</h1>
-<div class="create-intro">
-    <p>You can do whatever you want with a VOXPOP Story, if it's an issue personal to you, a campaign in your community or a global concern - write about it!</p>
+<h1 class="page-headings">
+    Respond to @Html.ActionLink(replyee, "Stories", "Stories", new { articleIdentifier = replyeeBlogIdentifier, authorIdentifier = replyeeIdentifier })'s Story here...
+</h1>
+<div class="create-intro stories-comment-intro">
+    You're responding to the Story '<p class="stories-comment-respond-link">@Html.ActionLink(@replyeeTitle, "Stories", new { articleIdentifier = replyeeBlogIdentifier, authorIdentifier = replyeeIdentifier }, null)</p>'.
 </div>
 <div class="create-form-box">
 
@@ -125,19 +132,18 @@
 
         <p class="create-form-descriptions">Now for the most important part - your Story's Content. You can write whatever you want however VOXPOP encourages you to add as much information as possible to help properly elaborate on your story, including links to other sites, pictures etc.</p>
 
-
-        <input class="create-form-submit" type="submit" value="CREATE!" />
-    }
-
-    <script>
-        var AddOption = function () {
-            var newOption = document.createElement("input");
-            newOption.setAttribute("class", "create-form-pollOption-boxes");
-            newOption.setAttribute("name", "pollOptions");
-            newOption.setAttribute("type", "text");
-            document.getElementById("pollOptions").insertAdjacentElement("beforeend", newOption);
+        <input class="create-form-submit" type="submit" value="RESPOND!" />
         }
-    </script>
+
+        <script>
+            var AddOption = function () {
+                var newOption = document.createElement("input");
+                newOption.setAttribute("class", "create-form-pollOption-boxes");
+                newOption.setAttribute("name", "pollOptions");
+                newOption.setAttribute("type", "text");
+                document.getElementById("pollOptions").insertAdjacentElement("beforeend", newOption);
+            }
+        </script>
 
 </div>
 
