@@ -240,7 +240,7 @@ a {
 .story-headings {
     display: block;
     font-size: 51px;
-    margin: 20px auto 20px auto;
+    margin: 20px auto 25px auto;
     width: 1075px;
     position: relative;
     left: 45px;
@@ -1045,9 +1045,20 @@ input[type="text"] {
     margin-top: 1px;
 }
 
-.stories-comment-respond-link{
-    font-weight:900;
-    display:inline;
+.stories-comment-respond-link {
+    font-weight: 900;
+    font-size: 17px;
+    display: inline;
+    margin-bottom: 50px;
+}
+
+.stories-comment-intro {
+    margin-left: 7%;
+    margin-bottom: 40px;
+}
+
+.story-comment-outro {
+    margin: 45px 0 30px 0;
 }
 
 
@@ -1384,12 +1395,14 @@ input[type="text"] {
 
 .response-in-response-to {
     font-size: small;
-    line-height: 95px;
-    margin-bottom: -45px;
-    display:inline-block;
+    /*line-height: 95px;*/
+    margin: 5px 0 -45px 0;
+    /*display: inline-table;
+    position: absolute;*/
+    float: right;
 }
 
 .response-in-response-to-links {
-    font-size:medium;
-    display:inline-block;
+    font-size: medium;
+    display: inline-block;
 }

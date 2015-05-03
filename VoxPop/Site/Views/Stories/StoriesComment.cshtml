@@ -15,8 +15,12 @@
     $(document).on('mousemove', 'textarea', function(e) { var a=$(this).offset().top+$(this).outerHeight()-16,b=$(this).offset().left+$(this).outerWidth()-16;$(this).css({cursor:e.pageY>a&&e.pageX>b?"nw-resize":""}); })
 </script>
 <h1 class="page-headings">Voter Comment</h1>
-<div class="edit-intro">
-    <p>Comment is free, but facts are sacred... Have your say on @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier, Auth = Model.Author }, null)'s Story.</p>
+<div class="stories-comment-intro">
+    Comment is free, but facts are sacred... Have your say on
+    <p class="stories-comment-respond-link">
+        @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier, Auth = Model.Author })
+    </p>
+    's Story.
 </div>
 <div class="create-form-box">
     @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
@@ -25,9 +29,12 @@
             Comment
         </div>
         <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?"></textarea>
-        <p class="create-form-descriptions">
-            Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story - <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">@Model.Title</a>.
-        </p>
+        <div class="create-form-descriptions">
+            Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story -
+            <p class="stories-comment-respond-link">
+                @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
+            </p>
+        </div>
         <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
             Voting Options
         </div>
@@ -66,18 +73,19 @@
                 </div>
             }
         </div>
-        <p class="create-form-descriptions">
-            Want to give your opinion on this Story but don't feel that it is represented by any of the above Voting Options?
-            <div class="stories-comment-respond-link">
-                @Html.ActionLink("RESPOND", "CreateResponse", new
+    <div class="create-form-descriptions story-comment-outro">
+        Want to give your opinion but don't feel its adequately represented by any of the above Voting Options?
+        <p class="stories-comment-respond-link">
+            @Html.ActionLink("RESPOND", "CreateResponse", new
                {
                    replyeeTitle = Model.Title,
                    replyee = Model.Author,
                    replyeeBlogIdentifier = Model.BlogIdentifier,
                    replyeeIdentifier = Model.AuthorIdentifier
                })
-            </div>.
         </p>
+        to this Story instead.
+    </div>
 
     }
 </div>
