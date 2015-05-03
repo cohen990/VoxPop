@@ -1,0 +1,30 @@
+﻿@using Site.Models
+@using Site.Services
+@using Site.Storage.Models;
+@model ResponseModel
+@{
+    ViewBag.Title = "";
+}
+
+@section MetaTags
+{
+    @Html.Partial("_DefaultMetaTags")
+}
+
+@{
+    Layout = "";
+}
+
+@if (Model != null)
+{
+    <div class="response-in-response-to">
+        (in response to
+        <div class="response-in-response-to-links">
+            @Html.ActionLink(Model.ReplyeeTitle, "Stories", new { articleIdentifier = Model.ReplyeeRowKey, authorIdentifier = Model.ReplyeePartitionKey })
+        </div>
+        by
+        <div class="response-in-response-to-links">
+            @Html.ActionLink(Model.Replyee, "AuthorStories", new { AuthUn = Model.ReplyeePartitionKey, Auth = Model.Replyee })
+        </div>)
+    </div>
+}
