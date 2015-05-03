@@ -51,10 +51,17 @@ namespace Site.Controllers
             return View(responses);
         }
 
-
-        public ActionResult AuthorStories(string Auth)
+        [ChildActionOnly]
+        public async Task<ActionResult> _IfIAmAResponseBox(string articleIdentifier, string authorIdentifier)
         {
-            var blogs = _blogService.GetAuthorBlogs(Auth);
+            var response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
+
+            return View(response);
+        }
+
+        public ActionResult AuthorStories(string AuthUn)
+        {
+            var blogs = _blogService.GetAuthorBlogs(AuthUn);
 
             return View(blogs);
         }
@@ -423,7 +430,7 @@ namespace Site.Controllers
             {
                 var dt = d.ToString("R");
 
-                return dt.Remove(dt.Length - 3);
+                return dt.Remove(dt.Length - 7);
             }
 
             //if (dayDiff < 7)

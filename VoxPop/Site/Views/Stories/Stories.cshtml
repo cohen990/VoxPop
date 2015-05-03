@@ -13,32 +13,44 @@
 
 <script src="~/Scripts/modally-baby.js"></script>
 <script src="~/Scripts/vote-ops.js"></script>
-<script src="~/Scripts/vote-ops-comments.js"></script>
 
 <script>
     var chartData = [];
 </script>
 
-<h1 id="story-headings" class="story-headings">@Model.Title</h1>
-
+<h1 id="story-headings" class="story-headings">
+    @Model.Title
+@Html.Action("_IfIAmAResponseBox", "Stories", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
+</h1>
 <div class="story-outer-width">
-    <div class="story-author-date-box">
-        <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier }, null)</p>
-        <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
-    </div>
-    @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
-    {
-        @Html.ActionLink("Edit", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
-    }
-    @Html.ActionLink("Comment", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+    <div class="story-outer-space-left">
+        <div class="story-author-date-box">
+            <p class="story-author">by @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier, Auth = Model.Author }, null)</p>
+            <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
+        </div>
 
-    @Html.ActionLink("Respond to this Story", "CreateResponse", new
-    {
-        replyeeTitle = Model.Title,
-        replyee = Model.Author,
-        replyeeBlogIdentifier = Model.BlogIdentifier,
-        replyeeIdentifier = Model.AuthorIdentifier
-    })
+        <div class="story-interact">
+            <p>
+                @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+            </p>
+            <p>
+                @Html.ActionLink("RESPOND", "CreateResponse", new
+            {
+                replyeeTitle = Model.Title,
+                replyee = Model.Author,
+                replyeeBlogIdentifier = Model.BlogIdentifier,
+                replyeeIdentifier = Model.AuthorIdentifier
+            })
+            </p>
+            <p>
+                @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
+                {
+                    @Html.ActionLink("EDIT", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+                }
+            </p>
+
+        </div>
+    </div>
     <div class="story-width">
         <img src="@Model.ImageUri" class="story-pic">
         <div>

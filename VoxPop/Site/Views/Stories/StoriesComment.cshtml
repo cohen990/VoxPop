@@ -16,7 +16,7 @@
 </script>
 <h1 class="page-headings">Voter Comment</h1>
 <div class="edit-intro">
-    <p>Have YOUR say on @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { Auth = @Model.AuthorIdentifier }, null)'s Story.</p>
+    <p>Comment is free, but facts are sacred... Have your say on @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier, Auth = Model.Author }, null)'s Story.</p>
 </div>
 <div class="create-form-box">
     @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
@@ -26,11 +26,11 @@
         </div>
         <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?"></textarea>
         <p class="create-form-descriptions">
-            Comment is free, but facts are sacred... Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story - <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">@Model.Title</a>.
+            Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story - <a href="~/Stories/Edit/@Model.AuthorIdentifier/@Model.BlogIdentifier">@Model.Title</a>.
         </p>
-    <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
-        Voting Options
-    </div>
+        <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+            Voting Options
+        </div>
         <div class="stories-comment-votebuttons-option-div">
             @{int count = 0;}
             @foreach (var pollItem in Model.Poll.Select((value, i) => new { i, value }))
@@ -66,6 +66,19 @@
                 </div>
             }
         </div>
+        <p class="create-form-descriptions">
+            Want to give your opinion on this Story but don't feel that it is represented by any of the above Voting Options?
+            <div class="stories-comment-respond-link">
+                @Html.ActionLink("RESPOND", "CreateResponse", new
+               {
+                   replyeeTitle = Model.Title,
+                   replyee = Model.Author,
+                   replyeeBlogIdentifier = Model.BlogIdentifier,
+                   replyeeIdentifier = Model.AuthorIdentifier
+               })
+            </div>.
+        </p>
+
     }
 </div>
 

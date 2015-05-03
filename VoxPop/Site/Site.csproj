@@ -255,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\VoxPopCharts2.js" />
     <Content Include="Content\VoxPopCharts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -265,6 +266,7 @@
     </Content>
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\reply.svg" />
+    <Content Include="Images\reply2.svg" />
     <Content Include="Images\search-icon-hi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -469,6 +471,7 @@
     <Content Include="Views\Stories\_CommentsBox.cshtml" />
     <Content Include="Views\Stories\CreateResponse.cshtml" />
     <Content Include="Views\Stories\_ResponsesBox.cshtml" />
+    <Content Include="Views\Stories\_IfIAmAResponseBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

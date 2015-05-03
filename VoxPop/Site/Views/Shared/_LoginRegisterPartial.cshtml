@@ -42,7 +42,7 @@
                             @("Hello, " + @Site.Services.ClaimsService.GetClaim(VoxPopConstants.FirstNameClaimKey) + ".")
                         </li>
                         <li>
-                            @Html.ActionLink("Your Stories", "AuthorStories", new { Auth = Site.Services.ClaimsService.GetClaim("identifier") }, null)
+                            @Html.ActionLink("Your Stories", "AuthorStories", new { AuthUn = Site.Services.ClaimsService.GetClaim("identifier") }, null)
                         </li>
                         <li>
                             <p class="cd-form-bottom-message"><a href="#0">Contact VOXPOP</a></p>
