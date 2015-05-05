@@ -57,5 +57,16 @@
 
             return result;
         }
+
+        public IEnumerable<VoteEntity> GetAllVotes(string blogRowKey)
+        {
+            var query = new TableQuery<VoteEntity>();
+
+            IEnumerable<VoteEntity> entities = _table.ExecuteQuery(query)
+                .Where(x => x.PartitionKey == blogRowKey)
+                .Select(x => x);
+
+            return entities;
+        }
     }
 }

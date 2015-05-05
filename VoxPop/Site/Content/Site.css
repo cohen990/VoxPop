@@ -326,14 +326,20 @@ a {
 }
 
 .story-votebuttons-title {
-    margin: 15px 0 0 30px;
+    margin: 1px -114px -49px 33px;
+    font-size: xx-large;
     width: auto;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    float: left;
+    position: relative;
+    z-index: 1;
 }
 
 .story-votebuttons {
-    padding: 0px 10px 17px 15px;
-    margin: 20px 10px 0 0;
-    max-height: 280px;
+    float: right;
+    padding: 7px 10px 17px 15px;
+    margin: 28px 0 0 362px;
+    max-height: 225px;
     width: 110px;
     overflow-y: hidden;
     /*word-break: break-word;*/
@@ -343,7 +349,7 @@ a {
     border-right: none;
     border-radius: 27px;
     transition-duration: 1.5s;
-    position: relative;
+    position: absolute;
     z-index: auto;
 }
 
@@ -351,9 +357,17 @@ a {
         background: #fafafa;
         max-height: 550px;
         padding-bottom: 10px;
-        position: relative;
+        position: absolute;
         z-index: auto;
     }
+
+.story-votebuttons-on-chart-hover {
+    background: #fafafa;
+    max-height: 550px;
+    padding-bottom: 10px;
+    position: absolute;
+    z-index: auto;
+}
 
 
 .story-votebuttons-option {
@@ -1259,9 +1273,13 @@ input[type="text"] {
 }
 
 .comment-box-comment-text {
-    margin-top: 10px;
+    margin-top: 32px;
     white-space: pre-wrap;
     font-size: 14.5px;
+}
+
+.comment-box-not-sbs-comment-text {
+    margin-top: 5px;
 }
 
 .comment-box-reply-comment-text {
@@ -1405,4 +1423,15 @@ input[type="text"] {
 .response-in-response-to-links {
     font-size: medium;
     display: inline-block;
+}
+
+
+/**              ***               **/
+/*_DidYouVote*/
+.did-you-vote-partial {
+    margin-top: 289px;
+}
+
+.did-you-vote-datetime {
+    margin-left:10px;
 }

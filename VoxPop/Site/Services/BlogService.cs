@@ -18,15 +18,18 @@
 
         private readonly IImageStore _imageStore;
 
+        private readonly IVoteStore _voteStore;
+
         private readonly IVoteService _voteService;
 
         private readonly ICommentStore _commentStore;
 
-        public BlogService(IBlogStore blogStore, IResponseStore responseStore, IImageStore imageStore, IVoteService voteService, ICommentStore commentStore)
+        public BlogService(IBlogStore blogStore, IResponseStore responseStore, IImageStore imageStore, IVoteStore voteStore, IVoteService voteService, ICommentStore commentStore)
         {
             _blogStore = blogStore;
             _responseStore = responseStore;
             _imageStore = imageStore;
+            _voteStore = voteStore;
             _voteService = voteService;
             _commentStore = commentStore;
         }
@@ -111,9 +114,23 @@
         {
             IEnumerable<CommentEntity> comments = _commentStore.GetAllComments(blogRowKey);
 
-            List<CommentEntity> sortedComments = comments.OrderByDescending(b => b.RowKey).ToList();
+            IEnumerable<CommentEntity> commentsWithVotes = comments
+                .Select(x => _voteService.RetrieveVotes(x)
+                    .GetAwaiter()
+                    .GetResult());
+
+            List<CommentEntity> sortedComments = commentsWithVotes.OrderByDescending(b => b.RowKey).ToList();
 
             return sortedComments;
+        }
+
+        public IEnumerable<VoteEntity> GetAllVotes(string blogRowKey)
+        {
+            IEnumerable<VoteEntity> votes = _voteStore.GetAllVotes(blogRowKey);
+
+            List<VoteEntity> sortedVotes = votes.OrderByDescending(b => b.RowKey).ToList();
+
+            return sortedVotes;
         }
 
         public async Task<BlogModel> GetBlog(string blogRowKey, string blogPartitionKey)

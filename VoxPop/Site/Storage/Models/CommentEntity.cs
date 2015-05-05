@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Security.Application;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
     using Services;
@@ -27,7 +29,7 @@
         {
             PollOptionKey = properties["PollOptionKey"].StringValue;
             PollOptionIndex = properties["PollOptionIndex"].Int32Value;
-           CommenterUsername = properties["CommenterUsername"].StringValue;
+            CommenterUsername = properties["CommenterUsername"].StringValue;
             Commenter = properties["Commenter"].StringValue;
             Comment = properties["Comment"].StringValue;
             CommentId = properties["CommentId"].StringValue;
@@ -35,6 +37,15 @@
             WhoDidIReply = properties["WhoDidIReply"].StringValue;
             WhoDidIReplyUsername = properties["WhoDidIReplyUsername"].StringValue;
             CommenterUserPic = properties["CommenterUserPic"].StringValue;
+
+            var pollString = properties["Poll"].StringValue;
+
+            var keyValuePairs = pollString.Split(',').Where(x => x != string.Empty);
+            var pollDict = keyValuePairs
+                .Select(pair => pair.Split(':')).ToDictionary(split => split[0], split => int.Parse(split[1]));
+
+            Poll = pollDict;
+
         }
 
         /// <summary>
@@ -63,6 +74,11 @@
             result.Add("WhoDidIReply", new EntityProperty(WhoDidIReply));
             result.Add("WhoDidIReplyUsername", new EntityProperty(WhoDidIReplyUsername));
             result.Add("CommenterUserPic", new EntityProperty(CommenterUserPic));
+
+            string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
+                .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
+
+            result.Add("Poll", new EntityProperty(pollAsString));
 
             return result;
         }
@@ -133,6 +149,11 @@
         //For future implementation - userPic URL will go here
         public string CommenterUserPic { get; set; }
 
+        /// <summary>
+        /// Gets or sets the poll of the blog.
+        /// </summary>
+        public Dictionary<string, int> Poll { get; set; }
+
         public static CommentEntity For(CommentModel model)
         {
             return new CommentEntity
@@ -148,7 +169,9 @@
                 WhoDidIReplyUsername = model.RepliedToUN,
                 CommenterUserPic = model.CommentPic,
                 PartitionKey = model.BlogPostRowKey,
-                RowKey = model.CommentTimestamp
+                RowKey = model.CommentTimestamp,
+
+                Poll = model.PollOptions.ToDictionary(key => key, value => 0)
             };
         }
     }

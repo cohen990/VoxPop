@@ -8,5 +8,9 @@
         Task<BlogPostEntity> RetrieveVotes(BlogPostEntity entity);
 
         Task<ResponseEntity> RetrieveVotes(ResponseEntity entity);
+
+        Task<CommentEntity> RetrieveVotes(CommentEntity entity);
+
+        //Task<VoteEntity> RetrieveVotes(VoteEntity entity);
     }
 }

@@ -14,6 +14,7 @@
 
         IEnumerable<CommentEntity> GetAllComments(string blogRowKey);
 
+        IEnumerable<VoteEntity> GetAllVotes(string blogRowKey);
 
         IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth);
 

@@ -10,6 +10,11 @@
             document.getElementById("story-votebuttons-box-" + i).addEventListener("mouseleave", function () {
                 $("#story-votebuttons-box-colour-" + i).removeClass("hover").removeClass("highlight-" + i);
             });
+
+            //document.getElementById("story-chart").addEventListener("mouseleave", function () {
+            //    $("#story-votebuttons-box-colour-" + i).removeClass("hover").removeClass("highlight-" + i);
+            //});
+
         }(i));
     }
 
@@ -23,6 +28,14 @@
         $(".story-votebuttons-button").removeClass("story-votebuttons-button-highlight");
         $(".story-votebuttons-value").removeClass("story-votebuttons-value-highlight");
         $(".story-votebuttons-option").removeClass("story-votebuttons-option-highlight");
+    });
+
+    document.getElementById("story-chart").addEventListener("mouseenter", function () {
+        $("#story-votebuttons").addClass("story-votebuttons-on-chart-hover")
+    });
+
+    document.getElementById("story-chart").addEventListener("mouseleave", function () {
+        $("#story-votebuttons").removeClass("story-votebuttons-on-chart-hover")
     });
 
 /// Modal
@@ -48,6 +61,4 @@
             });
         }(i));
     }
-
-
 })
