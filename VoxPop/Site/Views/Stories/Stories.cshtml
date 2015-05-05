@@ -13,7 +13,7 @@
 
 <script src="~/Scripts/modally-baby.js"></script>
 <script src="~/Scripts/vote-ops.js"></script>
-
+<script src="~/Scripts/percent-tooltips.js"></script>
 <script>
     var chartData = [];
 </script>
@@ -29,26 +29,26 @@
             <p class="story-date"> @Model.TimeCreated.ToString("D")</p>
         </div>
 
-        <div class="story-interact">
-            <p>
+        <p class="story-interact">
                 @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
             </p>
-            <p>
-                @Html.ActionLink("RESPOND", "CreateResponse", new
+        <p class="story-interact">
+            @Html.ActionLink("RESPOND", "CreateResponse", new
                 {
                     replyeeTitle = Model.Title,
                     replyee = Model.Author,
                     replyeeBlogIdentifier = Model.BlogIdentifier,
                     replyeeIdentifier = Model.AuthorIdentifier
                 })
-            </p>
-            <p>
-                @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
-                {
-                    @Html.ActionLink("EDIT", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
-                }
-            </p>
-        </div>
+        </p>
+        <p class="story-interact">
+            @if ((Request.IsAuthenticated) && (Site.Services.ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) == @Model.AuthorIdentifier))
+            {
+                @Html.ActionLink("EDIT", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+            }
+        </p>
+
+        </p>
     </div>
     <div class="story-width">
         <img src="@Model.ImageUri" class="story-pic">

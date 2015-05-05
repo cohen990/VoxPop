@@ -7,6 +7,7 @@
 {
     @Html.Partial("_DefaultMetaTags")
 }
+<script src="~/Scripts/modally-baby.js"></script>
 
 <script src="~/Libraries/tinymce/tinymce.min.js" type="text/javascript"></script>
 
@@ -38,8 +39,8 @@
 
         <input class="create-form-submit" type="submit" value="UPDATE" />
     }
-
 </div>
+<a class="story-interact edit-delete-link trigger" href="javascript:;">DELETE</a>
 
 <script type="text/javascript">
     tinymce.init({
@@ -59,3 +60,23 @@
 <form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
     <input id="mceu_91-inp" name="image" type="file" accept="image/*" onchange="$('#my_form').submit();this.value='';">
 </form>
+
+<div class="modal-wrapper">
+    <div class="modal">
+        <div class="modal-content">
+            <h1 class="story-modal-headings">Are you absolutely sure...?</h1>
+            <h2 class="story-votebuttons-modal-title">Delete your Story '@Html.ActionLink(@Model.Title, "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })'</h2>
+            <p class="create-form-descriptions">If it's the end of the road for your Story, no worries. But make sure you're sure... Deleted stories on VOXPOP are unrecoverable and you will lose your content and stuff, including all your Votes.</p>
+            @using (Html.BeginForm("Delete", "Stories", FormMethod.Post, new { @name = "blogForm", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(x => x.AuthorIdentifier)
+
+                @Html.HiddenFor(x => x.BlogIdentifier)
+
+                <input class="create-form-submit" type="submit" value="DELETE YOUR STORY" />
+            }
+        </div>
+    </div>
+</div>

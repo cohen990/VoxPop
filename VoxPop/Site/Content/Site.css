@@ -270,11 +270,16 @@ a {
 
 .story-interact {
     padding: 0;
-    margin: 50px 0 0 5px;
+    margin: 30px 0 0 5px;
     width: 75px;
     right: 5px;
     font-size: large;
     font-weight: 900;
+    transition: .3s;
+}
+
+.story-interact:hover {
+    font-size: 19px;
 }
 
 .story-pic {
@@ -1032,6 +1037,9 @@ input[type="text"] {
     margin-left: 5%;
 }
 
+.edit-delete-link{
+  float: right;
+  margin: 25px 285px 0 -0px;}
 
 /**              ***               **/
 /*StoriesComment*/
@@ -1075,6 +1083,12 @@ input[type="text"] {
     margin: 45px 0 30px 0;
 }
 
+.stories-comment-replyees-comment {
+  white-space: pre-line;
+  font-size: 14px;
+  width: 450px;
+  margin: 0 auto 36px auto;
+}
 
 
 /**              ***               **/

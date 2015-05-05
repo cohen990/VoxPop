@@ -30,6 +30,10 @@
 
         void UpdateResponse(ResponseModel updatedResponse);
 
+        void DeleteYourBlog(BlogModel blog);
+
+        void DeleteYourResponse(ResponseModel response);
+
         Task CreateBlogAsync(BlogModel blog, HttpPostedFileBase image, string authorName, string authorIdentifier, string sharedBlogIdentifier);
 
         Task CreateResponseAsync(

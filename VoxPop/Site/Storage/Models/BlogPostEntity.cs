@@ -170,10 +170,12 @@ namespace Site.Storage.Models
 
         public string Author { get; set; }
 
-        public void UpdateContent(string content)
+        public void UpdateContent(string content, Dictionary<string,int> poll)
         {
             Content = Sanitizer.GetSafeHtmlFragment(content);
+            Poll = poll;
         }
+
 
         public static BlogPostEntity For(BlogModel model)
         {

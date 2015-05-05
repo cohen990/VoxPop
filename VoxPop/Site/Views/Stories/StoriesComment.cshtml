@@ -4,6 +4,7 @@
     var ReplyId = Request.QueryString["replyId"];
     var Replyee = Request.QueryString["replyee"];
     var ReplyeeUN = Request.QueryString["replyeeUn"];
+    var ReplyeesComment = Request.QueryString["replyeesComment"];
 }
 
 @section MetaTags
@@ -25,9 +26,18 @@
 <div class="create-form-box">
     @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
     {
-        <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
-            Comment
-        </div>
+        if (Replyee != null)
+        {
+            <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+                Reply
+            </div>
+        }
+        else
+        {
+            <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+                Comment
+            </div>
+        }
         <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?"></textarea>
         if (Replyee != null)
         {
@@ -35,15 +45,28 @@
                 You're replying to
                 <p class="stories-comment-respond-link">
                     @Html.ActionLink(Replyee.Trim(), "AuthorStories", "Stories", new { AuthUn = ReplyeeUN, Auth = Replyee })
-                </p>'s comment.
+                </p>'s comment;
+                <p class="stories-comment-replyees-comment">
+                    "@ReplyeesComment"
+                </p>
+            </div>
+            <div class="create-form-descriptions">
+                Give 'em a peice of your mind above, then confirm your Vote below to post your reply to the Story -
+                <p class="stories-comment-respond-link">
+                    @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
+                </p>
             </div>
         }
-        <div class="create-form-descriptions">
-            Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story -
-            <p class="stories-comment-respond-link">
-                @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
-            </p>
-        </div>
+        else
+        {
+            <div class="create-form-descriptions">
+                Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story -
+                <p class="stories-comment-respond-link">
+                    @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
+                </p>
+            </div>
+
+        }
         <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
             Voting Options
         </div>
@@ -113,4 +136,3 @@
         $tempComment.val( this.value );
     });
 </script>
-

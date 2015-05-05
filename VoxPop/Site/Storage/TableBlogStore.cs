@@ -65,6 +65,13 @@ namespace Site.Storage
             _table.Execute(operation);
         }
 
+        public void DeleteBlog(BlogPostEntity entity)
+        {
+            TableOperation operation = TableOperation.Delete(entity);
+
+            _table.Execute(operation);
+        }
+
         private CloudStorageAccount GetStorageAccount()
         {
             string connectionString = CloudConfigurationManager.GetSetting("voxpop.articlestorage");

@@ -104,8 +104,6 @@
 
         if (data === EmptyChart) {
             var myPieChart = new Chart(context).Pie(data, {
-                responsive: false,
-                maintainAspectRatio: true,
                 tooltipCornerRadius: 15,
                 tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= '' %>",
                 animationEasing: "easeOutQuart",
@@ -118,8 +116,7 @@
 
         else {
             var myPieChart = new Chart(context).Pie(data, {
-                responsive: false,
-                maintainAspectRatio: false,
+                tooltipTemplate: " <%=label%>: <%= numeral(circumference / 6.283).format('(0[.][0]%)') %>",
                 tooltipCornerRadius: 15,
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
