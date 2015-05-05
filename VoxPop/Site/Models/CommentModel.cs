@@ -36,5 +36,13 @@ namespace Site.Models
 
         public string CommentTimestamp { get; set; }
 
+        public List<string> PollOptions { get; set; }
+
+        public CommentModel()
+        {
+            PollOptions = new List<string>();
+        }
+
+
     }
 }

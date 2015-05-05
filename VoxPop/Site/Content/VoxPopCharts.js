@@ -104,6 +104,8 @@
 
         if (data === EmptyChart) {
             var myPieChart = new Chart(context).Pie(data, {
+                responsive: false,
+                maintainAspectRatio: true,
                 tooltipCornerRadius: 15,
                 tooltipTemplate: "<%if (label){%><%=label%> <%}%><%= '' %>",
                 animationEasing: "easeOutQuart",
@@ -116,6 +118,8 @@
 
         else {
             var myPieChart = new Chart(context).Pie(data, {
+                responsive: false,
+                maintainAspectRatio: false,
                 tooltipCornerRadius: 15,
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
@@ -206,6 +210,7 @@
                             }
                         }
                     });
+
                 $("#storyChart").mouseleave(
                     function () {
                         $("#story-votebuttons-box-colour-" + i).removeClass("hover").removeClass("highlight-" + i);

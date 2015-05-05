@@ -472,6 +472,7 @@
     <Content Include="Views\Stories\CreateResponse.cshtml" />
     <Content Include="Views\Stories\_ResponsesBox.cshtml" />
     <Content Include="Views\Stories\_IfIAmAResponseBox.cshtml" />
+    <Content Include="Views\Stories\_DidYouVote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

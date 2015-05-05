@@ -32,11 +32,11 @@ namespace Site.Controllers
         [ChildActionOnly]
         public ActionResult _CommentsBox(string blogRowKey, string blogPartitionKey)
         {
-            var comments = _blogService.GetAllComments(blogRowKey);
-
             ViewBag.BlogID = blogRowKey;
 
             ViewBag.BlogAuthID = blogPartitionKey;
+
+            var comments = _blogService.GetAllComments(blogRowKey);
 
             return View(comments);
         }
@@ -49,6 +49,14 @@ namespace Site.Controllers
             //ViewBag.BlogID = blogRowKey;
 
             return View(responses);
+        }
+
+        [ChildActionOnly]
+        public ActionResult _DidYouVote(string blogRowKey)
+        {
+            var votes = _blogService.GetAllVotes(blogRowKey);
+
+            return View(votes);
         }
 
         [ChildActionOnly]
@@ -284,7 +292,8 @@ namespace Site.Controllers
             string repliedTo,
             string repliedToUN,
 
-            string returnUrl = null)
+            string returnUrl = null,
+            params string[] pollOptions)
         {
             var model2 = new VoteModel
             {
@@ -318,12 +327,13 @@ namespace Site.Controllers
                     BlogPostRowKey = commentBlogPostRowKey,
                     UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
                     CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
-                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
+                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.ffffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
                     CommentIdentifier = Guid.NewGuid().ToString("N").Substring(0, 6),
                     ReplyYayOrNay = false,
                     RepliedTo = "",
                     RepliedToUN = "",
-                    CommentPic = "BOHICA"
+                    CommentPic = "BOHICA",
+                    PollOptions = pollOptions.ToList()
                 };
 
                 _blogService.Vote(model2);
@@ -341,12 +351,13 @@ namespace Site.Controllers
                     BlogPostRowKey = commentBlogPostRowKey,
                     UserId = ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey),
                     CommenterName = ClaimsService.GetAuthenticatedUsersFullName(),
-                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.fffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
+                    CommentTimestamp = DateTime.Now.ToString("d:MM:yyy HH:mm:ss.ffffff", System.Globalization.DateTimeFormatInfo.InvariantInfo),
                     CommentIdentifier = commentId,
                     ReplyYayOrNay = true,
                     RepliedTo = repliedTo,
                     RepliedToUN = repliedToUN,
-                    CommentPic = "BOHICA"
+                    CommentPic = "BOHICA",
+                    PollOptions = pollOptions.ToList()
                 };
 
                 _blogService.Vote(model2);
@@ -360,6 +371,21 @@ namespace Site.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public static string GetPrettyDateQualifier(DateTimeOffset d)
+        {
+            TimeSpan s = DateTimeOffset.Now.Subtract(d);
+
+            int dayDiff = (int)s.TotalDays;
+
+            if (dayDiff > 1)
+            {
+                var on = "on";
+
+                return on;
+            }
+            return null;
         }
 
         public static string GetPrettyDate(DateTimeOffset d)

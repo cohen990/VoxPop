@@ -54,11 +54,11 @@
         <img src="@Model.ImageUri" class="story-pic">
         <div>
             <div class="story-chart-box">
-                <div class="story-chart">
+                <div id="story-chart" class="story-chart">
                     <canvas class="story-chart-canvas" id="storyChart" height="345" width="666"></canvas>
                 </div>
+                <h2 class="story-votebuttons-title">Vote</h2>
                 <div id="story-votebuttons" class="story-votebuttons">
-                    <h2 class="story-votebuttons-title">Vote</h2>
                     @{int count = 0;}
                     @if (Model.Poll.Count > 4)
                     {
@@ -118,6 +118,9 @@
                             </div>
                         }
                     }
+                </div>
+                <div class="did-you-vote-partial">
+                    @Html.Action("_DidYouVote", "Stories", new { blogRowKey = Model.BlogIdentifier })
                 </div>
             </div>
         </div>
