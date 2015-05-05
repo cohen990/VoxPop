@@ -50,8 +50,8 @@
                             </div>
                             <p class="comment-box-comment-text">@voteComment.value.Comment</p>
                             <div class="comment-box-reply-button">
-                                @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                                @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, new { @class = "comment-box-reply-button-pic" })
+                                @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, null)
                             </div>
                         </div>
                         foreach (var replyComment in Model.OrderBy(x => x.RowKey))
@@ -93,8 +93,8 @@
                                     </div>
                                     <p class="comment-box-comment-text comment-box-reply-comment-text">@replyComment.Comment</p>
                                     <div class="comment-box-reply-button">
-                                        @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                        @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, new { @class = "comment-box-reply-button-pic" })
+                                        @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, null)
                                     </div>
                                 </div>
                             }
@@ -131,8 +131,8 @@
                                 </div>
                                 <p class="comment-box-comment-text">@voteComment.value.Comment</p>
                                 <div class="comment-box-reply-button">
-                                    @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                                    @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, new { @class = "comment-box-reply-button-pic" })
+                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, null)
                                 </div>
                             </div>
                             foreach (var replyComment in Model.OrderBy(x => x.RowKey))
@@ -174,8 +174,8 @@
                                         </div>
                                         <p class="comment-box-comment-text comment-box-reply-comment-text">@replyComment.Comment</p>
                                         <div class="comment-box-reply-button">
-                                            @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                            @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, new { @class = "comment-box-reply-button-pic" })
+                                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, null)
                                         </div>
                                     </div>
                                 }
@@ -221,8 +221,8 @@
                         </div>
                         <p class="comment-box-comment-text comment-box-not-sbs-comment-text">@voteComment.value.Comment</p>
                         <div class="comment-box-reply-button">
-                            @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername }, null)
+                            @Html.ActionLink(" ", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, new { @class = "comment-box-reply-button-pic" })
+                            @Html.ActionLink("REPLY", "StoriesComment", new { replyId = voteComment.value.CommentId, replyee = voteComment.value.Commenter, replyeeUn = voteComment.value.CommenterUsername, replyeesComment = voteComment.value.Comment }, null)
                         </div>
                     </div>
                     foreach (var replyComment in Model.OrderBy(x => x.RowKey))
@@ -264,8 +264,8 @@
                                 </div>
                                 <p class="comment-box-comment-text comment-box-reply-comment-text">@replyComment.Comment</p>
                                 <div class="comment-box-reply-button">
-                                    @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, new { @class = "comment-box-reply-button-pic" })
-                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername }, null)
+                                    @Html.ActionLink(" ", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, new { @class = "comment-box-reply-button-pic" })
+                                    @Html.ActionLink("REPLY", "StoriesComment", new { replyId = @replyComment.CommentId, replyee = replyComment.Commenter, replyeeUn = replyComment.CommenterUsername, replyeesComment = replyComment.Comment }, null)
                                 </div>
                             </div>
                         }
@@ -273,7 +273,7 @@
                 }
             }
         }
-        <div class="comment-box-end-link">
+        <div class="story-interact">
             @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = @Html.Raw(ViewBag.BlogID), authorIdentifier = @Html.Raw(ViewBag.BlogAuthID) })
         </div>
     </div>

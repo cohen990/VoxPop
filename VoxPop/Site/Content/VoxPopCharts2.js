@@ -117,6 +117,7 @@
         else {
             var myPieChart = new Chart(context).Pie(data, {
                 tooltipCornerRadius: 15,
+                tooltipTemplate: " <%=label%>: <%= numeral(circumference / 6.283).format('(0[.][0]%)') %>",
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
                 segmentShowStroke: true,

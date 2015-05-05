@@ -12,6 +12,8 @@
 
         void MergeResponse(ResponseEntity entity);
 
+        void DeleteResponse(ResponseEntity entity);
+
         ResponseEntity GetResponse(string entityRowKey, string entityPartitionKey);
 
     }

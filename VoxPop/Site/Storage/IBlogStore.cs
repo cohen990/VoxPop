@@ -14,6 +14,8 @@
 
         void MergeBlog(BlogPostEntity entity);
 
+        void DeleteBlog(BlogPostEntity entity);
+
         BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey);
     }
 }

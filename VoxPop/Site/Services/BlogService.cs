@@ -162,7 +162,7 @@
         {
             BlogPostEntity originalBlog = _blogStore.GetBlog(updatedBlog.BlogIdentifier, updatedBlog.AuthorIdentifier);
 
-            originalBlog.UpdateContent(updatedBlog.Content);
+            originalBlog.UpdateContent(updatedBlog.Content, updatedBlog.Poll);
 
             _blogStore.MergeBlog(originalBlog);
         }
@@ -179,6 +179,21 @@
                 _responseStore.MergeResponse(originalResponse);
             }
         }
+
+        public void DeleteYourBlog(BlogModel blog)
+        {
+            BlogPostEntity blogToDelete = _blogStore.GetBlog(blog.BlogIdentifier, blog.AuthorIdentifier);
+
+            _blogStore.DeleteBlog(blogToDelete);
+        }
+
+        public void DeleteYourResponse(ResponseModel response)
+        {
+            ResponseEntity responseToDelete = _responseStore.GetResponse(response.BlogIdentifier, response.AuthorIdentifier);
+
+            _responseStore.DeleteResponse(responseToDelete);
+        }
+
 
         public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)
         {

@@ -267,6 +267,29 @@ namespace Site.Controllers
             return Redirect(targetUri);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(BlogModel blog, ResponseModel response)
+        {
+            if (ClaimsService.GetClaim(VoxPopConstants.IdentifierClaimKey) != blog.AuthorIdentifier)
+            {
+                return View("Error");
+            }
+
+            // TODO: shitty hack - remove
+            var targetUri = string.Format("~/Stories/AuthorStories?AuthUn={0}", blog.AuthorIdentifier);
+
+            _blogService.DeleteYourBlog(blog);
+
+            if(response != null)
+            {
+                _blogService.DeleteYourResponse(response);
+            }
+
+            return Redirect(targetUri);
+        }
+
         [Route("Stories/Comment/{authorIdentifier}/{articleIdentifier}")]
         [Authorize]
         public async Task<ActionResult> StoriesComment(string articleIdentifier, string authorIdentifier, string replyId)

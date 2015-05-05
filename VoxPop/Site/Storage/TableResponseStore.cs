@@ -56,6 +56,16 @@ namespace Site.Storage
             _table.Execute(operation);
         }
 
+        public void DeleteResponse(ResponseEntity entity)
+        {
+            if (entity != null)
+            {
+                TableOperation operation = TableOperation.Delete(entity);
+
+                _table.Execute(operation);
+            }
+        }
+
         private CloudStorageAccount GetStorageAccount()
         {
             string connectionString = CloudConfigurationManager.GetSetting("voxpop.responsestorage");
