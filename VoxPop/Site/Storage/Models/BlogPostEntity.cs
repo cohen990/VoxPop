@@ -173,7 +173,6 @@ namespace Site.Storage.Models
         public void UpdateContent(string content, Dictionary<string,int> poll)
         {
             Content = Sanitizer.GetSafeHtmlFragment(content);
-            Poll = poll;
         }
 
 
