@@ -9,27 +9,27 @@
     using Microsoft.WindowsAzure.Storage.Table;
     using Models;
 
-    public class TableVoteStore : IVoteStore
+    public class TableCommentStore : ICommentStore
     {
         private readonly CloudTable _table;
 
-        public TableVoteStore()
+        public TableCommentStore()
         {
             CloudTableClient client = GetStorageAccount().CreateCloudTableClient();
 
-            _table = client.GetTableReference("voxpopvotes");
+            _table = client.GetTableReference("voxpopcomments");
             _table.CreateIfNotExists();
         }
 
-        public async Task VoteAsync(VoteEntity entity)
+        public async Task CommentAsync(CommentEntity entity)
         {
-            var operation = TableOperation.InsertOrReplace(entity);
+            var operation = TableOperation.Insert(entity);
             await _table.ExecuteAsync(operation);
         }
 
         private CloudStorageAccount GetStorageAccount()
         {
-            string connectionString = CloudConfigurationManager.GetSetting("voxpop.votestorage");
+            string connectionString = CloudConfigurationManager.GetSetting("voxpop.commentstorage");
 
             CloudStorageAccount storageAccount;
             if (CloudStorageAccount.TryParse(connectionString, out storageAccount))
@@ -39,34 +39,47 @@
             throw new InvalidOperationException(message);
         }
 
-        public async Task<VoteEntity> GetAsync(string partitionKey, string rowKey)
+        public async Task<CommentEntity> GetAsync(string partitionKey, string rowKey)
         {
             TableOperation operation = TableOperation.Retrieve(partitionKey, rowKey);
 
             TableResult result = await _table.ExecuteAsync(operation);
 
-            return result.Result as VoteEntity;
+            return result.Result as CommentEntity;
         }
 
-        public async Task<List<VoteEntity>> GetAllForBlogAsync(string blogRowKey)
+        public async Task<List<CommentEntity>> GetAllForBlogAsync(string blogRowKey)
         {
-            var query = new TableQuery<VoteEntity>()
+            var query = new TableQuery<CommentEntity>()
                 .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, blogRowKey));
 
-            List<VoteEntity> result = _table.ExecuteQuery(query).ToList();
+            List<CommentEntity> result = _table.ExecuteQuery(query).ToList();
 
             return result;
         }
 
-        public IEnumerable<VoteEntity> GetAllVotes(string blogRowKey)
+        public IEnumerable<CommentEntity> GetAllComments(string blogRowKey)
         {
-            var query = new TableQuery<VoteEntity>();
+            var query = new TableQuery<CommentEntity>();
 
-            IEnumerable<VoteEntity> entities = _table.ExecuteQuery(query)
+            IEnumerable<CommentEntity> entities = _table.ExecuteQuery(query)
                 .Where(x => x.PartitionKey == blogRowKey)
                 .Select(x => x);
 
             return entities;
         }
+
+        public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)
+        {
+            TableOperation operation = TableOperation.Retrieve<BlogPostEntity>(entityPartitionKey, entityRowKey);
+
+            TableResult result = _table.Execute(operation);
+
+            var entity = result.Result as BlogPostEntity;
+
+            return entity;
+        }
+
+
     }
 }

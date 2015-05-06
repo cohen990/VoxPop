@@ -9,72 +9,66 @@ namespace Site.Storage
     using Microsoft.WindowsAzure.Storage.Table;
     using Models;
 
-    public class TableBlogStore : IBlogStore
+    public class TableResponseStore : IResponseStore
     {
         private readonly CloudTable _table;
 
-        public TableBlogStore()
+        public TableResponseStore()
         {
             CloudTableClient client = GetStorageAccount().CreateCloudTableClient();
 
-            _table = client.GetTableReference("voxpopblogs");
+            _table = client.GetTableReference("voxpopresponses");
             _table.CreateIfNotExists();
         }
 
-        public IEnumerable<BlogPostEntity> GetAllBlogs()
+        public IEnumerable<ResponseEntity> GetAllResponses(string blogRowKey)
         {
-            var query = new TableQuery<BlogPostEntity>();
+            var query = new TableQuery<ResponseEntity>();
 
-            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query).Select(x => x);
-
-            return entities;
-        }
-
-        public IEnumerable<BlogPostEntity> GetAuthorBlogs(string Auth)
-        {
-            var query = new TableQuery<BlogPostEntity>();
-
-            IEnumerable<BlogPostEntity> entities = _table.ExecuteQuery(query)
-                .Where(x => x.PartitionKey == Auth)
+            IEnumerable<ResponseEntity> entities = _table.ExecuteQuery(query)
+                .Where(x => x.ReplyeeRowKey == blogRowKey)
                 .Select(x => x);
 
             return entities;
         }
 
-        public BlogPostEntity GetBlog(string entityRowKey, string entityPartitionKey)
+        public ResponseEntity GetResponse(string entityRowKey, string entityPartitionKey)
         {
-            TableOperation operation = TableOperation.Retrieve<BlogPostEntity>(entityPartitionKey, entityRowKey);
+            TableOperation operation = TableOperation.Retrieve<ResponseEntity>(entityPartitionKey, entityRowKey);
 
             TableResult result = _table.Execute(operation);
 
-            var entity = result.Result as BlogPostEntity;
+            var entity = result.Result as ResponseEntity;
 
             return entity;
         }
 
-        public async Task CreateBlogAsync(BlogPostEntity entity)
+        public async Task CreateResponseAsync(ResponseEntity entity)
         {
             var operation = TableOperation.Insert(entity);
             await _table.ExecuteAsync(operation);
         }
 
-        public void MergeBlog(BlogPostEntity entity)
+        public void MergeResponse(ResponseEntity entity)
         {
             TableOperation operation = TableOperation.Merge(entity);
 
             _table.Execute(operation);
         }
 
-        public void DeleteBlog(BlogPostEntity entity)
+        public void DeleteResponse(ResponseEntity entity)
         {
-            TableOperation operation = TableOperation.Delete(entity);
+            if (entity != null)
+            {
+                TableOperation operation = TableOperation.Delete(entity);
 
-            _table.Execute(operation);
+                _table.Execute(operation);
+            }
         }
 
         private CloudStorageAccount GetStorageAccount()
         {
-            string connectionString = CloudConfigurationManager.GetSetting("voxpop.articlestorage");
+            string connectionString = CloudConfigurationManager.GetSetting("voxpop.responsestorage");
 
             CloudStorageAccount storageAccount;
             if (CloudStorageAccount.TryParse(connectionString, out storageAccount))

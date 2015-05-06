@@ -1,0 +1,138 @@
+﻿@model Site.Models.BlogModel
+@{
+    ViewBag.Title = "Voter Comment";
+    var ReplyId = Request.QueryString["replyId"];
+    var Replyee = Request.QueryString["replyee"];
+    var ReplyeeUN = Request.QueryString["replyeeUn"];
+    var ReplyeesComment = Request.QueryString["replyeesComment"];
+}
+
+@section MetaTags
+{
+    @Html.Partial("_DefaultMetaTags")
+}
+<script src="~/Scripts/comment-vote-ops.js"></script>
+<script>
+    $(document).on('mousemove', 'textarea', function(e) { var a=$(this).offset().top+$(this).outerHeight()-16,b=$(this).offset().left+$(this).outerWidth()-16;$(this).css({cursor:e.pageY>a&&e.pageX>b?"nw-resize":""}); })
+</script>
+<h1 class="page-headings">Voter Comment</h1>
+<div class="stories-comment-intro">
+    Comment is free, but facts are sacred... Have your say on
+    <p class="stories-comment-respond-link">
+        @Html.ActionLink(@Model.Author, "AuthorStories", "Stories", new { AuthUn = @Model.AuthorIdentifier, Auth = Model.Author })
+    </p>
+    's Story.
+</div>
+<div class="create-form-box">
+    @using (Html.BeginForm("Comment", "Stories", FormMethod.Post))
+    {
+        if (Replyee != null)
+        {
+            <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+                Reply
+            </div>
+        }
+        else
+        {
+            <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+                Comment
+            </div>
+        }
+        <textarea class="stories-comment-box" type="text" id="comment-1" placeholder="What do you think?"></textarea>
+        if (Replyee != null)
+        {
+            <div class="stories-comment-box-headings">
+                You're replying to
+                <p class="stories-comment-respond-link">
+                    @Html.ActionLink(Replyee.Trim(), "AuthorStories", "Stories", new { AuthUn = ReplyeeUN, Auth = Replyee })
+                </p>'s comment;
+                <p class="stories-comment-replyees-comment">
+                    "@ReplyeesComment"
+                </p>
+            </div>
+            <div class="create-form-descriptions">
+                Give 'em a peice of your mind above, then confirm your Vote below to post your reply to the Story -
+                <p class="stories-comment-respond-link">
+                    @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
+                </p>
+            </div>
+        }
+        else
+        {
+            <div class="create-form-descriptions">
+                Give 'em a peice of your mind here, then confirm your Vote below to post your comment to the Story -
+                <p class="stories-comment-respond-link">
+                    @Html.ActionLink(@Model.Title, "Stories", "Stories", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier }, null)
+                </p>
+            </div>
+
+        }
+        <div class="create-form-headings create-form-headings-Content stories-comment-box-headings">
+            Voting Options
+        </div>
+        <div class="stories-comment-votebuttons-option-div">
+            @{int count = 0;}
+            @foreach (var pollItem in Model.Poll.Select((value, i) => new { i, value }))
+            {
+                <div id="modal-box-@count" class="story-votebuttons-modal-option-box story-votebuttons-modal-option-box-@count">
+                    @{var option = pollItem.value.Key.Trim();}
+                    <h4 id="story-votebuttons-modal-option-@count" class="story-votebuttons-modal-option">@option&nbsp:</h4>
+                    <span id="modal-value-@count" class="story-votebuttons-modal-value story-votebuttons-modal-value-@count">@pollItem.value.Value</span>
+                    @using (Html.BeginForm("Comment", "Stories"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input id="inputComment" type="hidden" name="userComment" class="comment-2">
+                        <input type="hidden" name="commentPollItemKey" value="@pollItem.value.Key">
+                        <input type="hidden" name="commentPollItemIndex" value="@pollItem.i">
+                        <input type="hidden" name="commentBlogPostPartitionKey" value="@Model.AuthorIdentifier">
+                        <input type="hidden" name="commentBlogPostRowKey" value="@Model.BlogIdentifier">
+                        <input type="hidden" name="commentId" value="@ReplyId">
+                        <input type="hidden" name="repliedTo" value="@Replyee">
+                        <input type="hidden" name="repliedToUN" value="@ReplyeeUN">
+                        <input type="hidden" name="pollOptions" value="agreeWithComment">
+                        <input type="hidden" name="pollOptions" value="disagree">
+
+
+                        <input type="hidden" name="pollItemKey" value="@pollItem.value.Key">
+                        <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                        <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                        <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                        <input id="story-votebuttons-modal-button-@count" class="story-votebuttons-modal-button" type="submit" value="+1">
+                    }
+                    <div id="story-votebuttons-modal-box-colour-@count" class="story-votebuttons-modal-box-colour story-votebuttons-modal-box-colour-@count"></div>
+                    @{count++;}
+                    <script>
+                        chartData.push(VoxPopCharts.GetPollData("@pollItem.value.Key", @pollItem.value.Value));
+                    </script>
+                </div>
+            }
+        </div>
+        <div class="create-form-descriptions story-comment-outro">
+            Want to give your opinion but don't feel its adequately represented by any of the above Voting Options?
+            <p class="stories-comment-respond-link">
+                @Html.ActionLink("RESPOND", "CreateResponse", new
+               {
+                   replyeeTitle = Model.Title,
+                   replyee = Model.Author,
+                   replyeeBlogIdentifier = Model.BlogIdentifier,
+                   replyeeIdentifier = Model.AuthorIdentifier
+               })
+            </p>
+            to this Story instead.
+        </div>
+
+    }
+</div>
+
+
+<script type="text/javascript">
+    var $tempComment = $(".comment-2");
+
+    $("#comment-1").keyup(function() {
+        $tempComment.val( this.value );
+    });
+
+    $("#comment-1").blur(function() {
+        $tempComment.val( this.value );
+    });
+</script>

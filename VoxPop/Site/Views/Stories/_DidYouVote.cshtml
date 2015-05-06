@@ -1,0 +1,45 @@
+﻿@model List<Site.Storage.Models.VoteEntity>
+@using Site.Controllers
+@using Site.Models
+@using Site.Services
+@using Site.Storage.Models;
+@using Microsoft.AspNet.Identity;
+
+
+@section MetaTags
+{
+    @Html.Partial("_DefaultMetaTags")
+}
+
+@{
+    Layout = "";
+}
+@if (@Model.Select(x => x.PollOptionKey).Count() != 0)
+{
+    foreach (var vote in Model)
+    {
+        if (vote.RowKey == User.Identity.GetUserId())
+        {
+            <div class="did-you-vote-box">
+                <div class="comment-box-sbs-datetime">
+                    You voted
+                </div>
+                @if (vote.PollOptionKey.Length <= 10)
+                {
+                    <div class="comment-box-reply-ops">
+                        @HttpUtility.UrlDecode(vote.PollOptionKey)
+                    </div>
+                }
+                else
+                {
+                    <div class="comment-box-reply-ops">
+                        @HttpUtility.UrlDecode(vote.PollOptionKey.Substring(0, 10))...
+                    </div>
+                }
+                <div class="comment-box-sbs-datetime did-you-vote-datetime">
+                    @StoriesController.GetPrettyDateQualifier(vote.Timestamp) @StoriesController.GetPrettyDate(vote.Timestamp)
+                </div>
+            </div>
+        }
+    }
+}

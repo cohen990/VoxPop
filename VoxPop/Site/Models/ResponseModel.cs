@@ -8,7 +8,7 @@ namespace Site.Models
     using System.Web.Mvc;
 
 
-    public class BlogModel
+    public class ResponseModel
     {
         [Required(ErrorMessage = "Your Story needs a title...!")]
         public string Title { get; set; }
@@ -20,7 +20,7 @@ namespace Site.Models
         public List<string> PollOptions { get; set; }
 
         [Display(Name = "Image Caption")]
-        [Required(ErrorMessage = "Looks like you've skipped adding an Image Caption")]
+        [Required(ErrorMessage = "Looks like you skipped adding an Image Caption")]
         public string ImageCaption { get; set; }
 
         [Display(Name = "Image")]
@@ -37,7 +37,15 @@ namespace Site.Models
 
         public string AuthorIdentifier { get; set; }
 
-        public BlogModel()
+        public string ReplyeeTitle { get; set; }
+
+        public string Replyee { get; set; }
+
+        public string ReplyeeRowKey { get; set; }
+
+        public string ReplyeePartitionKey { get; set; }
+
+        public ResponseModel()
         {
             PollOptions = new List<string>();
         }

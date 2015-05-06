@@ -116,6 +116,7 @@
 
         else {
             var myPieChart = new Chart(context).Pie(data, {
+                tooltipTemplate: " <%=label%>: <%= numeral(circumference / 6.283).format('(0[.][0]%)') %>",
                 tooltipCornerRadius: 15,
                 animationEasing: "easeOutQuart",
                 //animateScale: true,
@@ -206,6 +207,7 @@
                             }
                         }
                     });
+
                 $("#storyChart").mouseleave(
                     function () {
                         $("#story-votebuttons-box-colour-" + i).removeClass("hover").removeClass("highlight-" + i);

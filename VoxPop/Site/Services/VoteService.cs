@@ -17,17 +17,64 @@
 
         public async Task<BlogPostEntity> RetrieveVotes(BlogPostEntity entity)
         {
-            // TODO: Add unit tests
-            List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
-
-            foreach (var key in entity.Poll.Keys.ToList())
+            if (entity != null)
             {
-                string pollOptionKey = key;
-                entity.Poll[pollOptionKey] = votes.Count(x => x.PollOptionKey == pollOptionKey);
-            }
+                // TODO: Add unit tests
+                List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
 
+                foreach (var key in entity.Poll.Keys.ToList())
+                {
+                    string pollOptionKey = key;
+                    entity.Poll[pollOptionKey] = votes.Count(x => x.PollOptionKey == pollOptionKey);
+                }
+            }
             return entity;
         }
+
+        public async Task<ResponseEntity> RetrieveVotes(ResponseEntity entity)
+        {
+            if (entity != null)
+            {
+                // TODO: Add unit tests
+                List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
+
+                foreach (var key in entity.Poll.Keys.ToList())
+                {
+                    string pollOptionKey = key;
+                    entity.Poll[pollOptionKey] = votes.Count(x => x.PollOptionKey == pollOptionKey);
+                }
+            }
+                return entity;
+        }
+
+        public async Task<CommentEntity> RetrieveVotes(CommentEntity entity)
+        {
+            if (entity != null)
+            {
+                // TODO: Add unit tests
+                List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
+
+                foreach (var key in entity.Poll.Keys.ToList())
+                {
+                    string pollOptionKey = key;
+                    entity.Poll[pollOptionKey] = votes.Count(x => x.PollOptionKey == pollOptionKey);
+                }
+            }
+            return entity;
+        }
+
+        //public async Task<VoteEntity> RetrieveVotes(VoteEntity entity)
+        //{
+        //    if (entity != null)
+        //    {
+        //        // TODO: Add unit tests
+        //        List<VoteEntity> votes = await _voteStore.GetAllForBlogAsync(entity.RowKey);
+        //    }
+        //    return entity;
+        //}
+
+
+
     }
 
 

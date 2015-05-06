@@ -1,5 +1,6 @@
 ﻿@model Site.Models.BlogModel
 <script src="~/Scripts/vote-ops.js"></script>
+<script src="~/Scripts/percent-tooltips.js"></script>
 
 <div class="modal-wrapper">
     <div class="modal">
@@ -31,6 +32,7 @@
                         <script>
                             chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
                             var numPoll = @Model.Poll.Count;
+                            var buttonLink = true;
                         </script>
                     </div>
                 }
