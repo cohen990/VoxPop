@@ -20,7 +20,7 @@
 
 <h1 id="story-headings" class="story-headings">
     @Model.Title
-@Html.Action("_IfIAmAResponseBox", "Stories", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
+    @Html.Action("_IfIAmAResponseBox", "Stories", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
 </h1>
 <div class="story-outer-width">
     <div class="story-outer-space-left">
@@ -30,8 +30,8 @@
         </div>
 
         <p class="story-interact">
-                @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
-            </p>
+            @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
+        </p>
         <p class="story-interact">
             @Html.ActionLink("RESPOND", "CreateResponse", new
                 {

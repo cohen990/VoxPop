@@ -63,8 +63,17 @@ namespace Site.Controllers
         public async Task<ActionResult> _IfIAmAResponseBox(string articleIdentifier, string authorIdentifier)
         {
             var response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
+            if (response != null)
+            {
+                //Makes sure deleted Stories that had Responses don't trigger crashes (TO DO: Enhance so users, especially responders, still recieve some trace of the deleted Story)
+                var deleteCheck = await _blogService.GetBlog(response.ReplyeeRowKey, response.ReplyeePartitionKey);
 
-            return View(response);
+                if (deleteCheck != null)
+                {
+                    return View(response);
+                }
+            }
+            return View();
         }
 
         public ActionResult AuthorStories(string AuthUn)
@@ -282,7 +291,7 @@ namespace Site.Controllers
 
             _blogService.DeleteYourBlog(blog);
 
-            if(response != null)
+            if (response != null)
             {
                 _blogService.DeleteYourResponse(response);
             }

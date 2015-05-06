@@ -269,17 +269,19 @@ a {
     }
 
 .story-interact {
-    padding: 0;
-    margin: 30px 0 0 5px;
-    width: 75px;
-    right: 5px;
-    font-size: large;
-    font-weight: 900;
-    transition: .3s;
+  padding: 0;
+  margin: 30px 0px 0 -3px;
+  width: 102px;
+  right: 5px;
+  font-size: large;
+  font-weight: 900;
+  transition: .25s;
+  text-align: right;
 }
 
 .story-interact:hover {
-    font-size: 19px;
+    font-size: 21px;
+    margin-bottom:-4px;
 }
 
 .story-pic {
