@@ -66,7 +66,7 @@ namespace Site.Controllers
             if (response != null)
             {
                 //For deleted Stories that had Responses;
-                //Makes sure that link backs on those responses aren't displayed and therefore don't trigger crashes 
+                //Makes sure that link backs on those responses aren't displayed and therefore do not trigger crashes
                 //(TO DO: Enhance so users, especially responders, can still find some trace of the deleted Story)
                 var deleteCheck = await _blogService.GetBlog(response.ReplyeeRowKey, response.ReplyeePartitionKey);
 
