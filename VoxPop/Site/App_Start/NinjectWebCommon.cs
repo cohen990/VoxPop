@@ -65,6 +65,8 @@ namespace Site.App_Start
         {
             kernel.Bind<IBlogService>().To<BlogService>();
             kernel.Bind<IBlogStore>().To<TableBlogStore>();
+            kernel.Bind<IResponseStore>().To<TableResponseStore>();
+            kernel.Bind<ICommentStore>().To<TableCommentStore>();
             kernel.Bind<IImageStore>().To<BlobImageStore>();
             kernel.Bind<IVoteService>().To<VoteService>();
             kernel.Bind<IVoteStore>().To<TableVoteStore>();

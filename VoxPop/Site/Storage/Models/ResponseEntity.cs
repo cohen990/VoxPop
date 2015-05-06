@@ -9,23 +9,26 @@ namespace Site.Storage.Models
     using Services;
     using Site.Models;
 
-    public class BlogPostEntity : ITableEntity
+    public class ResponseEntity : ITableEntity
     {
-        public BlogPostEntity()
+        public ResponseEntity()
         {
         }
 
-        public BlogPostEntity(
+        public ResponseEntity(
             string blogTitle,
             Uri imageUri,
             string blogContent,
-            IEnumerable<string> pollOptions,
+            IEnumerable<string> pollOptions, 
             string blogImageCaption,
             string userIdentifier,
             DateTime currentTime,
             string author,
-            string sharedBlogIdentifier
-            )
+            string replyeeTitle,
+            string replyee,
+            string replyeeBlogIdentifier,
+            string replyeeIdentifier,
+            string sharedBlogIdentifier)
         {
             PartitionKey = userIdentifier;
             RowKey = sharedBlogIdentifier;
@@ -36,6 +39,10 @@ namespace Site.Storage.Models
             ImageCaption = blogImageCaption;
             Author = author;
             TimeCreated = currentTime;
+            ReplyeeTitle = replyeeTitle;
+            Replyee = replyee;
+            ReplyeeRowKey = replyeeBlogIdentifier;
+            ReplyeePartitionKey = replyeeIdentifier;
 
             Poll = pollOptions.ToDictionary(key => key, value => 0);
         }
@@ -62,6 +69,10 @@ namespace Site.Storage.Models
             ImageCaption = properties["ImageCaption"].StringValue;
             Author = properties["Author"].StringValue;
             TimeCreated = properties["TimeCreated"].DateTime.Value;
+            ReplyeeTitle = properties["ReplyeeTitle"].StringValue;
+            Replyee = properties["Replyee"].StringValue;
+            ReplyeeRowKey = properties["ReplyeeRowKey"].StringValue;
+            ReplyeePartitionKey = properties["ReplyeePartitionKey"].StringValue;
 
             var pollString = properties["Poll"].StringValue;
 
@@ -94,6 +105,11 @@ namespace Site.Storage.Models
             result.Add("ImageCaption", new EntityProperty(ImageCaption));
             result.Add("Author", new EntityProperty(Author));
             result.Add("TimeCreated", new EntityProperty(TimeCreated));
+            result.Add("ReplyeeTitle", new EntityProperty(ReplyeeTitle));
+            result.Add("Replyee", new EntityProperty(Replyee));
+            result.Add("ReplyeeRowKey", new EntityProperty(ReplyeeRowKey));
+            result.Add("ReplyeePartitionKey", new EntityProperty(ReplyeePartitionKey));
+
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -170,32 +186,58 @@ namespace Site.Storage.Models
 
         public string Author { get; set; }
 
-        public void UpdateContent(string content, Dictionary<string,int> poll)
+        /// <summary>
+        /// Gets or sets the Title of the original blog this one is in response to.
+        /// </summary>
+        public string ReplyeeTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Author of the original blog this one is in response to.
+        /// </summary>
+        public string Replyee { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Blog Identifier GUID of the original blog this one is in response to.
+        /// </summary>
+        public string ReplyeeRowKey { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Username of the author of the original blog this one is in response to.
+        /// </summary>
+        public string ReplyeePartitionKey { get; set; }
+
+
+
+        public void UpdateContent(string content)
         {
             Content = Sanitizer.GetSafeHtmlFragment(content);
-            Poll = poll;
         }
 
-
-        public static BlogPostEntity For(BlogModel model)
+        public static ResponseEntity For(ResponseModel model)
         {
-                var entity = new BlogPostEntity(
-                    model.Title,
-                    model.ImageUri,
-                    Sanitizer.GetSafeHtmlFragment(model.Content),
-                    model.PollOptions.EncodePollOptions(),
-                    model.ImageCaption,
-                    model.AuthorIdentifier,
-                    DateTime.Now,
-                    model.Author,
-                    model.BlogIdentifier);
+            var entity = new ResponseEntity(
+                model.Title,
+                model.ImageUri,
+                Sanitizer.GetSafeHtmlFragment(model.Content),
+                model.PollOptions.EncodePollOptions(),
+                model.ImageCaption,
+                model.AuthorIdentifier,
+                DateTime.Now,
+                model.Author,
+                model.ReplyeeTitle,
+                model.Replyee,
+                model.ReplyeeRowKey,
+                model.ReplyeePartitionKey,
+                model.BlogIdentifier);
 
-                return entity;
+
+            return entity;
         }
 
-        public BlogModel ToModel()
+        public ResponseModel ToModel()
         {
-            return new BlogModel
+
+            return new ResponseModel
             {
                 ImageCaption = ImageCaption,
                 Author = Author,
@@ -205,7 +247,12 @@ namespace Site.Storage.Models
                 BlogIdentifier = RowKey,
                 Title = Title,
                 AuthorIdentifier = PartitionKey,
-                TimeCreated = TimeCreated
+                TimeCreated = TimeCreated,
+                ReplyeeTitle = ReplyeeTitle,
+                Replyee = Replyee,
+                ReplyeeRowKey = ReplyeeRowKey,
+                ReplyeePartitionKey = ReplyeePartitionKey
+
             };
         }
     }

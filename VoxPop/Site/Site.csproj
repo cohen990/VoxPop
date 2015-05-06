@@ -219,10 +219,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogResponseViewModel.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\BlogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MetaTagModel.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
@@ -234,18 +237,25 @@
     <Compile Include="Services\VoteService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Storage\AuthenticationContext.cs" />
+    <Compile Include="Storage\IResponseStore.cs" />
     <Compile Include="Storage\IImageStore.cs" />
     <Compile Include="Storage\BlobImageStore.cs" />
     <Compile Include="Storage\IBlogStore.cs" />
+    <Compile Include="Storage\ICommentStore.cs" />
     <Compile Include="Storage\IVoteStore.cs" />
+    <Compile Include="Storage\Models\ResponseEntity.cs" />
     <Compile Include="Storage\Models\BlogPostEntity.cs" />
     <Compile Include="Storage\Models\Politico.cs" />
+    <Compile Include="Storage\Models\CommentEntity.cs" />
     <Compile Include="Storage\Models\VoteEntity.cs" />
+    <Compile Include="Storage\TableResponseStore.cs" />
     <Compile Include="Storage\TableBlogStore.cs" />
+    <Compile Include="Storage\TableCommentStore.cs" />
     <Compile Include="Storage\TableVoteStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\VoxPopCharts2.js" />
     <Content Include="Content\VoxPopCharts.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -255,15 +265,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\reply.svg" />
+    <Content Include="Images\reply2.svg" />
     <Content Include="Images\search-icon-hi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\User3.svg" />
     <Content Include="Images\VPlogoVec.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\VPlogoVecHov.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\VS2.svg" />
     <Content Include="Libraries\login-signup-modal-window\css\reset.css" />
     <Content Include="Libraries\login-signup-modal-window\css\style.css" />
     <Content Include="Libraries\login-signup-modal-window\img\cd-icon-close.svg">
@@ -378,6 +392,9 @@
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\comment-vote-ops.js" />
+    <Content Include="Scripts\percent-tooltips.js" />
+    <Content Include="Scripts\vote-ops-comments.js" />
     <Content Include="Scripts\vote-ops.js" />
     <Content Include="Scripts\modally-baby.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -447,11 +464,16 @@
     <Content Include="Views\Stories\Edit.cshtml" />
     <Content Include="Views\Stories\Create.cshtml" />
     <Content Include="Views\Stories\Stories.cshtml" />
-    <Content Include="Views\Stories\Vote.cshtml" />
     <Content Include="Views\Stories\Index.cshtml" />
     <Content Include="Views\Shared\_DefaultMetaTags.cshtml" />
     <Content Include="Views\Shared\_MetaTags.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Stories\StoriesComment.cshtml" />
+    <Content Include="Views\Stories\_CommentsBox.cshtml" />
+    <Content Include="Views\Stories\CreateResponse.cshtml" />
+    <Content Include="Views\Stories\_ResponsesBox.cshtml" />
+    <Content Include="Views\Stories\_IfIAmAResponseBox.cshtml" />
+    <Content Include="Views\Stories\_DidYouVote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

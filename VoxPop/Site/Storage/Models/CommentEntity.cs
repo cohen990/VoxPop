@@ -1,4 +1,4 @@
-namespace Site.Storage.Models
+﻿namespace Site.Storage.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,37 +9,8 @@ namespace Site.Storage.Models
     using Services;
     using Site.Models;
 
-    public class BlogPostEntity : ITableEntity
+    public class CommentEntity : ITableEntity
     {
-        public BlogPostEntity()
-        {
-        }
-
-        public BlogPostEntity(
-            string blogTitle,
-            Uri imageUri,
-            string blogContent,
-            IEnumerable<string> pollOptions,
-            string blogImageCaption,
-            string userIdentifier,
-            DateTime currentTime,
-            string author,
-            string sharedBlogIdentifier
-            )
-        {
-            PartitionKey = userIdentifier;
-            RowKey = sharedBlogIdentifier;
-
-            Title = blogTitle;
-            ImageUri = imageUri;
-            Content = blogContent;
-            ImageCaption = blogImageCaption;
-            Author = author;
-            TimeCreated = currentTime;
-
-            Poll = pollOptions.ToDictionary(key => key, value => 0);
-        }
-
         /// <summary>
         /// Populates the entity's properties from the
         /// <see cref="T:Microsoft.WindowsAzure.Storage.Table.EntityProperty"/> data values in the
@@ -56,12 +27,16 @@ namespace Site.Storage.Models
         /// </param>
         public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
         {
-            Content = properties["Content"].StringValue;
-            Title = properties["Title"].StringValue;
-            ImageUri = new Uri(properties["ImageUri"].StringValue);
-            ImageCaption = properties["ImageCaption"].StringValue;
-            Author = properties["Author"].StringValue;
-            TimeCreated = properties["TimeCreated"].DateTime.Value;
+            PollOptionKey = properties["PollOptionKey"].StringValue;
+            PollOptionIndex = properties["PollOptionIndex"].Int32Value;
+            CommenterUsername = properties["CommenterUsername"].StringValue;
+            Commenter = properties["Commenter"].StringValue;
+            Comment = properties["Comment"].StringValue;
+            CommentId = properties["CommentId"].StringValue;
+            AmIAReply = properties["AmIAReply"].BooleanValue;
+            WhoDidIReply = properties["WhoDidIReply"].StringValue;
+            WhoDidIReplyUsername = properties["WhoDidIReplyUsername"].StringValue;
+            CommenterUserPic = properties["CommenterUserPic"].StringValue;
 
             var pollString = properties["Poll"].StringValue;
 
@@ -70,6 +45,7 @@ namespace Site.Storage.Models
                 .Select(pair => pair.Split(':')).ToDictionary(split => split[0], split => int.Parse(split[1]));
 
             Poll = pollDict;
+
         }
 
         /// <summary>
@@ -88,12 +64,16 @@ namespace Site.Storage.Models
         public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
         {
             IDictionary<string, EntityProperty> result = new Dictionary<string, EntityProperty>();
-            result.Add("Content", new EntityProperty(Content));
-            result.Add("Title", new EntityProperty(Title));
-            result.Add("ImageUri", new EntityProperty(ImageUri.ToString()));
-            result.Add("ImageCaption", new EntityProperty(ImageCaption));
-            result.Add("Author", new EntityProperty(Author));
-            result.Add("TimeCreated", new EntityProperty(TimeCreated));
+            result.Add("PollOptionKey", new EntityProperty(PollOptionKey));
+            result.Add("PollOptionIndex", new EntityProperty(PollOptionIndex));
+            result.Add("CommenterUsername", new EntityProperty(CommenterUsername));
+            result.Add("Commenter", new EntityProperty(Commenter));
+            result.Add("Comment", new EntityProperty(Comment));
+            result.Add("CommentId", new EntityProperty(CommentId));
+            result.Add("AmIAReply", new EntityProperty(AmIAReply));
+            result.Add("WhoDidIReply", new EntityProperty(WhoDidIReply));
+            result.Add("WhoDidIReplyUsername", new EntityProperty(WhoDidIReplyUsername));
+            result.Add("CommenterUserPic", new EntityProperty(CommenterUserPic));
 
             string pollAsString = Poll.Select(pollPair => pollPair.Key + ":" + pollPair.Value)
                 .Aggregate(string.Empty, (current, joined) => current + (joined + ","));
@@ -120,18 +100,12 @@ namespace Site.Storage.Models
         public string RowKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the entity's timestamp. This value changes every time the entity is updated.
+        /// Gets or sets the entity's timestamp.
         /// </summary>
         /// <value>
         /// The entity's timestamp. The property is populated by the Windows Azure Table Service.
         /// </value>
-        /// This changes when a Story is updated --> can be used a 'Last Edited on...' in Stories
         public DateTimeOffset Timestamp { get; set; }
-
-        /// <summary>
-        /// Does not change. Is guaranteed to be the <see cref="DateTime"/> when it was created.
-        /// </summary>
-        public DateTime TimeCreated { get; private set; }
 
         /// <summary>
         /// Gets or sets the entity's current ETag.  Set this value to '*'
@@ -144,68 +118,60 @@ namespace Site.Storage.Models
         public string ETag { get; set; }
 
         /// <summary>
-        /// Gets or sets the title of the blog.
+        /// The identifying key for the poll option.
         /// </summary>
-        public string Title { get; set; }
+        public string PollOptionKey { get; set; }
 
-        /// <summary>
-        /// Gets or sets the blog's Image.
-        /// </summary>
-        public Uri ImageUri { get; set; }
+        // What index is our Option? Helps for colour allocation down the line...
+        public int? PollOptionIndex { get; set; }
 
-        /// <summary>
-        /// Gets or sets the blog's Image Capation.
-        /// </summary>
-        public string ImageCaption { get; set; }
+        //Unique ID of the user commenting
+        public string CommenterUsername { get; set; }
 
-        ///<summary>
-        /// Gets or sets the content of the blog.
-        /// </summary>
-        public string Content { get; set; }
+        //Unique ID of the user commenting
+        public string Commenter { get; set; }
+
+        //Their comment
+        public string Comment { get; set; }
+
+        //ID unique to comment, only shared by replies to that comments
+        public string CommentId { get; set; }
+
+        //Is the curernt comment a reply or not?
+        public bool? AmIAReply { get; set; }
+
+        //Who did commenter replied to? Should provide clarity if one comment sparks a reply battle with lots of users
+        public string WhoDidIReply { get; set; }
+
+        //Their Username
+        public string WhoDidIReplyUsername { get; set; }
+
+        //For future implementation - userPic URL will go here
+        public string CommenterUserPic { get; set; }
 
         /// <summary>
         /// Gets or sets the poll of the blog.
         /// </summary>
         public Dictionary<string, int> Poll { get; set; }
 
-        public string Author { get; set; }
-
-        public void UpdateContent(string content, Dictionary<string,int> poll)
+        public static CommentEntity For(CommentModel model)
         {
-            Content = Sanitizer.GetSafeHtmlFragment(content);
-            Poll = poll;
-        }
-
-
-        public static BlogPostEntity For(BlogModel model)
-        {
-                var entity = new BlogPostEntity(
-                    model.Title,
-                    model.ImageUri,
-                    Sanitizer.GetSafeHtmlFragment(model.Content),
-                    model.PollOptions.EncodePollOptions(),
-                    model.ImageCaption,
-                    model.AuthorIdentifier,
-                    DateTime.Now,
-                    model.Author,
-                    model.BlogIdentifier);
-
-                return entity;
-        }
-
-        public BlogModel ToModel()
-        {
-            return new BlogModel
+            return new CommentEntity
             {
-                ImageCaption = ImageCaption,
-                Author = Author,
-                Content = Content,
-                ImageUri = ImageUri,
-                Poll = Poll.DecodePoll(),
-                BlogIdentifier = RowKey,
-                Title = Title,
-                AuthorIdentifier = PartitionKey,
-                TimeCreated = TimeCreated
+                PollOptionKey = model.PollItemKey.EncodePollOption(),
+                PollOptionIndex = model.PollItemIndex,
+                CommenterUsername = model.UserId,
+                Commenter = model.CommenterName,
+                Comment = model.VotersComment,
+                CommentId = model.CommentIdentifier,
+                AmIAReply = model.ReplyYayOrNay,
+                WhoDidIReply = model.RepliedTo,
+                WhoDidIReplyUsername = model.RepliedToUN,
+                CommenterUserPic = model.CommentPic,
+                PartitionKey = model.BlogPostRowKey,
+                RowKey = model.CommentTimestamp,
+
+                Poll = model.PollOptions.ToDictionary(key => key, value => 0)
             };
         }
     }

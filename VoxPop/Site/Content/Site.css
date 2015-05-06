@@ -21,10 +21,13 @@ a {
     clear: both;
     margin-top: 22%;
     margin-bottom: -21%;
+    height: 1px;
+    width: 100%;
+    background: lightgray;
 }
 
 .global-footer {
-    padding-bottom: 16px;
+    padding: 10px 0 16px 0;
 }
 
 .Logo {
@@ -230,37 +233,56 @@ a {
 }
 
 .story-width {
-    max-width: 1075px;
+    min-width: 1075px;
     margin: 0 0 0 100px;
 }
 
 .story-headings {
     display: block;
     font-size: 51px;
-    margin: 20px auto 20px auto;
+    margin: 20px auto 25px auto;
     width: 1075px;
     position: relative;
     left: 45px;
 }
 
+.story-outer-space-left {
+    float: left;
+    position: relative;
+    right: 5px;
+}
+
 .story-author-date-box {
-    margin: 10px 0 0 5px;
-    width: 75px;
-    padding: 10px;
     border: 4.5px dashed #060606;
     border-left: none;
     border-right: none;
     border-radius: 20px;
-    float: left;
-    position: relative;
-    right: 5px;
     transition-duration: 1s;
+    padding: 10px;
+    margin: 10px 0 0 5px;
+    width: 75px;
 }
 
     .story-author-date-box:hover {
         background: #fafafa;
         max-height: 500px;
     }
+
+.story-interact {
+  padding: 0;
+  margin: 30px 0px 0 -3px;
+  width: 102px;
+  right: 5px;
+  font-size: large;
+  font-weight: 900;
+  transition: .25s;
+  text-align: right;
+}
+
+.story-interact:hover {
+    font-size: 21px;
+    margin-bottom:-4.5px;
+}
 
 .story-pic {
     display: inline-block;
@@ -277,7 +299,7 @@ a {
     font-weight: 500;
     clear: both;
     float: left;
-    margin: 2px 0 -10px 0;
+    margin: 2px 0 0 0;
 }
 
 .story-chart-box {
@@ -290,7 +312,8 @@ a {
     border-radius: 30px;
     display: block;
     float: left;
-    position: static;
+    position: relative;
+    z-index: 2;
 }
 
 .story-chart {
@@ -310,14 +333,20 @@ a {
 }
 
 .story-votebuttons-title {
-    margin: 15px 0 0 30px;
+    margin: 1px -114px -49px 33px;
+    font-size: xx-large;
     width: auto;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    float: left;
+    position: relative;
+    z-index: 1;
 }
 
 .story-votebuttons {
-    padding: 0px 10px 17px 15px;
-    margin: 20px 10px 0 0;
-    max-height: 280px;
+    float: right;
+    padding: 7px 10px 17px 15px;
+    margin: 28px 0 0 362px;
+    max-height: 225px;
     width: 110px;
     overflow-y: hidden;
     /*word-break: break-word;*/
@@ -327,7 +356,7 @@ a {
     border-right: none;
     border-radius: 27px;
     transition-duration: 1.5s;
-    position: relative;
+    position: absolute;
     z-index: auto;
 }
 
@@ -335,9 +364,17 @@ a {
         background: #fafafa;
         max-height: 550px;
         padding-bottom: 10px;
-        position: relative;
+        position: absolute;
         z-index: auto;
     }
+
+.story-votebuttons-on-chart-hover {
+    background: #fafafa;
+    max-height: 550px;
+    padding-bottom: 10px;
+    position: absolute;
+    z-index: auto;
+}
 
 
 .story-votebuttons-option {
@@ -424,8 +461,9 @@ a {
 
 .story-content {
     clear: both;
-    max-width: 950px;
-    margin-top: -10px;
+    float: left;
+    max-width: 665px;
+    margin: -10px 0 70px 0;
     padding: 1px 0 0 0;
 }
 
@@ -939,6 +977,9 @@ input[type="text"] {
 
 .login-reg-form-hr-line {
     margin: 25px 0 25px 0;
+    height: 1px;
+    width: 100%;
+    background: lightgray;
 }
 
 .login-reg-form-page-titles {
@@ -990,7 +1031,423 @@ input[type="text"] {
     width: 25%;
     transition-duration: 1s;
 }
+
+
+/**              ***               **/
 /*Edit Page*/
 .edit-intro {
     margin-left: 5%;
+}
+
+.edit-delete-link{
+  float: right;
+  margin: 25px 285px 0 -0px;}
+
+/**              ***               **/
+/*StoriesComment*/
+.stories-comment-box {
+    border-radius: 19px;
+    border-left: none;
+    border-right: none;
+    max-width: 485px;
+    min-width: 425px;
+    height: 21px;
+    display: block;
+    padding: 0 10px 2px 10px;
+    font-size: 15px;
+    margin: 0 0 25px 0;
+}
+
+.stories-comment-votebuttons-option-div {
+    width: 460px;
+    margin: -10px auto 0 auto;
+    object-position: right;
+    display: inline-block;
+}
+
+.stories-comment-box-headings {
+    margin-top: 1px;
+}
+
+.stories-comment-respond-link {
+    font-weight: 900;
+    font-size: 17px;
+    display: inline;
+    margin-bottom: 50px;
+}
+
+.stories-comment-intro {
+    margin-left: 7%;
+    margin-bottom: 40px;
+}
+
+.story-comment-outro {
+    margin: 45px 0 30px 0;
+}
+
+.stories-comment-replyees-comment {
+  white-space: pre-line;
+  font-size: 14px;
+  width: 450px;
+  margin: 0 auto 36px auto;
+}
+
+
+/**              ***               **/
+/*_CommentsBox Partial*/
+.comment-partial {
+    position: relative;
+    margin: 0 0 0 -120px;
+    clear: left;
+}
+
+.comment-box {
+    padding: 25px;
+    border: 4.5px dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    min-width: 740px;
+    max-width: 100%;
+}
+
+.comment-box-main {
+    border-bottom: none;
+    display: table-caption;
+    padding-top: 50px;
+}
+
+.comment-box-title {
+    font-size: 40px;
+    margin: -95px 0 0 -10px;
+    position: absolute;
+    z-index: +1;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+
+.comment-box-title-link {
+    font-size: 45px;
+    transition-duration: .5s;
+}
+
+    .comment-box-title-link:hover {
+        font-size: 55px;
+    }
+
+.comment-box-sbs-ops-boxes {
+    min-height: 75px;
+    max-width: none;
+    border: none;
+    margin: 0 0 50px 32%;
+}
+
+.comment-box-sbs-ops-colours {
+    margin-top: -47px;
+}
+
+.comment-box-reply-ops-boxes {
+    margin: -16.9px 0 -15px -11px;
+    display: inline-block;
+    float: left;
+    min-height: 65px;
+    border: none;
+    position: absolute;
+}
+
+    .comment-box-reply-ops-boxes:hover {
+        background: none;
+    }
+
+
+.comment-box-reply-ops-colours {
+    margin-top: -57px;
+}
+
+.comment-box-reply-ops {
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.comment-box-sbs-1 {
+    float: left;
+    width: 45%;
+}
+
+.comment-box-sbs-divider-icon {
+    background: #fff;
+    height: 0px;
+    width: 0px;
+    margin: 25px 0 0 -61.5px;
+    float: left;
+}
+
+.comment-box-sbs-divider-icon-text {
+    background: #fff;
+    color: lightgray;
+    height: 21.5px;
+    width: 21.5px;
+    margin: 2.5px 0 0 14px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    -webkit-shape-outside: circle(50%);
+    text-align: center;
+}
+
+.comment-box-sbs-2 {
+    float: right;
+    width: 45%;
+    border-left: 1.5px lightgray solid;
+    padding-left: 4.8%;
+}
+
+.comment-box-each {
+    padding: 25px;
+    transition-duration: 1.5s;
+    min-width: 80%;
+    margin-bottom: 20px;
+}
+
+    .comment-box-each:hover {
+        background: #fafafa;
+    }
+
+.comment-box-reply {
+    margin: -10px 0 20px 10%;
+    padding: 25px;
+    border: 3.5px dashed #060606;
+    border-top: none;
+    transition-duration: 1.5s;
+    min-width: 80%;
+    position: relative;
+}
+
+    .comment-box-reply:hover {
+        background: #fafafa;
+    }
+
+.comment-box-user-pic {
+    border-left: none;
+    border-right: none;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    -webkit-shape-outside: circle(50%);
+    background: url('../Images/User3.svg') no-repeat;
+    background-size: 100%;
+    margin: -10px 0 0 -55px;
+    display: inline-block;
+    float: left;
+}
+
+.comment-box-user-pic-replier {
+    height: 55px;
+    width: 55px;
+}
+
+
+.comment-box-sbs-commenter {
+    float: left;
+    margin: -60px 0 0 5px;
+    font-size: medium;
+    font-weight: 600;
+    min-width: 100%;
+    display: block;
+}
+
+.comment-box-reply-sbs-commenter {
+    margin-top: 0;
+    position: relative;
+}
+
+.comment-box-reply-sbs-commenter-inner {
+    display: inline-block;
+    float: left;
+}
+
+.comment-box-not-sbs-commenter {
+    margin: -55px 0 0 7px;
+    position: relative;
+    z-index: 10;
+}
+
+.comment-box-sbs-datetime {
+    display: inline-block;
+    font-size: small;
+    font-weight: normal;
+    color: gray;
+    margin: -3px 0 0 3px;
+}
+
+.comment-box-not-sbs-datetime {
+    margin-top: 37px;
+}
+
+.comment-box-sbs-datetime-reply {
+    margin: 3.25px 0 0 7px;
+    float: right;
+}
+
+.comment-box-comment-text {
+    margin-top: 32px;
+    white-space: pre-wrap;
+    font-size: 14.5px;
+}
+
+.comment-box-not-sbs-comment-text {
+    margin-top: 5px;
+}
+
+.comment-box-reply-comment-text {
+    margin-top: 7px;
+    font-size: 14px;
+}
+
+.comment-box-reply-button {
+    float: right;
+    display: inline-block;
+    font-size: larger;
+    font-weight: 500;
+    margin-top: -10px;
+    font-size: inherit;
+}
+
+.comment-box-reply-button-pic {
+    background: url('../Images/reply.svg') no-repeat;
+    height: 35px;
+    width: 35px;
+    background-size: 85%;
+    float: left;
+    margin-top: -4px;
+}
+
+.comment-box-reply-button-pic-reply {
+    background: url('../Images/reply2.svg') no-repeat;
+    height: 35px;
+    width: 35px;
+    background-size: 85%;
+    float: left;
+    margin-top: -4px;
+}
+
+.comment-box-replied-to {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.comment-box-reply-button-pic-reply {
+    margin-top: -7px;
+}
+
+.comment-box-replied-to-inner {
+    float: left;
+    margin-left: 15px;
+    font-size: medium;
+}
+
+.comment-box-end-link {
+    clear: both;
+    font-size: large;
+    font-weight: 900;
+}
+
+
+/**              ***               **/
+/*Response Stories*/
+.response-partial {
+    float: right;
+    margin: 0 0 0 0;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.response-heading {
+    font-weight: bolder;
+    font-size: 38px;
+    /*background-color: #fff;*/
+    display: inline-block;
+    position: absolute;
+    margin: -39px 0px 0px 18px;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+
+.response-box {
+    border: 4.5px dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 30px;
+    padding: 0 15px 0 15px;
+    margin-top: 80px;
+    background-color: #fafafa;
+    transition: 1s;
+}
+
+    .response-box:hover {
+        background: #fff;
+    }
+
+.response-links {
+    text-decoration: none;
+    min-width: 325px;
+    max-width: 326px;
+    border: 4.5px dashed #060606;
+    border-left: none;
+    border-right: none;
+    border-radius: 30px;
+    margin: 30px auto 45px auto;
+    padding: 15px 15px 20px 26px;
+    transition: 1s;
+    background: #fff;
+}
+
+    .response-links:hover {
+        background: #f2f2f2;
+    }
+
+.response-pic {
+    padding-right: 0;
+    height: 115px;
+    width: 170px;
+}
+
+.response-chart {
+    height: 118.5px;
+    width: 119px;
+    margin: 5px 0 0 24px;
+    border: #060606 solid 5px;
+}
+
+.response-chart-canvas {
+    margin: -3.51px 0 0 -65.6px;
+}
+
+.response-link-titles {
+    min-width: inherit;
+}
+
+.response-in-response-to {
+    font-size: small;
+    /*line-height: 95px;*/
+    margin: 5px 0 -45px 0;
+    /*display: inline-table;
+    position: absolute;*/
+    float: right;
+}
+
+.response-in-response-to-links {
+    font-size: medium;
+    display: inline-block;
+}
+
+
+/**              ***               **/
+/*_DidYouVote*/
+.did-you-vote-partial {
+    margin-top: 289px;
+}
+
+.did-you-vote-datetime {
+    margin-left:10px;
 }
