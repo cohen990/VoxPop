@@ -137,9 +137,16 @@
         {
             BlogPostEntity entity = _blogStore.GetBlog(blogRowKey, blogPartitionKey);
 
-            entity = await _voteService.RetrieveVotes(entity);
+            if (entity != null)
+            {
+                entity = await _voteService.RetrieveVotes(entity);
 
-            return entity.ToModel();
+                return entity.ToModel();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<ResponseModel> GetResponse(string blogRowKey, string blogPartitionKey)
