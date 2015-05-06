@@ -65,7 +65,9 @@ namespace Site.Controllers
             var response = await _blogService.GetResponse(articleIdentifier, authorIdentifier);
             if (response != null)
             {
-                //Makes sure deleted Stories that had Responses don't trigger crashes (TO DO: Enhance so users, especially responders, still recieve some trace of the deleted Story)
+                //For deleted Stories that had Responses;
+                //Makes sure that link backs on those responses aren't displayed and therefore don't trigger crashes 
+                //(TO DO: Enhance so users, especially responders, can still find some trace of the deleted Story)
                 var deleteCheck = await _blogService.GetBlog(response.ReplyeeRowKey, response.ReplyeePartitionKey);
 
                 if (deleteCheck != null)
