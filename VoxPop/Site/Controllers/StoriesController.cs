@@ -490,7 +490,7 @@ namespace Site.Controllers
             {
                 var dt = d.ToString("R");
 
-                return dt.Remove(dt.Length - 7);
+                return "on" + " " + dt.Remove(dt.Length - 7);
             }
 
             //if (dayDiff < 7)

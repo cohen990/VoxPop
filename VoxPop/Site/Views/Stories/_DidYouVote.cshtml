@@ -24,7 +24,7 @@
                 <div class="comment-box-sbs-datetime">
                     You voted
                 </div>
-                @if (vote.PollOptionKey.Length <= 10)
+                @if (vote.PollOptionKey.Length <= 22)
                 {
                     <div class="comment-box-reply-ops">
                         @HttpUtility.UrlDecode(vote.PollOptionKey)
@@ -33,11 +33,11 @@
                 else
                 {
                     <div class="comment-box-reply-ops">
-                        @HttpUtility.UrlDecode(vote.PollOptionKey.Substring(0, 10))...
+                        @HttpUtility.UrlDecode(vote.PollOptionKey.Substring(0, 22))...
                     </div>
                 }
                 <div class="comment-box-sbs-datetime did-you-vote-datetime">
-                    @StoriesController.GetPrettyDateQualifier(vote.Timestamp) @StoriesController.GetPrettyDate(vote.Timestamp)
+                    @StoriesController.GetPrettyDate(vote.Timestamp)
                 </div>
             </div>
         }

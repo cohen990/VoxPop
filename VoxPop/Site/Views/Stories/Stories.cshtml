@@ -17,7 +17,7 @@
 <script>
     var chartData = [];
 </script>
-
+<div id="fb-root"></div>
 <h1 id="story-headings" class="story-headings">
     @Model.Title
     @Html.Action("_IfIAmAResponseBox", "Stories", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
@@ -133,6 +133,9 @@
         </div>
         <div class="comment-partial">
             @Html.Action("_CommentsBox", "Stories", new { blogRowKey = Model.BlogIdentifier, blogPartitionKey = Model.AuthorIdentifier })
+        </div>
+        <div class="story-interact">
+            @Html.ActionLink("COMMENT", "StoriesComment", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
         </div>
     </div>
 </div>
