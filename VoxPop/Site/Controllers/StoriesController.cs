@@ -438,7 +438,8 @@ namespace Site.Controllers
 
             // 4.
             // Don't allow out of range values.
-            if (dayDiff < 0 || dayDiff >= 31)
+            //if (dayDiff < 0 || dayDiff >= 31)
+            if (dayDiff < 0)
             {
                 return null;
             }
