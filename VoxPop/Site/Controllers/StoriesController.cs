@@ -437,7 +437,7 @@ namespace Site.Controllers
             int secDiff = (int)s.TotalSeconds;
 
             // 4.
-            // Don't allow out of range values.
+            // Don't allow out of range values, don't need atm
             //if (dayDiff < 0 || dayDiff >= 31)
             if (dayDiff < 0)
             {
