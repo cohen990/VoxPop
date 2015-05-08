@@ -1451,3 +1451,12 @@ input[type="text"] {
 .did-you-vote-datetime {
     margin-left:10px;
 }
+
+/**              ***               **/
+/*_SharingIsCaring*/
+.share-box {
+    width: 20%;
+    float: right;
+    margin: 5px 0 -32px;
+}
+
