@@ -10,13 +10,13 @@
 {
     @Html.Partial("_MetaTags", new MetaTagModel { Description = Model.Content.StripHtmlTags(), Title = Model.Title, ImageUri = Model.ImageUri })
 }
-
 <script src="~/Scripts/modally-baby.js"></script>
 <script src="~/Scripts/vote-ops.js"></script>
 <script src="~/Scripts/percent-tooltips.js"></script>
 <script>
     var chartData = [];
 </script>
+<div id="story-share" style="display: block;"></div>
 <h1 id="story-headings" class="story-headings">
     @Model.Title
     @Html.Action("_IfIAmAResponseBox", "Stories", new { articleIdentifier = Model.BlogIdentifier, authorIdentifier = Model.AuthorIdentifier })
@@ -45,8 +45,6 @@
             {
                 @Html.ActionLink("EDIT", "Edit", new { articleIdentifier = @Model.BlogIdentifier, authorIdentifier = @Model.AuthorIdentifier })
             }
-        </p>
-
         </p>
     </div>
     <div class="story-width">
@@ -122,7 +120,11 @@
                     @Html.Action("_DidYouVote", "Stories", new { blogRowKey = Model.BlogIdentifier })
                 </div>
             </div>
+            <div class="share-box">
+                @Html.Partial("_SharingIsCaring", @Model)
+            </div>
         </div>
+
         <p class="story-pic-caption">@Model.ImageCaption</p>
         <div class="story-content">
             @Html.Raw(Model.Content)
@@ -138,7 +140,6 @@
         </div>
     </div>
 </div>
-
 <script>
     VoxPopCharts.GenerateChart("storyChart", chartData);
     var numPoll;
