@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-/// Stories
+    /// Stories
     for (var i = 0; i < 4; i++) {
         (function (i) {
 
@@ -30,15 +30,9 @@
         $(".story-votebuttons-option").removeClass("story-votebuttons-option-highlight");
     });
 
-    document.getElementById("story-chart").addEventListener("mouseenter", function () {
-        $("#story-votebuttons").addClass("story-votebuttons-on-chart-hover")
-    });
 
-    document.getElementById("story-chart").addEventListener("mouseleave", function () {
-        $("#story-votebuttons").removeClass("story-votebuttons-on-chart-hover")
-    });
 
-/// Modal
+    /// Modal
     for (var i = 0; i < 13; i++) {
         (function (i) {
 
@@ -62,3 +56,11 @@
         }(i));
     }
 })
+
+document.getElementById("story-chart").addEventListener("mouseenter", function () {
+    $("#story-votebuttons").addClass("story-votebuttons-on-chart-hover")
+});
+
+document.getElementById("story-chart").addEventListener("mouseleave", function () {
+    $("#story-votebuttons").removeClass("story-votebuttons-on-chart-hover")
+});

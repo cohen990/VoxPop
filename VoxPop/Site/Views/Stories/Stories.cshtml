@@ -89,29 +89,28 @@
                     }
                     else
                     {
+                        @*<script src="~/Scripts/vote-ops-4-or-less.js"></script>*@
                         foreach (var pollItem in Model.Poll)
                         {
-                            <div class="story-votebuttons-box">
 
-                                <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
-                                    @{var option = @pollItem.Key.Trim();}
-                                    <h4 class="story-votebuttons-option">@option&nbsp:</h4>
-                                    <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
-                                    @using (Html.BeginForm("Vote", "Stories"))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="pollItemKey" value="@pollItem.Key">
-                                        <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
-                                        <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
-                                        <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
-                                        <input class="story-votebuttons-button" type="submit" value="+1">
-                                    }
-                                    <div id="story-votebuttons-box-colour-@count" class="story-votebuttons-box-colour story-votebuttons-box-colour-@count"></div>
-                                    @{count++;}
-                                    <script>
-                                        chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
-                                    </script>
-                                </div>
+                            <div id="story-votebuttons-box-@count" class="story-votebuttons-box-@count story-votebuttons-boxes">
+                                @{var option = @pollItem.Key.Trim();}
+                                <h4 class="story-votebuttons-option">@option&nbsp:</h4>
+                                <span id="story-votebuttons-value-@count" class="story-votebuttons-value">@pollItem.Value</span>
+                                @using (Html.BeginForm("Vote", "Stories"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="pollItemKey" value="@pollItem.Key">
+                                    <input type="hidden" name="blogPostPartitionKey" value="@Model.AuthorIdentifier">
+                                    <input type="hidden" name="blogPostRowKey" value="@Model.BlogIdentifier">
+                                    <input type="hidden" name="returnUrl" value="/Stories/@Model.AuthorIdentifier/@Model.BlogIdentifier">
+                                    <input class="story-votebuttons-button" type="submit" value="+1">
+                                }
+                                <div id="story-votebuttons-box-colour-@count" class="story-votebuttons-box-colour story-votebuttons-box-colour-@count"></div>
+                                @{count++;}
+                                <script>
+                                    chartData.push(VoxPopCharts.GetPollData("@pollItem.Key", @pollItem.Value));
+                                </script>
                             </div>
                         }
                     }
