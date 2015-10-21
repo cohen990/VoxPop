@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -105,6 +106,9 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceBus">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.3.0.4\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -231,6 +235,8 @@
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ClaimsService.cs" />
     <Compile Include="Services\IBlogService.cs" />
+    <Compile Include="Services\AzureEventBus.cs" />
+    <Compile Include="Services\IEventService.cs" />
     <Compile Include="Services\IVoteService.cs" />
     <Compile Include="Services\PollService.cs" />
     <Compile Include="Services\StringExtensions.cs" />
